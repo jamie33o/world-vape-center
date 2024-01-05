@@ -1,7 +1,26 @@
-{% extends "base.html" %}
-{% load static %}
-
+{% extends "base.html" %} 
+{% load static %} 
 
 {% block content %}
-    
+    <!-- Jumbotron -->
+    <div
+        class="mt-5 p-5 text-center bg-image rounded-3"
+        style="
+            background-image: url('{{ homepage_instance.jumbotron_image.url }}');
+            height: 400px;
+        "
+        >
+        <div class="mask w-50" style="background-color: rgba(0, 0, 0, 0.9)">
+            <div class="d-flex justify-content-center align-items-center h-100 p-5">
+                <div class="text-white">
+                    <h1 class="mb-3">{{ homepage_instance.title }}</h1>
+                    <h4 class="mb-3">{{ homepage_instance.jumbotron_text }}</h4>
+                    <a class="btn btn-outline-light btn-lg" href="{ url 'offers' }" role="button"
+                    >View Offers</a
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Jumbotron -->
 {% endblock %}

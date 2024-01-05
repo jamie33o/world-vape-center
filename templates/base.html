@@ -9,7 +9,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     {% endblock %}
 
-    {% block extra_meta %}
+    {% block favicon %}
+        <link rel="icon" sizes="192x192" href="{% static 'images/favicon/logo192.png' %}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/applelogo.png' %}">
+        <link rel="icon" href="{% static 'images/favicon/favicon.ico' %}" type="image/x-icon">
+        <link rel="icon" sizes="32x32" href="{% static 'images/favicon/logo32.png' %}">
+        <link rel="icon" sizes="16x16" href="{% static 'images/favicon/logo16.png' %}">
+        <link rel="icon" sizes="32x32" href="{% static 'images/favicon/logo512.png' %}">
     {% endblock %}   
     
     {% block corecss %}
@@ -32,19 +38,26 @@
   </head>
   <body>
 
-    {% include 'ls-header.html' %}
-
     {% if messages %}
         <div class="message-container"></div>
     {% endif %}
 
-    {% block page_header %}
-    {% endblock %}
+    <header class="container-fluid fixed-top p-0">
+      {% block page_header %}
+        {% include 'ls-header.html' %}
+      {% endblock %}
+    </header>
 
-    {% block content %}
-    {% endblock %}
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
 
-    {% include 'ls-footer.html' %}
+    <footer>
+      {% block page_footer %}
+        {% include 'ls-footer.html' %}
+      {% endblock %}
+    </footer>
 
     {% block postloadjs %}
     {% endblock %}

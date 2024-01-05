@@ -1,0 +1,61 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% load custom_filters %}
+
+
+{% block extra_css %}
+    <link async rel="stylesheet" href="{% static 'products/css/product-details.css' %}">  
+{% endblock %}
+{% block extra_js %}
+    <script src="{% static 'products/js/product-details.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card">
+            <div class="container-fliud">
+                <div class="wrapper row">
+                    <div class="preview col-md-6">
+                        
+                        <div class="preview-pic tab-content">
+                        <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
+                        </div>
+                       
+                    </div>
+                    <div class="details col-md-6">
+                        <h3 class="product-title">{{ product.name }}</h3>
+                        <div class="rating">
+                            <div class="stars">
+                                {% for i in "12345"|make_list %}
+                                    {% with i|add:0 as integer_value %}
+                                        {% if integer_value <= product.rating %}
+                                                <i class="fa fa-star text-warning"></i>
+                                            {% else %}
+                                                <i class="fa fa-star"></i>
+                                        {% endif %}
+                                    {% endwith %}
+                                {% endfor %}
+                            </div>
+                            <span class="review-no">{{ product.num_reviews }} reviews</span>
+                        </div>
+                        <p class="product-description">{{ product.description }} </p>
+                        <h4 class="price">current price: <span>{{ product.price }} </span></h4>
+                        <h5 class="sizes">ML:
+                            <span class="size" data-toggle="tooltip" title="small">s</span>
+                            <span class="size" data-toggle="tooltip" title="medium">m</span>
+                            <span class="size" data-toggle="tooltip" title="large">l</span>
+                            <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
+                        </h5>
+                        <div class="action">
+                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
+                            <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

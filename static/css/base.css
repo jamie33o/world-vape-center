@@ -1,4 +1,8 @@
 
+main {
+    margin-top: 10vh;
+    min-height: 90vh;
+}
 /*-------------- footer styles -------------*/
 #footer-sub{
     background-color: #f3f7f8;

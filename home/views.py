@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from .models import HomePage
 
 
 class IndexView(View):
@@ -16,4 +17,10 @@ class IndexView(View):
         Returns:
             HttpResponse: Rendered template with channel information.
         """
-        return render(request, self.template_name)
+        
+        homepage_instance = HomePage.objects.first()
+
+        context = {
+            'homepage_instance': homepage_instance,
+        }
+        return render(request, self.template_name, context)

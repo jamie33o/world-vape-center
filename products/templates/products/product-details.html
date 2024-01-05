@@ -56,6 +56,70 @@
         </div>
     </div>
 
+<div class="container pt-3">
+    <hr/>
+	<div class="row" style="margin-top:40px;">
+		<div class="col-md-6">
+    	<div class="well well-sm">
+            <div class="text-right">
+                {% if user.is_authenticated %}
+                <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
+                {% else %}
+                <a class="btn btn-danger btn-red" href="{% url 'account_login' %}" id="open-review-box">Sign in to leave review</a>
+                {% endif %}
+            </div>
+        
+            <div class="row" id="post-review-box" style="display:none;">
+                <div class="col-md-12">
+                    <form id='review-form' data-url='{% url "post_review" product_id=product.id %}'>
+                        {% csrf_token %}
+                        <input id="ratings-hidden" name="rating" type="hidden"> 
+                        <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
+        
+                        <div class="text-right">
+                            <div class="stars starrr" data-rating="0"></div>
+                            <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
+                            <span class="glyphicon glyphicon-remove"></span>Cancel</a>
+                            <button class="btn btn-success btn-lg" type="submit">Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div> 
+         
+		</div>
+        <div class="col-sm-6">
+
+            {% for review in reviews %}
+
+            <div class="review-block">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <img src="{{review.product.image.url}}" class="img-rounded">
+                        <div class="review-block-name"><a href="#">{{ review.name }}.</a></div>
+                        <div class="review-block-date">{{ review.created_at }}</div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="review-block-rate">
+                            {% for i in "12345"|make_list %}
+                            {% with i|add:0 as integer_value %}
+                                {% if integer_value <= review.rating %}
+                                    <span class="glyphicon glyphicon-star text-warning" aria-hidden="true"></span>
+                                {% else %}
+                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                                {% endif %}
+                            {% endwith %}
+                        {% endfor %}
+                           
+                        </div>
+                        <div class="review-block-title">{{ review.product.name }}</div>
+                        <div class="review-block-description">{{ review.comment }}</div>
+                    </div>
+                </div>
+                <hr/>
+                {% endfor %}
+
+            
 </div>
 
 {% endblock %}

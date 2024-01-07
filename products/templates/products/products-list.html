@@ -2,6 +2,14 @@
 {% load static %} 
 
 
+{% block extra_css %}
+    <link async rel="stylesheet" href="{% static 'products/css/product-list.css' %}">  
+{% endblock %}
+
+{% block extra_header %}
+    {% include 'products/categories.html' %}
+{% endblock %}
+
 {% block content %}
     <div class="container mt-5 mb-5 p-0">
         <div class="row m-0">
@@ -9,24 +17,24 @@
                 <div class="col-md-6 p-4 mb-4">
                     <div class="row p-2 bg-white border rounded overflow-hidden">
                         <div class="col-md-3 mt-1 d-flex justify-content-center"><img class=" rounded product-image" src="{{ product.image.url }}"></div>
-                        <div class="col-md-6 mt-1">
-                            <h5>{{ product.name }}</h5>
-                            <div class="d-flex flex-row">
-                                <div class="ratings mr-2">
-                                    {% for i in "12345"|make_list %}
-                                        {% with i|add:0 as integer_value %}
-                                            {% if integer_value <= product.rating %}
-                                                    <i class="fa fa-star text-warning"></i>
-                                                {% else %}
-                                                    <i class="fa fa-star"></i>
-                                            {% endif %}
-                                        {% endwith %}
-                                    {% endfor %}
+                            <div class="col-md-6 mt-1">
+                                <h5>{{ product.name }}</h5>
+                                <div class="d-flex flex-row">
+                                    <div class="ratings mr-2">
+                                        {% for i in "12345"|make_list %}
+                                            {% with i|add:0 as integer_value %}
+                                                {% if integer_value <= product.rating %}
+                                                        <i class="fa fa-star text-warning"></i>
+                                                    {% else %}
+                                                        <i class="fa fa-star"></i>
+                                                {% endif %}
+                                            {% endwith %}
+                                        {% endfor %}
+                                    </div>
+                                    <span>{{ product.num_reviews}} reviews</span>
                                 </div>
-                                <span>{{ product.num_reviews}} reviews</span>
+                                <p class="text-justify text-truncate para mb-0">{{ product.description }}<br><br></p>
                             </div>
-                            <p class="text-justify text-truncate para mb-0">{{ product.description }}<br><br></p>
-                        </div>
                         <div class="align-items-center align-content-center col-md-3 border-left mt-1">
                             <div class="d-flex flex-row align-items-center">
                                 <h4 class="mr-1">

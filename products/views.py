@@ -2,10 +2,11 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
-from .models import Product, Review
+from .models import Product, Review, Category
 from .forms import ReviewForm
 
-class Categories(View):
+
+class CategoryView(View):
     """
     View class for displaying a list of channels.
     """
@@ -19,16 +20,18 @@ class Categories(View):
         Returns:
             HttpResponse: Rendered template with channel information.
         """
-        
-        category_products = Product.objects.filter(category__name=category)
+        categories = Category.objects.all()
+
+        category_products = Product.objects.filter(category__name=category if category else categories[0])
 
         context = {
             'products': category_products,
+            'categories': categories
         }
         return render(request, self.template_name, context)
     
 
-class ProductDetail(View):
+class ProductDetailView(View):
     """
     View class for displaying a list of channels.
     """
@@ -54,7 +57,7 @@ class ProductDetail(View):
     
 
 
-class Reviews(View):
+class ReviewsView(View):
     def post(self, request, product_id):
         form = ReviewForm(request.POST)
         product = get_object_or_404(Product, id=product_id)

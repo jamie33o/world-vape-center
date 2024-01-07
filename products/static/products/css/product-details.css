@@ -61,7 +61,7 @@ img {
 }
 
 .tab-content img {
-  width: 100%;
+  width: 70%;
   -webkit-animation-name: opacity;
   animation-name: opacity;
   -webkit-animation-duration: .3s;

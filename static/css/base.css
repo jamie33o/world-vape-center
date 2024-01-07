@@ -1,8 +1,12 @@
 
 main {
-    margin-top: 10vh;
     min-height: 90vh;
 }
+
+header .navbar {
+    border-radius: 0;
+}
+
 /*-------------- footer styles -------------*/
 #footer-sub{
     background-color: #f3f7f8;

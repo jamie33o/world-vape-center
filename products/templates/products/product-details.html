@@ -18,7 +18,7 @@
                     <div class="preview col-md-6">
                         
                         <div class="preview-pic tab-content">
-                        <div class="tab-pane active" id="pic-1"><img src="http://placekitten.com/400/252" /></div>
+                        <div class="tab-pane active" id="pic-1"><img src={{product.image.url}}/></div>
                         </div>
                        
                     </div>
@@ -39,13 +39,15 @@
                             <span class="review-no">{{ product.num_reviews }} reviews</span>
                         </div>
                         <p class="product-description">{{ product.description }} </p>
-                        <h4 class="price">current price: <span>{{ product.price }} </span></h4>
-                        <h5 class="sizes">ML:
-                            <span class="size" data-toggle="tooltip" title="small">s</span>
-                            <span class="size" data-toggle="tooltip" title="medium">m</span>
-                            <span class="size" data-toggle="tooltip" title="large">l</span>
-                            <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-                        </h5>
+                        <h4 class="price">Price: €<span>{{ product.price }} </span></h4>
+                        {% if product.category.name == 'e-liquid' %}
+                            <h5 class="sizes">Nicotine Strength: <span class="nic_chosen"> </span>
+                                {% for nic_choice in product.choices %}
+                                    <button class="nic_choice" data-toggle="tooltip">{{nic_choice}}</button>
+                                {% endfor %}
+                            </h5>
+                        {% endif %}
+
                         <div class="action">
                             <button class="add-to-cart btn btn-default" type="button">add to cart</button>
                             <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
@@ -96,7 +98,7 @@
                 <div class="row">
                     <div class="col-sm-3">
                         <img src="{{review.product.image.url}}" class="img-rounded">
-                        <div class="review-block-name"><a href="#">{{ review.name }}.</a></div>
+                        <div class="review-block-name">{{ review.user }}</div>
                         <div class="review-block-date">{{ review.created_at }}</div>
                     </div>
                     <div class="col-sm-9">

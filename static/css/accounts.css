@@ -1,0 +1,86 @@
+/* //////////////////// allauth templates //////////////////// */
+
+
+/* for sign up/sign-in/log-out */
+.all-auth-container {
+    background: linear-gradient(45deg, var(--light) , #94bed1 ); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: white;
+    font-weight: 600;
+}
+
+.all-auth-container button, .all-auth-container a {
+    display: inline-block;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid #28a745; /* Border color for success theme */
+    color: #fff;
+    background-color: #28a745; /* Background color for success theme */
+    border-radius: 4px; /* Optional: Add border-radius for rounded corners */
+    transition: background-color 0.3s ease;
+}
+
+/* Hover effect for the success button */
+.all-auth-container button:hover, .all-auth-container a:hover {
+    background-color: #218838; /* Darker shade on hover */
+}
+
+.user_card {
+    display: flex;
+    justify-content: center;
+    height: fit-content;
+    justify-content: space-evenly;
+    width: fit-content;
+    max-width: 90%;
+    min-height: 400px;
+    background: #57abb889;
+    flex-direction: column;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 5px;
+    word-wrap: break-word;
+}
+
+.user_card input{
+    display: block;
+    width: 100%;
+}
+
+#div_id_remember label {
+    display: flex;
+}
+
+
+.brand_logo_container {
+    position: relative;
+    margin: -61px auto 0 auto;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    background: white;
+
+}
+
+.brand_logo {
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    left: 2px;
+    top: 0;
+    box-shadow: 0 2px 4px rgba(40, 167, 69, 0.9); 
+
+}
+
+.user_card input, .user_card button {
+    max-width: 100% !important;
+    margin-bottom: 5px;
+}

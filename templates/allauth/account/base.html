@@ -1,1 +1,25 @@
 {% extends "base.html" %}
+{% load static %}
+
+
+
+{% block extra_css %}
+    <link async rel="stylesheet" href="{% static 'css/accounts.css' %}">  
+{% endblock %}
+
+
+
+    {% block content %}
+    <div class="all-auth-container w-100 scrollable-div">
+		<div class="user_card">
+			<div class="brand_logo_container">
+				<img src="{% static 'logo.png' %}" class="brand_logo" alt="Logo">
+			</div>
+			<div class="py-2 px-3 m-auto justify-content-between justify-content-center w-100">
+				{% block extra_content %}
+				{% endblock %}     
+			</div>
+		</div>
+	</div>
+    {% endblock %}
+                        

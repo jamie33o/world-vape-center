@@ -1,27 +1,14 @@
+main {
+    min-height: 90vh;
+}
+
 .categories {
     display: flex;
     justify-content: space-evenly;
-    padding: 0 100px;
-    overflow-x: hidden;
-    background: #fcfcfc;
+    padding: 0 10px;
+    overflow-x: auto;
+    background: var(--gray);
     border-bottom: 1px solid var(--gray);
-}
-
-.categories h3.side-title {
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    color: #333;
-    text-transform: uppercase;
-}
-
-.categories h3.side-title:after {
-    content: '';
-    width: 60px;
-    height: 1px;
-    background: #ff173c;
-    display: block;
-    margin-top: 6px;
 }
 
 .categories ul {
@@ -29,18 +16,29 @@
 }
 
 .categories li a {
-    color: #666;
-    font-size: 14px;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
     text-transform: uppercase;
     line-height: 40px;
     display: block;
     text-decoration: none;
+    padding: 0 15px;
 }
 
-.single li a:hover {
-    color: #ff173c;
+.categories li a:hover {
+    box-shadow: inset 0 0 10px rgba(255, 255, 255, 1);
 }
 
 .categories li:last-child a {
     border-bottom: 0;
+}
+
+@media (max-width: 575.98px) {
+    .categories {
+        justify-content: initial;
+    }
+    .categories li {
+    }
+
 }

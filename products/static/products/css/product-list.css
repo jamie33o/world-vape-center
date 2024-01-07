@@ -1,0 +1,46 @@
+.categories {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 0 100px;
+    overflow-x: hidden;
+    background: #fcfcfc;
+    border-bottom: 1px solid var(--gray);
+}
+
+.categories h3.side-title {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+.categories h3.side-title:after {
+    content: '';
+    width: 60px;
+    height: 1px;
+    background: #ff173c;
+    display: block;
+    margin-top: 6px;
+}
+
+.categories ul {
+    margin-bottom: 0;
+}
+
+.categories li a {
+    color: #666;
+    font-size: 14px;
+    text-transform: uppercase;
+    line-height: 40px;
+    display: block;
+    text-decoration: none;
+}
+
+.single li a:hover {
+    color: #ff173c;
+}
+
+.categories li:last-child a {
+    border-bottom: 0;
+}

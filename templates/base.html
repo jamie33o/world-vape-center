@@ -39,7 +39,7 @@
 
     <title>World Vape Center</title>
   </head>
-  <body>
+  <body class="d-flex flex-column">
 
     {% if messages %}
         <div class="message-container"></div>
@@ -48,6 +48,8 @@
     <header class="container-fluid fixed-top p-0">
       {% block page_header %}
         {% include 'ls-header.html' %}
+      {% endblock %}
+      {% block extra_header %}
       {% endblock %}
     </header>
 

@@ -1,10 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Optional: Include this for a more consistent box model */
+}
 
-main {
-    min-height: 90vh;
+header nav .container {
+    justify-content: initial !important;
+}
+
+header .glyphicon {
+    font-size: 15px;
+    color:#6d6c6c;
+}
+
+.navbar li  {
+   
+    padding: 0 15px;
+}
+
+.navbar li a {
+    font-size: 14px;
+    font-weight: 600;
 }
 
 header .navbar {
     border-radius: 0;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    background-color: white;
+    border-radius: 50%;
 }
 
 /*-------------- footer styles -------------*/
@@ -65,9 +92,9 @@ margin-left: -38px;
     padding: 0px;
 }
 
-.glyphicon {
+footer .glyphicon {
     font-size: 35px;
-     color:#6d6c6c;
+    color:#6d6c6c;
 }
 
 #sub-two{
@@ -117,7 +144,7 @@ margin-left: -38px;
 
 #social-menu{
     float: right;
-   margin-right: 60px;
+    margin-right: 60px;
 }
 
 #side-padding{

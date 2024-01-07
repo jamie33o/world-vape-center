@@ -1,23 +1,24 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-0">
+{% load static %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-0 w-100">
   <div class="container">
-    <a class="navbar-brand" href="{% url 'home' %}">World Vape Center</a>
+    <img class="logo" src="{% static 'logo.png' %}" alt="logo" />
+    <a class="navbar-brand mx-auto" href="{% url 'home' %}">World Vape Center</a>
+
     <button
       class="navbar-toggler"
       type="button"
       data-toggle="collapse"
-      data-target="#navbarsExampleDefault"
-      aria-controls="navbarsExampleDefault"
+      data-target="#navbardropdown"
+      aria-controls="navbardropdown"
       aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+      aria-label="Toggle navigation">
+
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div
-      class="collapse navbar-collapse justify-content-end"
-      id="navbarsExampleDefault"
-    >
-      <ul class="navbar-nav m-auto">
+    <div class="collapse navbar-collapse" id="navbardropdown">
+      <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link" href="{% url 'home' %}">Home</a>
         </li>
@@ -26,8 +27,7 @@
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="product.html"
-            >Product <span class="sr-only">(current)</span></a
-          >
+            >Product <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="cart.html">Cart</a>
@@ -46,11 +46,24 @@
             </button>
           </div>
         </div>
-        <a class="btn btn-success btn-sm ml-3" href="cart.html">
+        <a class="btn btn-success btn-sm ml-sm-3 mt-3 mt-sm-0" href="cart.html">
           <i class="fa fa-shopping-cart"></i> Cart
           <span class="badge badge-light">3</span>
         </a>
       </form>
+      {% if user.is_authenticated %}
+      <a href="{% url 'account_logout' %}" class="btn btn-info ml-auto">
+        <i class="glyphicon glyphicon-log-out text-white"></i>
+      </a>
+      <div class="mx-auto text-center ">
+        <span class="glyphicon glyphicon-user text-white"></span>
+        <p class="text-white h4">{{ user }}</p>
+      </div>
+      {% else %}
+      <a href="{% url 'account_login' %}" class="btn btn-info ml-auto">
+        <i class="fa-solid fa-right-to-bracket"></i>
+      </a>
+      {% endif %}
     </div>
   </div>
 </nav>

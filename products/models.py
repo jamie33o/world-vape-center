@@ -14,7 +14,7 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
-        
+
 
 class Brand(models.Model):
     name = models.CharField(max_length=254)
@@ -30,8 +30,15 @@ class Brand(models.Model):
         verbose_name_plural = 'Brands'
 
 
+class MultiChoice(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
+   
     category = models.ForeignKey('Category', null=True, blank=True,
                                  on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
@@ -53,6 +60,7 @@ class Product(models.Model):
     countInStock = models.IntegerField(null=True, blank=True, default=0)
     free_shipping = models.BooleanField(default=False, help_text='Is shipping free?')
     discount_percentage = models.CharField(max_length=254, null=True, blank=True)
+    choices = models.JSONField(blank=True, null=True)
 
 
     def __str__(self):

@@ -1,0 +1,12 @@
+<!-- Category -->
+<nav class="w-100">
+  <ul class="categories list-unstyled list-inline">
+    {% for category in categories %}
+    <li>
+      <a href="{% url 'category' category=category %}" title=""
+        >{{category}}
+      </a>
+    </li>
+    {% endfor%}
+  </ul>
+</nav>

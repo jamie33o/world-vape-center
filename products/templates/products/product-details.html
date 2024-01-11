@@ -1,127 +1,210 @@
 {% extends "base.html" %} 
 {% load static %} 
-{% load custom_filters %}
-
+{% load custom_filters %} 
 
 {% block extra_css %}
-    <link async rel="stylesheet" href="{% static 'products/css/product-details.css' %}">  
-{% endblock %}
+    <link async rel="stylesheet" href="{% static 'products/css/product-details.css' %}" />
+{% endblock %} 
+
 {% block extra_js %}
     <script src="{% static 'products/js/product-details.js' %}"></script>
-{% endblock %}
+{% endblock %} 
 
 {% block content %}
-    <div class="container">
-        <div class="card">
-            <div class="container-fliud">
-                <div class="wrapper row">
-                    <div class="preview col-md-6">
-                        
-                        <div class="preview-pic tab-content">
-                        <div class="tab-pane active" id="pic-1"><img src={{product.image.url}}/></div>
+<div class="container">
+    <div class="card">
+        <div class="container-fliud">
+            <div class="wrapper row">
+                <div class="preview col-md-6">
+                    <div class="preview-pic tab-content">
+                        <div class="tab-pane active" id="pic-1">
+                            <img src="{{product.image.url}}" />
                         </div>
-                       
                     </div>
-                    <div class="details col-md-6">
-                        <h3 class="product-title">{{ product.name }}</h3>
-                        <div class="rating">
-                            <div class="stars">
-                                {% for i in "12345"|make_list %}
-                                    {% with i|add:0 as integer_value %}
-                                        {% if integer_value <= product.rating %}
-                                                <i class="fa fa-star text-warning"></i>
-                                            {% else %}
-                                                <i class="fa fa-star"></i>
-                                        {% endif %}
-                                    {% endwith %}
-                                {% endfor %}
+                </div>
+                <div class="details col-md-6">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <div class="rating">
+                        <div class="stars">
+                            {% for i in "12345"|make_list %} 
+                                {% with i|add:0 as integer_value %} 
+                                {% if integer_value <= product.rating %}
+                                    <i class="fa fa-star text-warning"></i>
+                                {% else %}
+                                    <i class="fa fa-star"></i>
+                                {% endif %} 
+                                {% endwith %} 
+                            {% endfor %}
+                        </div>
+                        <span class="review-no">{{ product.num_reviews }} reviews</span>
+                    </div>
+                    <p class="product-description">{{ product.description }}</p>
+                    <div class="d-flex flex-dir-row p-2">
+                        <h4 class="price">Price: € <span>{{ product.price }} </span></h4>
+                        <div class="ml-5 w-50">
+                            <p class="text-muted mb-2">Quantity</p>
+                            <div class="d-inline-flex">
+                                <select
+                                    id="select{{product.id}}"
+                                    class="form-select form-select-sm w-xl">
+                                    <option value="1" selected="">{{item.qty}}</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                </select>
                             </div>
-                            <span class="review-no">{{ product.num_reviews }} reviews</span>
-                        </div>
-                        <p class="product-description">{{ product.description }} </p>
-                        <h4 class="price">Price: €<span>{{ product.price }} </span></h4>
-                        {% if product.category.name == 'e-liquid' %}
-                            <h5 class="sizes">Nicotine Strength: <span class="nic_chosen"> </span>
-                                {% for nic_choice in product.choices %}
-                                    <button class="nic_choice" data-toggle="tooltip">{{nic_choice}}</button>
-                                {% endfor %}
-                            </h5>
-                        {% endif %}
+                            <div class="d-block">
+                                {% if product.option %}
+                                {% for key, value in product.option.options.items %}
 
-                        <div class="action">
-                            <button class="add-to-cart btn btn-default" type="button">add to cart</button>
-                            <button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+                                    <h5 class="d-block">
+                                        {{ key }}: 
+                                        <span class="cur_choice">10mg </span>
+                                    </h5>
+                                    <div class="">
+                                        {% for choice in value %}
+                                        <label class="custom-radio">
+                                            <input type="radio" name="options" value="{{choice}}" id="{{choice}}">
+                                            <span class="choice">{{choice}}</span>
+                                          </label>                    
+                                        {% endfor %}
+                                    </div>
+                                {% endfor %}
+
+                                {% endif %}
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="action">
+                        <button
+                            class="add-to-cart btn btn-default"
+                            value="{{product.id}}"
+                            type="button">
+                            add to cart
+                        </button>
+                        <button class="like btn btn-default" type="button">
+                            <span class="fa fa-heart"></span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 <div class="container pt-3">
-    <hr/>
-	<div class="row" style="margin-top:40px;">
-		<div class="col-md-6">
-    	<div class="well well-sm">
-            <div class="text-right">
-                {% if user.is_authenticated %}
-                <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box">Leave a Review</a>
-                {% else %}
-                <a class="btn btn-danger btn-red" href="{% url 'account_login' %}" id="open-review-box">Sign in to leave review</a>
-                {% endif %}
-            </div>
-        
-            <div class="row" id="post-review-box" style="display:none;">
-                <div class="col-md-12">
-                    <form id='review-form' data-url='{% url "post_review" product_id=product.id %}'>
-                        {% csrf_token %}
-                        <input id="ratings-hidden" name="rating" type="hidden"> 
-                        <textarea class="form-control animated" cols="50" id="new-review" name="comment" placeholder="Enter your review here..." rows="5"></textarea>
-        
-                        <div class="text-right">
-                            <div class="stars starrr" data-rating="0"></div>
-                            <a class="btn btn-danger btn-sm" href="#" id="close-review-box" style="display:none; margin-right: 10px;">
-                            <span class="glyphicon glyphicon-remove"></span>Cancel</a>
-                            <button class="btn btn-success btn-lg" type="submit">Save</button>
-                        </div>
-                    </form>
+    <hr />
+    <div class="row" style="margin-top: 40px">
+        <div class="col-md-6">
+            <div class="well well-sm">
+                <div class="text-right">
+                    {% if user.is_authenticated %}
+                    <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box"
+                        >Leave a Review</a>
+                    {% else %}
+                    <a class="btn btn-danger btn-red"
+                        href="{% url 'account_login' %}"
+                        id="open-review-box">
+                        Sign in to leave review</a>
+                    {% endif %}
+                </div>
+
+                <div class="row" id="post-review-box" style="display: none">
+                    <div class="col-md-12">
+                        <form
+                            id="review-form"
+                            data-url='{% url "post_review" product_id=product.id %}'>
+                            {% csrf_token %}
+                            <input id="ratings-hidden" name="rating" type="hidden" />
+                            <textarea
+                                class="form-control animated"
+                                cols="50"
+                                id="new-review"
+                                name="comment"
+                                placeholder="Enter your review here..."
+                                rows="5"></textarea>
+
+                            <div class="text-right">
+                                <div class="stars starrr" data-rating="0"></div>
+                                <a
+                                    class="btn btn-danger btn-sm"
+                                    href="#"
+                                    id="close-review-box"
+                                    style="display: none; margin-right: 10px">
+                                    <span class="glyphicon glyphicon-remove"></span>Cancel</a
+                                >
+                                <button class="btn btn-success btn-lg" type="submit">Save</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div> 
-         
-		</div>
+        </div>
         <div class="col-sm-6">
-
             {% for review in reviews %}
 
             <div class="review-block">
                 <div class="row">
                     <div class="col-sm-3">
-                        <img src="{{review.product.image.url}}" class="img-rounded">
+                        <img src="{{review.product.image.url}}" class="img-rounded" />
                         <div class="review-block-name">{{ review.user }}</div>
                         <div class="review-block-date">{{ review.created_at }}</div>
                     </div>
                     <div class="col-sm-9">
                         <div class="review-block-rate">
-                            {% for i in "12345"|make_list %}
+                            {% for i in "12345"|make_list %} 
                             {% with i|add:0 as integer_value %}
-                                {% if integer_value <= review.rating %}
-                                    <span class="glyphicon glyphicon-star text-warning" aria-hidden="true"></span>
-                                {% else %}
-                                    <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                                {% endif %}
-                            {% endwith %}
-                        {% endfor %}
-                           
+                            {% if integer_value <= review.rating %}
+                            <span
+                                class="glyphicon glyphicon-star text-warning"
+                                aria-hidden="true"></span>
+                            {% else %}
+                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+                            {% endif %} 
+                            {% endwith %} 
+                            {% endfor %}
                         </div>
                         <div class="review-block-title">{{ review.product.name }}</div>
                         <div class="review-block-description">{{ review.comment }}</div>
                     </div>
                 </div>
-                <hr/>
+                <hr />
                 {% endfor %}
+            </div>
 
-            
+            <script>
+                // Add button
+
+                $(document).on("click", ".add-to-cart", function (e) {
+                    e.preventDefault();
+
+                    $.ajax({
+                        type: "POST",
+                        url: '{% url "cart-add" %}',
+                        data: {
+                            product_id: $(".add-to-cart").val(),
+                            product_quantity: "1",
+                            csrfmiddlewaretoken: "{{csrf_token}}",
+                            action: "post",
+                        },
+
+                        success: function (json) {
+                            //console.log(json)
+
+                            document.getElementById("cart-qty").textContent = json.qty;
+                        },
+
+                        error: function (xhr, errmsg, err) {},
+                    });
+                });
+            </script>
+
+            {% endblock %}
+        </div>
+    </div>
 </div>
-
-{% endblock %}

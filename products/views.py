@@ -6,6 +6,23 @@ from .models import Product, Review, Category
 from .forms import ReviewForm
 
 
+
+def all_categories(request):
+    """
+    Handle GET requests to display the list of categories.
+
+    Returns:
+        HttpResponse: Rendered template with channel information.
+    """
+    categories = Category.objects.all()
+
+
+    context = {
+        'all_categories': categories
+    }
+    return context
+    
+
 class CategoryView(View):
     """
     View class for displaying a list of channels.
@@ -20,13 +37,11 @@ class CategoryView(View):
         Returns:
             HttpResponse: Rendered template with channel information.
         """
-        categories = Category.objects.all()
-
-        category_products = Product.objects.filter(category__name=category if category else categories[0])
+        category_instance = get_object_or_404(Category, name=category) if category else Category.objects.first()
+        category_products = Product.objects.filter(category=category_instance)
 
         context = {
             'products': category_products,
-            'categories': categories
         }
         return render(request, self.template_name, context)
     

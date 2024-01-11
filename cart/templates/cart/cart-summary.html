@@ -1,0 +1,261 @@
+{% extends "base.html" %} 
+{% load static %} 
+{% load mathfilters %} 
+
+{% block extra_css %}
+    <link async rel="stylesheet" href="{% static 'cart/css/cart-summary.css' %}" />
+{% endblock %} 
+
+{% block content %}
+
+<div class="container">
+    <h1 class="h5">Shopping cart</h1>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-sm-8">
+            {% for item in cart %} 
+            {% with product=item.product %}
+            <div class="card border shadow-none">
+                <div class="card-body">
+                    <div class="d-flex align-items-start border-bottom pb-3">
+                        <div class="me-4">
+                            <img
+                                class="img-fluid mx-auto d-block"
+                                width="100px"
+                                alt="Responsive image"
+                                src="{{ product.image.url }}" />
+                            <!-- Product image -->
+                        </div>
+                        <div class="flex-grow-1 align-self-center overflow-hidden">
+                            <div>
+                                <a
+                                    href="{% url 'product_details' product.id %}"
+                                    class="text-info text-decoration-none">
+                                    <!-- Product get absolute url -->
+                                    <h5 class="h5 pt-2">{{product.name}}<!-- Product title --></h5>
+                                </a>
+                                <p class="text-muted mb-0">
+                                    {% for i in "12345"|make_list %} 
+                                        {% with i|add:0 as integer_value %} 
+                                            {% if integer_value <= product.rating %}
+                                                <i class="fa fa-star text-warning"></i>
+                                            {% else %}
+                                                <i class="fa fa-star"></i>
+                                            {% endif %} 
+                                        {% endwith %} 
+                                    {% endfor %}
+                                </p>
+                                <p class="mb-0 mt-1">Color : <span class="fw-medium">Blue</span></p>
+                            </div>
+                        </div>
+                        <div class="flex-shrink-0 ms-2">
+                            <ul class="list-inline mb-0 font-size-16">
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-muted px-1">
+                                        <i class="mdi mdi-trash-can-outline"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-muted px-1">
+                                        <i class="mdi mdi-heart-outline"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mt-3">
+                                    <p class="text-muted mb-2">Price</p>
+                                    {% if product.discounted_price %}
+                                        <h5 class="mb-0 mt-2">{{product.discounted_price }}<span class="text-muted me-2"><del class="font-size-16 fw-normal">€ {{product.price }}</del></span></h5>
+                                    {% else %} 
+                                        <h5 class="mb-0 mt-2">€ {{product.price }}</h5>
+                                    {% endif %} 
+                                </div>
+                            </div>
+                            <div class="col-md-5">
+                                <div class="mt-3">
+                                    <p class="text-muted mb-2">Quantity</p>
+                                    <div class="d-inline-flex">
+                                        <select
+                                            id="select{{product.id}}"
+                                            class="form-select form-select-sm w-xl">
+                                            <option value="1" selected="">{{item.qty}}</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                            <option value="6">6</option>
+                                            <option value="7">7</option>
+                                            <option value="8">8</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mt-3">
+                                    <p class="text-muted mb-2">Total</p>
+                                    <h5>
+                                        {% if product.discounted_price %} 
+                                            € {{product.discounted_price|mul:item.qty}} 
+                                        {% else %}
+                                            € {{product.price|mul:item.qty}} 
+                                        {% endif %}
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end card -->
+                    <button
+                        type="button"
+                        data-index="{{product.id}}"
+                        class="btn btn-primary btn-sm update-button">
+                        Update
+                    </button>
+
+                    &nbsp;
+
+                    <button
+                        type="button"
+                        data-index="{{product.id}}"
+                        class="btn btn-danger btn-sm delete-button">
+                        Delete
+                    </button>
+                </div>
+            </div>
+
+            {% endwith %} 
+            {% endfor %}
+
+            <div class="row my-4">
+                <div class="col-6 col-sm-6">
+                    <a href="ecommerce-products.html" class="btn btn-info text-white">
+                        <i class="mdi mdi-arrow-left"></i> Continue Shopping
+                    </a>
+                </div>
+                <!-- end col -->
+                <div class="col-6 col-sm-6">
+                    <div class="text-sm-end mt-sm-0 pull-right">
+                        <a href="ecommerce-checkout.html" class="btn btn-success">
+                            <i class="mdi mdi-cart-outline me-1"></i> Checkout
+                        </a>
+                    </div>
+                </div>
+                <!-- end col -->
+            </div>
+        </div>
+
+        <!-- end row-->
+
+        <div class="col-sm-4">
+            <div class="mt-5 mt-lg-0">
+                <div class="card border shadow-none">
+                    <div class="card-header bg-transparent border-bottom py-3 px-4">
+                        <h5 class="font-size-16 mb-0">
+                            Order Summary <span class="float-end">#MN0124</span>
+                        </h5>
+                    </div>
+                    <div class="card-body p-4 pt-2">
+                        <div class="table-responsive">
+                            <table class="table mb-0">
+                                <tbody>
+                                    <tr>
+                                        <td>Sub Total :</td>
+                                        <td class="text-end">$ 780</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Discount :</td>
+                                        <td class="text-end">- $ 78</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Shipping Charge :</td>
+                                        <td class="text-end">$ 25</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Estimated Tax :</td>
+                                        <td class="text-end">$ 18.20</td>
+                                    </tr>
+                                    <tr class="bg-light">
+                                        <th>Total :</th>
+                                        <td class="text-end">
+                                            <span class="fw-bold"> $ 745.2 </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- end table-responsive -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+</div>
+
+<script>
+    // Delete button
+
+    $(document).on("click", ".delete-button", function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: '{% url "cart-delete" %}',
+            data: {
+                product_id: $(this).data("index"),
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: "post",
+            },
+
+            success: function (json) {
+                location.reload();
+
+                document.getElementById("cart-qty").textContent = json.qty;
+
+                document.getElementById("total").textContent = json.total;
+            },
+
+            error: function (xhr, errmsg, err) {},
+        });
+    });
+
+    // Update button
+
+    $(document).on("click", ".update-button", function (e) {
+        e.preventDefault();
+
+        var theproductid = $(this).data("index");
+
+        $.ajax({
+            type: "POST",
+            url: '{% url "cart-update" %}',
+            data: {
+                product_id: $(this).data("index"),
+                product_quantity: $("#select" + theproductid + " option:selected").text(),
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: "post",
+            },
+
+            success: function (json) {
+                //console.log(json)
+
+                location.reload();
+
+                document.getElementById("cart-qty").textContent = json.qty;
+
+                document.getElementById("total").textContent = json.total;
+            },
+
+            error: function (xhr, errmsg, err) {},
+        });
+    });
+</script>
+
+{% endblock %}

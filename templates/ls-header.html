@@ -46,9 +46,9 @@
             </button>
           </div>
         </div>
-        <a class="btn btn-success btn-sm ml-sm-3 mt-3 mt-sm-0" href="cart.html">
+        <a class="btn btn-success btn-sm ml-sm-3 mt-3 mt-sm-0" href="{% url 'cart-summary' %}">
           <i class="fa fa-shopping-cart"></i> Cart
-          <span class="badge badge-light">3</span>
+          <span id="cart-qty" class="badge badge-light">0</span>
         </a>
       </form>
       {% if user.is_authenticated %}

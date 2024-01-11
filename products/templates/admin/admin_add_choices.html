@@ -2,7 +2,7 @@
 
 {% block content %}
     <div id="content-main">
-        <h2>Multi Choice options to be added to '{{ ids }}'</h2>
+        <h2>Multi Choice options to be added to '{{ product_names }}'</h2>
         <form method="post" action="{% url 'admin:apply_choices_to_selected' %}">
             {% csrf_token %}
             

@@ -58,7 +58,6 @@
     display: flex;
 }
 
-
 .brand_logo_container {
     position: relative;
     margin: -61px auto 0 auto;
@@ -66,7 +65,6 @@
     width: 150px;
     border-radius: 50%;
     background: white;
-
 }
 
 .brand_logo {

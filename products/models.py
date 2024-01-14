@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
- 
+from django.db.models import Avg
+
+
 
 class Category(models.Model):
     name = models.CharField(max_length=254)
@@ -40,15 +42,11 @@ class MultiOption(models.Model):
 
 
 class Product(models.Model):
-   
+
     category = models.ForeignKey('Category', null=True, blank=True,
                                  on_delete=models.SET_NULL)
     sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
-    rating = models.IntegerField(
-        null=True,
-        blank=True
-    )
     image_url = models.URLField(max_length=1024, null=True, blank=True)
     image = models.ImageField(null=True, blank=True)
     brand = models.ForeignKey('Brand', null=True, blank=True,
@@ -66,11 +64,18 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def num_reviews(self):
         return self.review_set.count()
-    
-    
+
+    def average_rating(self):
+        # Calculate the average rating for the product's reviews
+        average_rating = Review.objects.filter(product=self).aggregate(Avg('rating'))['rating__avg']
+
+        # If there are no reviews, return 0 or another default value
+        return round(average_rating) if average_rating is not None else 0
+
+
 class Review(models.Model):
     product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
     user = models.ForeignKey(get_user_model(), on_delete=models.SET_NULL, null=True)

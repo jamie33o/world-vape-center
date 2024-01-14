@@ -42,28 +42,55 @@ $(function(){
 
 
 $(document).on('submit', '#review-form', function(e) {
-        e.preventDefault();
+      e.preventDefault();
 
-        // Serialize form data
-        var formData = $(this).serialize();
-        console.log(formData)
-        console.log($(this).data('url'))
+      // Serialize form data
+      var formData = $(this).serialize();
 
-        // Send AJAX request
-        $.ajax({
-            type: 'POST',
-            url: $(e.target).data('url'),  // Replace with the correct URL
-            data: formData,
-            success: function(response) {
-                // Handle success response
-                console.log(response);
-                // You can update the UI or show a success message here
-            },
-            error: function(response) {
-                // Handle error response
-                console.log(response);
-                // You can display error messages or handle form errors here
-            }
-        });
+      // Send AJAX request
+      $.ajax({
+          type: 'POST',
+          url: $(e.target).data('url'),  // Replace with the correct URL
+          data: formData,
+          success: function(response) {
+            location.reload();
+
+          },
+          error: function(response) {
+              // Handle error response
+              console.log(response);
+              // You can display error messages or handle form errors here
+          }
+      });
+  });
+
+
+$(document).on('click', '.delete-review', function(e) {
+    e.preventDefault();
+
+    let review_card = $(this).closest('.row')
+    let csrfToken = $(this).data('csrf')
+    $('.modal-backdrop').removeClass('show')
+
+
+    // Send AJAX request
+    $.ajax({
+        type: 'DELETE',
+        url: $(e.target).data('url'),
+        headers: {
+          'X-CSRFToken': csrfToken,
+        },
+        
+        success: function(response) {
+          review_card.remove()
+
+        },
+        error: function(response) {
+            // Handle error response
+            console.log(response);
+            // You can display error messages or handle form errors here
+        }
     });
+});
+
 

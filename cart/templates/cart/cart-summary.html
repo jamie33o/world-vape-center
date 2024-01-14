@@ -36,17 +36,8 @@
                                     <!-- Product get absolute url -->
                                     <h5 class="h5 pt-2">{{product.name}}<!-- Product title --></h5>
                                 </a>
-                                <p class="text-muted mb-0">
-                                    {% for i in "12345"|make_list %} 
-                                        {% with i|add:0 as integer_value %} 
-                                            {% if integer_value <= product.rating %}
-                                                <i class="fa fa-star text-warning"></i>
-                                            {% else %}
-                                                <i class="fa fa-star"></i>
-                                            {% endif %} 
-                                        {% endwith %} 
-                                    {% endfor %}
-                                </p>
+                                {% include 'components/ratings.html' with product=product %}
+
                                 <p class="mb-0 mt-1">Color : <span class="fw-medium">Blue</span></p>
                             </div>
                         </div>

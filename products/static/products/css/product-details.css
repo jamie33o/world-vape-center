@@ -2,6 +2,9 @@
 /*****************globals*************/
 /* product detail */
 
+.reviews-list {
+  height: 600px;
+}
 
 img {
   max-width: 100%;

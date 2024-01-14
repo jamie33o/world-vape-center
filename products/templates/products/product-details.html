@@ -25,17 +25,8 @@
                 <div class="details col-md-6">
                     <h3 class="product-title">{{ product.name }}</h3>
                     <div class="rating">
-                        <div class="stars">
-                            {% for i in "12345"|make_list %} 
-                                {% with i|add:0 as integer_value %} 
-                                {% if integer_value <= product.rating %}
-                                    <i class="fa fa-star text-warning"></i>
-                                {% else %}
-                                    <i class="fa fa-star"></i>
-                                {% endif %} 
-                                {% endwith %} 
-                            {% endfor %}
-                        </div>
+                        {% include 'components/ratings.html' with product=product %}
+
                         <span class="review-no">{{ product.num_reviews }} reviews</span>
                     </div>
                     <p class="product-description">{{ product.description }}</p>
@@ -145,66 +136,35 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            {% for review in reviews %}
-
-            <div class="review-block">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <img src="{{review.product.image.url}}" class="img-rounded" />
-                        <div class="review-block-name">{{ review.user }}</div>
-                        <div class="review-block-date">{{ review.created_at }}</div>
-                    </div>
-                    <div class="col-sm-9">
-                        <div class="review-block-rate">
-                            {% for i in "12345"|make_list %} 
-                            {% with i|add:0 as integer_value %}
-                            {% if integer_value <= review.rating %}
-                            <span
-                                class="glyphicon glyphicon-star text-warning"
-                                aria-hidden="true"></span>
-                            {% else %}
-                            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-                            {% endif %} 
-                            {% endwith %} 
-                            {% endfor %}
-                        </div>
-                        <div class="review-block-title">{{ review.product.name }}</div>
-                        <div class="review-block-description">{{ review.comment }}</div>
-                    </div>
-                </div>
-                <hr />
-                {% endfor %}
-            </div>
-
-            <script>
-                // Add button
-
-                $(document).on("click", ".add-to-cart", function (e) {
-                    e.preventDefault();
-
-                    $.ajax({
-                        type: "POST",
-                        url: '{% url "cart-add" %}',
-                        data: {
-                            product_id: $(".add-to-cart").val(),
-                            product_quantity: "1",
-                            csrfmiddlewaretoken: "{{csrf_token}}",
-                            action: "post",
-                        },
-
-                        success: function (json) {
-                            //console.log(json)
-
-                            document.getElementById("cart-qty").textContent = json.qty;
-                        },
-
-                        error: function (xhr, errmsg, err) {},
-                    });
-                });
-            </script>
-
-            {% endblock %}
+        <div class="col-sm-6 reviews-list">
+           {% include 'components/reviews.html' with reviews=reviews %}
+        </div>
+            
         </div>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_postloadjs %}  
+
+    $(document).on("click", ".add-to-cart", function (e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: "POST",
+            url: '{% url "cart-add" %}',
+            data: {
+                product_id: $(".add-to-cart").val(),
+                product_quantity: "1",
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                action: "post",
+            },
+
+            success: function (json) {
+                document.getElementById("cart-qty").textContent = json.qty;
+            },
+
+            error: function (xhr, errmsg, err) {},
+        });
+    });
+{% endblock %}

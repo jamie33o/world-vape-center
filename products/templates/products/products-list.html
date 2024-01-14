@@ -22,17 +22,7 @@
                             <div class="col-md-6 mt-1">
                                 <h5>{{ product.name }}</h5>
                                 <div class="d-flex flex-row">
-                                    <div class="ratings mr-2">
-                                        {% for i in "12345"|make_list %}
-                                            {% with i|add:0 as integer_value %}
-                                                {% if integer_value <= product.rating %}
-                                                        <i class="fa fa-star text-warning"></i>
-                                                    {% else %}
-                                                        <i class="fa fa-star"></i>
-                                                {% endif %}
-                                            {% endwith %}
-                                        {% endfor %}
-                                    </div>
+                                    {% include 'components/ratings.html' with product=product %}
                                     <span>{{ product.num_reviews }} reviews</span>
                                 </div>
                                 <p class="text-justify text-truncate para mb-0">{{ product.description }}<br><br></p>

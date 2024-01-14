@@ -1,0 +1,11 @@
+<div class="ratings mr-2">
+    {% for i in "12345"|make_list %}
+        {% with i|add:0 as integer_value %}
+            {% if integer_value <= product.average_rating %}
+                    <i class="fa fa-star text-warning"></i>
+                {% else %}
+                    <i class="fa fa-star"></i>
+            {% endif %}
+        {% endwith %}
+    {% endfor %}
+</div>

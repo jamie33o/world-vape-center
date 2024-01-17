@@ -1,3 +1,4 @@
+{% load static %}
 <div class="footer" id="footer-sub">
   <div class="container">
     <div class="row">
@@ -13,6 +14,10 @@
             <hr />
           </li>
           <li>
+            <a href="">About Us</a>
+            <hr />
+          </li>
+          <li>
             <a href="">Shipping</a>
             <hr />
           </li>
@@ -20,53 +25,45 @@
             <a href="">Cancellation & Returns</a>
             <hr />
           </li>
+        <li><a href="">Sitemap</a> <hr /></li>
           <li><a href="">FAQ</a></li>
         </ul>
       </div>
 
       <div class="col-md-4">
-        <h5>COMPANY NAME</h5>
-        <ul>
-          <li>
-            <a href="">Contact Us</a>
-            <hr />
-          </li>
-          <li>
-            <a href="">About Us</a>
-            <hr />
-          </li>
-          <li>
-            <a href="">Careers</a>
-            <hr />
-          </li>
-          <li>
-            <a href="">Press</a>
-            <hr />
-          </li>
-          <li><a href="">Sell on our website</a></li>
-        </ul>
+        <h5 class="mb-4">NEWS LETTER</h5>
+        <div class="nl-msg"></div>
+        <form id="nl_form" method="post">
+          {% csrf_token %}
+          <div class="nl-input-con">
+            {{ newsletter_form.as_p }}
+          
+            <button data-url="{% url 'un_subscribe_newsletter' %}" class="sub btn btn-danger mb-3">Unsubscribe</button>
+            <button data-url="{% url 'subscribe_newsletter' %}"  class="sub btn btn-success mb-3">Subscribe</button>
+          </div>
+        </form>
+      
+       
       </div>
 
       <div class="col-md-4">
-        <h5>MISC</h5>
+        <h5>CONTACT INFO</h5>
         <ul>
           <li>
-            <a href="">Online Shopping</a>
-            <hr />
+            <p>
+              <strong>Address: </strong><i class="fa-solid fa-location-dot"></i><br> 123 Main Street, <br>Cityville, <br>State, <br>Zip Code
+            </p>
           </li>
           <li>
-            <a href="">Affliate Program</a>
-            <hr />
+            <p>
+              <strong>Phone:</strong> <i class="fa-solid fa-phone"></i><br>+1 (555) 123-4567
+            </p>
           </li>
           <li>
-            <a href="">Gift Card</a>
-            <hr />
+            <p>
+              <strong>Email:</strong> <i class="fa-regular fa-envelope"></i><br><a href="mailto:info@example.com">info@example.com</a>
+            </p>
           </li>
-          <li>
-            <a href="">Subscription</a>
-            <hr />
-          </li>
-          <li><a href="">Sitemap</a></li>
         </ul>
       </div>
     </div>
@@ -97,35 +94,20 @@
     <hr style="margin-bottom: 30px; margin-top: 0px; padding: 0px" />
   </div>
 </div>
-<div style="min-height: 50px" id="footer-main">
-  <ul>
-    <li>
-      <a href=""><b>About Us</b></a>
-    </li>
-    <li>
-      <a href=""><b>Partner with us</b></a>
-    </li>
-    <li>
-      <a href=""><b>Terms & Conditions</b></a>
-    </li>
-    <li>
-      <a href=""><b>Blog</b></a>
-    </li>
-    <li>
-      <a href=""><b>Customer Service</b></a>
-    </li>
-  </ul>
-
+<div style="min-height: 80px" class="d-flex justify-content-between" id="footer-main">
+  <div class="ml-5 my-auto text-white ">
+    <h4><i class="fa-regular fa-copyright"></i> WORLD VAPE CENTER</h4>
+  </div>
   <div id="social-menu">
     <ul>
       <li>
-        <a href=""><img style="max-width: 18px; margin-top: -7px" src="" /></a>
+        <a href=""><img style="max-width: 50px; margin-top: -7px" src="{% static 'twitter.png' %}" /></a>
       </li>
       <li>
-        <a href=""><img style="max-width: 18px; margin-top: -7px" src="" /></a>
+        <a href=""><img style="max-width: 50px; margin-top: -7px" src="{% static 'fb.png' %}" /></a>
       </li>
       <li>
-        <a href=""><img style="max-width: 18px; margin-top: -7px" src="" /></a>
+        <a href=""><img style="max-width: 50px; margin-top: -7px" src="{% static 'insta.png' %}" /></a>
       </li>
     </ul>
   </div>

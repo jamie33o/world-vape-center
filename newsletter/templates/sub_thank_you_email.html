@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Thank You for Subscribing</title>
+</head>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+    integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<meta name="google-site-verification" content="OBHSOz2bJypVuqhse4EbUNPh6u4nlzaqmKaLoOryaqs" />
+<main>
+    <div class="email-container" style="margin: 5% 2% 1% 2%; background: #ffffff;">
+        <div class="email-body">
+            <div class="banner" style="background: rgb(52, 92, 12); color: white; padding: 2em 5em; overflow: hidden;">
+                <h4 style="margin: 0;">Subscription Successful!</h4>
+                <h1 style="font-family: 'Questrial', sans-serif; font-size: 5em; margin: 0 0 .5em 0;">WORLD VAPE CENTER</h1>
+            </div>
+            <div class="email-content" style="padding: 2em 5em; overflow: hidden;">
+                <p>Hi {{email}}!</p>
+                <p>Thank you for subscribing. We're so excited to share the latest news and updates about our product with
+                    you. If you'd like to learn more, follow us on social media!</p>
+                <a href="#" style="text-decoration: none;"><i class="fab fa-facebook-square"></i> Check us out on Facebook</a><br>
+                <a href="#" style="text-decoration: none;"><i class="fab fa-twitter-square"></i> Follow Us on Twitter</a>
+                <hr style="margin-top: 2em; background: rgba(24, 122, 26, 0.594);">
+                <p>Sincerely,</p>
+                <p class="sig" style="font-family: 'Dancing Script', cursive; font-size: 3.5em; margin: 0;">WORLD VAPE CENTER</p>
+                <p><em>WORLD VAPE CENTER</em><br>CEO, Allforms.</p>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer style="text-align: center; margin: 0; padding: 1em;">
+    {% with full_url=request.build_absolute_uri %}
+        <a href="{{ full_url }}{% url 'subscribe_newsletter' %}" style="text-decoration: none;">Un-Subscribe</a>
+    {% endwith %}
+</footer>
+
+</html>

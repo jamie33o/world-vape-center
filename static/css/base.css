@@ -4,17 +4,55 @@
     box-sizing: border-box; 
 }
 
+/* newsletter */
+.nl-input-con {
+    width: 90%;
+    margin-bottom: 50px;
+}
+
+.nl-input-con label {
+    display: block;
+}
+
+.nl-input-con input{
+    border-radius: 20px;
+    height: 40px;
+    width: 68%;
+    padding: 10px;
+}
+
+.nl-msg div p {
+    padding: 0;
+    margin: 0;
+}
+
+.nl-msg div {
+    padding: 3px;
+    border-radius: 20px;
+    width: 60%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* header */
+
 header nav .container {
     justify-content: initial !important;
 }
 
-header .glyphicon {
-    font-size: 15px;
-    color:#6d6c6c;
+header .container {
+    padding: 0;
+    margin: 0;
+}
+
+header form input {
+    height: 40px;
+    padding: 5px;
 }
 
 .navbar li  {
-   
     padding: 0 15px;
 }
 
@@ -32,6 +70,21 @@ header .navbar {
     height: auto;
     background-color: white;
     border-radius: 50%;
+}
+
+.search-btn {
+    color: white;
+    background-color: transparent;
+}
+
+.dropdown-toggle:hover {
+    height: fit-content;
+    text-decoration: none;
+}
+
+.badge {
+    top: -10px;
+    right: 20px;
 }
 
 /*-------------- footer styles -------------*/
@@ -133,9 +186,6 @@ footer .glyphicon {
     color:white;
 }
 
-.glyphicon-search{
-    font-size: 20px;
-}
 
 #social-menu{
     float: right;

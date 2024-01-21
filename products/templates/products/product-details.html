@@ -7,6 +7,7 @@
 {% endblock %} 
 
 {% block extra_js %}
+    <script src="{% static 'products/js/add-to-cart.js' %}"></script>
     <script src="{% static 'products/js/product-details.js' %}"></script>
 {% endblock %} 
 
@@ -49,23 +50,19 @@
                                 </select>
                             </div>
                             <div class="d-block">
-                                {% if product.option %}
-                                {% for key, value in product.option.options.items %}
-
-                                    <h5 class="d-block">
-                                        {{ key }}: 
-                                        <span class="cur_choice">10mg </span>
-                                    </h5>
-                                    <div class="">
-                                        {% for choice in value %}
-                                        <label class="custom-radio">
-                                            <input type="radio" name="options" value="{{choice}}" id="{{choice}}">
-                                            <span class="choice">{{choice}}</span>
-                                          </label>                    
-                                        {% endfor %}
-                                    </div>
+                                {% if product.options %}
+                                <h5 class="d-block">
+                                    {{ product.options_name }}: 
+                                    <span class="cur_choice"></span>
+                                 </h5>
+                                 <div class="">
+                                {% for option in product.options.all %}
+                                    <label class="custom-radio">
+                                        <input type="radio" name="options" value="{{option.name}}" id="{{choice}}">
+                                        <span class="choice">{{option.name}}</span>
+                                    </label>                                                       
                                 {% endfor %}
-
+                                </div>
                                 {% endif %}
                             </div>
                         </div>
@@ -73,7 +70,9 @@
 
                     <div class="action">
                         <button
+                            data-url="{% url "cart-add" %}"
                             class="add-to-cart btn btn-default"
+                            data-csrf="{{csrf_token}}"
                             value="{{product.id}}"
                             type="button">
                             add to cart
@@ -162,26 +161,3 @@
 </div>
 {% endblock %}
 
-{% block extra_postloadjs %}  
-
-    $(document).on("click", ".add-to-cart", function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: "POST",
-            url: '{% url "cart-add" %}',
-            data: {
-                product_id: $(".add-to-cart").val(),
-                product_quantity: "1",
-                csrfmiddlewaretoken: "{{csrf_token}}",
-                action: "post",
-            },
-
-            success: function (json) {
-                document.getElementById("cart-qty").textContent = json.qty;
-            },
-
-            error: function (xhr, errmsg, err) {},
-        });
-    });
-{% endblock %}

@@ -3,13 +3,18 @@
 {% block content %}
     <div id="content-main">
         <h2>Multi Choice options to be added to '{{ product_names }}'</h2>
-        <form method="post" action="{% url 'admin:apply_choices_to_selected' %}">
+        <form method="post" action="{% url 'admin:apply_multiple_choices' %}">
             {% csrf_token %}
             
-            <label for="{{ form.choices.id_for_label }}">Select Choices:</label>
-            {{ form.choices }}
+            <label for="{{ form.options_name.id_for_label }}">Choices Label: e.g. Nicotine Strength <br></label>
 
-            <input type="hidden" name="action" value="apply_choices_to_selected">
+            {{ form.options_name }}
+            <br>
+            <label for="{{ form.choices.id_for_label }}">Select Choices:<br></label>
+           
+            {{ form.choices }}
+           
+            <input type="hidden" name="action" value="apply_multiple_choices">
             <input type="hidden" name="ids" value="{{ids}}">
 
             <input type="submit" value="Yes, apply the custom action">

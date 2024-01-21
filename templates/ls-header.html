@@ -8,7 +8,7 @@
   <div class="d-flex ml-auto">
     <a class="text-white mt-2 position-relative d-flex d-sm-none mx-0" href="{% url 'cart-summary' %}">
       <i class="fa fa-shopping-cart h4 text-success"></i>
-      <span id="cart-qty" class="badge badge-light position-absolute">
+      <span class="cart-qty badge badge-light position-absolute">
         {% with qty_amount=cart|length %}
             {% if qty_amount > 0 %}
                 {{ qty_amount }}
@@ -18,10 +18,18 @@
         {% endwith %}
 
       </span>
-      <span class="ml-2">€{{ cart.get_total }}</span>
+      <span class="ml-2 cart-total">€{{ cart.get_total }}</span>
     </a>
     <span class="h4 mx-2 text-white d-flex d-sm-none">|</span>
-    <p class="h5 my-auto d-inline ml-1 text-white d-sm-none">{{ user }}</p>
+
+    <p class="h5 my-auto d-inline ml-1 text-white d-sm-none">
+      {% if user.is_authenticated %}
+        {{ user }}      
+      {% else %}
+        <a class="text-white mx-0" href="{% url 'account_login' %}">Sign In</a>
+
+      {% endif %}
+</p>
 
   </div>
   
@@ -104,7 +112,7 @@
 
     <a class="text-white mt-2 position-relative d-none d-sm-flex" href="{% url 'cart-summary' %}">
       <i class="fa fa-shopping-cart h4 text-success"></i>
-      <span id="cart-qty" class="badge badge-light position-absolute">
+      <span class="cart-qty badge badge-light position-absolute">
         {% with qty_amount=cart|length %}
             {% if qty_amount > 0 %}
                 {{ qty_amount }}
@@ -114,7 +122,7 @@
         {% endwith %}
 
       </span>
-      <span class="ml-2">€{{ cart.get_total }}</span>
+      <span class="ml-2 cart-total">€{{ cart.get_total }}</span>
     </a>
   </div>
   <form class="form-inline my-2 my-lg-0 w-100 d-flex d-sm-none d-lg-none">

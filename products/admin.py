@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django.urls import path, reverse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from .admin_utils.add_discount_actions import (apply_fifty_percentage_discount,
                                                apply_five_percentage_discount,
                                                apply_ten_percentage_discount,
@@ -21,62 +21,58 @@ class ProductAdmin(admin.ModelAdmin):
                apply_twenty_percentage_discount,
                apply_ten_percentage_discount,
                apply_five_percentage_discount,
-               'apply_choices_to_selected',
+               'apply_multiple_choices',
                remove_discount
                ]
 
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
-            path('apply_choices_to_selected/',
+            path('apply_multiple_choices/',
                  self.admin_site.admin_view(
-                     self.apply_choices_to_selected_view),
-                 name='apply_choices_to_selected'),
-
+                     self.apply_multiple_choices_view),
+                 name='apply_multiple_choices'),
         ]
         return custom_urls + urls
 
-    def apply_choices_to_selected(self, request, queryset):
+    def apply_multiple_choices(self, request, queryset):
         encoded_ids = ','.join(str(obj.id) for obj in queryset)
-        url = reverse('admin:apply_choices_to_selected') + \
-            f'?ids={encoded_ids}'
+        url = reverse('admin:apply_multiple_choices') + f'?ids={encoded_ids}'
         return HttpResponseRedirect(url)
 
-    def apply_choices_to_selected_view(self, request):
-
+    def apply_multiple_choices_view(self, request):
         if request.method == 'POST':
             form = CustomActionForm(request.POST)
             if form.is_valid():
                 ids = form.cleaned_data['ids']
-
                 ids_list = [int(id) for id in ids.split(',')]
-
                 queryset = Product.objects.filter(id__in=ids_list)
+                selected_choices = form.cleaned_data['choices']
+                options_name = form.cleaned_data['options_name']
+                print(options_name)
 
-                selected_choice = form.cleaned_data['choices']
-                if selected_choice:
-                    selected_option_id = selected_choice[0]
-                    selected_option = get_object_or_404(MultiOption, id=selected_option_id)
+                if selected_choices:
+                    selected_options = MultiOption.objects.filter(id__in=selected_choices)
 
-                for product in queryset:
-          
-                    # Clear existing options and set the selected MultiOption instances
-                    product.option = selected_option
-                    product.save()
+                    for product in queryset:
+                        # Clear existing options and set the selected MultiOption instances
+                        product.options.clear()
+                        product.options_name = options_name
+                        product.options.add(*selected_options)
+                        product.save()
 
-                self.message_user(
-                    request, 'Choices applied to selected products.')
-                # Redirect to the changelist page
-                return HttpResponseRedirect('..')
+                    self.message_user(request, 'Choices applied to selected products.')
+                    return HttpResponseRedirect('..')  # Redirect to the changelist page
         else:
             encoded_ids = request.GET.get('ids', '')
-            queryset = Product.objects.filter(id__in=encoded_ids).values_list('name')
-
+            queryset = Product.objects.filter(id__in=encoded_ids.split(','))
             form = CustomActionForm()
 
-        return render(request, 'admin/admin_add_choices.html', 
-                      {'form': form, 'ids': str(encoded_ids), 'product_name': queryset})
-
+        return render(request, 'admin/admin_add_choices.html', {
+            'form': form,
+            'ids': encoded_ids,
+            'products': queryset,
+        })
 
 admin.site.register(Category)
 admin.site.register(Brand)

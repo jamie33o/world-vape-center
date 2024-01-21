@@ -6,52 +6,71 @@
     <link async rel="stylesheet" href="{% static 'products/css/product-list.css' %}">  
 {% endblock %}
 
+{% block extra_js %}
+    <script src="{% static 'products/js/add-to-cart.js' %}"></script>
+{% endblock %} 
+
 {% block extra_header %}
     {% include 'products/categories.html' %}
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-5 mb-5 p-0">
-        <div class="row m-0">
-            {% for product in products %}
-                <div class="col-md-6 mb-4">
-                    <div class="row p-2 mx-2 bg-white border rounded">
-                        <div class="col-md-3 mt-1 d-flex justify-content-center overflow-hidden">
-                            <img class=" rounded product-image" width="100" src="{{ product.image.url }}">
-                        </div>
+<div class="container-fluid mt-5 mb-5 p-0">
+    <div class="row m-0">
+        <div class="col-md-2 mb-4 filters">
+            <h3 class="text-center mb-5">Filters</h3>
+            {% include 'products/filters.html' with category=category %}
+        </div>
+
+        <div class="col-md-9">
+            <div class="row m-0">
+                {% for product in products %}
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-6 mb-4">
+                        <div class="row p-2 mx-2 bg-white border rounded product-card">
+                            <div class="col-md-3 mt-1 d-flex justify-content-center overflow-hidden">
+                                <img class="rounded product-image" src="{{ product.image.url }}">
+                            </div>
                             <div class="col-md-6 mt-1">
                                 <h5>{{ product.name }}</h5>
-                                <div class="d-flex flex-row">
+                                <div class="d-flex flex-column flex-lx-row">
                                     {% include 'components/ratings.html' with product=product %}
                                     <span>{{ product.num_reviews }} reviews</span>
                                 </div>
                                 <p class="text-justify text-truncate para mb-0">{{ product.description }}<br><br></p>
                             </div>
-                        <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                            <div class="d-flex flex-row align-items-center">
-                                <h4 class="mr-1">
-                                    {% if not product.discounted_price %}
-                                        {{ product.price }}
-                                    {% else %}
-                                        {{ product.discounted_price}}  
+                            <div class="align-items-center align-content-center col-md-3 border-left mt-1">
+                                <div class="d-flex flex-row align-items-center">
+                                    <h4 class="mr-1">
+                                        {% if not product.discounted_price %}
+                                            {{ product.price }}
+                                        {% else %}
+                                            {{ product.discounted_price}}  
+                                        {% endif %}
+                                    </h4>
+                                    {% if product.discounted_price %}
+                                    <span class="strike-text text-danger text-bold font-weight-bold"><del>{{ product.price }}</del><br>{{ product.discount_percentage|default:'' }}</span>
                                     {% endif %}
-                                </h4>
-                                {% if product.discounted_price %}
-                                <span class="strike-text text-danger text-bold font-weight-bold"><del>{{ product.price }}</del><br>{{ product.discount_percentage|default:'' }}</span>
+                                </div>
+                                {% if product.free_shipping %}
+                                <h6 class="text-success">Free shipping</h6>
                                 {% endif %}
-                            </div>
-                            {% if product.free_shipping %}
-                            <h6 class="text-success">Free shipping</h6>
-                            {% endif %}
-                            <div class="d-flex flex-column mt-4">
-                                <a href='{% url 'product_details' product.id %}' class="btn btn-primary btn-sm" type="button">Details</a>
-                                <button class="btn btn-outline-primary btn-sm mt-2" type="button">Add to cart</button>
+                                <div class="d-flex flex-column mt-4">
+                                    <a href='{% url 'product_details' slug=product.slug %}' class="btn btn-primary btn-sm" type="button">Details</a>
+                                    <button
+                                        data-url="{% url "cart-add" %}"
+                                        data-csrf="{{csrf_token}}"
+                                        class="add-to-cart btn btn-light border-info p-0 mt-2"
+                                        value="{{product.id}}"
+                                        type="button">
+                                        <i class="fa-solid fa-cart-plus h6 text-primary my-auto"></i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}
-

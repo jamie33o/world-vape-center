@@ -55,19 +55,14 @@
       {% block extra_header %}
       {% endblock %}
     </header>
-    
-    
   
-
     <main>
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          
+      <nav aria-label="breadcrumb" class="d-none d-lg-inline">
+        <ol class="breadcrumb mx-5 bg-info">
         </ol>
       </nav>
       {% block content %}
       {% endblock %}    
-      
     </main>
 
     <footer id="help">
@@ -143,13 +138,13 @@
               $.each(breadcrumbs, function(i, breadcrumb) {
                 const breadcrumbItem = $('<li>', { class: 'breadcrumb-item' });
             
+                let link = $('<a>', { href: breadcrumb.url, text: breadcrumb.label });
                 if (i === breadcrumbs.length - 1) {
-                    breadcrumbItem.addClass('active');
-                    breadcrumbItem.attr('aria-current', 'page');
+                  link = $('<p>', { text: breadcrumb.label });
+                  link.addClass('text-white d-inline');
+                }else{
+                  link.addClass('text-dark');
                 }
-            
-                const link = $('<a>', { href: breadcrumb.url, text: breadcrumb.label });
-            
                 breadcrumbItem.append(link);
                 breadcrumbContainer.append(breadcrumbItem);
             });

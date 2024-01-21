@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.db.models import Avg
+from django.utils.text import slugify
+
 
 
 
@@ -33,18 +35,18 @@ class Brand(models.Model):
 
 
 class MultiOption(models.Model):
-    options = models.JSONField(blank=True, null=True)
-
+    name = models.CharField(max_length=254, default='')
 
     def __str__(self):
-        name = str(self.options)
-        return name
+        return self.name
 
 
 class Product(models.Model):
 
     category = models.ForeignKey('Category', null=True, blank=True,
                                  on_delete=models.SET_NULL)
+    slug = models.SlugField(max_length=255, null=True, blank=True)
+
     sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
     image_url = models.URLField(max_length=1024, null=True, blank=True)
@@ -59,7 +61,8 @@ class Product(models.Model):
     countInStock = models.IntegerField(null=True, blank=True, default=0)
     free_shipping = models.BooleanField(default=False, help_text='Is shipping free?')
     discount_percentage = models.CharField(max_length=254, null=True, blank=True)
-    option = models.ForeignKey('MultiOption', null=True, blank=True, on_delete=models.SET_NULL)
+    options_name = models.CharField(max_length=254, null=True, blank=True)
+    options = models.ManyToManyField(MultiOption, blank=True)
 
 
     def __str__(self):
@@ -67,6 +70,12 @@ class Product(models.Model):
 
     def num_reviews(self):
         return self.review_set.count()
+    
+    def save(self, *args, **kwargs):
+        if not self.slug and self.name:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
+
 
     def average_rating(self):
         # Calculate the average rating for the product's reviews

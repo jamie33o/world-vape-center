@@ -2,6 +2,15 @@ main {
     min-height: 90vh;
 }
 
+.product-card {
+    
+}
+
+.product-card img {
+    width: auto;
+    height: 150px;
+}
+
 .categories {
     display: flex;
     justify-content: space-evenly;
@@ -32,6 +41,22 @@ main {
 
 .categories li:last-child a {
     border-bottom: 0;
+}
+
+.filters {
+    padding: 20px;
+    margin-left: 5%;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.filters p label, .filters h3 {
+    border-bottom: 1px solid rgba(89, 89, 89, 0.321);
+    width: 100%;
+}
+
+.filters ul {
+    list-style-type: none;
 }
 
 @media (max-width: 575.98px) {

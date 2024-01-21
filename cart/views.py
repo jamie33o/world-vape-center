@@ -30,9 +30,10 @@ def cart_add(request):
 
 
         cart_quantity = cart.__len__()
+        cart_total = cart.get_total()
 
 
-        response = JsonResponse({'qty': cart_quantity})
+        response = JsonResponse({'qty': cart_quantity, 'cart_total': cart_total})
 
         return response
         

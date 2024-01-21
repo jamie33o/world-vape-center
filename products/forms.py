@@ -1,6 +1,7 @@
 from django import forms
 from .models import Review, MultiOption
-import json
+from .models import Brand, MultiOption
+
 class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
@@ -15,25 +16,30 @@ class ReviewForm(forms.ModelForm):
 
 class CustomActionForm(forms.Form):
     ids = forms.CharField()
-
+    options_name = forms.CharField()
+    
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # Populate choices dynamically from MultiOption JSONField key-value pairs
-        multi_option_data = MultiOption.objects.all().values('id', 'options')
-        choices_list = []
-
-        for option_data in multi_option_data:
-            try:
-                key = list(option_data['options'].keys())[0]
-                value = option_data['options'][key]
-                label = f"{key}: {value}"
-                choices_list.append((option_data['id'], label))
-            except (json.JSONDecodeError, AttributeError, IndexError):
-                pass
+        multi_option_data = MultiOption.objects.all()
+        choices_list = [(option.id, option.name) for option in multi_option_data]
 
         self.fields['choices'] = forms.MultipleChoiceField(
             choices=choices_list,
-            widget=forms.RadioSelect,
+            widget=forms.CheckboxSelectMultiple,
             required=False,
         )
+
+
+class FiltersForm(forms.Form):
+    brands = forms.ModelMultipleChoiceField(
+        queryset=Brand.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )
+
+    multi_options = forms.ModelMultipleChoiceField(
+        queryset=MultiOption.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False
+    )

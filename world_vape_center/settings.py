@@ -81,6 +81,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'products.views.all_categories',
+                'products.context_processors.filters',
                 'cart.context_processors.cart'
             ],
         },

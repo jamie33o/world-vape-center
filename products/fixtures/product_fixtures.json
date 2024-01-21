@@ -1,143 +1,88 @@
 [
-    {
+  {
       "model": "products.category",
       "pk": 1,
       "fields": {
-        "name": "ACCESSORIES",
-        "friendly_name": "ACCESSORIES"
+          "name": "Accessories",
+          "friendly_name": "Accessories"
       }
-    },
-    {
+  },
+  {
       "model": "products.category",
       "pk": 2,
       "fields": {
-        "name": "TANKS",
-        "friendly_name": "TANKS"
+          "name": "Tanks",
+          "friendly_name": "Tanks"
       }
-    },
-    {
+  },
+  {
       "model": "products.category",
       "pk": 3,
       "fields": {
-        "name": "VAPE_KITS",
-        "friendly_name": "VAPE_KITS"
+          "name": "Vape Kits",
+          "friendly_name": "Vape Kits"
       }
-    },
-    {
-      "model": "products.category",
-      "pk": 4,
-      "fields": {
-        "name": "E_LIQUIDS",
-        "friendly_name": "E_LIQUIDS"
-      }
-    },
-    {
-      "model": "products.category",
-      "pk": 5,
-      "fields": {
-        "name": "OFFERS",
-        "friendly_name": "OFFERS"
-      }
-    },
-    {
-      "model": "products.category",
-      "pk": 6,
-      "fields": {
-        "name": "COILS",
-        "friendly_name": "COILS"
-      }
-    },
-    {
-      "model": "products.category",
-      "pk": 7,
-      "fields": {
-        "name": "DISPOSABLE",
-        "friendly_name": "DISPOSABLE"
-      }
-    },
-    {
+  },
+  {
       "model": "products.brand",
       "pk": 1,
       "fields": {
-        "name": "CloudVape",
-        "friendly_name": "CloudVape"
+          "name": "CloudVape",
+          "friendly_name": "CloudVape"
       }
-    },
-    {
+  },
+  {
+      "model": "products.multioption",
+      "pk": 1,
+      "fields": {
+          "name": "Option1"
+      }
+  },
+  {
+      "model": "products.multioption",
+      "pk": 2,
+      "fields": {
+          "name": "Option2"
+      }
+  },
+  {
       "model": "products.product",
       "pk": 1,
       "fields": {
-        "category": 4,
-        "sku": "123456",
-        "name": "Ri-berry",
-        "rating": 4,
-        "image": "v3.jpeg",
-        "brand": 1,
-        "description": "A high-quality e-liquid.",
-        "price": 10.99,
-        "countInStock": 10,
-        "free_shipping": false
+          "category": 3,
+          "slug": "ri-berry",
+          "sku": "123456",
+          "name": "Ri-berry",
+          "image": "v3.jpeg",
+          "brand": 1,
+          "description": "A high-quality e-liquid.",
+          "price": 10.99,
+          "discounted_price": 9.99,
+          "countInStock": 10,
+          "free_shipping": false,
+          "discount_percentage": "10%",
+          "options_name": "Size",
+          "options": [1, 2]
       }
-    },
-    {
+  },
+  {
       "model": "products.product",
       "pk": 2,
       "fields": {
-        "category": 4,
-        "sku": "789012",
-        "name": "Mango Tango",
-        "image": "v2.png",
-        "brand": 1,
-        "description": "Exotic mango-flavored e-liquid.",
-        "price": 12.99,
-        "countInStock": 20,
-        "free_shipping": false
+          "category": 3,
+          "slug": "mango-tango",
+          "sku": "789012",
+          "name": "Mango Tango",
+          "image": "v3.jpeg",
+          "brand": 1,
+          "description": "Exotic mango-flavored e-liquid.",
+          "price": 12.99,
+          "discounted_price": 11.99,
+          "countInStock": 20,
+          "free_shipping": false,
+          "discount_percentage": "8%",
+          "options_name": "Color",
+          "options": [2]
       }
-    },
-    {
-      "model": "products.product",
-      "pk": 3,
-      "fields": {
-        "category": 4,
-        "sku": "345678",
-        "name": "Cool Mint",
-        "image": "v3.jpeg",
-        "brand": 1,
-        "description": "Refreshing cool mint-flavored e-liquid.",
-        "price": 9.99,
-        "countInStock": 15,
-        "free_shipping": false
-      }
-    },
-    {
-      "model": "products.product",
-      "pk": 4,
-      "fields": {
-        "category": 4,
-        "sku": "567890",
-        "name": "Strawberry Splash",
-        "image": "v3.jpeg",
-        "brand": 1,
-        "description": "Sweet strawberry-flavored e-liquid.",
-        "price": 11.99,
-        "countInStock": 25,
-        "free_shipping": false
-      }
-    },
-    {
-      "model": "products.product",
-      "pk": 5,
-      "fields": {
-        "category": 4,
-        "sku": "234567",
-        "name": "Vanilla Bliss",
-        "image": "v2.png",
-        "brand": 1,
-        "description": "Smooth vanilla-flavored e-liquid.",
-        "price": 14.99,
-        "countInStock": 18,
-        "free_shipping": false
-      }
-    }
-  ]
-  
+  }
+]

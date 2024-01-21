@@ -3,8 +3,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
 from .models import Product, Review, Category
-from .forms import ReviewForm
-
+from .forms import ReviewForm, FiltersForm
 
 
 def all_categories(request):
@@ -42,9 +41,38 @@ class CategoryView(View):
 
         context = {
             'products': category_products,
+            'category': category_instance
         }
         return render(request, self.template_name, context)
-    
+
+
+
+class FilterView(View):
+    template_name = 'products/products-list.html'
+
+    def get(self, request, category=None):
+        category_instance = get_object_or_404(Category, name=category) if category else Category.objects.first()
+        category_products = Product.objects.filter(category=category_instance)
+
+        filters_form = FiltersForm(request.GET)
+        if filters_form.is_valid():
+            brands = filters_form.cleaned_data.get('brands')
+            multi_options = filters_form.cleaned_data.get('multi_options')
+
+            if brands:
+                category_products = category_products.filter(brand__in=brands)
+
+            if multi_options:
+                category_products = category_products.filter(options__in=multi_options)
+
+        context = {
+            'products': category_products,
+            'category': category_instance
+        }
+
+        return render(request, self.template_name, context)
+
+
 
 class ProductDetailView(View):
     """
@@ -53,7 +81,7 @@ class ProductDetailView(View):
 
     template_name = 'products/product-details.html'
 
-    def get(self, request, product_id):
+    def get(self, request, slug):
         """
         Handle GET requests to display the list of channels.
 
@@ -61,7 +89,7 @@ class ProductDetailView(View):
             HttpResponse: Rendered template with channel information.
         """
         
-        product = get_object_or_404(Product, id=product_id)
+        product = get_object_or_404(Product, slug=slug)
         reviews = Review.objects.filter(product=product)
 
         context = {
@@ -79,7 +107,7 @@ class ReviewsView(View):
         if form.is_valid():
             new_review = form.save(commit=False)
             new_review.product = product
-            new_review.user = request.user 
+            new_review.user = request.user
             new_review.save()
             return JsonResponse({'status': 'success', 'message': 'Thank you for your feedback'}, status=200)
         return JsonResponse({'status': 'error', 'message': form.errors})

@@ -1,0 +1,4 @@
+<form method="get" action="{% url 'filter' category=category.name %}">
+    {{ filters_form.as_p }}
+    <button class="btn btn-primary" type="submit">Apply Filters</button>
+</form>

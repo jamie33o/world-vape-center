@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container">
+    <div class="text-center mt-4">
+        <h1>Delivery Information</h1>
+    </div>
+
+    <div class="mt-4">
+        <p>Vapeape delivers with <strong>DPD</strong> (with a tracking number and insurance) and <strong>An Post</strong> (with a tracking number and insurance) to ensure better service to satisfy our customers. <strong>Orders generated and paid before 4 pm Monday to Thursday (including bank holidays) will be processed the same day. Orders placed after 6 pm on Thursday will be dispatched on Sunday and delivered on Monday/Tuesday.</strong> We do our best to deliver your ordered products on time. This means that 99% of the time, you can expect your delivery within 24 hours of order placement. In case of any delays, please be advised that it could take 1-3 working days.</p>
+        <p>If an item is temporarily out of stock, we will be in contact. For order tracking, please see the designated couriers' tracking site (<a href="https://www.anpost.com/" target="_blank" rel="noopener" class="text-primary">Track My Parcel AnPost</a>, <a href="https://dpd.ie/" target="_blank" rel="noopener" class="text-primary">Track My Parcel DPD</a>).</p>
+        <p>For the delivery charge, please see below.</p>
+    </div>
+
+    <div class="mt-4">
+        <h3 class="text-center">Shipping cost is calculated by order value</h3>
+        <table class="table table-bordered table-striped mx-auto">
+            <thead>
+                <tr>
+                    <th scope="col">Order Value</th>
+                    <th scope="col">Delivery Cost</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>0 – 10€</td>
+                    <td>5€</td>
+                </tr>
+                <tr>
+                    <td>10 – 20€</td>
+                    <td>4€</td>
+                </tr>
+                <tr>
+                    <td>20 – 30€</td>
+                    <td>3€</td>
+                </tr>
+                <tr>
+                    <td>30 – 40€</td>
+                    <td>2€</td>
+                </tr>
+                <tr>
+                    <td>40 € +</td>
+                    <td>Free Shipping</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="mt-4">
+        <h3>Before you send an order:</h3>
+        <ul>
+            <li>Make sure your delivery address is correct.</li>
+            <li>Make sure your mobile or landline phone number is correct (The courier might contact you).</li>
+            <li>Please ensure that somebody is available at home to sign the parcel.</li>
+        </ul>
+        <p>Upon receipt of your delivery, please take extra care to inspect the package. If you are unsatisfied with the condition or have any concerns regarding the contents, please ask the courier to add your comments to the “Delivery Document”. If a package is returned to us, the customer will be charged for re-sending costs. Orders will not be dispatched until full payment has been received. Our Payment options are available <a href="https://www.vapeape.ie/payment-options/" target="_blank" rel="noopener" class="text-primary">here</a>.</p>
+    </div>
+</div>
+
+
+{% endblock %}

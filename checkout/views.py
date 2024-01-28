@@ -1,179 +1,156 @@
-from django.shortcuts import render
-
-# Create your views here.
-
-from . models import ShippingAddress, Order, OrderItem
-
+import stripe
+import json
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.views.decorators.http import require_POST
+from django.contrib import messages
+from django.conf import settings
+from .forms import ShippingDetailsForm
+from .models import Order, OrderLineItem
+from products.models import Product
 from cart.cart import Cart
+from decimal import Decimal
 
 
-from django.http import JsonResponse
+
+
+@require_POST
+def cache_checkout_data(request):
+    try:
+        pid = request.POST.get('client_secret').split('_secret')[0]
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        stripe.PaymentIntent.modify(pid, metadata={
+            'cart': json.dumps(request.session.get('cart', {})),
+            'save_info': request.POST.get('save_info'),
+            'username': request.user,
+        })
+        return HttpResponse(status=200)
+    except Exception as e:
+        messages.error(request, 'Sorry, your payment cannot be \
+            processed right now. Please try again later.')
+        return HttpResponse(content=e, status=400)
 
 
 def checkout(request):
+    stripe_public_key = settings.STRIPE_PUBLIC_KEY
+    stripe_secret_key = settings.STRIPE_SECRET_KEY
 
-    # Users with accounts -- Pre-fill the form
-
-    if request.user.is_authenticated:
-
-        try:
-
-            # Authenticated users WITH shipping information 
-
-            shipping_address = ShippingAddress.objects.get(user=request.user.id)
-
-            context = {'shipping': shipping_address}
-
-            
-
-
-            return render(request, 'payment/checkout.html', context=context)
-
-
-        except:
-
-            # Authenticated users with NO shipping information
-
-            return render(request, 'payment/checkout.html')
-
-    else:
-            
-        # Guest users
-
-        return render(request, 'payment/checkout.html')
-
-
-
-def complete_order(request):
-
-    if request.POST.get('action') == 'post':
-
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-
-        address1 = request.POST.get('address1')
-        address2 = request.POST.get('address2')
-        city = request.POST.get('city')
-
-        state = request.POST.get('state')
-        zipcode = request.POST.get('zipcode')
-
-
-        # All-in-one shipping address
-
-        shipping_address = (address1 + "\n" + address2 + "\n" +
-        
-        city + "\n" + state + "\n" + zipcode
-        
-        )
-
-        # Shopping cart information 
-
+    if request.method == 'POST':
         cart = Cart(request)
 
+        form_data = {
+            'full_name': request.POST['full_name'],
+            'email': request.POST['email'],
+            'phone_number': request.POST['phone_number'],
+            'eircode': request.POST['eircode'],
+            'town_or_city': request.POST['town_or_city'],
+            'street_address1': request.POST['street_address1'],
+            'street_address2': request.POST['street_address2'],
+            'county': request.POST['county'],
+        }
 
-        # Get the total price of items
-
-        total_cost = cart.get_total()
-
-
-        '''
-
-            Order variations
-
-            1) Create order -> Account users WITH + WITHOUT shipping information
-        
-
-            2) Create order -> Guest users without an account
-        
-
-        '''
-
-        # 1) Create order -> Account users WITH + WITHOUT shipping information
-
-        if request.user.is_authenticated:
-
-            order = Order.objects.create(full_name=name, email=email, shipping_address=shipping_address,
+        shipping_form = ShippingDetailsForm(form_data)
+        if shipping_form.is_valid():
+            address = shipping_form.save(commit=False)
+            address.save()
             
-            amount_paid=total_cost, user=request.user)
+            order = Order()
 
+            pid = request.POST.get('client_secret').split('_secret')[0]
 
-            order_id = order.pk
+            order.stripe_pid = pid
+            order.shipping_address = address
+            order.delivery_cost = cart.get_delivery_cost()
+            order.order_total = cart.get_total()
+            order.grand_total = cart.get_grand_total()
+            order.order_number = cart.get_order_num()
+            order.save()
+            
+            user = request.user if request.user.is_authenticated else None
 
-            for item in cart:
+            for item_id, item_data in cart.cart.items():
+                if item_data['discounted_price']:
+                    total = Decimal(item_data['discounted_price']) * item_data['qty']
+                else:
+                    total = Decimal(item_data['price']) * item_data['qty']
 
-                OrderItem.objects.create(order_id=order_id, product=item['product'], quantity=item['qty'],
-                
-                price=item['price'], user=request.user)
+                try:
+                    product = Product.objects.get(id=item_id)
+                    order_line_item = OrderLineItem(
+                        order=order,
+                        product=product,
+                        quantity=item_data['qty'],
+                        lineitem_total=total,
+                        product_option=item_data['product_choice'],
+                        user= user
+                    )
+                    order_line_item.save()
+                    
+                except Product.DoesNotExist:
+                    messages.error(request, (
+                        "One of the products in your bag wasn't found in our database. "
+                        "Please call us for assistance!")
+                    )
+                    order.delete()
 
+                    return redirect(reverse('cart-summary'))
 
-        #  2) Create order -> Guest users without an account
-
+            request.session['save_info'] = 'save-info' in request.POST
+            return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
+            messages.error(request, 'There was an error with your form. \
+                Please double check your information.')
+    else:
 
-            order = Order.objects.create(full_name=name, email=email, shipping_address=shipping_address,
-            
-            amount_paid=total_cost)
-
-
-            order_id = order.pk
-
-
-            for item in cart:
-
-                OrderItem.objects.create(order_id=order_id, product=item['product'], quantity=item['qty'],
-                
-                price=item['price'])
+        # cart = request.session.get('session_key', {})
+        cart = Cart(request)
+        if not cart:
+            messages.info(request, "There's nothing in your cart at the moment")
+            return redirect(reverse('cart-summary'))
 
 
+        total = cart.__len__()
+        stripe_total = round(total * 100)
+        stripe.api_key = stripe_secret_key
+        intent = stripe.PaymentIntent.create(
+            amount=stripe_total,
+            currency=settings.STRIPE_CURRENCY,
+        )
 
-        order_success = True
+        order_form = ShippingDetailsForm()
 
-        response = JsonResponse({'success':order_success})
+    if not stripe_public_key:
+        messages.warning(request, 'Stripe public key is missing. \
+            Did you forget to set it in your environment?')
 
-        return response
+    template = 'checkout/checkout.html'
+    context = {
+        'order_form': order_form,
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
+    }
 
-
-
-
-
-
-    
-
-
-
-
-def payment_success(request):
-
-
-    # Clear shopping cart
-
-
-    for key in list(request.session.keys()):
-
-        if key == 'session_key':
-
-            del request.session[key]
-
-
-
-    return render(request, 'payment/payment-success.html')
+    return render(request, template, context)
 
 
 
 
 
+def checkout_success(request, order_number):
+    """
+    Handle successful checkouts
+    """
+    order = get_object_or_404(Order, order_number=order_number)
+    messages.success(request, f'Order successfully processed! \
+        Your order number is {order_number}. A confirmation \
+        email will be sent to {order.shipping_address.email} .')
 
+    if 'cart' in request.session:
+        del request.session['cart']
+        del request.session['order_num']
 
-def payment_failed(request):
+    template = 'checkout/checkout-success.html'
+    context = {
+        'order': order,
+    }
 
-    return render(request, 'payment/payment-failed.html')
-
-
-
-
-
-
-
-
-
+    return render(request, template, context)

@@ -1,43 +1,56 @@
+import uuid
 
 from decimal import Decimal
 
 from products.models import Product
+
 
 class Cart():
 
     def __init__(self, request):
 
         self.session = request.session
+        # cart = self.session['cart'] = { }
+        # order_num = self.session['order_num'] = {}
 
         # Returning user - obtain his/her existing session
 
-        cart = self.session.get('session_key')
-
+        cart = self.session.get('cart')
+        order_num = self.session.get('order_num')
 
         # New user - generate a new session
 
-        if 'session_key' not in request.session:
+        if 'cart' not in request.session:
 
-            cart = self.session['session_key'] = {}
+            cart = self.session['cart'] = { }
+            order_num = self.session['order_num'] = self._generate_order_number()
 
-
+        
         self.cart = cart
+        self.order_num = order_num
 
 
-    def add(self, product, product_qty):
+    def add(self, product, product_qty, product_choice):
 
         product_id = str(product.id)
+        
 
 
         if product_id in self.cart:
 
-            self.cart[product_id]['qty'] = product_qty
+            self.cart[product_id]['qty'] = product_qty if product_qty > 1 else self.cart[product_id]['qty'] + 1
 
         else:
 
             self.cart[product_id] = {'price': str(product.price), 'qty': product_qty}
 
+            if product_choice:
+                self.cart[product_id]['product_choice'] = product_choice
 
+            if product.discounted_price:
+                self.cart[product_id]['discounted_price'] = str(product.discounted_price)
+
+        print(self.cart)
         self.session.modified = True
 
 
@@ -95,8 +108,58 @@ class Cart():
 
     
     def get_total(self):
-
         return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
+    
+    def get_delivery_cost(self):
+        total_cost = sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
+
+        if total_cost < 10:
+            delivery = 5
+        elif total_cost < 20:
+            delivery = 4
+        elif total_cost < 30:
+            delivery = 3
+        elif total_cost < 40:
+            delivery = 2
+        else:
+            delivery = 0
+        
+        return delivery
+    
+    def get_grand_total(self):
+        delivery = self.get_delivery_cost()
+        total = self.get_total()
+        total = delivery + total
+        discount = self.get_discounted_total()
+        if discount:
+            total = total -discount
+
+        return total
+    
+    
+    def _generate_order_number(self):
+        """
+        Generate a random, unique order number using UUID
+        """
+        return uuid.uuid4().hex.upper()[:16]
+    
+    def get_order_num(self):
+        return self.order_num
+    
+    def get_discounted_total(self):
+        total_discount = sum(
+            (Decimal(item['price']) - Decimal(item['discounted_price'])) * item['qty']
+            for item in self.cart.values() if item.get('discounted_price', False)
+        )
+        return total_discount if total_discount else None
+
+
+
+    
+
+
+
+
 
 
 

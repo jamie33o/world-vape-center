@@ -19,14 +19,15 @@ def cart_add(request):
 
     cart = Cart(request)
 
-    if request.POST.get('action') == 'post':
+    if request.method == 'POST':
 
         product_id = int(request.POST.get('product_id'))
         product_quantity = int(request.POST.get('product_quantity'))
+        product_choice = request.POST.get('product_choice') if request.POST.get('product_choice') else None
 
         product = get_object_or_404(Product, id=product_id)
 
-        cart.add(product=product, product_qty=product_quantity)
+        cart.add(product=product, product_qty=product_quantity, product_choice=product_choice)
 
 
         cart_quantity = cart.__len__()

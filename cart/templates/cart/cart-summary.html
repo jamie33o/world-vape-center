@@ -13,7 +13,7 @@
 
     <hr />
 
-    <div class="row">
+    <div class="row mb-5">
         <div class="col-sm-8">
             {% for item in cart %} 
             {% with product=item.product %}
@@ -37,8 +37,9 @@
                                     <h5 class="h5 pt-2">{{product.name}}<!-- Product title --></h5>
                                 </a>
                                 {% include 'components/ratings.html' with product=product %}
-
-                                <p class="mb-0 mt-1">Color : <span class="fw-medium">Blue</span></p>
+                                {% if product.options_name %}
+                                    <p class="mb-0 mt-1">{{ product.options_name }}:<span class="fw-medium">{{ item.product_choice }}</span></p>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="flex-shrink-0 ms-2">
@@ -76,7 +77,12 @@
                                         <select
                                             id="select{{product.id}}"
                                             class="form-select form-select-sm w-xl">
-                                            <option value="1" selected="">{{item.qty}}</option>
+                                            <option selected>
+                  
+                                                {{item.qty}}
+                                          
+                                            </option>
+                                            <option value="1">1</option>
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                             <option value="4">4</option>
@@ -124,22 +130,6 @@
             {% endwith %} 
             {% endfor %}
 
-            <div class="row my-4">
-                <div class="col-6 col-sm-6">
-                    <a href="javascript:history.back()" class="btn btn-info text-white">
-                        <i class="mdi mdi-arrow-left"></i> Continue Shopping
-                    </a>
-                </div>
-                <!-- end col -->
-                <div class="col-6 col-sm-6">
-                    <div class="text-sm-end mt-sm-0 pull-right">
-                        <a href="" class="btn btn-success">
-                            <i class="mdi mdi-cart-outline me-1"></i> Checkout
-                        </a>
-                    </div>
-                </div>
-                <!-- end col -->
-            </div>
         </div>
 
         <!-- end row-->
@@ -149,7 +139,7 @@
                 <div class="card border shadow-none">
                     <div class="card-header bg-transparent border-bottom py-3 px-4">
                         <h5 class="font-size-16 mb-0">
-                            Order Summary <span class="float-end">#MN0124</span>
+                            Order Summary <span class="float-end">(#{{ cart.get_order_num }})</span>
                         </h5>
                     </div>
                     <div class="card-body p-4 pt-2">
@@ -158,24 +148,22 @@
                                 <tbody>
                                     <tr>
                                         <td>Sub Total :</td>
-                                        <td class="text-end">$ 780</td>
+                                        <td class="text-end">€ {{ cart.get_total }}</td>
                                     </tr>
-                                    <tr>
-                                        <td>Discount :</td>
-                                        <td class="text-end">- $ 78</td>
-                                    </tr>
+                                    {% if cart.get_discounted_total %}
+                                        <tr>
+                                            <td>Discount :</td>
+                                            <td class="text-end">{{ cart.get_discounted_total }}</td>
+                                        </tr>
+                                    {% endif %}
                                     <tr>
                                         <td>Shipping Charge :</td>
-                                        <td class="text-end">$ 25</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Estimated Tax :</td>
-                                        <td class="text-end">$ 18.20</td>
+                                        <td class="text-end">€ {{ cart.get_delivery_cost }}</td>
                                     </tr>
                                     <tr class="bg-light">
                                         <th>Total :</th>
                                         <td class="text-end">
-                                            <span class="fw-bold"> $ 745.2 </span>
+                                            <span class="fw-bold">€ {{ cart.get_grand_total }} </span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -184,8 +172,22 @@
                         <!-- end table-responsive -->
                     </div>
                 </div>
-            </div>
+            </div>        
+                <div class="d-flex flex-dir-row justify-content-between">
+                    <a href="javascript:history.back()" class="btn btn-info text-white">
+                        <i class="mdi mdi-arrow-left"></i> Continue Shopping
+                    </a>
+               
+                    <div class="text-sm-end mt-sm-0 pull-right">
+                        <a href="{% url 'checkout' %}" class="btn btn-success">
+                            <i class="mdi mdi-cart-outline me-1"></i> Checkout
+                        </a>
+                    </div>
+                </div>
+                <!-- end col -->
         </div>
+        
+    
     </div>
     <!-- end row -->
 </div>

@@ -39,7 +39,7 @@
                                 <select
                                     id="select{{product.id}}"
                                     class="form-select form-select-sm w-xl">
-                                    <option value="1" selected="">{{item.qty}}</option>
+                                    <option value="1" selected>1</option>
                                     <option value="2">2</option>
                                     <option value="3">3</option>
                                     <option value="4">4</option>
@@ -49,22 +49,7 @@
                                     <option value="8">8</option>
                                 </select>
                             </div>
-                            <div class="d-block">
-                                {% if product.options %}
-                                <h5 class="d-block">
-                                    {{ product.options_name }}: 
-                                    <span class="cur_choice"></span>
-                                 </h5>
-                                 <div class="">
-                                {% for option in product.options.all %}
-                                    <label class="custom-radio">
-                                        <input type="radio" name="options" value="{{option.name}}" id="{{choice}}">
-                                        <span class="choice">{{option.name}}</span>
-                                    </label>                                                       
-                                {% endfor %}
-                                </div>
-                                {% endif %}
-                            </div>
+                            {% include 'components/options.html' %}
                         </div>
                     </div>
 

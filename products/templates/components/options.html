@@ -1,0 +1,16 @@
+<div class="d-block">
+    {% if product.options %}
+    <h5 class="d-block">
+        {{ product.options_name }}: 
+        <span class="cur_choice"></span>
+     </h5>
+     <div class="options">
+    {% for option in product.options.all %}
+        <label class="custom-radio">
+            <input type="radio" name="options" value="{{option.name}}" class="option" {% if forloop.first %}checked{% endif %}>
+            <span class="choice">{{option.name}}</span>
+        </label>                                                       
+    {% endfor %}
+    </div>
+    {% endif %}
+</div>

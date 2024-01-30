@@ -50,7 +50,6 @@ class Cart():
             if product.discounted_price:
                 self.cart[product_id]['discounted_price'] = str(product.discounted_price)
 
-        print(self.cart)
         self.session.modified = True
 
 

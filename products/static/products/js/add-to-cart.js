@@ -7,8 +7,10 @@ $(document).ready(function(){
         let url = $(this).data('url')
 
         let qty = $("#select" + $(e.target).val() + " option:selected").text() 
+        
         if(!qty)
             qty = 1
+
         $.ajax({
             type: "POST",
             url: url,

@@ -1,14 +1,17 @@
-import stripe
+from decimal import Decimal
 import json
+import stripe
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.conf import settings
-from .forms import ShippingDetailsForm
-from .models import Order, OrderLineItem
 from products.models import Product
 from cart.cart import Cart
-from decimal import Decimal
+from .forms import ShippingDetailsForm
+from .models import Order, OrderLineItem
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 
@@ -22,6 +25,8 @@ def cache_checkout_data(request):
             'cart': json.dumps(request.session.get('cart', {})),
             'save_info': request.POST.get('save_info'),
             'username': request.user,
+            'order_num': json.dumps(request.session.get('order_num', {})),
+
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -93,6 +98,8 @@ def checkout(request):
                     order.delete()
 
                     return redirect(reverse('cart-summary'))
+                
+            email_customer(request.POST['email'], 'Order Received')
 
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
@@ -100,8 +107,6 @@ def checkout(request):
             messages.error(request, 'There was an error with your form. \
                 Please double check your information.')
     else:
-
-        # cart = request.session.get('session_key', {})
         cart = Cart(request)
         if not cart:
             messages.info(request, "There's nothing in your cart at the moment")
@@ -132,9 +137,6 @@ def checkout(request):
     return render(request, template, context)
 
 
-
-
-
 def checkout_success(request, order_number):
     """
     Handle successful checkouts
@@ -154,3 +156,17 @@ def checkout_success(request, order_number):
     }
 
     return render(request, template, context)
+
+
+def email_customer( email, email_subject):
+
+        email_content = render_to_string('checkout/order_received_email.html')
+        from_email = settings.EMAIL_HOST_USER
+        send_mail(
+            email_subject,
+            '',
+            from_email,
+            [email],
+            html_message=email_content,
+            fail_silently=False
+        )

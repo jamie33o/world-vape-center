@@ -35,11 +35,14 @@ class FiltersForm(forms.Form):
     brands = forms.ModelMultipleChoiceField(
         queryset=Brand.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=False
+        required=False,
+        to_field_name='slug'
     )
 
     multi_options = forms.ModelMultipleChoiceField(
         queryset=MultiOption.objects.all(),
         widget=forms.CheckboxSelectMultiple,
-        required=False
+        required=False,
+        to_field_name='slug'
     )
+

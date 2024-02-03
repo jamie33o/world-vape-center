@@ -53,8 +53,8 @@
     </header>
   
     <main>
-      <nav aria-label="breadcrumb" class="d-none d-lg-inline">
-        <ol class="breadcrumb mx-5 bg-info">
+      <nav aria-label="breadcrumb" class="d-none bc-con w-100 mx-0 px-5">
+        <ol class="breadcrumb mx-5 bg-light">
         </ol>
       </nav>
       
@@ -118,58 +118,67 @@
         });
       });
 
-            adjustMainSectionMargin();
+            
         
-        function adjustMainSectionMargin() {
-            var headerHeight = $('header').outerHeight();
-            $('main').css('margin-top', headerHeight + 'px');
-        }
+            function adjustMainSectionMargin() {
+                var headerHeight = $('header').outerHeight();
+                $('main').css('margin-top', headerHeight + 'px');
+            }
+            
+            adjustMainSectionMargin();
 
-            function breadcrumsList() {
-              // Retrieve existing breadcrumbs from localStorage
-              const storedBreadcrumbs = localStorage.getItem('breadcrumbs');
-              const breadcrumbs = storedBreadcrumbs ? JSON.parse(storedBreadcrumbs) : [];
+
+            function breadcrumbsList() {
+              const breadcrumbContainer = $('.breadcrumb');
+              let homeItem = null;
+              if (!breadcrumbContainer.length) {
+                  console.error('Breadcrumb container not found');
+                  return;
+              }
           
               const path = window.location.pathname;
               const pathParts = path.split('/').filter(Boolean);
-          
-              const breadcrumbContainer = $('.breadcrumb'); // Use jQuery selector
-              breadcrumbContainer.empty(); // Clear existing breadcrumbs
+              if(pathParts.length > 0){
+                $('.bc-con').addClass('d-lg-inline')
+                homeItem = $('<li>', { class: 'breadcrumb-item' });
+                let homeLink = $('<a>', { href: '/', text: 'Home' });
+                homeItem.append(homeLink);
 
-              const breadcrumb = { label: pathParts.slice(-1)[0], url: path};
-              // Check if breadcrumbs already contains the new breadcrumb
-              const existingIndex = breadcrumbs.findIndex(item => item.label === breadcrumb.label);
-
-              if (existingIndex !== -1) {
-                  // Remove everything after the existing index
-                  breadcrumbs.splice(existingIndex + 1);
-              } else {
-                  // Add the new breadcrumb to the array
-                  breadcrumbs.push(breadcrumb);
+              }else{
+                $('.bc-con').removeClass('d-lg-inline')
               }
-
-              
-              $.each(breadcrumbs, function(i, breadcrumb) {
-                const breadcrumbItem = $('<li>', { class: 'breadcrumb-item' });
-            
-                let link = $('<a>', { href: breadcrumb.url, text: breadcrumb.label });
-                if (i === breadcrumbs.length - 1) {
-                  link = $('<p>', { text: breadcrumb.label });
-                  link.addClass('text-white d-inline');
-                }else{
-                  link.addClass('text-dark');
-                }
-                breadcrumbItem.append(link);
-                breadcrumbContainer.append(breadcrumbItem);
-            });
-            
           
-              // Store updated breadcrumbs in localStorage
-              localStorage.setItem('breadcrumbs', JSON.stringify(breadcrumbs));
+              renderBreadcrumbs(breadcrumbContainer, pathParts, homeItem);
           }
           
+          function renderBreadcrumbs(container, pathParts, homeItem) {
+              container.empty();
           
-              breadcrumsList();
+              let currentPath = '';
+              pathParts.forEach((part, index) => {
+                  currentPath += `/${part}`;
+          
+                  const breadcrumbItem = $('<li>', { class: 'breadcrumb-item' });
+                  let link = $('<a>', { href: currentPath, text: part });
+          
+                  if (index === pathParts.length - 2) {
+                      link = $('<p>', { text: part });
+                      link.addClass('text-dark d-inline');
+                  } else {
+                      link.addClass('text-dark');
+                  }
+          
+                  breadcrumbItem.append(link);
+                  container.append(breadcrumbItem);
+                  if(homeItem){
+                    container.prepend(homeItem);
+                  }
+
+              });
+          }
+          
+      
+          breadcrumbsList();
           
       });
     {% endblock %} 

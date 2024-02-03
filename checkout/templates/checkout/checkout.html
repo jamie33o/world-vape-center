@@ -13,7 +13,6 @@
     <div class="container my-3">
         <div class="row">
             <div class="col">
-                <hr>
                 <h2 class="logo-font mb-4">Checkout</h2>
                 <hr>
             </div>
@@ -21,52 +20,68 @@
 
         <div class="row">
             <div class="col-12 col-lg-6 order-lg-last mb-5">
-                <p class="text-muted">Order Summary (#{{ cart.get_order_num }})</p>
-                <div class="row">
-                    <div class="col-7 offset-2">
-                        <p class="mb-1 mt-0 small text-muted">Item</p>
-                    </div>
-                    <div class="col-3 text-right">
-                        <p class="mb-1 mt-0 small text-muted">Subtotal</p>
-                    </div>
-                </div>
-                {% for item in cart %}
-                    <div class="row">
-                        <div class="col-2 mb-1">
-                            <a href="{% url 'product_details' item.product.id %}">
-                                {% if item.product.image %}
-                                    <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
-                                {% else %}
-                                    <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                                {% endif %}
-                            </a>
+                <div class="mt-5 mt-lg-0">
+                    <div class="card border shadow-none">
+                        <div class="card-header bg-transparent border-bottom py-3 px-4">
+                            <h5 class="font-size-16 mb-0">
+                                Order Summary <span class="float-end">(#{{ cart.get_order_num }})</span>
+                            </h5>
                         </div>
-                        <div class="col-7">
-                            <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                            <p class="my-0 small">{% if item.product.options_name %}{{ item.product.options_name |upper }}: {{ item.product_choice|upper }}{% else %}N/A{% endif %}</p>
-                            <p class="my-0 small text-muted">Qty: {{ item.qty }}</p>
+                        <div class="card-body p-4 pt-2">
+                            {% for item in cart %}
+                                <div class="row mb-4">
+                                    <div class="col-2 mb-1">
+                                        <a href="{% url 'product_details' item.product.id %}">
+                                            {% if item.product.image %}
+                                                <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
+                                            {% else %}
+                                                <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                            {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="col-6">
+                                        <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                                        <p class="my-0 small">{% if item.product.options_name %}{{ item.product.options_name |upper }}: {{ item.product_choice|upper }}{% else %}N/A{% endif %}</p>
+                                        <p class="my-0 small text-muted">Qty: {{ item.qty }}</p>
+                                    </div>
+                                    <div class="col-2 text-right">
+                                        <p class="my-0 small text-muted">€ {{item.product.price|mul:item.qty}} </p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            <div class="table-responsive">
+                                <table class="table mb-0">
+                                    <tbody>
+                                        {% if cart.get_discounted_total %}
+                                            <tr>
+                                                <td>Discount :</td>
+                                                <td class="text-end">€ {{ cart.get_discounted_total }}</td>
+                                            </tr>
+                                        {% endif %}
+                                        <tr>
+                                            <td>Sub Total :</td>
+                                            <td class="text-end">€ {{ cart.get_total|sub:cart.get_discounted_total }}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Shipping Charge :</td>
+                                            <td class="text-end">€ {{ cart.get_delivery_cost }}</td>
+                                        </tr>
+                                        <tr class="bg-light">
+                                            <th>Total :</th>
+                                            <td class="text-end">
+                                                <span class="fw-bold">€ {{ cart.get_grand_total }} </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- end table-responsive -->
                         </div>
-                        <div class="col-3 text-right">
-                            <p class="my-0 small text-muted">€ {{item.product.price|mul:item.qty}} </p>
-                        </div>
                     </div>
-                {% endfor %}
-                <hr class="my-0">
-                <div class="row text-black text-right">
-                    <div class="col-7 offset-2">
-                        <p class="my-0">Order Total:</p>
-                        <p class="my-0">Delivery:</p>
-                        <p class="my-0">Grand Total:</p>
-                    </div>
-                    <div class="col-3">
-                        <p class="my-0">€ {{ cart.get_total | floatformat:2 }}</p>
-                        <p class="my-0">{% if cart.get_delivery_cost == 0 %}<span class="text-success h6">Free</span>{% else%}€ {{ cart.get_delivery_cost | floatformat:2 }}{% endif %}</p>
-                        <p class="my-0"><strong>€ {{ cart.get_grand_total | floatformat:2 }}</strong></p>
-                    </div>
-                </div>
+                </div>    
             </div>
-            <div class="col-12 col-lg-6">
-                <p class="text-muted">Please fill out the form below to complete your order</p>
+            <div class="col-12 col-lg-6 border rounded bg-white py-2">
+                <p class="text-muted">*Please fill out the form below to complete your order</p>
                 <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                     {% csrf_token %}
                     <fieldset class="rounded px-3 mb-5">
@@ -118,9 +133,7 @@
 								<i class="fas fa-lock"></i>
 							</span>
 						</button>
-
 					</div>
-
                     <p class="small text-danger my-0 text-right pr-3">
                         <span class="icon">
                             <i class="fas fa-exclamation-circle"></i>
@@ -128,8 +141,6 @@
                         <span>Your card will be charged <strong>€ {{ cart.get_grand_total|floatformat:2 }}</strong></span>
                     </p>
                 </form>
-                <button id="verify-button">Verify</button>
-
             </div>
         </div>
     </div>
@@ -143,9 +154,7 @@
 {% endblock %}
 
 {% block extra_postloadjs %}
-
     {{ client_secret|json_script:'id_client_secret' }}
     {{ stripe_public_key|json_script:'id_stripe_public_key' }}
     <script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
- 
 {% endblock %}

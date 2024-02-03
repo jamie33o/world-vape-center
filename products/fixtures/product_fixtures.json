@@ -1,88 +1,939 @@
 [
   {
-      "model": "products.category",
-      "pk": 1,
-      "fields": {
-          "name": "Accessories",
-          "friendly_name": "Accessories"
-      }
+    "model": "products.category",
+    "pk": 1,
+    "fields": {
+      "name": "Vape Kits",
+      "slug": "vape-kits"
+    }
   },
   {
-      "model": "products.category",
-      "pk": 2,
-      "fields": {
-          "name": "Tanks",
-          "friendly_name": "Tanks"
-      }
+    "model": "products.category",
+    "pk": 2,
+    "fields": {
+      "name": "E-Liquids",
+      "slug": "e-liquids"
+    }
   },
   {
-      "model": "products.category",
-      "pk": 3,
-      "fields": {
-          "name": "Vape Kits",
-          "friendly_name": "Vape Kits"
-      }
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+      "name": "Mods",
+      "slug": "mods"
+    }
   },
   {
-      "model": "products.brand",
-      "pk": 1,
-      "fields": {
-          "name": "CloudVape",
-          "friendly_name": "CloudVape"
-      }
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+      "name": "Coils",
+      "slug": "coils"
+    }
   },
   {
-      "model": "products.multioption",
-      "pk": 1,
-      "fields": {
-          "name": "Option1"
-      }
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+      "name": "Accessories",
+      "slug": "accessories"
+    }
   },
   {
-      "model": "products.multioption",
-      "pk": 2,
-      "fields": {
-          "name": "Option2"
-      }
+    "model": "products.category",
+    "pk": 6,
+    "fields": {
+      "name": "Pod Systems",
+      "slug": "pod-systems"
+    }
   },
   {
-      "model": "products.product",
-      "pk": 1,
-      "fields": {
-          "category": 3,
-          "slug": "ri-berry",
-          "sku": "123456",
-          "name": "Ri-berry",
-          "image": "v3.jpeg",
-          "brand": 1,
-          "description": "A high-quality e-liquid.",
-          "price": 10.99,
-          "discounted_price": 9.99,
-          "countInStock": 10,
-          "free_shipping": false,
-          "discount_percentage": "10%",
-          "options_name": "Size",
-          "options": [1, 2]
-      }
+    "model": "products.category",
+    "pk": 7,
+    "fields": {
+      "name": "Tanks",
+      "slug": "tanks"
+    }
   },
   {
-      "model": "products.product",
-      "pk": 2,
-      "fields": {
-          "category": 3,
-          "slug": "mango-tango",
-          "sku": "789012",
-          "name": "Mango Tango",
-          "image": "v3.jpeg",
-          "brand": 1,
-          "description": "Exotic mango-flavored e-liquid.",
-          "price": 12.99,
-          "discounted_price": 11.99,
-          "countInStock": 20,
-          "free_shipping": false,
-          "discount_percentage": "8%",
-          "options_name": "Color",
-          "options": [2]
-      }
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+      "name": "Batteries",
+      "slug": "batteries"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 9,
+    "fields": {
+      "name": "Chargers",
+      "slug": "chargers"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 10,
+    "fields": {
+      "name": "Nicotine Salts",
+      "slug": "nicotine-salts"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 11,
+    "fields": {
+      "name": "Disposable Vapes",
+      "slug": "disposable-vapes"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 12,
+    "fields": {
+      "name": "Starter Kits",
+      "slug": "starter-kits"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 13,
+    "fields": {
+      "name": "Vape Pens",
+      "slug": "vape-pens"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 14,
+    "fields": {
+      "name": "Squonk Mods",
+      "slug": "squonk-mods"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 15,
+    "fields": {
+      "name": "DIY Supplies",
+      "slug": "diy-supplies"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 1,
+    "fields": {
+      "name": "Vaporesso",
+      "slug": "vaporesso"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 2,
+    "fields": {
+      "name": "SMOK",
+      "slug": "smok"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 3,
+    "fields": {
+      "name": "Innokin",
+      "slug": "innokin"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 4,
+    "fields": {
+      "name": "Aspire",
+      "slug": "aspire"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 5,
+    "fields": {
+      "name": "GeekVape",
+      "slug": "geekvape"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 6,
+    "fields": {
+      "name": "Voopoo",
+      "slug": "voopoo"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 7,
+    "fields": {
+      "name": "Eleaf",
+      "slug": "eleaf"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 8,
+    "fields": {
+      "name": "Joyetech",
+      "slug": "joyetech"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 9,
+    "fields": {
+      "name": "Wismec",
+      "slug": "wismec"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 10,
+    "fields": {
+      "name": "Sigelei",
+      "slug": "sigelei"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 11,
+    "fields": {
+      "name": "Lost Vape",
+      "slug": "lost-vape"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 12,
+    "fields": {
+      "name": "Vandy Vape",
+      "slug": "vandy-vape"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 13,
+    "fields": {
+      "name": "Uwell",
+      "slug": "uwell"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 14,
+    "fields": {
+      "name": "HorizonTech",
+      "slug": "horizontech"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 15,
+    "fields": {
+      "name": "Freemax",
+      "slug": "freemax"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 1,
+    "fields": {
+      "name": "10ml",
+      "slug": "10ml"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 2,
+    "fields": {
+      "name": "20ml",
+      "slug": "20ml"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 3,
+    "fields": {
+      "name": "30ml",
+      "slug": "30ml"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 4,
+    "fields": {
+      "name": "50ml",
+      "slug": "50ml"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 5,
+    "fields": {
+      "name": "Nicotine Free",
+      "slug": "nicotine-free"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 6,
+    "fields": {
+      "name": "Single Coil",
+      "slug": "single-coil"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 7,
+    "fields": {
+      "name": "Dual Coil",
+      "slug": "dual-coil"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 8,
+    "fields": {
+      "name": "Mesh Coil",
+      "slug": "mesh-coil"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 9,
+    "fields": {
+      "name": "Ceramic Coil",
+      "slug": "ceramic-coil"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 10,
+    "fields": {
+      "name": "Variable Wattage",
+      "slug": "variable-wattage"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 11,
+    "fields": {
+      "name": "Temperature Control",
+      "slug": "temperature-control"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 12,
+    "fields": {
+      "name": "Pod System",
+      "slug": "pod-system"
+    }
+  },
+  {
+    "model": "products.multioption",
+    "pk": 13,
+    "fields": {
+      "name": "Box Mod",
+      "slug": "box-mod"
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "slug": "voopoo-drag-x-plus",
+      "sku": "SKU1",
+      "name": "Voopoo Drag X Plus",
+      "image": "v3.jpeg",
+      "brand": 1,
+      "description": "A high-quality product for Product Voopoo Drag X Plus.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "slug": "geekvape-aegis-x",
+      "sku": "SKU2",
+      "name": "GeekVape Aegis X",
+      "image": "v3.jpeg",
+      "brand": 2,
+      "description": "A high-quality product for Product GeekVape Aegis X.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "slug": "vaporesso-luxe-pm40",
+      "sku": "SKU3",
+      "name": "Vaporesso Luxe PM40",
+      "image": "v3.jpeg",
+      "brand": 3,
+      "description": "A high-quality product for Product Vaporesso Luxe PM40.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 4,
+    "fields": {
+      "category": 1,
+      "slug": "innokin-mvp5",
+      "sku": "SKU4",
+      "name": "Innokin MVP5",
+      "image": "v3.jpeg",
+      "brand": 4,
+      "description": "A high-quality product for Product Innokin MVP5.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 5,
+    "fields": {
+      "category": 1,
+      "slug": "lost-vape-thelema",
+      "sku": "SKU5",
+      "name": "Lost Vape Thelema",
+      "image": "v3.jpeg",
+      "brand": 5,
+      "description": "A high-quality product for Product Lost Vape Thelema.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 6,
+    "fields": {
+      "category": 1,
+      "slug": "uwell-caliburn-g",
+      "sku": "SKU6",
+      "name": "Uwell Caliburn G",
+      "image": "v3.jpeg",
+      "brand": 6,
+      "description": "A high-quality product for Product Uwell Caliburn G.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 7,
+    "fields": {
+      "category": 1,
+      "slug": "vaporesso-xros",
+      "sku": "SKU7",
+      "name": "Vaporesso XROS",
+      "image": "v3.jpeg",
+      "brand": 7,
+      "description": "A high-quality product for Product Vaporesso XROS.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 8,
+    "fields": {
+      "category": 1,
+      "slug": "voopoo-argus-gt",
+      "sku": "SKU8",
+      "name": "Voopoo Argus GT",
+      "image": "v3.jpeg",
+      "brand": 8,
+      "description": "A high-quality product for Product Voopoo Argus GT.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 9,
+    "fields": {
+      "category": 1,
+      "slug": "smok-rpm-80-pro",
+      "sku": "SKU9",
+      "name": "SMOK RPM 80 Pro",
+      "image": "v3.jpeg",
+      "brand": 9,
+      "description": "A high-quality product for Product SMOK RPM 80 Pro.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 10,
+    "fields": {
+      "category": 1,
+      "slug": "vaporesso-luxe-pm80",
+      "sku": "SKU10",
+      "name": "Vaporesso Luxe PM80",
+      "image": "v3.jpeg",
+      "brand": 10,
+      "description": "A high-quality product for Product Vaporesso Luxe PM80.",
+      "price": 5.0,
+      "countInStock": 10,
+      "options_name": "Kit Type",
+      "options": [
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 11,
+    "fields": {
+      "category": 2,
+      "slug": "tropical-breeze-vape-kit",
+      "sku": "SKU1",
+      "name": "Tropical Breeze Vape Kit",
+      "image": "v3.jpeg",
+      "brand": 1,
+      "description": "A high-quality product for Product Tropical Breeze Vape Kit.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 12,
+    "fields": {
+      "category": 2,
+      "slug": "citrus-splash-nicotine-salt",
+      "sku": "SKU2",
+      "name": "Citrus Splash Nicotine Salt",
+      "image": "v3.jpeg",
+      "brand": 2,
+      "description": "A high-quality product for Product Citrus Splash Nicotine Salt.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 13,
+    "fields": {
+      "category": 2,
+      "slug": "sour-apple-vape-juice",
+      "sku": "SKU3",
+      "name": "Sour Apple Vape Juice",
+      "image": "v3.jpeg",
+      "brand": 3,
+      "description": "A high-quality product for Product Sour Apple Vape Juice.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 14,
+    "fields": {
+      "category": 2,
+      "slug": "vanilla-dream-pod-system",
+      "sku": "SKU4",
+      "name": "Vanilla Dream Pod System",
+      "image": "v3.jpeg",
+      "brand": 4,
+      "description": "A high-quality product for Product Vanilla Dream Pod System.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 15,
+    "fields": {
+      "category": 2,
+      "slug": "blueberry-burst-cbd-vape-pen",
+      "sku": "SKU5",
+      "name": "Blueberry Burst CBD Vape Pen",
+      "image": "v3.jpeg",
+      "brand": 5,
+      "description": "A high-quality product for Product Blueberry Burst CBD Vape Pen.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 16,
+    "fields": {
+      "category": 2,
+      "slug": "cherry-chill-nicotine-pouches",
+      "sku": "SKU6",
+      "name": "Cherry Chill Nicotine Pouches",
+      "image": "v3.jpeg",
+      "brand": 6,
+      "description": "A high-quality product for Product Cherry Chill Nicotine Pouches.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 17,
+    "fields": {
+      "category": 2,
+      "slug": "mango-tango-disposable-vape",
+      "sku": "SKU7",
+      "name": "Mango Tango Disposable Vape",
+      "image": "v3.jpeg",
+      "brand": 7,
+      "description": "A high-quality product for Product Mango Tango Disposable Vape.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 18,
+    "fields": {
+      "category": 2,
+      "slug": "caramel-cloud-vape-mod",
+      "sku": "SKU8",
+      "name": "Caramel Cloud Vape Mod",
+      "image": "v3.jpeg",
+      "brand": 8,
+      "description": "A high-quality product for Product Caramel Cloud Vape Mod.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 19,
+    "fields": {
+      "category": 2,
+      "slug": "strawberry-serenity-e-hookah",
+      "sku": "SKU9",
+      "name": "Strawberry Serenity E-hookah",
+      "image": "v3.jpeg",
+      "brand": 9,
+      "description": "A high-quality product for Product Strawberry Serenity E-hookah.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 20,
+    "fields": {
+      "category": 2,
+      "slug": "watermelon-wave-vape-cartridge",
+      "sku": "SKU10",
+      "name": "Watermelon Wave Vape Cartridge",
+      "image": "v3.jpeg",
+      "brand": 10,
+      "description": "A high-quality product for Product Watermelon Wave Vape Cartridge.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 21,
+    "fields": {
+      "category": 2,
+      "slug": "peppermint-pleasure-thc-vape",
+      "sku": "SKU11",
+      "name": "Peppermint Pleasure THC Vape",
+      "image": "v3.jpeg",
+      "brand": 11,
+      "description": "A high-quality product for Product Peppermint Pleasure THC Vape.",
+      "price": 6.0,
+      "countInStock": 9,
+      "options_name": "Nicotine Strength",
+      "options": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 1,
+    "fields": {
+      "product": 2,
+      "user": 1,
+      "name": "User 1",
+      "rating": 5,
+      "comment": "Review 1: Great product!",
+      "created_at": "2022-01-01T12:00:00Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 2,
+    "fields": {
+      "product": 3,
+      "user": 1,
+      "name": "User 2",
+      "rating": 4,
+      "comment": "Review 2: Great product!",
+      "created_at": "2022-01-02T12:00:00Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 3,
+    "fields": {
+      "product": 4,
+      "user": 1,
+      "name": "User 3",
+      "rating": 5,
+      "comment": "Review 3: Great product!",
+      "created_at": "2022-01-03T12:00:00Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 4,
+    "fields": {
+      "product": 5,
+      "user": 1,
+      "name": "User 4",
+      "rating": 4,
+      "comment": "Review 4: Great product!",
+      "created_at": "2022-01-04T12:00:00Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 5,
+    "fields": {
+      "product": 6,
+      "user": 1,
+      "name": "User 5",
+      "rating": 5,
+      "comment": "Review 5: Great product!",
+      "created_at": "2022-01-05T12:00:00Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 6,
+    "fields": {
+      "product": 7,
+      "user": 1,
+      "name": "User 6",
+      "rating": 4,
+      "comment": "Review 6: Great product!",
+      "created_at": "2022-01-06T12:00:00Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 7,
+    "fields": {
+      "product": 8,
+      "user": 1,
+      "name": "User 7",
+      "rating": 5,
+      "comment": "Review 7: Great product!",
+      "created_at": "2022-01-07T12:00:00Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 8,
+    "fields": {
+      "product": 9,
+      "user": 1,
+      "name": "User 8",
+      "rating": 4,
+      "comment": "Review 8: Great product!",
+      "created_at": "2022-01-08T12:00:00Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 9,
+    "fields": {
+      "product": 10,
+      "user": 1,
+      "name": "User 9",
+      "rating": 5,
+      "comment": "Review 9: Great product!",
+      "created_at": "2022-01-09T12:00:00Z"
+    }
+  },
+  {
+    "model": "products.review",
+    "pk": 10,
+    "fields": {
+      "product": 1,
+      "user": 1,
+      "name": "User 10",
+      "rating": 4,
+      "comment": "Review 10: Great product!",
+      "created_at": "2022-01-10T12:00:00Z"
+    }
   }
 ]

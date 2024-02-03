@@ -3,7 +3,7 @@
   <ul class="categories list-unstyled list-inline">
     {% for category in all_categories %}
     <li>
-      <a href="{% url 'category' category=category %}" title="{{category}}"
+      <a href="{% url 'category' category=category.slug %}" class="text-nowrap" title="{{category}}"
         >{{ category | capfirst }}
       </a>
     </li>

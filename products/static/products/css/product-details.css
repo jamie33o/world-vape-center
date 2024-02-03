@@ -26,32 +26,30 @@ img {
   display: inline-block;
   position: relative;
   cursor: pointer;
-  font-size: 12px; /* Adjust font size as needed */
+  font-size: 1em; 
+  font-weight: 500;
 }
 
-.custom-radio:hover .choice {
-  background-color: #ddd;
+.choice {
+  border-radius: 10px;  
+  border: 2px solid #ccc;
+  display: inline-block;
+  padding: 10px;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 8px; 
 }
 
 .custom-radio input[type="radio"]:checked + .choice {
-  background-color: #2196F3;
-  border: 1px solid #2196F3;
+  color: rgb(93, 165, 237);
+  border-color: rgb(93, 165, 237);
 }
 
 .custom-radio .label-text {
   vertical-align: middle;
 }
 
-.choice {
-  width: 40px; 
-  height: 20px;
-  background-color: #eee;
-  border: 1px solid #ccc;
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-  margin-right: 8px; 
-}
+
 
 input[type="radio"] {
   opacity: 0;
@@ -112,7 +110,7 @@ input[type="radio"] {
   margin-top: 50px;
   background: #eee;
   padding: 3em;
-  line-height: 1.5em;
+  /* line-height: 1.5em; */
 }
 
 @media screen and (min-width: 997px) {
@@ -149,6 +147,10 @@ input[type="radio"] {
 .colors {
   text-transform: UPPERCASE;
   font-weight: bold;
+}
+
+.price-amount {
+  color: rgb(93, 165, 237);
 }
 
 .product-title,
@@ -188,7 +190,7 @@ input[type="radio"] {
 .add-to-cart,
 .like {
   background: #ff9f1a;
-  padding: 1.2em 1.5em;
+  padding: .5em 1em;
   border: none;
   text-transform: UPPERCASE;
   font-weight: bold;

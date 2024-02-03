@@ -3,7 +3,15 @@ main {
 }
 
 .product-card {
-    
+    align-items: center;
+}
+
+/* Custom CSS for Button Hover and Focus */
+.product-list .btn:hover,
+.product-list .btn:focus {
+    border: none !important;
+    box-shadow: none !important; 
+    outline: none !important; 
 }
 
 .product-card img {
@@ -11,10 +19,14 @@ main {
     height: 150px;
 }
 
+.product-hover:hover {
+    color: rgb(127, 202, 255);
+    border: none;
+}
+
 .categories {
     display: flex;
-    justify-content: space-evenly;
-    padding: 0 10px;
+    padding: 0 30px;
     overflow-x: auto;
     background: var(--gray);
     border-bottom: 1px solid var(--gray);
@@ -45,9 +57,6 @@ main {
 
 .filters {
     padding: 20px;
-    margin-left: 5%;
-    border: 1px solid black;
-    background-color: white;
 }
 
 .filters p label, .filters h3 {
@@ -59,10 +68,55 @@ main {
     list-style-type: none;
 }
 
+.percentage {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    rotate: 25deg;
+}
+
 @media (max-width: 575.98px) {
     .categories {
         justify-content: initial;
     }
     
+    .filter-mobile {
+        position: fixed;        
+        top:0;
+        right: 0; 
+        z-index: 10000;
+        height: 100%;
+        transform: translateX(100%);
+        border: 1px solid gray;
+        background: #605f5f76;
+    }
+
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(80%);
+    }
+    100% {
+        transform: translateX(10%);
+    }
+}
+
+.slide-in {
+    animation: slideInFromRight 0.5s forwards;
+}
+
+@keyframes slideOutFromRight {
+    0% {
+        transform: translateX(10%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.slide-out {
+    animation: slideOutFromRight 0.5s forwards;
+}
+
 
 }

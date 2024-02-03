@@ -1,4 +1,4 @@
-<div class="ratings mr-2">
+<div class="mr-2">
     {% for i in "12345"|make_list %}
         {% with i|add:0 as integer_value %}
             {% if integer_value <= product.average_rating %}

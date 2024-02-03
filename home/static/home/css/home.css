@@ -8,13 +8,6 @@
     text-shadow: rgba(0, 0, 0, .01) 0 0 1px
 }
 
-body {
-    font-family: 'Rubik', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    background: #eff6fa;
-    color: #000000
-}
 
 div {
     display: block;
@@ -25,17 +18,13 @@ div {
 }
 
 
-
-
 .bbb_viewed {
-    padding-top: 51px;
-    padding-bottom: 60px;
     background: #eff6fa
 }
 
 .bbb_main_container{
-        background-color: #fff;
-   padding: 11px;
+    background-color: #fff;
+    padding: 11px;
 }
 
 .bbb_viewed_title_container {
@@ -43,8 +32,8 @@ div {
 }
 
 .bbb_viewed_title {
-        margin-bottom: 16px;
-   margin-top: 8px;
+    margin-bottom: 16px;
+    margin-top: 8px;
 
 }
 

@@ -22,7 +22,7 @@ class IndexView(View):
         """
         
         homepage_instance = HomePage.objects.first()
-        top_rated_products = Product.objects.annotate(avg_rating=Avg('reviews__rating')).filter(avg_rating__gte=3)
+        top_rated_products = Product.objects.annotate(avg_rating=Avg('review__rating')).filter(avg_rating__gte=3)
 
 
         context = {

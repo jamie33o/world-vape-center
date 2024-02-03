@@ -13,7 +13,7 @@
 
 {% block content %}
 <div class="container">
-    <div class="card">
+    <div class="card  bg-white">
         <div class="container-fliud">
             <div class="wrapper row">
                 <div class="preview col-md-6">
@@ -25,19 +25,24 @@
                 </div>
                 <div class="details col-md-6">
                     <h3 class="product-title">{{ product.name }}</h3>
-                    <div class="rating">
-                        {% include 'components/ratings.html' with product=product %}
-
-                        <span class="review-no">{{ product.num_reviews }} reviews</span>
+                    <div class="d-flex justify-content-between">
+                        <h5 class="font-weight-bold text-info">{{ product.brand.name }}</h5>
+                        <div class="d-inline">
+                            {% include 'components/ratings.html' with product=product %}
+                            <span class="text-info">{{ product.num_reviews }} reviews</span>
+                        </div>
                     </div>
-                    <p class="product-description">{{ product.description }}</p>
-                    <div class="d-flex flex-dir-row p-2">
-                        <h4 class="price">Price: € <span>{{ product.price }} </span></h4>
-                        <div class="ml-5 w-50">
+                    <hr>
+                    <div class="my-2">
+                        <h5 class="text-muted">Description</h5>
+                        <p class="product-description">{{ product.description }}</p>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <h4 class="price text-muted">Price: <span class="price-amount">€ {{ product.price }} </span></h4>
+                        <div class="w-100">
                             <p class="text-muted mb-2">Quantity</p>
                             <div class="d-inline-flex">
-                                <select
-                                    id="select{{product.id}}"
+                                <select id="select{{product.id}}"
                                     class="form-select form-select-sm w-xl">
                                     <option value="1" selected>1</option>
                                     <option value="2">2</option>
@@ -49,8 +54,9 @@
                                     <option value="8">8</option>
                                 </select>
                             </div>
-                            {% include 'components/options.html' %}
-                        </div>
+                        </div>                            
+                        {% include 'components/options.html' %}
+
                     </div>
 
                     <div class="action">
@@ -68,14 +74,14 @@
                     </div>
                     <div class="row my-4">
                         <div class="col-6 col-sm-6">
-                            <a href="javascript:history.back()" class="btn btn-info text-white">
+                            <a href="{% url 'categories' %}" class="btn btn-info text-white font-weight-bold text-nowrap">
                                 <i class="mdi mdi-arrow-left"></i> Continue Shopping
                             </a>
                         </div>
                         <!-- end col -->
-                        <div class="col-6 col-sm-6">
-                            <div class="text-sm-end mt-sm-0 pull-right">
-                                <a href="{% url 'cart-summary' %}" class="btn btn-success">
+                        <div class="col-7 col-sm-6">
+                            <div class="ml-5 mt-sm-0">
+                                <a href="{% url 'cart-summary' %}" class="btn btn-success font-weight-bold">
                                     <i class="mdi mdi-cart-outline me-1"></i> Cart
                                     <i class="mdi mdi-arrow-right"></i>
                                 </a>

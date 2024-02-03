@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views import View
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 from .models import Product, Review, Category
 from .forms import ReviewForm, FiltersForm
 
@@ -36,42 +38,50 @@ class CategoryView(View):
         Returns:
             HttpResponse: Rendered template with channel information.
         """
-        category_instance = get_object_or_404(Category, name=category) if category else Category.objects.first()
+        category_instance = get_object_or_404(Category, slug=category) if category else Category.objects.first()
         category_products = Product.objects.filter(category=category_instance)
-
-        context = {
-            'products': category_products,
-            'category': category_instance
-        }
-        return render(request, self.template_name, context)
-
-
-
-class FilterView(View):
-    template_name = 'products/products-list.html'
-
-    def get(self, request, category=None):
-        category_instance = get_object_or_404(Category, name=category) if category else Category.objects.first()
-        category_products = Product.objects.filter(category=category_instance)
-
+                
         filters_form = FiltersForm(request.GET)
         if filters_form.is_valid():
             brands = filters_form.cleaned_data.get('brands')
             multi_options = filters_form.cleaned_data.get('multi_options')
 
             if brands:
-                category_products = category_products.filter(brand__in=brands)
+                category_products = category_products.filter(brand__slug__in=[brand.slug for brand in brands])
 
             if multi_options:
-                category_products = category_products.filter(options__in=multi_options)
+                category_products = category_products.filter(options__slug__in=multi_options)
+
+
+        # Default number of items per page
+        items_per_page = request.session.get('items_per_page', 24)
+
+        # If the form is submitted with a new value, update the session
+        if 'items_per_page' in request.GET:
+            items_per_page = int(request.GET['items_per_page'])
+            request.session['items_per_page'] = items_per_page
+
+
+        paginator = Paginator(category_products, items_per_page)
+        page = request.GET.get('page')
+
+        try:
+            products = paginator.page(page)
+        except PageNotAnInteger:
+            # If page is not an integer, deliver the first page
+            products = paginator.page(1)
+        except EmptyPage:
+            # If page is out of range (e.g., 9999), deliver the last page
+            products = paginator.page(paginator.num_pages)
+
 
         context = {
-            'products': category_products,
-            'category': category_instance
+            'products': products,
+            'category': category_instance,
+            'items_per_page': items_per_page,
+
         }
-
         return render(request, self.template_name, context)
-
 
 
 class ProductDetailView(View):

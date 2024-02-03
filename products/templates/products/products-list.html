@@ -1,5 +1,6 @@
 {% extends "base.html" %} 
 {% load static %} 
+{% load mathfilters %} 
 
 
 {% block extra_css %}
@@ -17,31 +18,56 @@
 {% block content %}
 <div class="container-fluid mt-5 mb-5 p-0">
     <div class="row m-0">
-        <div class="col-md-2 mb-4 filters">
-            <h3 class="text-center mb-5">Filters</h3>
+        <div class="col-md-2 ml-auto d-none d-lg-flex filter-mobile">
+            <div class="overflow-auto h-100">
             {% include 'products/filters.html' with category=category %}
+            </div>
         </div>
+        <div class="col-md-9 mx-auto">
+            <div class="row p-0 bg-white border shadow product-list">
+                <div class="col-12 border-bottom py-2">
+                    <div class="row">
+                        <div class="col-6 col-lg-4 d-flex align-items-center">
+                            <button class="btn filter-btn d-block d-lg-none"><i class="fa-solid fa-filter"></i> Filter</button>
+                            <span class="current d-none d-lg-flex">
+                                Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                            </span>
+                        </div>
+                        <div class="col-4 d-none d-sm-flex justify-content-between">
+                            <span class="h3">|</span>
+                            <span class="h3">{{ category.name }}</span>
+                            <span class="h3">|</span>
+                        </div>
+                        <div class="col-6 col-lg-4 d-flex align-items-center">
+                            
+                            <form method="get" class="ml-auto" action="{% url 'category' category %}">
+                                <label for="items_per_page">Items per page:</label>
+                                <select name="items_per_page" id="items_per_page" onchange="this.form.submit()">
+                                    <option value="24" {% if items_per_page == 24 %}selected{% endif %}>24</option>
+                                    <option value="36" {% if items_per_page == 36 %}selected{% endif %}>36</option>
+                                    <option value="48" {% if items_per_page == 48 %}selected{% endif %}>48</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="col-md-9">
-            <div class="row m-0">
                 {% for product in products %}
-                    <div class="col-12 col-md-12 col-lg-12 col-xl-6 mb-4">
-                        <div class="row p-2 mx-2 bg-white border rounded product-card">
-                            <div class="col-md-3 mt-1 d-flex justify-content-center overflow-hidden">
-                                <img class="rounded product-image" src="{{ product.image.url }}">
-                            </div>
-                            <div class="col-md-6 mt-1">
-                                <h5>{{ product.name }}</h5>
-                                <div class="d-flex flex-column flex-lx-row">
-                                    {% include 'components/ratings.html' with product=product %}
-                                    <span>{{ product.num_reviews }} reviews</span>
+                    <div class="col-12 col-md-12 col-lg-12 col-xl-3 border rounded align-items-center">
+                        <a href="{% url 'product_details' slug=product.slug %}" class="btn border-0 w-100" type="button">
+                            <div class="row flex-column bg-white product-card">
+                                <div class="w-100 mt-1 overflow-hidden">
+                                    <img class="product-image mx-auto" src="{{ product.image.url }}">
                                 </div>
-                                <p class="text-justify text-truncate para mb-0">{{ product.description }}<br><br></p>
-                                {% include 'components/options.html' %}
-                            </div>
-                            <div class="align-items-center align-content-center col-md-3 border-left mt-1">
-                                <div class="d-flex flex-row align-items-center">
-                                    <h4 class="mr-1">
+
+                                <div class="w-100">
+                                    <p class="h6 text-muted product-hover">{{ product.brand.name }}</p>
+                                    <h5 class="product-hover">{{ product.name }}</h5>
+                                    <p class="para mb-0 product-hover text-truncate">{{ product.description }}<br><br></p>
+                                </div>
+
+                                <div class="w-100 d-flex justify-content-center">
+                                    <h4 class="mr-1">€
                                         {% if not product.discounted_price %}
                                             {{ product.price }}
                                         {% else %}
@@ -49,29 +75,91 @@
                                         {% endif %}
                                     </h4>
                                     {% if product.discounted_price %}
-                                    <span class="strike-text text-danger text-bold font-weight-bold"><del>{{ product.price }}</del><br>{{ product.discount_percentage|default:'' }}</span>
+                                    <p class="strike-text text-danger text-bold font-weight-bold posotion-relative">
+                                        <del>€ {{ product.price }}</del>
+                                        <br>
+                                        <span class="percentage">{{ product.discount_percentage|default:'' }}</span>
+                                    </p>
+                                    {% endif %}
+                                    {% if product.free_shipping %}
+                                    <h6 class="text-success">Free shipping</h6>
                                     {% endif %}
                                 </div>
-                                {% if product.free_shipping %}
-                                <h6 class="text-success">Free shipping</h6>
+                                {% if product.num_reviews > 0 %}
+                                    <div class="w-100">
+                                        {% include 'components/ratings.html' with product=product %}
+                                        <span>{{ product.num_reviews }} reviews</span>
+                                    </div>
                                 {% endif %}
-                                <div class="d-flex flex-column mt-4">
-                                    <a href='{% url 'product_details' slug=product.slug %}' class="btn btn-primary btn-sm" type="button">Details</a>
-                                    <button
-                                        data-url="{% url "cart-add" %}"
-                                        data-csrf="{{csrf_token}}"
-                                        class="add-to-cart btn btn-light border-info p-0 mt-2"
-                                        value="{{product.id}}"
-                                        type="button">
-                                        <i class="fa-solid fa-cart-plus h6 text-primary my-auto"></i>
-                                    </button>
-                                </div>
+
                             </div>
-                        </div>
+                        </a>
                     </div>
                 {% endfor %}
+                <div class="col-12 border p-3">
+                    <div class="pagination">
+                        <span class="step-links d-flex w-100 mx-5">
+                            {% if products.has_previous %}
+                                <a class="btn btn-secondary p-1" href="?page={{ products.previous_page_number }}"><< previous</a>
+                            {% endif %}
+
+                            <span class="current d-flex d-lg-none mx-auto">
+                                Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                            </span>
+
+                            <div class="mx-auto d-none d-lg-block">
+                                {% for i in products.paginator.page_range %}
+                                    {% if products.number == i %}
+                                        <span class="current border rounded p-2 bg-info mx-1">{{ i }}</span>
+                                    {% elif i > products.number|sub:3 and i < products.number|add:3 %}
+                                        <a class="btn" href="?page={{ i }}">{{ i }}</a>
+                                    {% elif i == products.paginator.num_pages %}
+                                        <a class="btn" href="?page={{ i }}">{{ i }}</a>
+                                    {% elif i == 1 %}
+                                        <a class="btn" href="?page={{ i }}">{{ i }}</a>
+                                    {% endif %}
+
+                                    {% if i == 1 and products.number > 4 or i == products.paginator.num_pages|sub:1 and products.number < products.paginator.num_pages|sub:3 %}
+                                        <span class="ellipsis">…</span>
+                                    {% endif %}
+
+                                    
+                                {% endfor %}
+                            </div>
+                
+                            {% if products.has_next %}
+                                <a class="btn btn-secondary p-1" href="?page={{ products.next_page_number }}">next >></a>
+                            {% endif %}
+                        </span>
+                    </div>                
+                </div>
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
+{% block extra_postloadjs %}  
+<script>
+    $('.filter-btn').on('click', function(){
+        $('.filter-mobile').removeClass('d-none')
+        $('.filter-mobile').addClass('slide-in')
+    })
+
+    $('.hide-filter').on('click', function(){
+        $('.filter-mobile').addClass('slide-out')
+        setTimeout(() => {
+            $('.filter-mobile').removeClass('slide-out')
+            $('.filter-mobile').addClass('d-none')
+        }, 800);
+    })
+    document.getElementById('items_per_page').addEventListener('change', function() {
+        const selectedValue = this.value;
+        const currentUrl = window.location.href;
+        const updatedUrl = new URL(currentUrl);
+        updatedUrl.searchParams.set('items_per_page', selectedValue);
+        window.location.href = updatedUrl.toString();
+    });
+</script>
+
+
+{% endblock %}  

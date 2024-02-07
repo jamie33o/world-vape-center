@@ -11,18 +11,20 @@ from .admin_utils.add_discount_actions import (apply_fifty_percentage_discount,
 from .models import Product, Category, Brand, MultiOption
 from .forms import CustomActionForm
 
-
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
 
-    list_display = ('name', 'price', 'discounted_price')
+    list_display = ('name', 'category', 'brand', 'price', 'discounted_price')
+    list_filter = ('category', 'brand', 'options')
+    list_editable = ('price',)  # Enable editing the price directly in the list view
+
 
     actions = [apply_fifty_percentage_discount,
                apply_twenty_percentage_discount,
                apply_ten_percentage_discount,
                apply_five_percentage_discount,
                'apply_multiple_choices',
-               remove_discount
+               remove_discount,
                ]
 
     def get_urls(self):
@@ -49,7 +51,6 @@ class ProductAdmin(admin.ModelAdmin):
                 queryset = Product.objects.filter(id__in=ids_list)
                 selected_choices = form.cleaned_data['choices']
                 options_name = form.cleaned_data['options_name']
-                print(options_name)
 
                 if selected_choices:
                     selected_options = MultiOption.objects.filter(id__in=selected_choices)

@@ -60,13 +60,13 @@
                                     <img class="product-image mx-auto" src="{{ product.image.url }}">
                                 </div>
 
-                                <div class="w-100">
-                                    <p class="h6 text-muted product-hover">{{ product.brand.name }}</p>
-                                    <h5 class="product-hover">{{ product.name }}</h5>
+                                <div class="w-100 text-left">
+                                    <p class="h5 text-muted product-hover">{{ product.brand.name }}</p>
+                                    <h5 class="product-hover h6">{{ product.name }}</h5>
                                     <p class="para mb-0 product-hover text-truncate">{{ product.description }}<br><br></p>
                                 </div>
 
-                                <div class="w-100 d-flex justify-content-center">
+                                <div class="w-100 d-flex ">
                                     <h4 class="mr-1">€
                                         {% if not product.discounted_price %}
                                             {{ product.price }}

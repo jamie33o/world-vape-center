@@ -3,344 +3,192 @@
     "model": "products.category",
     "pk": 1,
     "fields": {
-      "name": "Vape Kits",
-      "slug": "vape-kits"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 2,
-    "fields": {
-      "name": "E-Liquids",
-      "slug": "e-liquids"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 3,
-    "fields": {
-      "name": "Mods",
-      "slug": "mods"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 4,
-    "fields": {
-      "name": "Coils",
-      "slug": "coils"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 5,
-    "fields": {
-      "name": "Accessories",
+      "name": "accessories",
       "slug": "accessories"
     }
   },
   {
     "model": "products.category",
+    "pk": 2,
+    "fields": {
+      "name": "coils",
+      "slug": "coils"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 3,
+    "fields": {
+      "name": "disposable vape bars",
+      "slug": "disposable-vape-bars"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 4,
+    "fields": {
+      "name": "e liquids",
+      "slug": "e-liquids"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 5,
+    "fields": {
+      "name": "nic salts",
+      "slug": "nic-salts"
+    }
+  },
+  {
+    "model": "products.category",
     "pk": 6,
     "fields": {
-      "name": "Pod Systems",
-      "slug": "pod-systems"
+      "name": "pods",
+      "slug": "pods"
     }
   },
   {
     "model": "products.category",
     "pk": 7,
     "fields": {
-      "name": "Tanks",
+      "name": "spare glass",
+      "slug": "spare-glass"
+    }
+  },
+  {
+    "model": "products.category",
+    "pk": 8,
+    "fields": {
+      "name": "tanks",
       "slug": "tanks"
     }
   },
   {
     "model": "products.category",
-    "pk": 8,
-    "fields": {
-      "name": "Batteries",
-      "slug": "batteries"
-    }
-  },
-  {
-    "model": "products.category",
     "pk": 9,
     "fields": {
-      "name": "Chargers",
-      "slug": "chargers"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 10,
-    "fields": {
-      "name": "Nicotine Salts",
-      "slug": "nicotine-salts"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 11,
-    "fields": {
-      "name": "Disposable Vapes",
-      "slug": "disposable-vapes"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 12,
-    "fields": {
-      "name": "Starter Kits",
-      "slug": "starter-kits"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 13,
-    "fields": {
-      "name": "Vape Pens",
-      "slug": "vape-pens"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 14,
-    "fields": {
-      "name": "Squonk Mods",
-      "slug": "squonk-mods"
-    }
-  },
-  {
-    "model": "products.category",
-    "pk": 15,
-    "fields": {
-      "name": "DIY Supplies",
-      "slug": "diy-supplies"
+      "name": "vape kits",
+      "slug": "vape-kits"
     }
   },
   {
     "model": "products.brand",
     "pk": 1,
     "fields": {
-      "name": "Vaporesso",
-      "slug": "vaporesso"
-    }
-  },
-  {
-    "model": "products.brand",
-    "pk": 2,
-    "fields": {
-      "name": "SMOK",
-      "slug": "smok"
-    }
-  },
-  {
-    "model": "products.brand",
-    "pk": 3,
-    "fields": {
-      "name": "Innokin",
-      "slug": "innokin"
-    }
-  },
-  {
-    "model": "products.brand",
-    "pk": 4,
-    "fields": {
-      "name": "Aspire",
+      "name": "aspire",
       "slug": "aspire"
     }
   },
   {
     "model": "products.brand",
-    "pk": 5,
+    "pk": 2,
     "fields": {
-      "name": "GeekVape",
-      "slug": "geekvape"
+      "name": "innokin",
+      "slug": "innokin"
     }
   },
   {
     "model": "products.brand",
-    "pk": 6,
+    "pk": 3,
     "fields": {
-      "name": "Voopoo",
+      "name": "kangertech",
+      "slug": "kangertech"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 4,
+    "fields": {
+      "name": "voopoo",
       "slug": "voopoo"
     }
   },
   {
     "model": "products.brand",
+    "pk": 5,
+    "fields": {
+      "name": "lve",
+      "slug": "lve"
+    }
+  },
+  {
+    "model": "products.brand",
+    "pk": 6,
+    "fields": {
+      "name": "elf bar",
+      "slug": "elf-bar"
+    }
+  },
+  {
+    "model": "products.brand",
     "pk": 7,
     "fields": {
-      "name": "Eleaf",
-      "slug": "eleaf"
+      "name": "ivg",
+      "slug": "ivg"
     }
   },
   {
     "model": "products.brand",
     "pk": 8,
     "fields": {
-      "name": "Joyetech",
-      "slug": "joyetech"
+      "name": "lost mary",
+      "slug": "lost-mary"
     }
   },
   {
     "model": "products.brand",
     "pk": 9,
     "fields": {
-      "name": "Wismec",
-      "slug": "wismec"
+      "name": "nasty",
+      "slug": "nasty"
     }
   },
   {
     "model": "products.brand",
     "pk": 10,
     "fields": {
-      "name": "Sigelei",
-      "slug": "sigelei"
+      "name": "flo",
+      "slug": "flo"
     }
   },
   {
     "model": "products.brand",
     "pk": 11,
     "fields": {
-      "name": "Lost Vape",
-      "slug": "lost-vape"
+      "name": "cookies",
+      "slug": "cookies"
     }
   },
   {
     "model": "products.brand",
     "pk": 12,
     "fields": {
-      "name": "Vandy Vape",
-      "slug": "vandy-vape"
+      "name": "elfliq",
+      "slug": "elfliq"
     }
   },
   {
     "model": "products.brand",
     "pk": 13,
     "fields": {
-      "name": "Uwell",
-      "slug": "uwell"
+      "name": "maryliq",
+      "slug": "maryliq"
     }
   },
   {
     "model": "products.brand",
     "pk": 14,
     "fields": {
-      "name": "HorizonTech",
-      "slug": "horizontech"
+      "name": "pod salt",
+      "slug": "pod-salt"
     }
   },
   {
     "model": "products.brand",
     "pk": 15,
     "fields": {
-      "name": "Freemax",
-      "slug": "freemax"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 1,
-    "fields": {
-      "name": "10ml",
-      "slug": "10ml"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 2,
-    "fields": {
-      "name": "20ml",
-      "slug": "20ml"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 3,
-    "fields": {
-      "name": "30ml",
-      "slug": "30ml"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 4,
-    "fields": {
-      "name": "50ml",
-      "slug": "50ml"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 5,
-    "fields": {
-      "name": "Nicotine Free",
-      "slug": "nicotine-free"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 6,
-    "fields": {
-      "name": "Single Coil",
-      "slug": "single-coil"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 7,
-    "fields": {
-      "name": "Dual Coil",
-      "slug": "dual-coil"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 8,
-    "fields": {
-      "name": "Mesh Coil",
-      "slug": "mesh-coil"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 9,
-    "fields": {
-      "name": "Ceramic Coil",
-      "slug": "ceramic-coil"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 10,
-    "fields": {
-      "name": "Variable Wattage",
-      "slug": "variable-wattage"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 11,
-    "fields": {
-      "name": "Temperature Control",
-      "slug": "temperature-control"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 12,
-    "fields": {
-      "name": "Pod System",
-      "slug": "pod-system"
-    }
-  },
-  {
-    "model": "products.multioption",
-    "pk": 13,
-    "fields": {
-      "name": "Box Mod",
-      "slug": "box-mod"
+      "name": "yeti",
+      "slug": "yeti"
     }
   },
   {
@@ -348,21 +196,12 @@
     "pk": 1,
     "fields": {
       "category": 1,
-      "slug": "voopoo-drag-x-plus",
-      "sku": "SKU1",
-      "name": "Voopoo Drag X Plus",
-      "image": "v3.jpeg",
+      "slug": "aspire-nautilus-prime-x-mod-510-adaptor",
+      "sku": "SKU-accessories_211",
+      "name": "aspire nautilus prime x mod 510 adaptor",
+      "image": "accessories/aspire-nautilus-prime-x-mod-510-adaptor.avif",
       "brand": 1,
-      "description": "A high-quality product for Product Voopoo Drag X Plus.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "description": "A high-quality product for Product aspire nautilus prime x mod 510 adaptor."
     }
   },
   {
@@ -370,21 +209,12 @@
     "pk": 2,
     "fields": {
       "category": 1,
-      "slug": "geekvape-aegis-x",
-      "sku": "SKU2",
-      "name": "GeekVape Aegis X",
-      "image": "v3.jpeg",
-      "brand": 2,
-      "description": "A high-quality product for Product GeekVape Aegis X.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "slug": "aspire-nautilus-prime-x-rdta",
+      "sku": "SKU-accessories_221",
+      "name": "aspire nautilus prime x rdta",
+      "image": "accessories/aspire-nautilus-prime-x-rdta.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire nautilus prime x rdta."
     }
   },
   {
@@ -392,21 +222,12 @@
     "pk": 3,
     "fields": {
       "category": 1,
-      "slug": "vaporesso-luxe-pm40",
-      "sku": "SKU3",
-      "name": "Vaporesso Luxe PM40",
-      "image": "v3.jpeg",
-      "brand": 3,
-      "description": "A high-quality product for Product Vaporesso Luxe PM40.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "slug": "aspire-onixx-replacement-glass-3ml",
+      "sku": "SKU-accessories_231",
+      "name": "aspire onixx replacement glass 3ml",
+      "image": "accessories/aspire-onixx-replacement-glass-3ml.webp",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire onixx replacement glass 3ml."
     }
   },
   {
@@ -414,21 +235,12 @@
     "pk": 4,
     "fields": {
       "category": 1,
-      "slug": "innokin-mvp5",
-      "sku": "SKU4",
-      "name": "Innokin MVP5",
-      "image": "v3.jpeg",
-      "brand": 4,
-      "description": "A high-quality product for Product Innokin MVP5.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "slug": "aspire-wall-adapter-uk",
+      "sku": "SKU-accessories_241",
+      "name": "aspire wall adapter uk",
+      "image": "accessories/aspire-wall-adapter-uk.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire wall adapter uk."
     }
   },
   {
@@ -436,21 +248,12 @@
     "pk": 5,
     "fields": {
       "category": 1,
-      "slug": "lost-vape-thelema",
-      "sku": "SKU5",
-      "name": "Lost Vape Thelema",
-      "image": "v3.jpeg",
-      "brand": 5,
-      "description": "A high-quality product for Product Lost Vape Thelema.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "slug": "falcon-king-replacement-bulb-glass-horizontech-with-m1-coil",
+      "sku": "SKU-accessories_251",
+      "name": "falcon king replacement bulb glass horizontech with m1 coil",
+      "image": "accessories/falcon-king-replacement-bulb-glass-horizontech-with-m1-coil.avif",
+      "brand": null,
+      "description": "A high-quality product for Product falcon king replacement bulb glass horizontech with m1 coil."
     }
   },
   {
@@ -458,21 +261,12 @@
     "pk": 6,
     "fields": {
       "category": 1,
-      "slug": "uwell-caliburn-g",
-      "sku": "SKU6",
-      "name": "Uwell Caliburn G",
-      "image": "v3.jpeg",
-      "brand": 6,
-      "description": "A high-quality product for Product Uwell Caliburn G.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "slug": "geekvape-zeus-x-rta-zeus-x-mesh-rta-bubble-glass",
+      "sku": "SKU-accessories_261",
+      "name": "geekvape zeus x rta zeus x mesh rta bubble glass",
+      "image": "accessories/geekvape-zeus-x-rta-zeus-x-mesh-rta-bubble-glass.avif",
+      "brand": null,
+      "description": "A high-quality product for Product geekvape zeus x rta zeus x mesh rta bubble glass."
     }
   },
   {
@@ -480,21 +274,12 @@
     "pk": 7,
     "fields": {
       "category": 1,
-      "slug": "vaporesso-xros",
-      "sku": "SKU7",
-      "name": "Vaporesso XROS",
-      "image": "v3.jpeg",
-      "brand": 7,
-      "description": "A high-quality product for Product Vaporesso XROS.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "slug": "innokin-zlide-resin-drip-tip",
+      "sku": "SKU-accessories_371",
+      "name": "innokin zlide resin drip tip",
+      "image": "accessories/innokin-zlide-resin-drip-tip.avif",
+      "brand": 2,
+      "description": "A high-quality product for Product innokin zlide resin drip tip."
     }
   },
   {
@@ -502,21 +287,12 @@
     "pk": 8,
     "fields": {
       "category": 1,
-      "slug": "voopoo-argus-gt",
-      "sku": "SKU8",
-      "name": "Voopoo Argus GT",
-      "image": "v3.jpeg",
-      "brand": 8,
-      "description": "A high-quality product for Product Voopoo Argus GT.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "slug": "kangertech-evod-1000mah-ego-510-battery",
+      "sku": "SKU-accessories_481",
+      "name": "kangertech evod 1000mah ego 510 battery",
+      "image": "accessories/kangertech-evod-1000mah-ego-510-battery.avif",
+      "brand": 3,
+      "description": "A high-quality product for Product kangertech evod 1000mah ego 510 battery."
     }
   },
   {
@@ -524,21 +300,12 @@
     "pk": 9,
     "fields": {
       "category": 1,
-      "slug": "smok-rpm-80-pro",
-      "sku": "SKU9",
-      "name": "SMOK RPM 80 Pro",
-      "image": "v3.jpeg",
-      "brand": 9,
-      "description": "A high-quality product for Product SMOK RPM 80 Pro.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "slug": "new-i2-nitecore-intellicharger",
+      "sku": "SKU-accessories_491",
+      "name": "new i2 nitecore intellicharger",
+      "image": "accessories/new-i2-nitecore-intellicharger.avif",
+      "brand": null,
+      "description": "A high-quality product for Product new i2 nitecore intellicharger."
     }
   },
   {
@@ -546,113 +313,64 @@
     "pk": 10,
     "fields": {
       "category": 1,
-      "slug": "vaporesso-luxe-pm80",
-      "sku": "SKU10",
-      "name": "Vaporesso Luxe PM80",
-      "image": "v3.jpeg",
-      "brand": 10,
-      "description": "A high-quality product for Product Vaporesso Luxe PM80.",
-      "price": 5.0,
-      "countInStock": 10,
-      "options_name": "Kit Type",
-      "options": [
-        9,
-        10,
-        11,
-        12
-      ]
+      "slug": "pack-of-2-x-aspire-18650-2600mah-battery",
+      "sku": "SKU-accessories_4101",
+      "name": "pack of 2 x aspire 18650 2600mah battery",
+      "image": "accessories/pack-of-2-x-aspire-18650-2600mah-battery.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product pack of 2 x aspire 18650 2600mah battery."
     }
   },
   {
     "model": "products.product",
     "pk": 11,
     "fields": {
-      "category": 2,
-      "slug": "tropical-breeze-vape-kit",
-      "sku": "SKU1",
-      "name": "Tropical Breeze Vape Kit",
-      "image": "v3.jpeg",
+      "category": 1,
+      "slug": "pack-of-2-x-aspire-18650-2900mah-li-ion-battery",
+      "sku": "SKU-accessories_4111",
+      "name": "pack of 2 x aspire 18650 2900mah li ion battery",
+      "image": "accessories/pack-of-2-x-aspire-18650-2900mah-li-ion-battery.webp",
       "brand": 1,
-      "description": "A high-quality product for Product Tropical Breeze Vape Kit.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "description": "A high-quality product for Product pack of 2 x aspire 18650 2900mah li ion battery."
     }
   },
   {
     "model": "products.product",
     "pk": 12,
     "fields": {
-      "category": 2,
-      "slug": "citrus-splash-nicotine-salt",
-      "sku": "SKU2",
-      "name": "Citrus Splash Nicotine Salt",
-      "image": "v3.jpeg",
-      "brand": 2,
-      "description": "A high-quality product for Product Citrus Splash Nicotine Salt.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "category": 1,
+      "slug": "voopoo-pnp-pod-2-4-5ml-replacement-pod",
+      "sku": "SKU-accessories_5121",
+      "name": "voopoo pnp pod 2 4 5ml replacement pod",
+      "image": "accessories/voopoo-pnp-pod-2-4-5ml-replacement-pod.webp",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo pnp pod 2 4 5ml replacement pod."
     }
   },
   {
     "model": "products.product",
     "pk": 13,
     "fields": {
-      "category": 2,
-      "slug": "sour-apple-vape-juice",
-      "sku": "SKU3",
-      "name": "Sour Apple Vape Juice",
-      "image": "v3.jpeg",
-      "brand": 3,
-      "description": "A high-quality product for Product Sour Apple Vape Juice.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "category": 1,
+      "slug": "voopoo-tpp-empty-pod-replacement-silver",
+      "sku": "SKU-accessories_6131",
+      "name": "voopoo tpp empty pod replacement silver",
+      "image": "accessories/voopoo-tpp-empty-pod-replacement-silver.avif",
+      "brand": 5,
+      "description": "A high-quality product for Product voopoo tpp empty pod replacement silver."
     }
   },
   {
     "model": "products.product",
     "pk": 14,
     "fields": {
-      "category": 2,
-      "slug": "vanilla-dream-pod-system",
-      "sku": "SKU4",
-      "name": "Vanilla Dream Pod System",
-      "image": "v3.jpeg",
+      "category": 1,
+      "slug": "voopoo-tpp-x-5-5ml-empty-replacement-pod",
+      "sku": "SKU-accessories_6141",
+      "name": "voopoo tpp x 5 5ml empty replacement pod",
+      "image": "accessories/voopoo-tpp-x-5-5ml-empty-replacement-pod.avif",
       "brand": 4,
-      "description": "A high-quality product for Product Vanilla Dream Pod System.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "description": "A high-quality product for Product voopoo tpp x 5 5ml empty replacement pod."
     }
   },
   {
@@ -660,22 +378,12 @@
     "pk": 15,
     "fields": {
       "category": 2,
-      "slug": "blueberry-burst-cbd-vape-pen",
-      "sku": "SKU5",
-      "name": "Blueberry Burst CBD Vape Pen",
-      "image": "v3.jpeg",
-      "brand": 5,
-      "description": "A high-quality product for Product Blueberry Burst CBD Vape Pen.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "slug": "aspire-pockex-replacement-atomizer",
+      "sku": "SKU-coils_6152",
+      "name": "aspire pockex replacement atomizer",
+      "image": "coils/aspire-pockex-replacement-atomizer.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire pockex replacement atomizer."
     }
   },
   {
@@ -683,22 +391,12 @@
     "pk": 16,
     "fields": {
       "category": 2,
-      "slug": "cherry-chill-nicotine-pouches",
-      "sku": "SKU6",
-      "name": "Cherry Chill Nicotine Pouches",
-      "image": "v3.jpeg",
-      "brand": 6,
-      "description": "A high-quality product for Product Cherry Chill Nicotine Pouches.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "slug": "innokin-zenith-replacement-coil",
+      "sku": "SKU-coils_6162",
+      "name": "innokin zenith replacement coil",
+      "image": "coils/innokin-zenith-replacement-coil.avif",
+      "brand": 2,
+      "description": "A high-quality product for Product innokin zenith replacement coil."
     }
   },
   {
@@ -706,22 +404,12 @@
     "pk": 17,
     "fields": {
       "category": 2,
-      "slug": "mango-tango-disposable-vape",
-      "sku": "SKU7",
-      "name": "Mango Tango Disposable Vape",
-      "image": "v3.jpeg",
-      "brand": 7,
-      "description": "A high-quality product for Product Mango Tango Disposable Vape.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "slug": "replacement-aspire-nautilus-bvc-coils",
+      "sku": "SKU-coils_6172",
+      "name": "replacement aspire nautilus bvc coils",
+      "image": "coils/replacement-aspire-nautilus-bvc-coils.webp",
+      "brand": 1,
+      "description": "A high-quality product for Product replacement aspire nautilus bvc coils."
     }
   },
   {
@@ -729,22 +417,12 @@
     "pk": 18,
     "fields": {
       "category": 2,
-      "slug": "caramel-cloud-vape-mod",
-      "sku": "SKU8",
-      "name": "Caramel Cloud Vape Mod",
-      "image": "v3.jpeg",
-      "brand": 8,
-      "description": "A high-quality product for Product Caramel Cloud Vape Mod.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "slug": "smok-rpm-replacement-coils",
+      "sku": "SKU-coils_6182",
+      "name": "smok rpm replacement coils",
+      "image": "coils/smok-rpm-replacement-coils.webp",
+      "brand": null,
+      "description": "A high-quality product for Product smok rpm replacement coils."
     }
   },
   {
@@ -752,22 +430,12 @@
     "pk": 19,
     "fields": {
       "category": 2,
-      "slug": "strawberry-serenity-e-hookah",
-      "sku": "SKU9",
-      "name": "Strawberry Serenity E-hookah",
-      "image": "v3.jpeg",
-      "brand": 9,
-      "description": "A high-quality product for Product Strawberry Serenity E-hookah.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "slug": "uwell-caliburn-g-replacement-coils",
+      "sku": "SKU-coils_6192",
+      "name": "uwell caliburn g replacement coils",
+      "image": "coils/uwell-caliburn-g-replacement-coils.avif",
+      "brand": null,
+      "description": "A high-quality product for Product uwell caliburn g replacement coils."
     }
   },
   {
@@ -775,22 +443,12 @@
     "pk": 20,
     "fields": {
       "category": 2,
-      "slug": "watermelon-wave-vape-cartridge",
-      "sku": "SKU10",
-      "name": "Watermelon Wave Vape Cartridge",
-      "image": "v3.jpeg",
-      "brand": 10,
-      "description": "A high-quality product for Product Watermelon Wave Vape Cartridge.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "slug": "vaporesso-gtx-coils",
+      "sku": "SKU-coils_6202",
+      "name": "vaporesso gtx coils",
+      "image": "coils/vaporesso-gtx-coils.avif",
+      "brand": null,
+      "description": "A high-quality product for Product vaporesso gtx coils."
     }
   },
   {
@@ -798,142 +456,2924 @@
     "pk": 21,
     "fields": {
       "category": 2,
-      "slug": "peppermint-pleasure-thc-vape",
-      "sku": "SKU11",
-      "name": "Peppermint Pleasure THC Vape",
-      "image": "v3.jpeg",
+      "slug": "voopoo-pnp-coils-vm1-0-3-ohm-32-40w",
+      "sku": "SKU-coils_6212",
+      "name": "voopoo pnp coils vm1 0 3 ohm 32 40w",
+      "image": "coils/voopoo-pnp-coils-vm1-0-3-ohm-32-40w.avif",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo pnp coils vm1 0 3 ohm 32 40w."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 22,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-disposable-blue",
+      "sku": "SKU-disposable vape bars_7223",
+      "name": "elf bar disposable blue",
+      "image": "disposable_vape_bars/elf-bar-disposable-blue.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar disposable blue."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 23,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-disposable-blueberry",
+      "sku": "SKU-disposable vape bars_7233",
+      "name": "elf bar disposable blueberry",
+      "image": "disposable_vape_bars/elf-bar-disposable-blueberry.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar disposable blueberry."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 24,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-disposable-cola",
+      "sku": "SKU-disposable vape bars_7243",
+      "name": "elf bar disposable cola",
+      "image": "disposable_vape_bars/elf-bar-disposable-cola.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar disposable cola."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 25,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-disposable-energy-ice",
+      "sku": "SKU-disposable vape bars_7253",
+      "name": "elf bar disposable energy ice",
+      "image": "disposable_vape_bars/elf-bar-disposable-energy-ice.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar disposable energy ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 26,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-disposable-kiwi-passionfruit-guava",
+      "sku": "SKU-disposable vape bars_7263",
+      "name": "elf bar disposable kiwi passionfruit guava",
+      "image": "disposable_vape_bars/elf-bar-disposable-kiwi-passionfruit-guava.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar disposable kiwi passionfruit guava."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 27,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-disposable-mango",
+      "sku": "SKU-disposable vape bars_7273",
+      "name": "elf bar disposable mango",
+      "image": "disposable_vape_bars/elf-bar-disposable-mango.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar disposable mango."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 28,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-disposable-watermelon",
+      "sku": "SKU-disposable vape bars_7283",
+      "name": "elf bar disposable watermelon",
+      "image": "disposable_vape_bars/elf-bar-disposable-watermelon.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar disposable watermelon."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 29,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-lost-mary-bm600-apple-watermelon",
+      "sku": "SKU-disposable vape bars_7293",
+      "name": "elf bar lost mary bm600 apple watermelon",
+      "image": "disposable_vape_bars/elf-bar-lost-mary-bm600-apple-watermelon.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar lost mary bm600 apple watermelon."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 30,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-lost-mary-bm600s-berry-apple-peach",
+      "sku": "SKU-disposable vape bars_7303",
+      "name": "elf bar lost mary bm600s berry apple peach",
+      "image": "disposable_vape_bars/elf-bar-lost-mary-bm600s-berry-apple-peach.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar lost mary bm600s berry apple peach."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 31,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-lost-mary-bm600s-lemon-lime",
+      "sku": "SKU-disposable vape bars_7313",
+      "name": "elf bar lost mary bm600s lemon lime",
+      "image": "disposable_vape_bars/elf-bar-lost-mary-bm600s-lemon-lime.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar lost mary bm600s lemon lime."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 32,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-lost-mary-bm600s-pina-kiwi-lemonade",
+      "sku": "SKU-disposable vape bars_7323",
+      "name": "elf bar lost mary bm600s pina kiwi lemonade",
+      "image": "disposable_vape_bars/elf-bar-lost-mary-bm600s-pina-kiwi-lemonade.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar lost mary bm600s pina kiwi lemonade."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 33,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-lost-mary-bm600s-straw-golden-pina",
+      "sku": "SKU-disposable vape bars_7333",
+      "name": "elf bar lost mary bm600s straw golden pina",
+      "image": "disposable_vape_bars/elf-bar-lost-mary-bm600s-straw-golden-pina.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar lost mary bm600s straw golden pina."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 34,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-apple-peach",
+      "sku": "SKU-disposable vape bars_7343",
+      "name": "elf bar v2 disposable apple peach",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-apple-peach.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable apple peach."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 35,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-apple-watermelon",
+      "sku": "SKU-disposable vape bars_7353",
+      "name": "elf bar v2 disposable apple watermelon",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-apple-watermelon.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable apple watermelon."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 36,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-banana-ice",
+      "sku": "SKU-disposable vape bars_7363",
+      "name": "elf bar v2 disposable banana ice",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-banana-ice.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable banana ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 37,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-banana-mango",
+      "sku": "SKU-disposable vape bars_7373",
+      "name": "elf bar v2 disposable banana mango",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-banana-mango.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable banana mango."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 38,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-blue-razz-lemonade",
+      "sku": "SKU-disposable vape bars_7383",
+      "name": "elf bar v2 disposable blue razz lemonade",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-blue-razz-lemonade.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable blue razz lemonade."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 39,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-blueberry-kiwi",
+      "sku": "SKU-disposable vape bars_7393",
+      "name": "elf bar v2 disposable blueberry kiwi",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-blueberry-kiwi.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable blueberry kiwi."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 40,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-blueberry-raspberry",
+      "sku": "SKU-disposable vape bars_7403",
+      "name": "elf bar v2 disposable blueberry raspberry",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-blueberry-raspberry.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable blueberry raspberry."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 41,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-blueberry-sour-raspberry",
+      "sku": "SKU-disposable vape bars_7413",
+      "name": "elf bar v2 disposable blueberry sour raspberry",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-blueberry-sour-raspberry.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable blueberry sour raspberry."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 42,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-cherry-cola",
+      "sku": "SKU-disposable vape bars_7423",
+      "name": "elf bar v2 disposable cherry cola",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-cherry-cola.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable cherry cola."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 43,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-cherry",
+      "sku": "SKU-disposable vape bars_7433",
+      "name": "elf bar v2 disposable cherry",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-cherry.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable cherry."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 44,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-cola",
+      "sku": "SKU-disposable vape bars_7443",
+      "name": "elf bar v2 disposable cola",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-cola.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable cola."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 45,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-elfbull-ice",
+      "sku": "SKU-disposable vape bars_7453",
+      "name": "elf bar v2 disposable elfbull ice",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-elfbull-ice.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable elfbull ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 46,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-golden-kiwi",
+      "sku": "SKU-disposable vape bars_7463",
+      "name": "elf bar v2 disposable golden kiwi",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-golden-kiwi.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable golden kiwi."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 47,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-grape-raspberry",
+      "sku": "SKU-disposable vape bars_7473",
+      "name": "elf bar v2 disposable grape raspberry",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-grape-raspberry.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable grape raspberry."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 48,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-grape",
+      "sku": "SKU-disposable vape bars_7483",
+      "name": "elf bar v2 disposable grape",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-grape.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable grape."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 49,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-kiwi-passion-fruit-guava",
+      "sku": "SKU-disposable vape bars_7493",
+      "name": "elf bar v2 disposable kiwi passion fruit guava",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-kiwi-passion-fruit-guava.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable kiwi passion fruit guava."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 50,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-lemon-lime",
+      "sku": "SKU-disposable vape bars_7503",
+      "name": "elf bar v2 disposable lemon lime",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-lemon-lime.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable lemon lime."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 51,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-mad-blue",
+      "sku": "SKU-disposable vape bars_7513",
+      "name": "elf bar v2 disposable mad blue",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-mad-blue.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable mad blue."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 52,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-mojito",
+      "sku": "SKU-disposable vape bars_7523",
+      "name": "elf bar v2 disposable mojito",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-mojito.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable mojito."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 53,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-p-b-cloud",
+      "sku": "SKU-disposable vape bars_7533",
+      "name": "elf bar v2 disposable p b cloud",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-p-b-cloud.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable p b cloud."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 54,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-pink-grapefruit",
+      "sku": "SKU-disposable vape bars_7543",
+      "name": "elf bar v2 disposable pink grapefruit",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-pink-grapefruit.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable pink grapefruit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 55,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-pink-lemonade",
+      "sku": "SKU-disposable vape bars_7553",
+      "name": "elf bar v2 disposable pink lemonade",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-pink-lemonade.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable pink lemonade."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 56,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-strawberry-ice",
+      "sku": "SKU-disposable vape bars_7563",
+      "name": "elf bar v2 disposable strawberry ice",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-strawberry-ice.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable strawberry ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 57,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-strawberry-kiwi",
+      "sku": "SKU-disposable vape bars_7573",
+      "name": "elf bar v2 disposable strawberry kiwi",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-strawberry-kiwi.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable strawberry kiwi."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 58,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-strawberry-raspberry-cherry-ice",
+      "sku": "SKU-disposable vape bars_7583",
+      "name": "elf bar v2 disposable strawberry raspberry cherry ice",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-strawberry-raspberry-cherry-ice.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable strawberry raspberry cherry ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 59,
+    "fields": {
+      "category": 3,
+      "slug": "elf-bar-v2-disposable-watermelon",
+      "sku": "SKU-disposable vape bars_7593",
+      "name": "elf bar v2 disposable watermelon",
+      "image": "disposable_vape_bars/elf-bar-v2-disposable-watermelon.avif",
+      "brand": 6,
+      "description": "A high-quality product for Product elf bar v2 disposable watermelon."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 60,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-exotic",
+      "sku": "SKU-disposable vape bars_8603",
+      "name": "ivg 2400 puff disposable vape exotic",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-exotic.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape exotic."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 61,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-ice",
+      "sku": "SKU-disposable vape bars_8613",
+      "name": "ivg 2400 puff disposable vape ice",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-ice.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 62,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-juicy",
+      "sku": "SKU-disposable vape bars_8623",
+      "name": "ivg 2400 puff disposable vape juicy",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-juicy.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape juicy."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 63,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-menthol",
+      "sku": "SKU-disposable vape bars_8633",
+      "name": "ivg 2400 puff disposable vape menthol",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-menthol.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape menthol."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 64,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-pink",
+      "sku": "SKU-disposable vape bars_8643",
+      "name": "ivg 2400 puff disposable vape pink",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-pink.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape pink."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 65,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-plum-blue",
+      "sku": "SKU-disposable vape bars_8653",
+      "name": "ivg 2400 puff disposable vape plum blue",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-plum-blue.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape plum blue."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 66,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-purple",
+      "sku": "SKU-disposable vape bars_8663",
+      "name": "ivg 2400 puff disposable vape purple",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-purple.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape purple."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 67,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-red-edition",
+      "sku": "SKU-disposable vape bars_8673",
+      "name": "ivg 2400 puff disposable vape red edition",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-red-edition.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape red edition."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 68,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-special-edition",
+      "sku": "SKU-disposable vape bars_8683",
+      "name": "ivg 2400 puff disposable vape special edition",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-special-edition.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape special edition."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 69,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-strawberry-ice",
+      "sku": "SKU-disposable vape bars_8693",
+      "name": "ivg 2400 puff disposable vape strawberry ice",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-strawberry-ice.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape strawberry ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 70,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-summer-edition",
+      "sku": "SKU-disposable vape bars_8703",
+      "name": "ivg 2400 puff disposable vape summer edition",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-summer-edition.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape summer edition."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 71,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape-yellow-edition",
+      "sku": "SKU-disposable vape bars_8713",
+      "name": "ivg 2400 puff disposable vape yellow edition",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape-yellow-edition.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape yellow edition."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 72,
+    "fields": {
+      "category": 3,
+      "slug": "ivg-2400-puff-disposable-vape",
+      "sku": "SKU-disposable vape bars_8723",
+      "name": "ivg 2400 puff disposable vape",
+      "image": "disposable_vape_bars/ivg-2400-puff-disposable-vape.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg 2400 puff disposable vape."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 73,
+    "fields": {
+      "category": 3,
+      "slug": "lost-mary-qm600-disposable-banana-ice",
+      "sku": "SKU-disposable vape bars_9733",
+      "name": "lost mary qm600 disposable banana ice",
+      "image": "disposable_vape_bars/lost-mary-qm600-disposable-banana-ice.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary qm600 disposable banana ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 74,
+    "fields": {
+      "category": 3,
+      "slug": "lost-mary-qm600-disposable-lemon-lime",
+      "sku": "SKU-disposable vape bars_9743",
+      "name": "lost mary qm600 disposable lemon lime",
+      "image": "disposable_vape_bars/lost-mary-qm600-disposable-lemon-lime.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary qm600 disposable lemon lime."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 75,
+    "fields": {
+      "category": 3,
+      "slug": "lost-mary-qm600-disposable-pineapple-coconut",
+      "sku": "SKU-disposable vape bars_9753",
+      "name": "lost mary qm600 disposable pineapple coconut",
+      "image": "disposable_vape_bars/lost-mary-qm600-disposable-pineapple-coconut.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary qm600 disposable pineapple coconut."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 76,
+    "fields": {
+      "category": 3,
+      "slug": "lost-mary-qm600-disposable-pineapple-ice",
+      "sku": "SKU-disposable vape bars_9763",
+      "name": "lost mary qm600 disposable pineapple ice",
+      "image": "disposable_vape_bars/lost-mary-qm600-disposable-pineapple-ice.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary qm600 disposable pineapple ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 77,
+    "fields": {
+      "category": 3,
+      "slug": "nasty-air-fix-disposable-kit-menthol",
+      "sku": "SKU-disposable vape bars_10773",
+      "name": "nasty air fix disposable kit menthol",
+      "image": "disposable_vape_bars/nasty-air-fix-disposable-kit-menthol.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty air fix disposable kit menthol."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 78,
+    "fields": {
+      "category": 3,
+      "slug": "nasty-air-fix-disposable-kit-vanilla-tobacco",
+      "sku": "SKU-disposable vape bars_10783",
+      "name": "nasty air fix disposable kit vanilla tobacco",
+      "image": "disposable_vape_bars/nasty-air-fix-disposable-kit-vanilla-tobacco.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty air fix disposable kit vanilla tobacco."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 79,
+    "fields": {
+      "category": 4,
+      "slug": "dinner-lady-50ml-shortfill-e-liquid-strawberry-bikini-summer-holidays-series",
+      "sku": "SKU-e liquids_10794",
+      "name": "dinner lady 50ml shortfill e liquid strawberry bikini summer holidays series",
+      "image": "e_liquids/dinner-lady-50ml-shortfill-e-liquid-strawberry-bikini-summer-holidays-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product dinner lady 50ml shortfill e liquid strawberry bikini summer holidays series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 80,
+    "fields": {
+      "category": 4,
+      "slug": "dinner-lady-50ml-shortfill-e-liquid-sun-tan-mango-summer-holidays-series",
+      "sku": "SKU-e liquids_10804",
+      "name": "dinner lady 50ml shortfill e liquid sun tan mango summer holidays series",
+      "image": "e_liquids/dinner-lady-50ml-shortfill-e-liquid-sun-tan-mango-summer-holidays-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product dinner lady 50ml shortfill e liquid sun tan mango summer holidays series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 81,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-blackcurrant-fruit-series",
+      "sku": "SKU-e liquids_10814",
+      "name": "hale 10ml e liquid blackcurrant fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-blackcurrant-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid blackcurrant fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 82,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-blackfire-tobacco-series",
+      "sku": "SKU-e liquids_10824",
+      "name": "hale 10ml e liquid blackfire tobacco series",
+      "image": "e_liquids/hale-10ml-e-liquid-blackfire-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid blackfire tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 83,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-blueberry-fruit-series",
+      "sku": "SKU-e liquids_10834",
+      "name": "hale 10ml e liquid blueberry fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-blueberry-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid blueberry fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 84,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-bubblegum-fruit-series",
+      "sku": "SKU-e liquids_10844",
+      "name": "hale 10ml e liquid bubblegum fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-bubblegum-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid bubblegum fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 85,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-cherry-menthol-minted-series",
+      "sku": "SKU-e liquids_10854",
+      "name": "hale 10ml e liquid cherry menthol minted series",
+      "image": "e_liquids/hale-10ml-e-liquid-cherry-menthol-minted-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid cherry menthol minted series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 86,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-cola-fruit-series",
+      "sku": "SKU-e liquids_10864",
+      "name": "hale 10ml e liquid cola fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-cola-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid cola fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 87,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-italian-cappuccino-fruit-series",
+      "sku": "SKU-e liquids_10874",
+      "name": "hale 10ml e liquid italian cappuccino fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-italian-cappuccino-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid italian cappuccino fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 88,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-lemon-fruit-series",
+      "sku": "SKU-e liquids_10884",
+      "name": "hale 10ml e liquid lemon fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-lemon-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid lemon fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 89,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-lemon-menthol-minted-series",
+      "sku": "SKU-e liquids_10894",
+      "name": "hale 10ml e liquid lemon menthol minted series",
+      "image": "e_liquids/hale-10ml-e-liquid-lemon-menthol-minted-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid lemon menthol minted series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 90,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-london-blend-tobacco-series",
+      "sku": "SKU-e liquids_10904",
+      "name": "hale 10ml e liquid london blend tobacco series",
+      "image": "e_liquids/hale-10ml-e-liquid-london-blend-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid london blend tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 91,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-mango-fruit-series",
+      "sku": "SKU-e liquids_10914",
+      "name": "hale 10ml e liquid mango fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-mango-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid mango fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 92,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-menthol-minted-series",
+      "sku": "SKU-e liquids_10924",
+      "name": "hale 10ml e liquid menthol minted series",
+      "image": "e_liquids/hale-10ml-e-liquid-menthol-minted-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid menthol minted series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 93,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-platinum-tobacco-series",
+      "sku": "SKU-e liquids_10934",
+      "name": "hale 10ml e liquid platinum tobacco series",
+      "image": "e_liquids/hale-10ml-e-liquid-platinum-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid platinum tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 94,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-raspberry-fruit-series",
+      "sku": "SKU-e liquids_10944",
+      "name": "hale 10ml e liquid raspberry fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-raspberry-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid raspberry fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 95,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-rollin-blend-tobacco-series",
+      "sku": "SKU-e liquids_10954",
+      "name": "hale 10ml e liquid rollin blend tobacco series",
+      "image": "e_liquids/hale-10ml-e-liquid-rollin-blend-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid rollin blend tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 96,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-royal-carlos-tobacco-series",
+      "sku": "SKU-e liquids_10964",
+      "name": "hale 10ml e liquid royal carlos tobacco series",
+      "image": "e_liquids/hale-10ml-e-liquid-royal-carlos-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid royal carlos tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 97,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-ry4-tobacco-series",
+      "sku": "SKU-e liquids_10974",
+      "name": "hale 10ml e liquid ry4 tobacco series",
+      "image": "e_liquids/hale-10ml-e-liquid-ry4-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid ry4 tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 98,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-sapphire-tobacco-series",
+      "sku": "SKU-e liquids_10984",
+      "name": "hale 10ml e liquid sapphire tobacco series",
+      "image": "e_liquids/hale-10ml-e-liquid-sapphire-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid sapphire tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 99,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-spearmint-menthol-minted-series",
+      "sku": "SKU-e liquids_10994",
+      "name": "hale 10ml e liquid spearmint menthol minted series",
+      "image": "e_liquids/hale-10ml-e-liquid-spearmint-menthol-minted-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid spearmint menthol minted series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 100,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-strawberry-fruit-series",
+      "sku": "SKU-e liquids_101004",
+      "name": "hale 10ml e liquid strawberry fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-strawberry-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid strawberry fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 101,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-strawberry-menthol-minted-series",
+      "sku": "SKU-e liquids_101014",
+      "name": "hale 10ml e liquid strawberry menthol minted series",
+      "image": "e_liquids/hale-10ml-e-liquid-strawberry-menthol-minted-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid strawberry menthol minted series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 102,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-sunstone-tobacco-series",
+      "sku": "SKU-e liquids_101024",
+      "name": "hale 10ml e liquid sunstone tobacco series",
+      "image": "e_liquids/hale-10ml-e-liquid-sunstone-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid sunstone tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 103,
+    "fields": {
+      "category": 4,
+      "slug": "hale-10ml-e-liquid-vanilla-fruit-series",
+      "sku": "SKU-e liquids_101034",
+      "name": "hale 10ml e liquid vanilla fruit series",
+      "image": "e_liquids/hale-10ml-e-liquid-vanilla-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale 10ml e liquid vanilla fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 104,
+    "fields": {
+      "category": 4,
+      "slug": "hale-fusion-10ml-e-liquid-cancun-sun",
+      "sku": "SKU-e liquids_101044",
+      "name": "hale fusion 10ml e liquid cancun sun",
+      "image": "e_liquids/hale-fusion-10ml-e-liquid-cancun-sun.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale fusion 10ml e liquid cancun sun."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 105,
+    "fields": {
+      "category": 4,
+      "slug": "hale-fusion-10ml-e-liquid-heisenberg",
+      "sku": "SKU-e liquids_101054",
+      "name": "hale fusion 10ml e liquid heisenberg",
+      "image": "e_liquids/hale-fusion-10ml-e-liquid-heisenberg.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale fusion 10ml e liquid heisenberg."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 106,
+    "fields": {
+      "category": 4,
+      "slug": "hale-fusion-10ml-e-liquid-island-breeze",
+      "sku": "SKU-e liquids_101064",
+      "name": "hale fusion 10ml e liquid island breeze",
+      "image": "e_liquids/hale-fusion-10ml-e-liquid-island-breeze.avif",
+      "brand": null,
+      "description": "A high-quality product for Product hale fusion 10ml e liquid island breeze."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 107,
+    "fields": {
+      "category": 4,
+      "slug": "king-s-dew-100ml-e-liquid-mango-elderflower-smoothie",
+      "sku": "SKU-e liquids_111074",
+      "name": "king s dew 100ml e liquid mango elderflower smoothie",
+      "image": "e_liquids/king-s-dew-100ml-e-liquid-mango-elderflower-smoothie.avif",
+      "brand": 10,
+      "description": "A high-quality product for Product king s dew 100ml e liquid mango elderflower smoothie."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 108,
+    "fields": {
+      "category": 4,
+      "slug": "king-s-dew-100ml-e-liquid-peach-raspberry-smoothie",
+      "sku": "SKU-e liquids_111084",
+      "name": "king s dew 100ml e liquid peach raspberry smoothie",
+      "image": "e_liquids/king-s-dew-100ml-e-liquid-peach-raspberry-smoothie.avif",
+      "brand": null,
+      "description": "A high-quality product for Product king s dew 100ml e liquid peach raspberry smoothie."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 109,
+    "fields": {
+      "category": 4,
+      "slug": "king-s-dew-100ml-e-liquid-strawberry-maracuja-smoothie",
+      "sku": "SKU-e liquids_111094",
+      "name": "king s dew 100ml e liquid strawberry maracuja smoothie",
+      "image": "e_liquids/king-s-dew-100ml-e-liquid-strawberry-maracuja-smoothie.avif",
+      "brand": null,
+      "description": "A high-quality product for Product king s dew 100ml e liquid strawberry maracuja smoothie."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 110,
+    "fields": {
+      "category": 4,
+      "slug": "king-s-dew-shortfill-tobacco-smooth",
+      "sku": "SKU-e liquids_111104",
+      "name": "king s dew shortfill tobacco smooth",
+      "image": "e_liquids/king-s-dew-shortfill-tobacco-smooth.avif",
+      "brand": null,
+      "description": "A high-quality product for Product king s dew shortfill tobacco smooth."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 111,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-american-blend-tobacco-series",
+      "sku": "SKU-e liquids_111114",
+      "name": "liqua elements 10ml liquid american blend tobacco series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-american-blend-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid american blend tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 112,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-apple-fruit-series",
+      "sku": "SKU-e liquids_111124",
+      "name": "liqua elements 10ml liquid apple fruit series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-apple-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid apple fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 113,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-berry-mix-berry-series",
+      "sku": "SKU-e liquids_111134",
+      "name": "liqua elements 10ml liquid berry mix berry series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-berry-mix-berry-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid berry mix berry series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 114,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-black-tea-drink-series",
+      "sku": "SKU-e liquids_111144",
+      "name": "liqua elements 10ml liquid black tea drink series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-black-tea-drink-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid black tea drink series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 115,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-blackberry-berry-series",
+      "sku": "SKU-e liquids_111154",
+      "name": "liqua elements 10ml liquid blackberry berry series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-blackberry-berry-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid blackberry berry series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 116,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-blackcurrant-berry-series",
+      "sku": "SKU-e liquids_111164",
+      "name": "liqua elements 10ml liquid blackcurrant berry series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-blackcurrant-berry-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid blackcurrant berry series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 117,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-bright-tobacco-tobacco-series",
+      "sku": "SKU-e liquids_111174",
+      "name": "liqua elements 10ml liquid bright tobacco tobacco series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-bright-tobacco-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid bright tobacco tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 118,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-caramel-dessert-series",
+      "sku": "SKU-e liquids_111184",
+      "name": "liqua elements 10ml liquid caramel dessert series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-caramel-dessert-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid caramel dessert series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 119,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-cherry-berry-series",
+      "sku": "SKU-e liquids_111194",
+      "name": "liqua elements 10ml liquid cherry berry series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-cherry-berry-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid cherry berry series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 120,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-cigar-tobacco-series",
+      "sku": "SKU-e liquids_111204",
+      "name": "liqua elements 10ml liquid cigar tobacco series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-cigar-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid cigar tobacco series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 121,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-cola-drink-series",
+      "sku": "SKU-e liquids_111214",
+      "name": "liqua elements 10ml liquid cola drink series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-cola-drink-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid cola drink series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 122,
+    "fields": {
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-cookies-dessert-series",
+      "sku": "SKU-e liquids_121224",
+      "name": "liqua elements 10ml liquid cookies dessert series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-cookies-dessert-series.avif",
       "brand": 11,
-      "description": "A high-quality product for Product Peppermint Pleasure THC Vape.",
-      "price": 6.0,
-      "countInStock": 9,
-      "options_name": "Nicotine Strength",
-      "options": [
-        1,
-        2,
-        3,
-        4,
-        5
-      ]
+      "description": "A high-quality product for Product liqua elements 10ml liquid cookies dessert series."
     }
   },
   {
-    "model": "products.review",
-    "pk": 1,
+    "model": "products.product",
+    "pk": 123,
     "fields": {
-      "product": 2,
-      "user": 1,
-      "name": "User 1",
-      "rating": 5,
-      "comment": "Review 1: Great product!",
-      "created_at": "2022-01-01T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-dark-tobacco-tobacco-series",
+      "sku": "SKU-e liquids_121234",
+      "name": "liqua elements 10ml liquid dark tobacco tobacco series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-dark-tobacco-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid dark tobacco tobacco series."
     }
   },
   {
-    "model": "products.review",
-    "pk": 2,
+    "model": "products.product",
+    "pk": 124,
     "fields": {
-      "product": 3,
-      "user": 1,
-      "name": "User 2",
-      "rating": 4,
-      "comment": "Review 2: Great product!",
-      "created_at": "2022-01-02T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-menthol-refreshingly-strong",
+      "sku": "SKU-e liquids_121244",
+      "name": "liqua elements 10ml liquid menthol refreshingly strong",
+      "image": "e_liquids/liqua-elements-10ml-liquid-menthol-refreshingly-strong.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid menthol refreshingly strong."
     }
   },
   {
-    "model": "products.review",
-    "pk": 3,
+    "model": "products.product",
+    "pk": 125,
     "fields": {
-      "product": 4,
-      "user": 1,
-      "name": "User 3",
-      "rating": 5,
-      "comment": "Review 3: Great product!",
-      "created_at": "2022-01-03T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-peach-fruit-series",
+      "sku": "SKU-e liquids_121254",
+      "name": "liqua elements 10ml liquid peach fruit series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-peach-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid peach fruit series."
     }
   },
   {
-    "model": "products.review",
-    "pk": 4,
+    "model": "products.product",
+    "pk": 126,
     "fields": {
-      "product": 5,
-      "user": 1,
-      "name": "User 4",
-      "rating": 4,
-      "comment": "Review 4: Great product!",
-      "created_at": "2022-01-04T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-pineapple-fruit-series",
+      "sku": "SKU-e liquids_121264",
+      "name": "liqua elements 10ml liquid pineapple fruit series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-pineapple-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid pineapple fruit series."
     }
   },
   {
-    "model": "products.review",
-    "pk": 5,
+    "model": "products.product",
+    "pk": 127,
     "fields": {
-      "product": 6,
-      "user": 1,
-      "name": "User 5",
-      "rating": 5,
-      "comment": "Review 5: Great product!",
-      "created_at": "2022-01-05T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-strawberry-berry-series",
+      "sku": "SKU-e liquids_121274",
+      "name": "liqua elements 10ml liquid strawberry berry series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-strawberry-berry-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid strawberry berry series."
     }
   },
   {
-    "model": "products.review",
-    "pk": 6,
+    "model": "products.product",
+    "pk": 128,
     "fields": {
-      "product": 7,
-      "user": 1,
-      "name": "User 6",
-      "rating": 4,
-      "comment": "Review 6: Great product!",
-      "created_at": "2022-01-06T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-traditional-tobacco-tobacco-series",
+      "sku": "SKU-e liquids_121284",
+      "name": "liqua elements 10ml liquid traditional tobacco tobacco series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-traditional-tobacco-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid traditional tobacco tobacco series."
     }
   },
   {
-    "model": "products.review",
-    "pk": 7,
+    "model": "products.product",
+    "pk": 129,
     "fields": {
-      "product": 8,
-      "user": 1,
-      "name": "User 7",
-      "rating": 5,
-      "comment": "Review 7: Great product!",
-      "created_at": "2022-01-07T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-turkish-tobacco-tobacco-series",
+      "sku": "SKU-e liquids_121294",
+      "name": "liqua elements 10ml liquid turkish tobacco tobacco series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-turkish-tobacco-tobacco-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid turkish tobacco tobacco series."
     }
   },
   {
-    "model": "products.review",
-    "pk": 8,
+    "model": "products.product",
+    "pk": 130,
     "fields": {
-      "product": 9,
-      "user": 1,
-      "name": "User 8",
-      "rating": 4,
-      "comment": "Review 8: Great product!",
-      "created_at": "2022-01-08T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-two-mints-refreshingly-strong",
+      "sku": "SKU-e liquids_121304",
+      "name": "liqua elements 10ml liquid two mints refreshingly strong",
+      "image": "e_liquids/liqua-elements-10ml-liquid-two-mints-refreshingly-strong.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid two mints refreshingly strong."
     }
   },
   {
-    "model": "products.review",
-    "pk": 9,
+    "model": "products.product",
+    "pk": 131,
     "fields": {
-      "product": 10,
-      "user": 1,
-      "name": "User 9",
-      "rating": 5,
-      "comment": "Review 9: Great product!",
-      "created_at": "2022-01-09T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-vanilla-dessert-series",
+      "sku": "SKU-e liquids_121314",
+      "name": "liqua elements 10ml liquid vanilla dessert series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-vanilla-dessert-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid vanilla dessert series."
     }
   },
   {
-    "model": "products.review",
-    "pk": 10,
+    "model": "products.product",
+    "pk": 132,
     "fields": {
-      "product": 1,
-      "user": 1,
-      "name": "User 10",
-      "rating": 4,
-      "comment": "Review 10: Great product!",
-      "created_at": "2022-01-10T12:00:00Z"
+      "category": 4,
+      "slug": "liqua-elements-10ml-liquid-watermelon-fruit-series",
+      "sku": "SKU-e liquids_121324",
+      "name": "liqua elements 10ml liquid watermelon fruit series",
+      "image": "e_liquids/liqua-elements-10ml-liquid-watermelon-fruit-series.avif",
+      "brand": null,
+      "description": "A high-quality product for Product liqua elements 10ml liquid watermelon fruit series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 133,
+    "fields": {
+      "category": 4,
+      "slug": "nasty-ballin-50ml-short-fill-bloody-berry-berry-mixed-lemon",
+      "sku": "SKU-e liquids_121334",
+      "name": "nasty ballin 50ml short fill bloody berry berry mixed lemon",
+      "image": "e_liquids/nasty-ballin-50ml-short-fill-bloody-berry-berry-mixed-lemon.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty ballin 50ml short fill bloody berry berry mixed lemon."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 134,
+    "fields": {
+      "category": 4,
+      "slug": "nasty-ballin-50ml-short-fill-hippie-trail-lemon-lime",
+      "sku": "SKU-e liquids_121344",
+      "name": "nasty ballin 50ml short fill hippie trail lemon lime",
+      "image": "e_liquids/nasty-ballin-50ml-short-fill-hippie-trail-lemon-lime.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty ballin 50ml short fill hippie trail lemon lime."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 135,
+    "fields": {
+      "category": 4,
+      "slug": "nasty-ballin-50ml-short-fill-migos-moon-orange-sour-lemon",
+      "sku": "SKU-e liquids_121354",
+      "name": "nasty ballin 50ml short fill migos moon orange sour lemon",
+      "image": "e_liquids/nasty-ballin-50ml-short-fill-migos-moon-orange-sour-lemon.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty ballin 50ml short fill migos moon orange sour lemon."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 136,
+    "fields": {
+      "category": 4,
+      "slug": "nasty-ballin-50ml-short-fill-passion-killa-tropical-fruit",
+      "sku": "SKU-e liquids_121364",
+      "name": "nasty ballin 50ml short fill passion killa tropical fruit",
+      "image": "e_liquids/nasty-ballin-50ml-short-fill-passion-killa-tropical-fruit.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty ballin 50ml short fill passion killa tropical fruit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 137,
+    "fields": {
+      "category": 4,
+      "slug": "nasty-juice-10ml-e-liquid-asap-grape-50-50",
+      "sku": "SKU-e liquids_121374",
+      "name": "nasty juice 10ml e liquid asap grape 50 50",
+      "image": "e_liquids/nasty-juice-10ml-e-liquid-asap-grape-50-50.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty juice 10ml e liquid asap grape 50 50."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 138,
+    "fields": {
+      "category": 4,
+      "slug": "nasty-juice-10ml-e-liquid-bad-blood-blackcurrant-50-50",
+      "sku": "SKU-e liquids_121384",
+      "name": "nasty juice 10ml e liquid bad blood blackcurrant 50 50",
+      "image": "e_liquids/nasty-juice-10ml-e-liquid-bad-blood-blackcurrant-50-50.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty juice 10ml e liquid bad blood blackcurrant 50 50."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 139,
+    "fields": {
+      "category": 4,
+      "slug": "nasty-juice-10ml-e-liquid-devil-teeth-honeydew-50-50",
+      "sku": "SKU-e liquids_121394",
+      "name": "nasty juice 10ml e liquid devil teeth honeydew 50 50",
+      "image": "e_liquids/nasty-juice-10ml-e-liquid-devil-teeth-honeydew-50-50.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty juice 10ml e liquid devil teeth honeydew 50 50."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 140,
+    "fields": {
+      "category": 4,
+      "slug": "nasty-juice-10ml-e-liquid-fat-boy-green-mango-50-50",
+      "sku": "SKU-e liquids_121404",
+      "name": "nasty juice 10ml e liquid fat boy green mango 50 50",
+      "image": "e_liquids/nasty-juice-10ml-e-liquid-fat-boy-green-mango-50-50.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty juice 10ml e liquid fat boy green mango 50 50."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 141,
+    "fields": {
+      "category": 5,
+      "slug": "aspire-avp-pro-pods",
+      "sku": "SKU-nic salts_121415",
+      "name": "aspire avp pro pods",
+      "image": "nic_salts/aspire-avp-pro-pods.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire avp pro pods."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 142,
+    "fields": {
+      "category": 5,
+      "slug": "aspire-bp60-replacement-coil-heads",
+      "sku": "SKU-nic salts_121425",
+      "name": "aspire bp60 replacement coil heads",
+      "image": "nic_salts/aspire-bp60-replacement-coil-heads.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire bp60 replacement coil heads."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 143,
+    "fields": {
+      "category": 5,
+      "slug": "aspire-bp60-replacement-pods",
+      "sku": "SKU-nic salts_121435",
+      "name": "aspire bp60 replacement pods",
+      "image": "nic_salts/aspire-bp60-replacement-pods.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire bp60 replacement pods."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 144,
+    "fields": {
+      "category": 5,
+      "slug": "aspire-finixx-pod-tank-stainless-steel",
+      "sku": "SKU-nic salts_121445",
+      "name": "aspire finixx pod tank stainless steel",
+      "image": "nic_salts/aspire-finixx-pod-tank-stainless-steel.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire finixx pod tank stainless steel."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 145,
+    "fields": {
+      "category": 5,
+      "slug": "aspire-guroo-replacement-glass-5ml",
+      "sku": "SKU-nic salts_121455",
+      "name": "aspire guroo replacement glass 5ml",
+      "image": "nic_salts/aspire-guroo-replacement-glass-5ml.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire guroo replacement glass 5ml."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 146,
+    "fields": {
+      "category": 5,
+      "slug": "dinner-lady-50ml-shortfill-e-liquid-flip-flop-lychee-summer-holidays-series",
+      "sku": "SKU-nic salts_121465",
+      "name": "dinner lady 50ml shortfill e liquid flip flop lychee summer holidays series",
+      "image": "nic_salts/dinner-lady-50ml-shortfill-e-liquid-flip-flop-lychee-summer-holidays-series.avif",
+      "brand": 10,
+      "description": "A high-quality product for Product dinner lady 50ml shortfill e liquid flip flop lychee summer holidays series."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 147,
+    "fields": {
+      "category": 5,
+      "slug": "elfliq-nic-salt-10ml-apple-peach-elf-bar-e-liquid",
+      "sku": "SKU-nic salts_131475",
+      "name": "elfliq nic salt 10ml apple peach elf bar e liquid",
+      "image": "nic_salts/elfliq-nic-salt-10ml-apple-peach-elf-bar-e-liquid.avif",
+      "brand": 12,
+      "description": "A high-quality product for Product elfliq nic salt 10ml apple peach elf bar e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 148,
+    "fields": {
+      "category": 5,
+      "slug": "elfliq-nic-salt-10ml-blue-razz-lemonade-elf-bar-e-liquid",
+      "sku": "SKU-nic salts_131485",
+      "name": "elfliq nic salt 10ml blue razz lemonade elf bar e liquid",
+      "image": "nic_salts/elfliq-nic-salt-10ml-blue-razz-lemonade-elf-bar-e-liquid.avif",
+      "brand": 12,
+      "description": "A high-quality product for Product elfliq nic salt 10ml blue razz lemonade elf bar e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 149,
+    "fields": {
+      "category": 5,
+      "slug": "elfliq-nic-salt-10ml-blueberry-sour-raspberry-elf-bar-e-liquid",
+      "sku": "SKU-nic salts_131495",
+      "name": "elfliq nic salt 10ml blueberry sour raspberry elf bar e liquid",
+      "image": "nic_salts/elfliq-nic-salt-10ml-blueberry-sour-raspberry-elf-bar-e-liquid.avif",
+      "brand": 12,
+      "description": "A high-quality product for Product elfliq nic salt 10ml blueberry sour raspberry elf bar e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 150,
+    "fields": {
+      "category": 5,
+      "slug": "elfliq-nic-salt-10ml-cherry-cola-elf-bar-e-liquid",
+      "sku": "SKU-nic salts_131505",
+      "name": "elfliq nic salt 10ml cherry cola elf bar e liquid",
+      "image": "nic_salts/elfliq-nic-salt-10ml-cherry-cola-elf-bar-e-liquid.avif",
+      "brand": 12,
+      "description": "A high-quality product for Product elfliq nic salt 10ml cherry cola elf bar e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 151,
+    "fields": {
+      "category": 5,
+      "slug": "elfliq-nic-salt-10ml-cherry-elf-bar-e-liquid",
+      "sku": "SKU-nic salts_131515",
+      "name": "elfliq nic salt 10ml cherry elf bar e liquid",
+      "image": "nic_salts/elfliq-nic-salt-10ml-cherry-elf-bar-e-liquid.avif",
+      "brand": 12,
+      "description": "A high-quality product for Product elfliq nic salt 10ml cherry elf bar e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 152,
+    "fields": {
+      "category": 5,
+      "slug": "elfliq-nic-salt-10ml-peach-ice-elf-bar-e-liquid",
+      "sku": "SKU-nic salts_131525",
+      "name": "elfliq nic salt 10ml peach ice elf bar e liquid",
+      "image": "nic_salts/elfliq-nic-salt-10ml-peach-ice-elf-bar-e-liquid.avif",
+      "brand": 12,
+      "description": "A high-quality product for Product elfliq nic salt 10ml peach ice elf bar e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 153,
+    "fields": {
+      "category": 5,
+      "slug": "elfliq-nic-salt-10ml-strawberry-ice-elf-bar-e-liquid",
+      "sku": "SKU-nic salts_131535",
+      "name": "elfliq nic salt 10ml strawberry ice elf bar e liquid",
+      "image": "nic_salts/elfliq-nic-salt-10ml-strawberry-ice-elf-bar-e-liquid.avif",
+      "brand": 12,
+      "description": "A high-quality product for Product elfliq nic salt 10ml strawberry ice elf bar e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 154,
+    "fields": {
+      "category": 5,
+      "slug": "elfliq-nic-salt-10ml-strawberry-kiwi-elf-bar-e-liquid",
+      "sku": "SKU-nic salts_131545",
+      "name": "elfliq nic salt 10ml strawberry kiwi elf bar e liquid",
+      "image": "nic_salts/elfliq-nic-salt-10ml-strawberry-kiwi-elf-bar-e-liquid.avif",
+      "brand": 12,
+      "description": "A high-quality product for Product elfliq nic salt 10ml strawberry kiwi elf bar e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 155,
+    "fields": {
+      "category": 5,
+      "slug": "elfliq-nic-salt-10ml-watermelon-elf-bar-e-liquid",
+      "sku": "SKU-nic salts_131555",
+      "name": "elfliq nic salt 10ml watermelon elf bar e liquid",
+      "image": "nic_salts/elfliq-nic-salt-10ml-watermelon-elf-bar-e-liquid.avif",
+      "brand": 12,
+      "description": "A high-quality product for Product elfliq nic salt 10ml watermelon elf bar e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 156,
+    "fields": {
+      "category": 5,
+      "slug": "ivg-nic-salt-10ml-bubblegum",
+      "sku": "SKU-nic salts_131565",
+      "name": "ivg nic salt 10ml bubblegum",
+      "image": "nic_salts/ivg-nic-salt-10ml-bubblegum.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg nic salt 10ml bubblegum."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 157,
+    "fields": {
+      "category": 5,
+      "slug": "ivg-nic-salt-10ml-summer-blaze",
+      "sku": "SKU-nic salts_131575",
+      "name": "ivg nic salt 10ml summer blaze",
+      "image": "nic_salts/ivg-nic-salt-10ml-summer-blaze.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg nic salt 10ml summer blaze."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 158,
+    "fields": {
+      "category": 5,
+      "slug": "ivg-nic-salt-blue-raspberry-10ml-bottle",
+      "sku": "SKU-nic salts_131585",
+      "name": "ivg nic salt blue raspberry 10ml bottle",
+      "image": "nic_salts/ivg-nic-salt-blue-raspberry-10ml-bottle.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg nic salt blue raspberry 10ml bottle."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 159,
+    "fields": {
+      "category": 5,
+      "slug": "ivg-nic-salt-cola-ice-10ml-bottle",
+      "sku": "SKU-nic salts_131595",
+      "name": "ivg nic salt cola ice 10ml bottle",
+      "image": "nic_salts/ivg-nic-salt-cola-ice-10ml-bottle.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg nic salt cola ice 10ml bottle."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 160,
+    "fields": {
+      "category": 5,
+      "slug": "ivg-nic-salt-forest-berries-ice-10ml-bottle",
+      "sku": "SKU-nic salts_131605",
+      "name": "ivg nic salt forest berries ice 10ml bottle",
+      "image": "nic_salts/ivg-nic-salt-forest-berries-ice-10ml-bottle.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg nic salt forest berries ice 10ml bottle."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 161,
+    "fields": {
+      "category": 5,
+      "slug": "ivg-nic-salt-frozen-cherries-10ml",
+      "sku": "SKU-nic salts_131615",
+      "name": "ivg nic salt frozen cherries 10ml",
+      "image": "nic_salts/ivg-nic-salt-frozen-cherries-10ml.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg nic salt frozen cherries 10ml."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 162,
+    "fields": {
+      "category": 5,
+      "slug": "ivg-nic-salt-sour-green-apple-10ml-bottle",
+      "sku": "SKU-nic salts_131625",
+      "name": "ivg nic salt sour green apple 10ml bottle",
+      "image": "nic_salts/ivg-nic-salt-sour-green-apple-10ml-bottle.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg nic salt sour green apple 10ml bottle."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 163,
+    "fields": {
+      "category": 5,
+      "slug": "ivg-nic-salt-strawberry-watermelon-chew-10ml-bottle",
+      "sku": "SKU-nic salts_131635",
+      "name": "ivg nic salt strawberry watermelon chew 10ml bottle",
+      "image": "nic_salts/ivg-nic-salt-strawberry-watermelon-chew-10ml-bottle.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg nic salt strawberry watermelon chew 10ml bottle."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 164,
+    "fields": {
+      "category": 5,
+      "slug": "ivg-nic-salt-tropical-ice-blast-10ml",
+      "sku": "SKU-nic salts_131645",
+      "name": "ivg nic salt tropical ice blast 10ml",
+      "image": "nic_salts/ivg-nic-salt-tropical-ice-blast-10ml.avif",
+      "brand": 7,
+      "description": "A high-quality product for Product ivg nic salt tropical ice blast 10ml."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 165,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-beach-day-by-lost-mary",
+      "sku": "SKU-nic salts_141655",
+      "name": "maryliq salt e liquid beach day by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-beach-day-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid beach day by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 166,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-blackcurrant-apple-by-lost-mary",
+      "sku": "SKU-nic salts_141665",
+      "name": "maryliq salt e liquid blackcurrant apple by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-blackcurrant-apple-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid blackcurrant apple by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 167,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-blueberry-sour-raspberry-by-lost-mary",
+      "sku": "SKU-nic salts_141675",
+      "name": "maryliq salt e liquid blueberry sour raspberry by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-blueberry-sour-raspberry-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid blueberry sour raspberry by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 168,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-blueberry-watermelon-lemonade-by-lost-mary",
+      "sku": "SKU-nic salts_141685",
+      "name": "maryliq salt e liquid blueberry watermelon lemonade by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-blueberry-watermelon-lemonade-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid blueberry watermelon lemonade by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 169,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-cherry-lemon-mint-by-lost-mary",
+      "sku": "SKU-nic salts_141695",
+      "name": "maryliq salt e liquid cherry lemon mint by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-cherry-lemon-mint-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid cherry lemon mint by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 170,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-citrus-sunrise-by-lost-mary",
+      "sku": "SKU-nic salts_141705",
+      "name": "maryliq salt e liquid citrus sunrise by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-citrus-sunrise-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid citrus sunrise by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 171,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-double-apple-by-lost-mary",
+      "sku": "SKU-nic salts_141715",
+      "name": "maryliq salt e liquid double apple by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-double-apple-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid double apple by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 172,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-lime-rum-by-lost-mary",
+      "sku": "SKU-nic salts_141725",
+      "name": "maryliq salt e liquid lime rum by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-lime-rum-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid lime rum by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 173,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-menthol-by-lost-mary",
+      "sku": "SKU-nic salts_141735",
+      "name": "maryliq salt e liquid menthol by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-menthol-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid menthol by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 174,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-peach-ice-by-lost-mary",
+      "sku": "SKU-nic salts_141745",
+      "name": "maryliq salt e liquid peach ice by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-peach-ice-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid peach ice by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 175,
+    "fields": {
+      "category": 5,
+      "slug": "maryliq-salt-e-liquid-pineapple-ice-by-lost-mary",
+      "sku": "SKU-nic salts_141755",
+      "name": "maryliq salt e liquid pineapple ice by lost mary",
+      "image": "nic_salts/maryliq-salt-e-liquid-pineapple-ice-by-lost-mary.avif",
+      "brand": 13,
+      "description": "A high-quality product for Product maryliq salt e liquid pineapple ice by lost mary."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 176,
+    "fields": {
+      "category": 5,
+      "slug": "nasty-juice-nic-salt-10ml-cushman-banana",
+      "sku": "SKU-nic salts_141765",
+      "name": "nasty juice nic salt 10ml cushman banana",
+      "image": "nic_salts/nasty-juice-nic-salt-10ml-cushman-banana.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty juice nic salt 10ml cushman banana."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 177,
+    "fields": {
+      "category": 5,
+      "slug": "nasty-juice-nic-salt-10ml-slow-blow",
+      "sku": "SKU-nic salts_141775",
+      "name": "nasty juice nic salt 10ml slow blow",
+      "image": "nic_salts/nasty-juice-nic-salt-10ml-slow-blow.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty juice nic salt 10ml slow blow."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 178,
+    "fields": {
+      "category": 5,
+      "slug": "nasty-juice-nic-salt-10ml-trap-queen",
+      "sku": "SKU-nic salts_141785",
+      "name": "nasty juice nic salt 10ml trap queen",
+      "image": "nic_salts/nasty-juice-nic-salt-10ml-trap-queen.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty juice nic salt 10ml trap queen."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 179,
+    "fields": {
+      "category": 5,
+      "slug": "nasty-juice-nic-salts-10ml-menthol",
+      "sku": "SKU-nic salts_141795",
+      "name": "nasty juice nic salts 10ml menthol",
+      "image": "nic_salts/nasty-juice-nic-salts-10ml-menthol.avif",
+      "brand": 9,
+      "description": "A high-quality product for Product nasty juice nic salts 10ml menthol."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 180,
+    "fields": {
+      "category": 5,
+      "slug": "pod-salt-blackcurrant-menthol-nic-salt-10ml-e-liquid",
+      "sku": "SKU-nic salts_151805",
+      "name": "pod salt blackcurrant menthol nic salt 10ml e liquid",
+      "image": "nic_salts/pod-salt-blackcurrant-menthol-nic-salt-10ml-e-liquid.avif",
+      "brand": 14,
+      "description": "A high-quality product for Product pod salt blackcurrant menthol nic salt 10ml e liquid."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 181,
+    "fields": {
+      "category": 5,
+      "slug": "voopoo-pnp-coils-r2-1-00-ohm-10-15w",
+      "sku": "SKU-nic salts_151815",
+      "name": "voopoo pnp coils r2 1 00 ohm 10 15w",
+      "image": "nic_salts/voopoo-pnp-coils-r2-1-00-ohm-10-15w.avif",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo pnp coils r2 1 00 ohm 10 15w."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 182,
+    "fields": {
+      "category": 5,
+      "slug": "yeti-10ml-salt-nicotine-e-liquid-grape",
+      "sku": "SKU-nic salts_161825",
+      "name": "yeti 10ml salt nicotine e liquid grape",
+      "image": "nic_salts/yeti-10ml-salt-nicotine-e-liquid-grape.avif",
+      "brand": 15,
+      "description": "A high-quality product for Product yeti 10ml salt nicotine e liquid grape."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 183,
+    "fields": {
+      "category": 5,
+      "slug": "yeti-10ml-salt-nicotine-e-liquid-watermelon",
+      "sku": "SKU-nic salts_161835",
+      "name": "yeti 10ml salt nicotine e liquid watermelon",
+      "image": "nic_salts/yeti-10ml-salt-nicotine-e-liquid-watermelon.avif",
+      "brand": 15,
+      "description": "A high-quality product for Product yeti 10ml salt nicotine e liquid watermelon."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 184,
+    "fields": {
+      "category": 6,
+      "slug": "aspire-bp60-replacement-pods",
+      "sku": "SKU-pods_161846",
+      "name": "aspire bp60 replacement pods",
+      "image": "pods/aspire-bp60-replacement-pods.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire bp60 replacement pods."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 185,
+    "fields": {
+      "category": 6,
+      "slug": "aspire-bp80-pod",
+      "sku": "SKU-pods_161856",
+      "name": "aspire bp80 pod",
+      "image": "pods/aspire-bp80-pod.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire bp80 pod."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 186,
+    "fields": {
+      "category": 6,
+      "slug": "aspire-minican-replacement-pod-2-pack",
+      "sku": "SKU-pods_161866",
+      "name": "aspire minican replacement pod 2 pack",
+      "image": "pods/aspire-minican-replacement-pod-2-pack.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire minican replacement pod 2 pack."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 187,
+    "fields": {
+      "category": 6,
+      "slug": "aspire-slym-pod",
+      "sku": "SKU-pods_161876",
+      "name": "aspire slym pod",
+      "image": "pods/aspire-slym-pod.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire slym pod."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 188,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-blue-razz-lemonade",
+      "sku": "SKU-pods_161886",
+      "name": "lost mary tappo prefilled pod blue razz lemonade",
+      "image": "pods/lost-mary-tappo-prefilled-pod-blue-razz-lemonade.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod blue razz lemonade."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 189,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-blueberry-sour-raspberry",
+      "sku": "SKU-pods_161896",
+      "name": "lost mary tappo prefilled pod blueberry sour raspberry",
+      "image": "pods/lost-mary-tappo-prefilled-pod-blueberry-sour-raspberry.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod blueberry sour raspberry."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 190,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-cherry-cola",
+      "sku": "SKU-pods_161906",
+      "name": "lost mary tappo prefilled pod cherry cola",
+      "image": "pods/lost-mary-tappo-prefilled-pod-cherry-cola.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod cherry cola."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 191,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-kiwi-passion-fruit-guava",
+      "sku": "SKU-pods_161916",
+      "name": "lost mary tappo prefilled pod kiwi passion fruit guava",
+      "image": "pods/lost-mary-tappo-prefilled-pod-kiwi-passion-fruit-guava.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod kiwi passion fruit guava."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 192,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-lemon-lime",
+      "sku": "SKU-pods_161926",
+      "name": "lost mary tappo prefilled pod lemon lime",
+      "image": "pods/lost-mary-tappo-prefilled-pod-lemon-lime.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod lemon lime."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 193,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-mixed-berries",
+      "sku": "SKU-pods_161936",
+      "name": "lost mary tappo prefilled pod mixed berries",
+      "image": "pods/lost-mary-tappo-prefilled-pod-mixed-berries.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod mixed berries."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 194,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-peach-ice",
+      "sku": "SKU-pods_161946",
+      "name": "lost mary tappo prefilled pod peach ice",
+      "image": "pods/lost-mary-tappo-prefilled-pod-peach-ice.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod peach ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 195,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-spearmint",
+      "sku": "SKU-pods_161956",
+      "name": "lost mary tappo prefilled pod spearmint",
+      "image": "pods/lost-mary-tappo-prefilled-pod-spearmint.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod spearmint."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 196,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-strawberry-ice",
+      "sku": "SKU-pods_161966",
+      "name": "lost mary tappo prefilled pod strawberry ice",
+      "image": "pods/lost-mary-tappo-prefilled-pod-strawberry-ice.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod strawberry ice."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 197,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-strawberry-raspberry",
+      "sku": "SKU-pods_161976",
+      "name": "lost mary tappo prefilled pod strawberry raspberry",
+      "image": "pods/lost-mary-tappo-prefilled-pod-strawberry-raspberry.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod strawberry raspberry."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 198,
+    "fields": {
+      "category": 6,
+      "slug": "lost-mary-tappo-prefilled-pod-tropical-fruit",
+      "sku": "SKU-pods_161986",
+      "name": "lost mary tappo prefilled pod tropical fruit",
+      "image": "pods/lost-mary-tappo-prefilled-pod-tropical-fruit.avif",
+      "brand": 8,
+      "description": "A high-quality product for Product lost mary tappo prefilled pod tropical fruit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 199,
+    "fields": {
+      "category": 6,
+      "slug": "smok-nord-4-empty-replacement-pod",
+      "sku": "SKU-pods_161996",
+      "name": "smok nord 4 empty replacement pod",
+      "image": "pods/smok-nord-4-empty-replacement-pod.avif",
+      "brand": null,
+      "description": "A high-quality product for Product smok nord 4 empty replacement pod."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 200,
+    "fields": {
+      "category": 6,
+      "slug": "smok-nord-5-pod-3-5ml",
+      "sku": "SKU-pods_162006",
+      "name": "smok nord 5 pod 3 5ml",
+      "image": "pods/smok-nord-5-pod-3-5ml.avif",
+      "brand": null,
+      "description": "A high-quality product for Product smok nord 5 pod 3 5ml."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 201,
+    "fields": {
+      "category": 6,
+      "slug": "uwell-caliburn-a3-replacement-pods",
+      "sku": "SKU-pods_162016",
+      "name": "uwell caliburn a3 replacement pods",
+      "image": "pods/uwell-caliburn-a3-replacement-pods.avif",
+      "brand": null,
+      "description": "A high-quality product for Product uwell caliburn a3 replacement pods."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 202,
+    "fields": {
+      "category": 6,
+      "slug": "uwell-caliburn-x-empty-pod",
+      "sku": "SKU-pods_162026",
+      "name": "uwell caliburn x empty pod",
+      "image": "pods/uwell-caliburn-x-empty-pod.webp",
+      "brand": null,
+      "description": "A high-quality product for Product uwell caliburn x empty pod."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 203,
+    "fields": {
+      "category": 6,
+      "slug": "voom-replacement-pods-3-pack-tobacco",
+      "sku": "SKU-pods_162036",
+      "name": "voom replacement pods 3 pack tobacco",
+      "image": "pods/voom-replacement-pods-3-pack-tobacco.avif",
+      "brand": null,
+      "description": "A high-quality product for Product voom replacement pods 3 pack tobacco."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 204,
+    "fields": {
+      "category": 6,
+      "slug": "voopoo-argus-pod-replacement",
+      "sku": "SKU-pods_162046",
+      "name": "voopoo argus pod replacement",
+      "image": "pods/voopoo-argus-pod-replacement.avif",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo argus pod replacement."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 205,
+    "fields": {
+      "category": 6,
+      "slug": "voopoo-pnp-4-5ml-drag-x-s-replacement-pods",
+      "sku": "SKU-pods_162056",
+      "name": "voopoo pnp 4 5ml drag x s replacement pods",
+      "image": "pods/voopoo-pnp-4-5ml-drag-x-s-replacement-pods.avif",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo pnp 4 5ml drag x s replacement pods."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 206,
+    "fields": {
+      "category": 7,
+      "slug": "aspire-nautilus-3-replacement-tube-4ml",
+      "sku": "SKU-spare glass_162067",
+      "name": "aspire nautilus 3 replacement tube 4ml",
+      "image": "spare_glass/aspire-nautilus-3-replacement-tube-4ml.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire nautilus 3 replacement tube 4ml."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 207,
+    "fields": {
+      "category": 7,
+      "slug": "aspire-nautilus-x-4ml-adapter-kit",
+      "sku": "SKU-spare glass_162077",
+      "name": "aspire nautilus x 4ml adapter kit",
+      "image": "spare_glass/aspire-nautilus-x-4ml-adapter-kit.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire nautilus x 4ml adapter kit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 208,
+    "fields": {
+      "category": 7,
+      "slug": "aspire-odan-mini-replacement-glasses",
+      "sku": "SKU-spare glass_162087",
+      "name": "aspire odan mini replacement glasses",
+      "image": "spare_glass/aspire-odan-mini-replacement-glasses.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire odan mini replacement glasses."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 209,
+    "fields": {
+      "category": 7,
+      "slug": "aspire-odan-replacement-glasses",
+      "sku": "SKU-spare glass_162097",
+      "name": "aspire odan replacement glasses",
+      "image": "spare_glass/aspire-odan-replacement-glasses.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire odan replacement glasses."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 210,
+    "fields": {
+      "category": 7,
+      "slug": "aspire-pockex-replacement-tube-with-glass",
+      "sku": "SKU-spare glass_162107",
+      "name": "aspire pockex replacement tube with glass",
+      "image": "spare_glass/aspire-pockex-replacement-tube-with-glass.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire pockex replacement tube with glass."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 211,
+    "fields": {
+      "category": 7,
+      "slug": "aspire-tigon-replacement-2ml-glass",
+      "sku": "SKU-spare glass_162117",
+      "name": "aspire tigon replacement 2ml glass",
+      "image": "spare_glass/aspire-tigon-replacement-2ml-glass.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire tigon replacement 2ml glass."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 212,
+    "fields": {
+      "category": 7,
+      "slug": "falcon-king-replacement-bulb-glass-5ml-horizontech",
+      "sku": "SKU-spare glass_162127",
+      "name": "falcon king replacement bulb glass 5ml horizontech",
+      "image": "spare_glass/falcon-king-replacement-bulb-glass-5ml-horizontech.avif",
+      "brand": null,
+      "description": "A high-quality product for Product falcon king replacement bulb glass 5ml horizontech."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 213,
+    "fields": {
+      "category": 7,
+      "slug": "falcon-king-replacement-bulb-glass-horizontech-with-m1-coil",
+      "sku": "SKU-spare glass_162137",
+      "name": "falcon king replacement bulb glass horizontech with m1 coil",
+      "image": "spare_glass/falcon-king-replacement-bulb-glass-horizontech-with-m1-coil.avif",
+      "brand": null,
+      "description": "A high-quality product for Product falcon king replacement bulb glass horizontech with m1 coil."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 214,
+    "fields": {
+      "category": 7,
+      "slug": "geekvape-zeus-x-rta-zeus-x-mesh-rta-bubble-glass",
+      "sku": "SKU-spare glass_162147",
+      "name": "geekvape zeus x rta zeus x mesh rta bubble glass",
+      "image": "spare_glass/geekvape-zeus-x-rta-zeus-x-mesh-rta-bubble-glass.avif",
+      "brand": null,
+      "description": "A high-quality product for Product geekvape zeus x rta zeus x mesh rta bubble glass."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 215,
+    "fields": {
+      "category": 7,
+      "slug": "smok-replacement-glass-for-baby-big-baby-vape-pen-22-prince-baby-prince",
+      "sku": "SKU-spare glass_162157",
+      "name": "smok replacement glass for baby big baby vape pen 22 prince baby prince",
+      "image": "spare_glass/smok-replacement-glass-for-baby-big-baby-vape-pen-22-prince-baby-prince.avif",
+      "brand": null,
+      "description": "A high-quality product for Product smok replacement glass for baby big baby vape pen 22 prince baby prince."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 216,
+    "fields": {
+      "category": 7,
+      "slug": "vaporesso-sky-solo-plus-8ml-replacement-pyrex-glass",
+      "sku": "SKU-spare glass_162167",
+      "name": "vaporesso sky solo plus 8ml replacement pyrex glass",
+      "image": "spare_glass/vaporesso-sky-solo-plus-8ml-replacement-pyrex-glass.avif",
+      "brand": null,
+      "description": "A high-quality product for Product vaporesso sky solo plus 8ml replacement pyrex glass."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 217,
+    "fields": {
+      "category": 7,
+      "slug": "vaporesso-veco-tank-replacement-glass",
+      "sku": "SKU-spare glass_162177",
+      "name": "vaporesso veco tank replacement glass",
+      "image": "spare_glass/vaporesso-veco-tank-replacement-glass.webp",
+      "brand": null,
+      "description": "A high-quality product for Product vaporesso veco tank replacement glass."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 218,
+    "fields": {
+      "category": 7,
+      "slug": "voopoo-maat-bubble-glass-6-5ml",
+      "sku": "SKU-spare glass_162187",
+      "name": "voopoo maat bubble glass 6 5ml",
+      "image": "spare_glass/voopoo-maat-bubble-glass-6-5ml.avif",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo maat bubble glass 6 5ml."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 219,
+    "fields": {
+      "category": 8,
+      "slug": "aspire-k1-plus-tank",
+      "sku": "SKU-tanks_162198",
+      "name": "aspire k1 plus tank",
+      "image": "tanks/aspire-k1-plus-tank.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire k1 plus tank."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 220,
+    "fields": {
+      "category": 8,
+      "slug": "aspire-nautilus-3-tank",
+      "sku": "SKU-tanks_162208",
+      "name": "aspire nautilus 3 tank",
+      "image": "tanks/aspire-nautilus-3-tank.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire nautilus 3 tank."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 221,
+    "fields": {
+      "category": 8,
+      "slug": "aspire-tigon-tank",
+      "sku": "SKU-tanks_162218",
+      "name": "aspire tigon tank",
+      "image": "tanks/aspire-tigon-tank.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire tigon tank."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 222,
+    "fields": {
+      "category": 8,
+      "slug": "falcon-king-horizontech-sub-ohm-tank-silver",
+      "sku": "SKU-tanks_162228",
+      "name": "falcon king horizontech sub ohm tank silver",
+      "image": "tanks/falcon-king-horizontech-sub-ohm-tank-silver.avif",
+      "brand": 5,
+      "description": "A high-quality product for Product falcon king horizontech sub ohm tank silver."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 223,
+    "fields": {
+      "category": 8,
+      "slug": "geekvape-z-nano-tank-gunmetal",
+      "sku": "SKU-tanks_162238",
+      "name": "geekvape z nano tank gunmetal",
+      "image": "tanks/geekvape-z-nano-tank-gunmetal.avif",
+      "brand": null,
+      "description": "A high-quality product for Product geekvape z nano tank gunmetal."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 224,
+    "fields": {
+      "category": 8,
+      "slug": "innokin-ares-rta-diy",
+      "sku": "SKU-tanks_162248",
+      "name": "innokin ares rta diy",
+      "image": "tanks/innokin-ares-rta-diy.avif",
+      "brand": 2,
+      "description": "A high-quality product for Product innokin ares rta diy."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 225,
+    "fields": {
+      "category": 8,
+      "slug": "innokin-t18-ii-endure-replacement-tank",
+      "sku": "SKU-tanks_162258",
+      "name": "innokin t18 ii endure replacement tank",
+      "image": "tanks/innokin-t18-ii-endure-replacement-tank.avif",
+      "brand": 2,
+      "description": "A high-quality product for Product innokin t18 ii endure replacement tank."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 226,
+    "fields": {
+      "category": 8,
+      "slug": "innokin-z-force-tank",
+      "sku": "SKU-tanks_162268",
+      "name": "innokin z force tank",
+      "image": "tanks/innokin-z-force-tank.webp",
+      "brand": 2,
+      "description": "A high-quality product for Product innokin z force tank."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 227,
+    "fields": {
+      "category": 8,
+      "slug": "innokin-zenith-pro-tank-black",
+      "sku": "SKU-tanks_162278",
+      "name": "innokin zenith pro tank black",
+      "image": "tanks/innokin-zenith-pro-tank-black.avif",
+      "brand": 2,
+      "description": "A high-quality product for Product innokin zenith pro tank black."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 228,
+    "fields": {
+      "category": 8,
+      "slug": "voopoo-maat-tank",
+      "sku": "SKU-tanks_162288",
+      "name": "voopoo maat tank",
+      "image": "tanks/voopoo-maat-tank.avif",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo maat tank."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 229,
+    "fields": {
+      "category": 8,
+      "slug": "zeus-sub-ohm-tank-geekvape",
+      "sku": "SKU-tanks_162298",
+      "name": "zeus sub ohm tank geekvape",
+      "image": "tanks/zeus-sub-ohm-tank-geekvape.avif",
+      "brand": null,
+      "description": "A high-quality product for Product zeus sub ohm tank geekvape."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 230,
+    "fields": {
+      "category": 9,
+      "slug": "aspire-flexus-blok-kit",
+      "sku": "SKU-vape kits_162309",
+      "name": "aspire flexus blok kit",
+      "image": "vape_kits/aspire-flexus-blok-kit.webp",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire flexus blok kit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 231,
+    "fields": {
+      "category": 9,
+      "slug": "aspire-gotek-s-kit-yellow",
+      "sku": "SKU-vape kits_162319",
+      "name": "aspire gotek s kit yellow",
+      "image": "vape_kits/aspire-gotek-s-kit-yellow.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire gotek s kit yellow."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 232,
+    "fields": {
+      "category": 9,
+      "slug": "aspire-gotek-x-kit-translucent-pink",
+      "sku": "SKU-vape kits_162329",
+      "name": "aspire gotek x kit translucent pink",
+      "image": "vape_kits/aspire-gotek-x-kit-translucent-pink.avif",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire gotek x kit translucent pink."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 233,
+    "fields": {
+      "category": 9,
+      "slug": "aspire-vrod-200w-kit",
+      "sku": "SKU-vape kits_162339",
+      "name": "aspire vrod 200w kit",
+      "image": "vape_kits/aspire-vrod-200w-kit.webp",
+      "brand": 1,
+      "description": "A high-quality product for Product aspire vrod 200w kit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 234,
+    "fields": {
+      "category": 9,
+      "slug": "copy-of-voopoo-drag-3-tpp-x-kit",
+      "sku": "SKU-vape kits_162349",
+      "name": "copy of voopoo drag 3 tpp x kit",
+      "image": "vape_kits/copy-of-voopoo-drag-3-tpp-x-kit.webp",
+      "brand": 4,
+      "description": "A high-quality product for Product copy of voopoo drag 3 tpp x kit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 235,
+    "fields": {
+      "category": 9,
+      "slug": "innokin-sceptre-mtl-rdl-pod-mod-kit-1400mah-pink",
+      "sku": "SKU-vape kits_162359",
+      "name": "innokin sceptre mtl rdl pod mod kit 1400mah pink",
+      "image": "vape_kits/innokin-sceptre-mtl-rdl-pod-mod-kit-1400mah-pink.webp",
+      "brand": 2,
+      "description": "A high-quality product for Product innokin sceptre mtl rdl pod mod kit 1400mah pink."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 236,
+    "fields": {
+      "category": 9,
+      "slug": "oxva-xlim-pro-pod-kit-gleamy-red",
+      "sku": "SKU-vape kits_162369",
+      "name": "oxva xlim pro pod kit gleamy red",
+      "image": "vape_kits/oxva-xlim-pro-pod-kit-gleamy-red.avif",
+      "brand": null,
+      "description": "A high-quality product for Product oxva xlim pro pod kit gleamy red."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 237,
+    "fields": {
+      "category": 9,
+      "slug": "smok-nord-4-80w-pod-kit-black-armor",
+      "sku": "SKU-vape kits_162379",
+      "name": "smok nord 4 80w pod kit black armor",
+      "image": "vape_kits/smok-nord-4-80w-pod-kit-black-armor.webp",
+      "brand": null,
+      "description": "A high-quality product for Product smok nord 4 80w pod kit black armor."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 238,
+    "fields": {
+      "category": 9,
+      "slug": "smok-nord-5-kit-beige-white-leather",
+      "sku": "SKU-vape kits_162389",
+      "name": "smok nord 5 kit beige white leather",
+      "image": "vape_kits/smok-nord-5-kit-beige-white-leather.webp",
+      "brand": null,
+      "description": "A high-quality product for Product smok nord 5 kit beige white leather."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 239,
+    "fields": {
+      "category": 9,
+      "slug": "smok-novo-5-pod-kit-30w-beige-white-leather",
+      "sku": "SKU-vape kits_162399",
+      "name": "smok novo 5 pod kit 30w beige white leather",
+      "image": "vape_kits/smok-novo-5-pod-kit-30w-beige-white-leather.avif",
+      "brand": null,
+      "description": "A high-quality product for Product smok novo 5 pod kit 30w beige white leather."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 240,
+    "fields": {
+      "category": 9,
+      "slug": "uwell-caliburn-g2-pod-vape-kit",
+      "sku": "SKU-vape kits_162409",
+      "name": "uwell caliburn g2 pod vape kit",
+      "image": "vape_kits/uwell-caliburn-g2-pod-vape-kit.webp",
+      "brand": null,
+      "description": "A high-quality product for Product uwell caliburn g2 pod vape kit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 241,
+    "fields": {
+      "category": 9,
+      "slug": "vaporesso-swag-px80-pod-kit-leather-brown",
+      "sku": "SKU-vape kits_162419",
+      "name": "vaporesso swag px80 pod kit leather brown",
+      "image": "vape_kits/vaporesso-swag-px80-pod-kit-leather-brown.webp",
+      "brand": null,
+      "description": "A high-quality product for Product vaporesso swag px80 pod kit leather brown."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 242,
+    "fields": {
+      "category": 9,
+      "slug": "voopoo-argus-gt-2-vape-kit-carbon-fiber",
+      "sku": "SKU-vape kits_162429",
+      "name": "voopoo argus gt 2 vape kit carbon fiber",
+      "image": "vape_kits/voopoo-argus-gt-2-vape-kit-carbon-fiber.webp",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo argus gt 2 vape kit carbon fiber."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 243,
+    "fields": {
+      "category": 9,
+      "slug": "voopoo-argus-pod-kit",
+      "sku": "SKU-vape kits_162439",
+      "name": "voopoo argus pod kit",
+      "image": "vape_kits/voopoo-argus-pod-kit.webp",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo argus pod kit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 244,
+    "fields": {
+      "category": 9,
+      "slug": "voopoo-drag-q-kit",
+      "sku": "SKU-vape kits_162449",
+      "name": "voopoo drag q kit",
+      "image": "vape_kits/voopoo-drag-q-kit.webp",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo drag q kit."
+    }
+  },
+  {
+    "model": "products.product",
+    "pk": 245,
+    "fields": {
+      "category": 9,
+      "slug": "voopoo-vinci-2-pod-kit",
+      "sku": "SKU-vape kits_162459",
+      "name": "voopoo vinci 2 pod kit",
+      "image": "vape_kits/voopoo-vinci-2-pod-kit.webp",
+      "brand": 4,
+      "description": "A high-quality product for Product voopoo vinci 2 pod kit."
     }
   }
 ]

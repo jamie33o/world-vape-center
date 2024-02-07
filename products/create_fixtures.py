@@ -1,4 +1,210 @@
+import os
 import json
+from django.utils.text import slugify
+
+vape_brands = [
+    "maryliq",
+    "elfliq",
+    "avct-avictor",
+    "across-vape",
+    "advken",
+    "air-factory",
+    "airistech",
+    "airmez",
+    "al-fakher",
+    "aleader",
+    "aleaf",
+    "aloha-sun",
+    "alt-zero",
+    "armageddon",
+    "aspire",
+    "astro-eight",
+    "asvape",
+    "augvape",
+    "auxo",
+    "asmodus",
+    "barz",
+    "blvk-unicorn",
+    "bmic-tech",
+    "bp-mods",
+    "bad-drip-labs",
+    "baked-hhc",
+    "bam-bam's-cannoli",
+    "bantam-vape",
+    "bar-juice",
+    "beach-club-vapor",
+    "beard-vape-co.",
+    "binoid",
+    "blank-bar",
+    "blitz-enterprises",
+    "bluegrass-cannabis-co.",
+    "boulder-vape",
+    "boundless",
+    "bugatti",
+    "cbdfx",
+    "ccell",
+    "crazyace",
+    "cake-vapors",
+    "cali-extrax",
+    "candy-king",
+    "carats",
+    "cartisan",
+    "chapo-extrax",
+    "charlie's-chalk-dust",
+    "cheech",
+    "chillax",
+    "chromium-crusher",
+    "chubby-gorilla",
+    "cloud-nurdz",
+    "coastal-clouds",
+    "coil-master",
+    "coilology",
+    "cookies",
+    "craving-vapor",
+    "crooked-creations",
+    "cutleaf",
+    "cuttwood",
+    "czar",
+    "dogg-lbs",
+    "dovpo-technology",
+    "dozo",
+    "davinci-vaporizers",
+    "damn-vape",
+    "daywalker",
+    "dazzleaf",
+    "death-row",
+    "delta-extrax",
+    "delta-king",
+    "delta-muchies",
+    "desire-vape",
+    "diamond-shruumz",
+    "diamond-supply-co.",
+    "digiflavor",
+    "dimo-hemp",
+    "dotmod",
+    "dr-dabber",
+    "dummy-vapes",
+    "dripmore",
+    "elf-thc",
+    "elyxr",
+    "eyce",
+    "echo",
+    "efest",
+    "eighty-six",
+    "eleaf",
+    "elf-bar",
+    "elysian-labs",
+    "exodus",
+    "feela",
+    "flerbar",
+    "flo",
+    "fryd",
+    "fume-vape",
+    "fifty-bar",
+    "firerose",
+    "flayvorz",
+    "flum-float",
+    "flying-monkey",
+    "focus-v",
+    "foger",
+    "food-fighter-juice",
+    "four-seasons",
+    "freemax",
+    "fresh-farms-e-liquid",
+    "frozen-fields",
+    "frutia",
+    "fume-extracts",
+    "funky-republic",
+    "grav-labs",
+    "gumi",
+    "galaxy-treats",
+    "geek-vape",
+    "geek'd-extracts",
+    "ghost-hemp",
+    "glamee",
+    "glas-vapor",
+    "goo'd-extracts",
+    "good-vibez",
+    "grenco-science",
+    "göst-vapor",
+    "hqd-technology",
+    "half-bak'd",
+    "hamilton-devices",
+    "hangsen",
+    "happi",
+    "haze",
+    "hellvape",
+    "hemper",
+    "hi-fog",
+    "hidrip",
+    "hixotic",
+    "hidden-hills",
+    "hideseek",
+    "high-garden",
+    "high-times",
+    "hohm-tech",
+    "honeyroot-wellness",
+    "horizon-tech",
+    "hugo-vapor",
+    "hulk-hogan",
+    "humble-juice-co.",
+    "huni-badger",
+    "icewave",
+    "indacloud",
+    "iykyk",
+    "innevape",
+    "innokin",
+    "instabar",
+    "ijoy",
+    "imini",
+    "jus-vape",
+    "justfog",
+    "jam-monster",
+    "ivg",
+    "jeeter",
+    "jimmy-the-juiceman",
+    "joyetech",
+    "jubi",
+    "juice-head",
+    "juice-roll-upz",
+    "just-cbd",
+    "kilo",
+    "kros",
+    "kado",
+    "kangertech",
+    "kangvape",
+    "keep-it-100",
+    "king-van-vapes",
+    "koi-cbd",
+    "kush-burst",
+    "kuz",
+    "kynn-labs",
+    "lg",
+    "litto",
+    "lokey",
+    "lucid",
+    "luffbar",
+    "lve",
+    "leaf-buddi",
+    "lil-baby",
+    "limitless-mod-co.",
+    "logic",
+    "lookah",
+    "looper",
+    "losst",
+    "lost-mary",
+    "lost-vape",
+    "lykcan",
+    "mj-arsenal",
+    "mnke-bars",
+    "mrkt",
+    "mad-hatter",
+    "nasty",
+    "voopoo",
+    "yeti",
+    "pod-salt"
+]
+
 
 def create_fixture(model_name, pk, fields):
     return {
@@ -7,186 +213,100 @@ def create_fixture(model_name, pk, fields):
         "fields": fields
     }
 
-# Categories
-vape_categories = [
-    ("Vape Kits", "vape-kits"),
-    ("E-Liquids", "e-liquids"),
-    ("Mods", "mods"),
-    ("Coils", "coils"),
-    ("Accessories", "accessories"),
-    ("Pod Systems", "pod-systems"),
-    ("Tanks", "tanks"),
-    ("Batteries", "batteries"),
-    ("Chargers", "chargers"),
-    ("Nicotine Salts", "nicotine-salts"),
-    ("Disposable Vapes", "disposable-vapes"),
-    ("Starter Kits", "starter-kits"),
-    ("Vape Pens", "vape-pens"),
-    ("Squonk Mods", "squonk-mods"),
-    ("DIY Supplies", "diy-supplies"),
-]
+def format_category_name(original_string):
+    # Replace underscores with spaces
+    formatted_string = original_string.replace('_', ' ')
 
+    # Convert to slug
+    slug = slugify(formatted_string)
 
-categories = []
-for i, category in enumerate(vape_categories):
-    category_fixture = create_fixture("category", i+1, {"name":  category[0], "slug": category[1]})
-    categories.append(category_fixture)
-
-# Brands
-vape_brands = [
-    ("Vaporesso", "vaporesso"),
-    ("SMOK", "smok"),
-    ("Innokin", "innokin"),
-    ("Aspire", "aspire"),
-    ("GeekVape", "geekvape"),
-    ("Voopoo", "voopoo"),
-    ("Eleaf", "eleaf"),
-    ("Joyetech", "joyetech"),
-    ("Wismec", "wismec"),
-    ("Sigelei", "sigelei"),
-    ("Lost Vape", "lost-vape"),
-    ("Vandy Vape", "vandy-vape"),
-    ("Uwell", "uwell"),
-    ("HorizonTech", "horizontech"),
-    ("Freemax", "freemax"),
-]
-
-
-brands = []
-for i, brand in enumerate(vape_brands):
-    brand_fixture = create_fixture("brand", i+1, {"name": brand[0], "slug": brand[1]})
-    brands.append(brand_fixture)
-
-
-vape_options = [
-    # 0-4 e-liquids
-    ("10ml", "10ml"),
-    ("20ml", "20ml"),
-    ("30ml", "30ml"),
-    ("50ml", "50ml"),
-    ("Nicotine Free", "nicotine-free"),
-    # coils 5-8
-    ("Single Coil", "single-coil"),
-    ("Dual Coil", "dual-coil"),
-    ("Mesh Coil", "mesh-coil"),
-    ("Ceramic Coil", "ceramic-coil"),
-    # vape kits 9-12
-    ("Variable Wattage", "variable-wattage"),
-    ("Temperature Control", "temperature-control"),
-    ("Pod System", "pod-system"),
-    ("Box Mod", "box-mod"),
-]
-
-options = []
-for i, option in enumerate(vape_options):
-    option_fixture = create_fixture("multioption", i+1, {"name": option[0], "slug": option[1]})
-    options.append(option_fixture)
-
-
-
-
-# Products
-e_liquid_name = [
-    ("Mystic Mint E-liquid", "mystic-mint-e-liquid"),
-    ("Tropical Breeze Vape Kit", "tropical-breeze-vape-kit"),
-    ("Citrus Splash Nicotine Salt", "citrus-splash-nicotine-salt"),
-    ("Sour Apple Vape Juice", "sour-apple-vape-juice"),
-    ("Vanilla Dream Pod System", "vanilla-dream-pod-system"),
-    ("Blueberry Burst CBD Vape Pen", "blueberry-burst-cbd-vape-pen"),
-    ("Cherry Chill Nicotine Pouches", "cherry-chill-nicotine-pouches"),
-    ("Mango Tango Disposable Vape", "mango-tango-disposable-vape"),
-    ("Caramel Cloud Vape Mod", "caramel-cloud-vape-mod"),
-    ("Strawberry Serenity E-hookah", "strawberry-serenity-e-hookah"),
-    ("Watermelon Wave Vape Cartridge", "watermelon-wave-vape-cartridge"),
-    ("Peppermint Pleasure THC Vape", "peppermint-pleasure-thc-vape"),
-    ("Grape Glacier Nicotine Lozenges", "grape-glacier-nicotine-lozenges"),
-    ("Cotton Candy Cloud E-liquid", "cotton-candy-cloud-e-liquid"),
-    ("Lemon Lime Fizz Vape Pen", "lemon-lime-fizz-vape-pen"),
-    ("Chocolate Bliss Nicotine Patch", "chocolate-bliss-nicotine-patch"),
-    ("Honeydew Heaven CBD Gummies", "honeydew-heaven-cbd-gummies"),
-    ("Pineapple Paradise Vape Stick", "pineapple-paradise-vape-stick"),
-    ("Raspberry Rapture Vape Mod", "raspberry-rapture-vape-mod"),
-    ("Coffee Craze E-hookah", "coffee-craze-e-hookah"),
-    ("Peppermint Bark THC Vape", "peppermint-bark-thc-vape"),
-    ("Blue Raspberry Burst Nicotine Pouches", "blue-raspberry-burst-nicotine-pouches"),
-    ("Mango Madness Vape Juice", "mango-madness-vape-juice"),
-    ("Cherry Cheesecake CBD Vape Pen", "cherry-cheesecake-cbd-vape-pen"),
-    ("Pomegranate Punch Disposable Vape", "pomegranate-punch-disposable-vape"),
-    ("Cinnamon Swirl Vape Cartridge", "cinnamon-swirl-vape-cartridge"),
-    ("Coconut Cream Pie THC Vape", "coconut-cream-pie-thc-vape"),
-    ("Orange Creamsicle Nicotine Lozenges", "orange-creamsicle-nicotine-lozenges"),
-    ("Gingerbread Delight E-liquid", "gingerbread-delight-e-liquid"),
-]
-
-
-
-# Reviews
-reviews = []
-for i in range(1, 11):
-    review_fixture = create_fixture("review", i, {
-        "product": i % 10 + 1,
-        "user": 1,
-        "name": f"User {i}",
-        "rating": 4 + i % 2,
-        "comment": f"Review {i}: Great product!",
-        "created_at": f"2022-01-{i:02d}T12:00:00Z"
-    })
-    reviews.append(review_fixture)
-
-
+    # Create a tuple with both formatted and slug
+    name_n_slug = (formatted_string, slug)
+    return name_n_slug
+    
+def find_brand(input_string):
+    for brand in vape_brands:
+        if brand in input_string:
+            return brand
+    return False
 
 products = []
-def create_product_fix(product_id, cat, name_slug_tuple, brand_id, options_name, options_id_list, sku):
+categories = []
+brands = []
+def create_product_fix(product_id, cat, name_slug_tuple, brand_id, sku, image_url):
     product_fixture = create_fixture("product", product_id, {
                     "category": cat,  
                     "slug": name_slug_tuple[1],
                     "sku": f"SKU{sku}",
                     "name": name_slug_tuple[0],
-                    "image": "v3.jpeg",
+                    "image": image_url,
                     "brand": brand_id,  
                     "description": f"A high-quality product for Product {name_slug_tuple[0]}.",
-                    "price": 5.00 + i,
-                    "countInStock": 10 - i,
-                    "options_name": options_name,
-                    "options": options_id_list
                 })
 
     products.append(product_fixture)
 
+def add_extension_to_files_in_folder():
+    product_id = 1
+    category_id = 1
+    brand_id = 1
+    brand_pk = None
 
-for i, _ in enumerate(vape_categories):
-    if i == 0:
-        # vape kits
-        vape_kits = [
-            ("SMOK Nord 4", "smok-nord-4"),
-            ("Voopoo Drag X Plus", "voopoo-drag-x-plus"),
-            ("GeekVape Aegis X", "geekvape-aegis-x"),
-            ("Vaporesso Luxe PM40", "vaporesso-luxe-pm40"),
-            ("Innokin MVP5", "innokin-mvp5"),
-            ("Lost Vape Thelema", "lost-vape-thelema"),
-            ("Uwell Caliburn G", "uwell-caliburn-g"),
-            ("Vaporesso XROS", "vaporesso-xros"),
-            ("Voopoo Argus GT", "voopoo-argus-gt"),
-            ("SMOK RPM 80 Pro", "smok-rpm-80-pro"),
-            ("Vaporesso Luxe PM80", "vaporesso-luxe-pm80"),
-            ("Voopoo Drag S", "voopoo-drag-s"),
-            ("GeekVape Aegis X Zeus", "geekvape-aegis-x-zeus"),
-            ("Vaporesso Swag PX80", "vaporesso-swag-px80"),
-            ("SMOK Stick V9 Max", "smok-stick-v9-max"),
-        ]
+    for folder in os.listdir('media'):
+        full_path = os.path.join('media', folder)
 
-        for e in range(1, 11):
-            create_product_fix(e, i+1, vape_kits[e], e, 'Kit Type', [9,10,11,12], e)
+        if folder != 'jumbotron_images' and os.path.isdir(full_path):
 
-    elif i == 1:
-        # e-liquid
-        multi_options = [1,2,3,4,5]
+            category_name_n_slug = format_category_name(folder)
+            category_fixture = create_fixture("category", category_id,
+                                            {"name":  category_name_n_slug[0],
+                                            "slug": category_name_n_slug[1]})
+            categories.append(category_fixture)
 
-        for e in range(1, 12):
-            create_product_fix(e+10, i+1, e_liquid_name[e], e, 'Nicotine Strength', multi_options, e*i)
+            if os.path.exists(full_path) and len(os.listdir(full_path)) > 0:
+                for filename in os.listdir(full_path):
+                    brand = find_brand(filename)
+
+                    if brand:
+                        brand_pk = next((fixture['pk'] for fixture in \
+                                         brands if brand in fixture['fields']['slug']), None)
+                        match = brand.replace('-', ' ')
+
+                       
+                        if brand_pk is None:
+                            brand_fixture = create_fixture("brand",
+                                                           brand_id,
+                                                           {"name": match, "slug": brand})
+                            brands.append(brand_fixture)
+                            brand_pk = brand_id
+                            brand_id += 1
+                           
+                    # Remove file extension
+                    file_name_without_ext = filename.rsplit('.', 1)[0]
+
+                    # Replace underscores with spaces
+                    name = file_name_without_ext.replace('-', ' ')
+                    slug = filename.rsplit('.', 1)[0]
+                    product_name_n_slug = (name, slug)
+                    sku = f"-{category_name_n_slug[0]}_{brand_id}{product_id}{category_id}"
+
+                    create_product_fix(product_id, category_id,
+                                       product_name_n_slug,
+                                       brand_pk,
+                                       sku,
+                                       folder + '/' + filename)
+                    product_id += 1
+
+                    brand_pk = None
 
 
-fixtures = categories + brands + options + products + reviews
+            category_id += 1
+
+
+add_extension_to_files_in_folder()
+
+fixtures = categories + brands + products
+
 
 with open('products/fixtures/product_fixtures.json', 'w', encoding='utf-8') as f:
     json.dump(fixtures, f, indent=2)

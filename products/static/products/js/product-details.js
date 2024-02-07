@@ -72,7 +72,6 @@ $(document).on('click', '.delete-review', function(e) {
     let csrfToken = $(this).data('csrf')
     $('.modal-backdrop').removeClass('show')
 
-
     // Send AJAX request
     $.ajax({
         type: 'DELETE',
@@ -94,3 +93,6 @@ $(document).on('click', '.delete-review', function(e) {
 });
 
 
+$(document).on('click', '.custom-radio', function(){
+  $('.cur_choice').text($(this).find('input').val())
+} )

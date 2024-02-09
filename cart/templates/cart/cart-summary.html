@@ -133,11 +133,7 @@
                     <div class="card-body p-4 pt-2">
                         <div class="table-responsive">
                             <table class="table mb-0">
-                                <tbody>
-                                    <tr>
-                                        <td>Sub Total :</td>
-                                        <td class="text-end">€ {{ cart.get_total }}</td>
-                                    </tr>
+                                <tbody> 
                                     {% if cart.get_discounted_total %}
                                         <tr>
                                             <td>Discount :</td>
@@ -145,8 +141,13 @@
                                         </tr>
                                     {% endif %}
                                     <tr>
+                                        <td>Sub Total :</td>
+                                        <td class="text-end">€ {% if cart.get_discounted_total %}{{ cart.get_total|sub:cart.get_discounted_total }}{% else %}{{ cart.get_total }}{% endif %}</td>
+                                    </tr>
+                                   
+                                    <tr>
                                         <td>Shipping Charge :</td>
-                                        <td class="text-end">€ {{ cart.get_delivery_cost }}</td>
+                                        <td class="text-end">{% if cart.get_delivery_cost %}€ {{ cart.get_delivery_cost }}{% else %}<span class="h6 text-success">Free Delivery</span>{% endif %}</td>
                                     </tr>
                                     <tr class="bg-light">
                                         <th>Total :</th>

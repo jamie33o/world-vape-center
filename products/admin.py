@@ -128,7 +128,6 @@ class ProductAdmin(admin.ModelAdmin):
                 self.message_user(request, 'Choices applied to selected products.')
                 return HttpResponseRedirect('..')  # Redirect to the changelist page
             messages.error(request, 'Choices not applied to selected products.')
-            print(form.errors)
 
             return HttpResponseRedirect('..')  # Redirect to the changelist page
         else:

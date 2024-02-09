@@ -73,21 +73,24 @@ def checkout(request):
             user = request.user if request.user.is_authenticated else None
 
             for item_id, item_data in cart.cart.items():
-                if item_data['discounted_price']:
+                if item_data.get('discounted_price'):
                     total = Decimal(item_data['discounted_price']) * item_data['qty']
                 else:
                     total = Decimal(item_data['price']) * item_data['qty']
 
                 try:
                     product = Product.objects.get(id=item_id)
+                    
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product,
                         quantity=item_data['qty'],
                         lineitem_total=total,
-                        product_option=item_data['product_choice'],
                         user= user
                     )
+                    if item_data.get('product_choice'):
+                        order_line_item.product_option=item_data['product_choice'],
+
                     order_line_item.save()
                     
                 except Product.DoesNotExist:

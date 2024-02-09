@@ -1,0 +1,79 @@
+<!-- myapp/mymodel/change_list.html -->
+{% extends 'admin/change_list.html' %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block object-tools-items %}
+    {{ block.super }}
+        <li>
+            <a data-url="{% url 'admin:apply_multiple_choices' %}" class="add addlink bg-info text-light py-1">Bulk add choices</a>
+        </li>
+        <li>
+            <a data-url="{% url 'admin:apply_brand' %}" class="add addlink bg-info text-light py-1">Bulk add brands</a>
+        </li>
+        <li>
+            <a data-url="{% url 'admin:apply_prices' %}" class="add addlink bg-info text-light py-1">Bulk add prices</a>
+        </li>
+{% endblock %}
+
+{% block extrajs %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block footer %}
+{{ block.super }}
+  <div class="modal" id="bulkUpdateModal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="btn btn-danger" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">  
+              </div>
+          </div>
+      </div>
+  </div>
+  <script>
+    $(document).ready(function(){
+        // AJAX function
+        $(".add").click(function (e) {
+          e.preventDefault()
+          let self = $(this)
+
+          let idList = $('#result_list .selected .action-select').map(function () {
+            return $(this).val();
+          }).get();        
+
+          if(idList.length > 0){
+              // AJAX request
+              $.ajax({
+                type: "GET",  
+                url: self.data('url'),  
+                dataType: "json",  
+                success: function (data) {
+                    // Handle the successful response
+                    $(".modal-body").html(data['html_content']);  
+                    $('#bulkUpdateModal').modal('show');
+                            
+                    $('#id_ids').val(idList)
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", status, error);
+                }
+              });
+          }else{
+            $(".modal-body").html('<div class="bg-danger p-5 border rounded"><h3 class="text-white">No products selected</h3></div>');  
+            $('#bulkUpdateModal').modal('show');
+          }
+        });
+    });
+    </script>
+  {% endblock %}

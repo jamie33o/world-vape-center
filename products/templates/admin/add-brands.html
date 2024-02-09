@@ -1,0 +1,8 @@
+<div id="content-main">
+    <h2>Apply brands</h2>
+    <form method="post" action="{% url 'admin:apply_brand' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Yes, apply brand">
+    </form>
+</div>

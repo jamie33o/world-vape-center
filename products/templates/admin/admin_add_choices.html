@@ -1,23 +1,17 @@
-{% extends "admin/base_site.html" %}
+<div id="content-main">
+    <h2>Apply Multi Choice options</h2>
+    <form method="post" action="{% url 'admin:apply_multiple_choices' %}">
+        {% csrf_token %}
+        {{ form.ids }}
+        
+        <label for="{{ form.options_name.id_for_label }}">Choices Label: e.g. Nicotine Strength <br></label>
 
-{% block content %}
-    <div id="content-main">
-        <h2>Multi Choice options to be added to '{{ product_names }}'</h2>
-        <form method="post" action="{% url 'admin:apply_multiple_choices' %}">
-            {% csrf_token %}
-            
-            <label for="{{ form.options_name.id_for_label }}">Choices Label: e.g. Nicotine Strength <br></label>
-
-            {{ form.options_name }}
-            <br>
-            <label for="{{ form.choices.id_for_label }}">Select Choices:<br></label>
-           
-            {{ form.choices }}
-           
-            <input type="hidden" name="action" value="apply_multiple_choices">
-            <input type="hidden" name="ids" value="{{ids}}">
-
-            <input type="submit" value="Yes, apply the custom action">
-        </form>
-    </div>
-{% endblock %}
+        {{ form.options_name }}
+        <br>
+        <label for="{{ form.choices.id_for_label }}">Select Choices:<br></label>
+        
+        {{ form.choices }}
+        
+        <input type="submit" value="Add choices">
+    </form>
+</div>

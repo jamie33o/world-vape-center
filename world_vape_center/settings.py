@@ -35,18 +35,6 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'world-vape-center-468f3f7d12a1.herok
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'crispy_forms',
-    # allauth
-    'django.contrib.sites',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
     # my apps
     'home',
     'products',
@@ -55,6 +43,20 @@ INSTALLED_APPS = [
     'newsletter',
     'help',
     'checkout',
+    # django apps
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    # crispy forms
+    'crispy_forms',
+    # allauth
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     # aws
     'storages',
 

@@ -18,7 +18,7 @@
         <link rel="icon" sizes="32x32" href="{% static 'images/favicon/logo512.png' %}">
     {% endblock %}   
     
-    {% block corecss %}    
+    {% block corecss %}   
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
         <link async rel="stylesheet" href="{% static 'css/base.css' %}">  
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -86,99 +86,126 @@
     </footer>
 
 
+    <div class="modal" id="age-modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Age Verification</h5>
+          </div>
+          <div class="modal-body">
+            <p>Are you 18 years old or older?</p>
+            <p>By entering this site, 
+              you confirm that you are 18 years old or older. 
+              Age verification will be required at checkout.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary verified" data-dismiss="modal">Yes, I'm 18+</button>
+            <a href="javascript:history.back()" type="button" class="btn btn-secondary un-verified" >No, I'm under 18</a>
+          </div>
+        </div>
+      </div>
+    </div>
  <script>
     {% block postloadjs %}
    
         // Dynamically adjust the top margin of the main section based on the header's height
-    $(document).ready(function() {
-
-      $('.sub').click(function(e) {
-        e.preventDefault();
-        let nlMsg = $('.nl-msg')
-        nlMsg.empty()
-
-        let url = $(this).data('url')
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: $('#nl_form').serialize(),
-            success: function(data) {
-               
-                if (data.success) {
-                  nlMsg.prepend('<div class="bg-success text-white"><p>' + data.message + '</p></div>');
-                } else {
-                  console.log(data.message)
-                  nlMsg.prepend('<div class="bg-danger text-white"><p>' + data.message + '</p></div>');
-                }
-            },
-            error: function(xhr, textStatus, errorThrown) {
-                nlMsg.prepend('<div class="bg-danger text-white"><p>An error occurred. Please try again.</p></div>');
-            }
-        });
-      });
-
-            
+      $(document).ready(function() {
         
-            function adjustMainSectionMargin() {
-                var headerHeight = $('header').outerHeight();
-                $('main').css('margin-top', headerHeight + 'px');
-            }
-            
-            adjustMainSectionMargin();
+        $('.un-verified').on('click', function(){
+          localStorage.setItem('firstVisit', 'true');
+        })
 
+        if(localStorage.getItem('firstVisit') != 'false') {
+          $('#age-modal').modal('show');
+          localStorage.setItem('firstVisit', 'false');
+        }
 
-            function breadcrumbsList() {
-              const breadcrumbContainer = $('.breadcrumb');
-              let homeItem = null;
-              if (!breadcrumbContainer.length) {
-                  console.error('Breadcrumb container not found');
-                  return;
-              }
-          
-              const path = window.location.pathname;
-              const pathParts = path.split('/').filter(Boolean);
-              if(pathParts.length > 0){
-                $('.bc-con').addClass('d-lg-inline')
-                homeItem = $('<li>', { class: 'breadcrumb-item' });
-                let homeLink = $('<a>', { href: '/', text: 'Home' });
-                homeItem.append(homeLink);
+        $('.sub').click(function(e) {
+          e.preventDefault();
+          let nlMsg = $('.nl-msg')
+          nlMsg.empty()
 
-              }else{
-                $('.bc-con').removeClass('d-lg-inline')
-              }
-          
-              renderBreadcrumbs(breadcrumbContainer, pathParts, homeItem);
-          }
-          
-          function renderBreadcrumbs(container, pathParts, homeItem) {
-              container.empty();
-          
-              let currentPath = '';
-              pathParts.forEach((part, index) => {
-                  currentPath += `/${part}`;
-          
-                  const breadcrumbItem = $('<li>', { class: 'breadcrumb-item' });
-                  let link = $('<a>', { href: currentPath, text: part });
-          
-                  if (index === pathParts.length - 2) {
-                      link = $('<p>', { text: part });
-                      link.addClass('text-dark d-inline');
+          let url = $(this).data('url')
+
+          $.ajax({
+              type: 'POST',
+              url: url,
+              data: $('#nl_form').serialize(),
+              success: function(data) {
+                
+                  if (data.success) {
+                    nlMsg.prepend('<div class="bg-success text-white"><p>' + data.message + '</p></div>');
                   } else {
-                      link.addClass('text-dark');
+                    console.log(data.message)
+                    nlMsg.prepend('<div class="bg-danger text-white"><p>' + data.message + '</p></div>');
                   }
-          
-                  breadcrumbItem.append(link);
-                  container.append(breadcrumbItem);
-                  if(homeItem){
-                    container.prepend(homeItem);
-                  }
+              },
+              error: function(xhr, textStatus, errorThrown) {
+                  nlMsg.prepend('<div class="bg-danger text-white"><p>An error occurred. Please try again.</p></div>');
+              }
+          });
+        });
 
-              });
+        
+          function adjustMainSectionMargin() {
+              var headerHeight = $('header').outerHeight();
+              $('main').css('margin-top', headerHeight + 'px');
           }
           
-      
-          breadcrumbsList();
+          adjustMainSectionMargin();
+
+
+          function breadcrumbsList() {
+            const breadcrumbContainer = $('.breadcrumb');
+            let homeItem = null;
+            if (!breadcrumbContainer.length) {
+                console.error('Breadcrumb container not found');
+                return;
+            }
+        
+            const path = window.location.pathname;
+            const pathParts = path.split('/').filter(Boolean);
+            if(pathParts.length > 0){
+              $('.bc-con').addClass('d-lg-inline')
+              homeItem = $('<li>', { class: 'breadcrumb-item' });
+              let homeLink = $('<a>', { href: '/', text: 'Home' });
+              homeItem.append(homeLink);
+
+            }else{
+              $('.bc-con').removeClass('d-lg-inline')
+            }
+        
+            renderBreadcrumbs(breadcrumbContainer, pathParts, homeItem);
+        }
+        
+        function renderBreadcrumbs(container, pathParts, homeItem) {
+            container.empty();
+        
+            let currentPath = '';
+            pathParts.forEach((part, index) => {
+                currentPath += `/${part}`;
+        
+                const breadcrumbItem = $('<li>', { class: 'breadcrumb-item' });
+                let link = $('<a>', { href: currentPath, text: part });
+        
+                if (index === pathParts.length - 1) {
+                    link = $('<p>', { text: part });
+                    link.addClass('text-dark d-inline');
+                } else {
+                    link.addClass('text-dark');
+                }
+        
+                breadcrumbItem.append(link);
+                container.append(breadcrumbItem);
+                if(homeItem){
+                  container.prepend(homeItem);
+                }
+
+            });
+        }
+        
+    
+        breadcrumbsList();
           
       });
     {% endblock %} 

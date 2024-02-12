@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /private/
+Allow: /public/
+Sitemap: https://world-vape-center-468f3f7d12a1.herokuapp.com/sitemap.xml

@@ -91,7 +91,7 @@ class ProductDetailView(View):
 
     template_name = 'products/product-details.html'
 
-    def get(self, request, slug):
+    def get(self, request, slug, *args, **kwargs):
         """
         Handle GET requests to display the list of channels.
 
@@ -107,20 +107,31 @@ class ProductDetailView(View):
             'reviews': reviews
         }
         return render(request, self.template_name, context)
-    
 
 
 class ReviewsView(View):
+
     def post(self, request, product_id):
         form = ReviewForm(request.POST)
         product = get_object_or_404(Product, id=product_id)
         if form.is_valid():
-            new_review = form.save(commit=False)
-            new_review.product = product
-            new_review.user = request.user
-            new_review.save()
-            return JsonResponse({'status': 'success', 'message': 'Thank you for your feedback'}, status=200)
-        return JsonResponse({'status': 'error', 'message': form.errors})
+            # Check if a review already exists for the user and product
+            existing_review = Review.objects.filter(product=product, user=request.user).first()
+
+            if existing_review:
+                # If review exists, update the existing one
+                existing_review.comment = form.cleaned_data['comment']
+                existing_review.rating = form.cleaned_data['rating']
+                existing_review.save()
+                return JsonResponse({'status': 'success', 'message': 'Review updated successfully'}, status=200)
+            else:
+                # If review does not exist, create a new one
+                new_review = form.save(commit=False)
+                new_review.product = product
+                new_review.user = request.user
+                new_review.save()
+                return JsonResponse({'status': 'success', 'message': 'Thank you for your review'}, status=200)
+        return JsonResponse({'status': 'error', 'message': form.errors}, status=400)
 
 
     def delete(self, request, review_id):
@@ -129,7 +140,6 @@ class ReviewsView(View):
 
         # Check if the user deleting the review is the owner of the review
         if review.user == request.user:
-
             review.delete()
             return JsonResponse({'status': 'success', 'message': 'Review deleted successfully'}, status=200)
         else:

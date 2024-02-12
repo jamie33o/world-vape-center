@@ -1,16 +1,16 @@
-<div class="d-block mb-4">
-    {% if product.options %}
-    <h5 class="d-block text-muted">
-        {{ product.options_name }}: 
-        <span class="cur_choice">{{ product.options.first }}</span>
-     </h5>
-     <div class="options">
-    {% for option in product.options.all %}
-        <label class="custom-radio">
-            <input type="radio" name="options" value="{{ option.name }}" class="option" {% if forloop.first %}checked{% endif %}>
-            <span class="choice">{{option.name}}</span>
-        </label>                                                       
-    {% endfor %}
+{% if product.options_name %}
+    <div class="d-block mb-4">
+        <h5 class="d-block text-muted">
+            {{ product.options_name }}: 
+            <span class="cur_choice">{{ product.options.first }}</span>
+        </h5>
+        <div class="options">
+            {% for option in product.options.all %}
+                <label class="custom-radio">
+                    <input type="radio" name="options" value="{{ option.name }}" class="option" {% if forloop.first %}checked{% endif %}>
+                    <span class="choice">{{option.name}}</span>
+                </label>                                                       
+            {% endfor %}
+        </div>
     </div>
-    {% endif %}
-</div>
+{% endif %}

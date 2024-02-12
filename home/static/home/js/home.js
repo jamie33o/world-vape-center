@@ -1,5 +1,4 @@
-$(document).ready(function()
-{
+$(document).ready(function(){
     if($('.bbb_viewed_slider').length)
     {
         var viewedSlider = $('.bbb_viewed_slider');

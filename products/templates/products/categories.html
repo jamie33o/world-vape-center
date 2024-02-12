@@ -3,8 +3,8 @@
   <ul class="categories list-unstyled list-inline">
     {% for category in all_categories %}
     <li>
-      <a href="{% url 'category' category=category.slug %}" class="text-nowrap" title="{{category}}"
-        >{{ category | capfirst }}
+      <a href="{% url 'category' category=category.slug %}" class="text-nowrap {% if category.slug == request.resolver_match.kwargs.category %}active{% endif %}" title="{{ category }}">
+        {{ category | capfirst }}
       </a>
     </li>
     {% endfor%}

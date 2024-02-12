@@ -59,9 +59,7 @@
                                 </select>
                             </div>
                         </div>     
-                        {% if product.choices %}                       
                             {% include 'components/options.html' %}
-                        {% endif %}
                     </div>
                     <div class="action">
                         <button
@@ -104,10 +102,11 @@
     <div class="row" style="margin-top: 40px">
         <div class="col-md-6">
             <div class="well well-sm">
-                <div class="text-right">
+                <div class="text-right bg-light border rounded">
                     {% if user.is_authenticated %}
-                    <a class="btn btn-success btn-green" href="#reviews-anchor" id="open-review-box"
-                        >Leave a Review</a>
+                    <a class="btn btn-success btn-green m-2" 
+                    href="#reviews-anchor" 
+                    id="open-review-box">Leave a Review</a>
                     {% else %}
                     <a class="btn btn-danger btn-red"
                         href="{% url 'account_login' %}"
@@ -116,11 +115,11 @@
                     {% endif %}
                 </div>
 
-                <div class="row" id="post-review-box" style="display: none">
+                <div class="row d-none" id="post-review-box">
                     <div class="col-md-12">
                         <form
-                            id="review-form"
-                            data-url='{% url "post_review" product_id=product.id %}'>
+                            class="review-form"
+                            data-url="{% url 'post_review' product.id %}">
                             {% csrf_token %}
                             <input id="ratings-hidden" name="rating" type="hidden" />
                             <textarea
@@ -129,17 +128,16 @@
                                 id="new-review"
                                 name="comment"
                                 placeholder="Enter your review here..."
+                                required
                                 rows="5"></textarea>
 
                             <div class="text-right">
                                 <div class="stars starrr" data-rating="0"></div>
-                                <a
-                                    class="btn btn-danger btn-sm"
+                                <a class="btn btn-danger btn-sm"
                                     href="#"
                                     id="close-review-box"
                                     style="display: none; margin-right: 10px">
-                                    <span class="glyphicon glyphicon-remove"></span>Cancel</a
-                                >
+                                    <i class="fa-solid fa-xmark text-light h6 mr-2"></i>Cancel</a>
                                 <button class="btn btn-success btn-lg" type="submit">Save</button>
                             </div>
                         </form>

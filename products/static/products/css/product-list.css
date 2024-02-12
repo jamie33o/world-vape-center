@@ -47,7 +47,7 @@ main {
     padding: 0 15px;
 }
 
-.categories li a:hover {
+.categories li a:hover, .categories li a.active {
     box-shadow: inset 0 0 10px rgba(255, 255, 255, 1);
 }
 

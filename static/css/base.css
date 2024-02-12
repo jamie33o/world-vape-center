@@ -73,6 +73,10 @@ header nav .container {
     justify-content: initial !important;
 }
 
+.main-nav .active {
+    color: white;
+}
+
 header .container {
     padding: 0;
     margin: 0;

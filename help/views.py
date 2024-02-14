@@ -5,6 +5,7 @@ from django.views.decorators.http import require_GET
 from django.contrib import messages
 from world_vape_center.urls import sitemaps
 from .forms import ContactForm
+from products.models import Category
 
 @require_GET
 def payments_options(request):
@@ -62,6 +63,15 @@ def sitemap_html(request):
     for key, value in sitemaps.items():
         sitemap_class = value()
         sitemap_urls = sitemap_class.get_urls()
-        urls[key] = [url['location'] for url in sitemap_urls]
-
-    return render(request, 'help/sitemap.html', {'urls': urls})
+        urls[key] = []
+        for sitemap_item in sitemap_urls:
+           urls[key].append((
+               sitemap_item['item'],
+               sitemap_item['location']
+           ))
+    categories = Category.objects.all()
+           
+    context = {'urls': urls,
+               'categories': categories}
+    
+    return render(request, 'help/sitemap.html', context)

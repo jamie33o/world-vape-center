@@ -101,11 +101,14 @@ class ProductDetailView(View):
         
         product = get_object_or_404(Product, slug=slug)
         reviews = Review.objects.filter(product=product)
+        category_products = Product.objects.filter(category=product.category)
 
         context = {
             'product': product,
-            'reviews': reviews
+            'reviews': reviews,
+            'category_products': category_products
         }
+
         return render(request, self.template_name, context)
 
 

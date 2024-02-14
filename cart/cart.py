@@ -106,7 +106,7 @@ class Cart():
 
 
     
-    def get_total(self):
+    def get_subtotal(self):
         return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
     
     def get_delivery_cost(self):
@@ -127,11 +127,11 @@ class Cart():
     
     def get_grand_total(self):
         delivery = self.get_delivery_cost()
-        total = self.get_total()
+        total = self.get_subtotal()
         total = delivery + total
         discount = self.get_discounted_total()
         if discount:
-            total = total -discount
+            total = total - discount
 
         return total
     

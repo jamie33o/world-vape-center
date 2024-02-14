@@ -1,4 +1,5 @@
 {% load static %}
+{% load mathfilters %} 
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +19,7 @@
         {% endwith %}
 
       </span>
-      <span class="ml-2 cart-total">€{{ cart.get_total }}</span>
+      <span class="ml-2 cart-total">€{{ cart.get_grand_total }}</span>
     </a>
     <span class="h4 mx-2 text-white d-flex d-sm-none">|</span>
 
@@ -110,7 +111,7 @@
       </div>
       <span class="h2 mx-2 text-white d-none d-sm-flex">|</span>
 
-    <a class="text-white mt-2 position-relative d-none d-sm-flex" href="{% url 'cart-summary' %}">
+    <button class="btn text-white mt-2 position-relative d-none d-sm-flex" data-toggle="modal" data-target="#cart-modal">
       <i class="fa fa-shopping-cart h4 text-success"></i>
       <span class="cart-qty badge badge-light position-absolute">
         {% with qty_amount=cart|length %}
@@ -122,8 +123,89 @@
         {% endwith %}
 
       </span>
-      <span class="ml-2 cart-total">€{{ cart.get_total }}</span>
-    </a>
+      <span class="ml-2 cart-total">€ {{ cart.get_grand_total }}</span>
+    </button>
+    <div class="modal fade" id="cart-modal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="cart modal" aria-hidden="true">
+      <div class="modal-dialog float-right" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Shopping cart</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="mt-5 mt-lg-0">
+              <div class="card border shadow-none">
+                  <div class="card-header bg-transparent border-bottom py-3 px-4">
+                      <h5 class="font-size-16 mb-0">
+                          Order Summary <span class="float-end">(#{{ cart.get_order_num }})</span>
+                      </h5>
+                  </div>
+                  <div class="card-body p-4 pt-2">
+                      {% for item in cart %}
+                          <div class="row mb-4">
+                              <div class="col-2 mb-1">
+                                  <a href="{% url 'product_details' item.product.category.slug item.product.id %}">
+                                      {% if item.product.image %}
+                                          <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
+                                      {% else %}
+                                          <img class="w-100" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+                                      {% endif %}
+                                  </a>
+                              </div>
+                              <div class="col-6">
+                                  <p class="my-0"><strong>{{ item.product.name }}</strong></p>
+                                  <p class="my-0 small">{% if item.product.options_name %}{{ item.product.options_name |upper }}: {{ item.product_choice|upper }}{% else %}N/A{% endif %}</p>
+                                  <p class="my-0 small text-muted">Qty: {{ item.qty }}</p>
+                              </div>
+                              <div class="col-2 text-right">
+                                  <p class="my-0 small text-muted">€ {{item.product.price|mul:item.qty}} </p>
+                              </div>
+                          </div>
+                      {% endfor %}
+                      <div class="table-responsive">
+                          <table class="table mb-0">
+                              <tbody>
+                                  <tr>
+                                      <td>Sub Total :</td>
+                                      <td class="text-end">€ {{ cart.get_subtotal }}</td>
+                                  </tr>
+                                  {% if cart.get_discounted_total %}
+                                      <tr>
+                                          <td>Discount :</td>
+                                          <td class="text-end">€ {{ cart.get_discounted_total }}</td>
+                                      </tr>
+                                  {% endif %}
+                                 
+                                  <tr>
+                                      <td>Shipping Charge :</td>
+                                      <td class="text-end">{% if cart.get_delivery_cost %}€ {{ cart.get_delivery_cost }}{% else %}<span class="h6 text-success">Free Delivery</span>{% endif %}</td>
+                                  </tr>
+                                  <tr class="bg-light">
+                                      <th>Total :</th>
+                                      <td class="text-end">
+                                          <span class="fw-bold">€ {{ cart.get_grand_total }} </span>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                      <!-- end table-responsive -->
+                  </div>
+              </div>
+          </div>          </div>
+          <div class="modal-footer">
+            <a href="{% url 'checkout' %}">
+                <span class="icon">
+                  <i class="fas fa-lock"></i>
+              </span>
+              Secure Checkout 
+            </a>       
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <form class="form-inline my-2 my-lg-0 w-100 d-flex d-sm-none d-lg-none">
     <div class="w-100 d-flex flex-dir-row">
@@ -148,3 +230,4 @@
     </div>
   </div>
 </form>
+

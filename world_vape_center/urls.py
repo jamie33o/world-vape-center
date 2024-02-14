@@ -23,9 +23,9 @@ from .sitemaps import StaticViewSitemap
 
 
 sitemaps = {
-    'products': ProductSitemap,
-    "static": StaticViewSitemap,
-    'catgories': CategorySitemap
+    'Help': StaticViewSitemap,
+    'Catagories': CategorySitemap,
+    'Products': ProductSitemap,
 }
 
 urlpatterns = [

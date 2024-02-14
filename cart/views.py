@@ -11,7 +11,11 @@ def cart_summary(request):
 
     cart = Cart(request)
 
-    return render(request, 'cart/cart-summary.html', {'cart':cart})
+    discounted_products = Product.objects.filter(discounted_price__gt=0)
+
+    return render(request, 'cart/cart-summary.html',
+                  {'cart':cart,
+                   'discounted_products': discounted_products})
 
 
 
@@ -31,7 +35,7 @@ def cart_add(request):
 
 
         cart_quantity = cart.__len__()
-        cart_total = cart.get_total()
+        cart_total = cart.get_subtotal()
 
 
         response = JsonResponse({'qty': cart_quantity, 'cart_total': cart_total})
@@ -53,7 +57,7 @@ def cart_delete(request):
 
         cart_quantity = cart.__len__()
 
-        cart_total = cart.get_total()
+        cart_total = cart.get_subtotal()
 
 
         response = JsonResponse({'qty':cart_quantity, 'total':cart_total})
@@ -76,7 +80,7 @@ def cart_update(request):
 
         cart_quantity = cart.__len__()
 
-        cart_total = cart.get_total()
+        cart_total = cart.get_subtotal()
 
 
         response = JsonResponse({'qty':cart_quantity, 'total':cart_total})

@@ -31,7 +31,7 @@
                         <div class="flex-grow-1 align-self-center overflow-hidden">
                             <div>
                                 <a
-                                    href="{% url 'product_details' product.slug %}"
+                                    href="{% url 'product_details' product.category.slug product.slug %}"
                                     class="text-info text-decoration-none">
                                     <!-- Product get absolute url -->
                                     <h5 class="h5 pt-2">{{product.name}}<!-- Product title --></h5>
@@ -134,16 +134,16 @@
                         <div class="table-responsive">
                             <table class="table mb-0">
                                 <tbody> 
+                                    <tr>
+                                        <td>Sub Total :</td>
+                                        <td class="text-end">€ {{ cart.get_subtotal }}</td>
+                                    </tr>
                                     {% if cart.get_discounted_total %}
                                         <tr>
                                             <td>Discount :</td>
                                             <td class="text-end">€ {{ cart.get_discounted_total }}</td>
                                         </tr>
                                     {% endif %}
-                                    <tr>
-                                        <td>Sub Total :</td>
-                                        <td class="text-end">€ {% if cart.get_discounted_total %}{{ cart.get_total|sub:cart.get_discounted_total }}{% else %}{{ cart.get_total }}{% endif %}</td>
-                                    </tr>
                                    
                                     <tr>
                                         <td>Shipping Charge :</td>
@@ -178,6 +178,53 @@
     </div>
     <!-- end row -->
 </div>
+{% if discounted_products %}
+    <div class="bbb_viewed container bg-transparent mb-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col p-0">
+                <div class="bbb_main_container">
+                    <div class="bbb_viewed_title_container">
+                        <h3 class="bbb_viewed_title">Discounted products</h3>
+                        <div class="bbb_viewed_nav_container">
+                            <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
+                            <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
+                        </div>
+                    </div>
+                    <div class="bbb_viewed_slider_container">
+                        <div class="owl-carousel owl-theme bbb_viewed_slider">
+                            {% for product in discounted_products %}
+                                <div class="owl-item">
+                                    <a href="{% url 'product_details' product.category.slug product.slug %}" class="btn text-hover">
+                                    <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
+                                        <div class="bbb_viewed_image"><img src="{{ product.image.url }}" alt=""></div>
+                                        <div class="bbb_viewed_content text-center">
+                                            {% if product.discounted_price %}
+                                            <div class="bbb_viewed_price">Price: € {{ product.discounted_price }} <span>{{ product.price }} </span></div>
+                                            {% else %}
+                                            <div class="bbb_viewed_price">Price: € {{ product.price }} </div>
+                                            {% endif %}
+                                            <div class="bbb_viewed_name">{{ product.name }}</div>
+                                        </div>
+                                        {% if product.discount_percentage %}
+                                            <ul class="item_marks">
+                                                <li class="item_mark item_discount">{{ product.discount_percentage }}</li>
+                                                <li class="item_mark item_new">new</li>
+                                            </ul>
+                                        {% endif %}
+                                    </div>
+                                </a>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
 
 <script>
     // Delete button

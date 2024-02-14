@@ -3,6 +3,17 @@ import json
 from django.utils.text import slugify
 
 vape_brands = [
+    "vaporesso",
+    "smok",
+    "hale",
+    "dinner-lady",
+    "nitecore"
+    "geekvape",
+    "falcon-king",
+    "voom",
+    "uwell",
+    "liqua",
+    "king-s-dew",
     "maryliq",
     "elfliq",
     "avct-avictor",
@@ -184,7 +195,6 @@ vape_brands = [
     "lokey",
     "lucid",
     "luffbar",
-    "lve",
     "leaf-buddi",
     "lil-baby",
     "limitless-mod-co.",
@@ -294,7 +304,8 @@ def add_extension_to_files_in_folder():
                                        product_name_n_slug,
                                        brand_pk,
                                        sku,
-                                       folder + '/' + filename)
+                                       folder + '/' + filename,
+                                       )
                     product_id += 1
 
                     brand_pk = None

@@ -1,20 +1,45 @@
-{% extends "base.html" %} 
-{% block content %} 
+{% extends 'help/base.html' %}
+{% load static %}
 
-<div class="container">
-  <h1>Sitemap HTML</h1>
-  {% for category, urls in urls.items %}
+{% block help_content %}
 
-  <h4>{{ category }}</h4>
-  <ul>
-    {% for url in urls %}
-      <li>
-        <a href="{{ url }}">{{ url }}</a>
-      </li>
+    <h1 class="mt-auto">Sitemap</h1>
+    <hr>
+    
+    {% for category, urls in urls.items %}
+      <h4 class="my-3">{{ category }}</h4>
+      
+      {% if category == 'Products' %}
+        
+      <div class="container mt-4">
+        {% for cat in categories %}
+            <button class="btn btn-primary my-2 w-100" data-toggle="collapse" data-target="#{{cat.slug}}">
+                {{cat.name|upper}}
+            </button>
+    
+            <div class="collapse" id="{{cat.slug}}">
+                <ul class="list-group">
+                    {% for url in urls %}
+                        {% if cat.slug in url.1 %}
+                            <li class="list-group-item">
+                                <a class="h5 text-info" href="{{ url.1 }}">{{ url.0 }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endfor %}
+    </div>
+    
+      {% else %}
+        <ul class="list-group">
+          {% for url in urls %}
+            <li class="list-group-item">
+              <a class="h5 text-info" href="{{ url.1 }}">{{ url.0 }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+      {% endif %}
+
     {% endfor %}
-  </ul>
-
-  {% endfor %}
-</div>
-
 {% endblock %} 

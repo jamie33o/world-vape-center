@@ -1,23 +1,23 @@
-{% extends 'base.html' %}
+{% extends 'help/base.html' %}
+{% load static %}
 
-{% block content %}
+{% block help_content %}
 
-<div class="container">
     <div class="text-center mt-4">
         <h1>Payment Options</h1>
     </div>
 
     <div class="row mt-5">
         <div class="col-12">
-            <img class="img-fluid" src="https:" alt="Payments options">
+            <img class="img-fluid border rounded" src="{% static 'payments_type.jpg' %}" alt="Payments options">
         </div>
     </div>
 
     <div class="row mt-5">
         <div class="col-12">
             <p class="text-left">
-                At VapeApe.ie, we take every precaution to ensure that the whole payment process is very secure.
-                Your data and payment are protected by an SSL certificate. We currently accept payment from Visa Credit & Debit cards, Mastercard, Maestro, and JCB.
+                At World Vape Center, we take every precaution to ensure that the whole payment process is very secure.
+                Your data and payment are protected by an SSL certificate. We currently accept payment from Visa Credit & Debit cards, Mastercard, Maestro, Discover and American express.
                 <strong>We only accept Irish registered cards.</strong> We do not operate with your card data.
                 The process is done through your bank and our payment gateway provider.
             </p>
@@ -36,7 +36,8 @@
                 <li>Visa</li>
                 <li>Mastercard</li>
                 <li>Maestro</li>
-                <li>JCB</li>
+                <li>American Express</li>
+                <li>Discover</li>
                 <li>Bank transfer</li>
                 <li>Cash (local pick up only)</li>
             </ul>
@@ -77,8 +78,5 @@
             </p>
         </div>
     </div>
-
-</div>
-
 
 {% endblock %}

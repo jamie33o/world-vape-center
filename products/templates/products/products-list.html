@@ -17,13 +17,13 @@
 
 {% block content %}
 <div class="container-fluid mt-5 mb-5 p-0">
-    <div class="row m-0">
-        <div class="col-md-2 ml-auto d-none d-lg-flex filter-mobile">
+    <div class="row m-0 d-flex justify-content-center">
+        <div class="col-md-2 p-0 d-none d-lg-flex filter-mobile">
             <div class="overflow-auto h-100">
             {% include 'products/filters.html' with category=category %}
             </div>
         </div>
-        <div class="col-md-9 mx-auto">
+        <div class="col-md-9">
             <div class="row p-0 bg-white border shadow product-list">
                 <div class="col-12 border-bottom py-2">
                     <div class="row">
@@ -63,7 +63,6 @@
                                 <div class="w-100 text-left">
                                     <p class="h5 text-muted product-hover">{{ product.brand.name }}</p>
                                     <h5 class="product-hover h6">{{ product.name }}</h5>
-                                    <p class="para mb-0 product-hover text-truncate">{{ product.description }}<br><br></p>
                                 </div>
 
                                 <div class="w-100 d-flex ">
@@ -86,9 +85,9 @@
                                     {% endif %}
                                 </div>
                                 {% if product.num_reviews > 0 %}
-                                    <div class="w-100">
+                                    <div class="w-100 text-left d-flex">
                                         {% include 'components/ratings.html' with product=product %}
-                                        <span>{{ product.num_reviews }} reviews</span>
+                                        <span class="d-flex">{{ product.num_reviews }} reviews</span>
                                     </div>
                                 {% endif %}
 

@@ -1,6 +1,6 @@
 <!-- Category -->
 <nav class="w-100">
-  <ul class="categories list-unstyled list-inline">
+  <ul class="categories list-unstyled list-inline d-flex justify-content-between">
     {% for category in all_categories %}
     <li>
       <a href="{% url 'category' category=category.slug %}" class="text-nowrap {% if category.slug == request.resolver_match.kwargs.category %}active{% endif %}" title="{{ category }}">

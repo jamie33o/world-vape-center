@@ -132,7 +132,9 @@ class Cart():
         discount = self.get_discounted_total()
         if discount:
             total = total - discount
-
+        if len(self) == 0:
+            total = 0
+            
         return total
     
     

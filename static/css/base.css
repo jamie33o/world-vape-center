@@ -4,15 +4,61 @@
     box-sizing: border-box; 
 }
 
+:root {
+    --primary-color: linear-gradient(45deg, var(--light), #94bed1);
+    --light-grey: #f3f7f8;
+    --accent-color: #ffcc00;
+    --font-size: 16px;
+    --font-family: 'Roboto', sans-serif;
+    --line-height: 1.5;
+    --background-color: #f9f9f9;
+    --border-radius: 4px;
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --transition-duration: 0.3s;
+    --link-color: #007bff;
+    --link-hover-color: #0056b3;
+    --error-color: #dc3545;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --dark-grey: #606060;
+    --hover-color: #94bed1;
+}
+
+h1, h2, h3 {
+    font-family: var(--headings);
+}
+
+h4, h5 {
+    color: var(--dark-grey);
+}
+
+.messages {
+    position: absolute;
+    top: 100px;
+    z-index: 1000;
+    right: 20px;
+    transition: opacity 0.5s ease; 
+}
+
 body {
-    background: linear-gradient(45deg, var(--light) , #94bed1 ); 
-    max-width: 2000px;
+    background: var(--primary-color); 
+    max-width: 2500px;
     margin: 0 auto;
+}
+
+main {
+    position: relative;
+    margin-top: 70px;
+}
+
+header {
+    max-width: 2500px;
 }
 
 .text-hover:hover {
     transition: color 0.5s; 
-    color: #007bff; 
+    color: var(--hover-color); 
 }
 
 /* Custom Scrollbar Styles for WebKit Browsers */
@@ -47,7 +93,6 @@ body {
 .nl-input-con input{
     border-radius: 20px;
     height: 40px;
-    width: 68%;
     padding: 10px;
 }
 
@@ -66,7 +111,7 @@ body {
     align-items: center;
 }
 
-/* header */
+/*////////////////// header //////////////////*/
 header nav .container {
     justify-content: initial !important;
 }
@@ -120,9 +165,38 @@ header .navbar {
     right: 20px;
 }
 
-/*-------------- footer styles -------------*/
+
+/* ////////////// breadcrumbs /////////////////// */
+
+.bc-con {
+    margin: 300px 0 ;
+}
+
+.breadcrumb {
+    background-color: transparent;
+}
+
+.breadcrumb a {
+    color: gray;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+ /* Custom style for breadcrumb divider */
+ .breadcrumb-item + .breadcrumb-item::before {
+    content: '>';
+    color: gray; /* Change color as needed */
+}
+
+.results .card:hover {
+    transition: color 0.5s; 
+    background-color: var(--hover-color); 
+    color: white;
+}
+
+/*///////////////// footer styles ////////////////////////*/
 #footer-sub{
-    background-color: #f3f7f8;
+    background-color: var(--light-grey);
     border-top: 1px solid #dbdbdb;
 }
 
@@ -199,7 +273,7 @@ footer .glyphicon {
     align-items: center;
     color: black;
     font-weight: 600;
-    margin: 50px 0;
+    margin: 100px 0;
 }
 
 .all-auth-container button {
@@ -228,8 +302,7 @@ footer .glyphicon {
     justify-content: center;
     height: fit-content;
     justify-content: space-evenly;
-    width: fit-content;
-    max-width: 90%;
+    width: 90%;
     min-height: 400px;
     background: #57abb889;
     flex-direction: column;
@@ -273,13 +346,40 @@ footer .glyphicon {
     margin-bottom: 5px;
 }
 
+.user_card .form {
+    width: fit-content;
+    margin: auto;
+    max-width: 500px;
+}
+
+.user_card .form textarea {
+    width: 100%;
+}
+
+/* ///////////////////////// media queries ///////////////////////// */
 
 /* Media query for screens smaller than 576px (extra small devices) */
 @media (max-width: 575.98px) {
     /* Styles for extra small devices go here */
     main{
-        margin-top: 150px;
+        margin-top: 130px;
     }
+
+    #search-form {
+        position: absolute;
+        top: 0;
+        height: 105vh;
+        width: 100vw;
+        background: var(--primary-color); 
+        z-index: 100;
+        padding: 0 0 100px 0;
+        align-items:start !important;
+    }
+
+    .input-container {
+        padding: 20px 10px;
+    }
+
 }
 
 /* Media query for screens between 576px and 767.98px (small devices) */

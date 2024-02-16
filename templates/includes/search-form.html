@@ -1,0 +1,21 @@
+<form id="search-form" class="form-inline my-lg-0 w-100 d-none position-absolute" method="get" action="{% url 'search' %}">
+    <div class="w-100 d-flex flex-dir-row input-container">
+      <input type="text" class="w-100" name="q" placeholder="Search..." id="search-input" />
+
+      <div class="input-group-append">
+        <button type="submit" value="Search" class="btn btn-secondary btn-number">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+      <button class="btn btn-danger close-search ml-3 d-sm-none">
+        X
+      </button>
+    </div>
+    <div class="w-100 h-100 overflow-auto results-container d-none">
+        <div class="w-100 text-white border bg-light px-3 py-2 ">
+            <h4>Products</h4>
+        </div>
+      <div class="results mx-auto bg-light p-3 border rounded ">
+      </div>
+    </div>
+  </form>

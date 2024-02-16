@@ -30,11 +30,9 @@
         <a class="text-white mx-0" href="{% url 'account_login' %}">Sign In</a>
 
       {% endif %}
-</p>
-
+    </p>
   </div>
   
-
   <div class="collapse navbar-collapse main-nav" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
@@ -135,6 +133,7 @@
             </button>
           </div>
           <div class="modal-body">
+            {% if cart|length > 0 %}
             <div class="mt-5 mt-lg-0">
               <div class="card border shadow-none">
                   <div class="card-header bg-transparent border-bottom py-3 px-4">
@@ -194,24 +193,35 @@
                       <!-- end table-responsive -->
                   </div>
               </div>
-          </div>          </div>
+          </div>    
+          {% else %} 
+          <h3>Your Cart is Empty</h3>
+          {% endif%}
+        </div>
           <div class="modal-footer">
-            <a href="{% url 'checkout' %}">
-                <span class="icon">
-                  <i class="fas fa-lock"></i>
-              </span>
-              Secure Checkout 
-            </a>       
+            {% if cart|length > 0 %}
+              <a href="{% url 'checkout' %}">
+                  <span class="icon">
+                    <i class="fas fa-lock"></i>
+                </span>
+                Secure Checkout 
+              </a>    
+            {% else %}
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                < KEEP SHOPPING
+              </button>  
+            {% endif %}
+
           </div>
         </div>
       </div>
     </div>
   </div>
-  <form class="form-inline my-2 my-lg-0 w-100 d-flex d-sm-none d-lg-none">
+  <form class="form-inline my-2 my-lg-0 w-100 d-sm-none">
     <div class="w-100 d-flex flex-dir-row">
-      <input type="text" class="w-100" placeholder="Search..." />
+      <input type="text" class="w-100" placeholder="Search..." id="mob-search-input" />
       <div class="input-group-append">
-        <button type="button" class="btn btn-secondary btn-number">
+        <button type="submit" value="Search" class="btn btn-secondary btn-number">
           <i class="fa fa-search"></i>
         </button>
       </div>
@@ -219,15 +229,6 @@
   </form>
 </nav>
 
+{% include 'includes/search-form.html' %}
 
-<form id="search-form" class="form-inline my-2 my-lg-0 w-100 position-absolute d-none">
-  <div class="w-100 d-flex flex-dir-row">
-    <input type="text" class="w-100" placeholder="Search..." />
-    <div class="input-group-append">
-      <button type="button" class="btn btn-secondary btn-number">
-        <i class="fa fa-search"></i>
-      </button>
-    </div>
-  </div>
-</form>
 

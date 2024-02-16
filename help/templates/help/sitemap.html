@@ -11,7 +11,7 @@
       
       {% if category == 'Products' %}
         
-      <div class="container mt-4">
+      <div class="container-fliud mt-4">
         {% for cat in categories %}
             <button class="btn btn-primary my-2 w-100" data-toggle="collapse" data-target="#{{cat.slug}}">
                 {{cat.name|upper}}

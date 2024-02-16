@@ -3,10 +3,6 @@
 {% load mathfilters %} 
 
 
-{% block extra_css %}
-    <link async rel="stylesheet" href="{% static 'products/css/product-list.css' %}">  
-{% endblock %}
-
 {% block extra_js %}
     <script src="{% static 'products/js/add-to-cart.js' %}"></script>
 {% endblock %} 
@@ -16,9 +12,9 @@
 {% endblock %}
 
 {% block content %}
-<div class="container-fluid mt-5 mb-5 p-0">
-    <div class="row m-0 d-flex justify-content-center">
-        <div class="col-md-2 p-0 d-none d-lg-flex filter-mobile">
+<div class="container-fluid my-5 my-lg-0 p-0">
+    <div class="row m-0 d-flex justify-content-center mb-5">
+        <div class="col-md-2 p-0 d-none d-xl-flex filter-mobile">
             <div class="overflow-auto h-100">
             {% include 'products/filters.html' with category=category %}
             </div>
@@ -33,13 +29,12 @@
                                 Page {{ products.number }} of {{ products.paginator.num_pages }}.
                             </span>
                         </div>
-                        <div class="col-4 d-none d-sm-flex justify-content-between">
+                        <div class="col-4 d-none d-lg-flex justify-content-between">
                             <span class="h3">|</span>
                             <span class="h3">{{ category.name }}</span>
                             <span class="h3">|</span>
                         </div>
                         <div class="col-6 col-lg-4 d-flex align-items-center">
-                            
                             <form method="get" class="ml-auto" action="{% url 'category' category %}">
                                 <label for="items_per_page">Items per page:</label>
                                 <select name="items_per_page" id="items_per_page" onchange="this.form.submit()">
@@ -54,45 +49,51 @@
 
                 {% for product in products %}
                     <div class="col-12 col-md-12 col-lg-12 col-xl-3 border rounded align-items-center">
-                        <a href="{% url 'product_details' category=category.slug slug=product.slug %}" class="btn border-0 w-100" type="button">
-                            <div class="row flex-column bg-white product-card">
-                                <div class="w-100 mt-1 overflow-hidden">
-                                    <img class="product-image mx-auto" src="{{ product.image.url }}">
-                                </div>
 
-                                <div class="w-100 text-left">
-                                    <p class="h5 text-muted product-hover">{{ product.brand.name }}</p>
-                                    <h5 class="product-hover h6">{{ product.name }}</h5>
-                                </div>
-
-                                <div class="w-100 d-flex ">
-                                    <h4 class="mr-1">€
-                                        {% if not product.discounted_price %}
-                                            {{ product.price }}
-                                        {% else %}
-                                            {{ product.discounted_price}}  
-                                        {% endif %}
-                                    </h4>
-                                    {% if product.discounted_price %}
-                                    <p class="strike-text text-danger text-bold font-weight-bold posotion-relative">
-                                        <del>€ {{ product.price }}</del>
-                                        <br>
-                                        <span class="percentage">{{ product.discount_percentage|default:'' }}</span>
-                                    </p>
-                                    {% endif %}
-                                    {% if product.free_shipping %}
-                                    <h6 class="text-success">Free shipping</h6>
-                                    {% endif %}
-                                </div>
-                                {% if product.num_reviews > 0 %}
-                                    <div class="w-100 text-left d-flex">
-                                        {% include 'components/ratings.html' with product=product %}
-                                        <span class="d-flex">{{ product.num_reviews }} reviews</span>
-                                    </div>
-                                {% endif %}
-
+                        <div class="row flex-column bg-white product-card">
+                            <div class="w-100 d-flex justify-content-end p-2">
+                                {% include 'components/favourite-btn.html' %}
                             </div>
-                        </a>
+
+                            <a href="{% url 'product_details' category=category.slug slug=product.slug %}" class="btn border-0 w-100" type="button">
+
+                            <div class="w-100 mt-1 overflow-hidden">
+                                <img class="product-image mx-auto" src="{{ product.image.url }}">
+                            </div>
+
+                            <div class="w-100 text-left">
+                                <p class="h5 text-muted product-hover">{{ product.brand.name }}</p>
+                                <h5 class="product-hover h6">{{ product.name }}</h5>
+                            </div>
+
+                            <div class="w-100 d-flex ">
+
+                                <h4 class="mr-1">€
+                                    {% if not product.discounted_price %}
+                                        {{ product.price }}
+                                    {% else %}
+                                        {{ product.discounted_price}}  
+                                    {% endif %}
+                                </h4>
+                                {% if product.discounted_price %}
+                                <p class="strike-text text-danger text-bold font-weight-bold posotion-relative">
+                                    <del>€ {{ product.price }}</del>
+                                    <br>
+                                    <span class="percentage">{{ product.discount_percentage|default:'' }}</span>
+                                </p>
+                                {% endif %}
+                                {% if product.free_shipping %}
+                                <h6 class="text-success">Free shipping</h6>
+                                {% endif %}
+                            </div>
+                            {% if product.num_reviews > 0 %}
+                                <div class="w-100 text-left d-flex">
+                                    {% include 'components/ratings.html' with product=product %}
+                                    <span class="d-flex">{{ product.num_reviews }} reviews</span>
+                                </div>
+                            {% endif %}
+                            </a>
+                        </div>
                     </div>
                 {% endfor %}
                 <div class="col-12 border p-3">

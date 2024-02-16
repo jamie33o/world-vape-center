@@ -4,15 +4,15 @@
 
 {% block extra_css %}
     <link async rel="stylesheet" href="{% static 'products/css/product-details.css' %}" />
-{% endblock %} 
+{% endblock %}
 
-{% block extra_js %}
-    <script src="{% static 'products/js/add-to-cart.js' %}"></script>
-    <script src="{% static 'products/js/product-details.js' %}"></script>
-{% endblock %} 
+
+{% block extra_header %}
+    {% include 'products/categories.html' %}
+{% endblock %}
 
 {% block content %}
-<div class="container mb-5">
+<div class="container-fluid px-0 px-lg-5 py-3">
     <div class="card  bg-white">
         <div class="container-fliud">
             <div class="wrapper row">
@@ -64,28 +64,28 @@
                     <div class="action">
                         <button
                             data-url="{% url "cart-add" %}"
-                            class="add-to-cart btn btn-default"
+                            class="add-to-cart btn btn-warning text-white font-weight-bold"
                             data-csrf="{{csrf_token}}"
                             value="{{product.id}}"
                             type="button">
-                            add to cart
+                            Add To Cart
                         </button>
-                        <button class="like btn btn-default" type="button">
-                            <span class="fa fa-heart"></span>
-                        </button>
+                        {% include 'components/favourite-btn.html' %}
                     </div>
                     <div class="row my-4">
-                        <div class="col-6 col-sm-6">
-                            <a href="{% url 'categories' %}" class="btn btn-info text-white font-weight-bold text-nowrap">
+                        <div class="col-8 col-sm-5">
+                            <a href="{% url 'categories' %}" class="btn btn-info text-white font-weight-bold text-nowrap w-100">
                                 <i class="mdi mdi-arrow-left"></i> Continue Shopping
                             </a>
                         </div>
                         <!-- end col -->
-                        <div class="col-7 col-sm-6">
-                            <div class="ml-5 mt-sm-0">
-                                <a href="{% url 'cart-summary' %}" class="btn btn-success font-weight-bold">
-                                    <i class="mdi mdi-cart-outline me-1"></i> Cart
-                                    <i class="mdi mdi-arrow-right"></i>
+                        <div class="col-8 col-sm-5 mt-3 mt-sm-0">
+                            <div class="ml-0">
+                                <a {% if cart|length == 0 %}data-toggle="modal" data-target="#cart-modal"{% else%} href="{% url 'cart-summary' %}" {% endif%}class="btn btn-success font-weight-bold w-100">
+                                    
+                                    <i class="mdi mdi-cart-outline me-1"></i> 
+                                    Shopping Cart
+                                    <i class="mdi mdi-arrow-right"></i> 
                                 </a>
                             </div>
                         </div>
@@ -96,7 +96,7 @@
         </div>
     </div>
 </div>
-<div class="bbb_viewed container bg-transparent">
+<div class="bbb_viewed container-fluid px-0 px-lg-5 bg-transparent">
     <div class="container-fluid">
         <div class="row">
             <div class="col p-0">
@@ -112,6 +112,9 @@
                     <div class="owl-carousel owl-theme bbb_viewed_slider">
                         {% for product in category_products %}
                             <div class="owl-item">
+                                <div class="w-100 d-flex justify-content-end p-2">
+                                    {% include 'components/favourite-btn.html' %}
+                                </div>
                                 <a href="{% url 'product_details' product.category.slug product.slug %}" class="btn text-hover">
                                 <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
                                     <div class="bbb_viewed_image"><img src="{{ product.image.url }}" alt=""></div>
@@ -140,7 +143,7 @@
         </div>
     </div>
 </div>
-<div class="container pt-3">
+<div class="container-fluid pt-3 px-0 px-lg-5">
     <hr />
     <div class="row" style="margin-top: 40px">
         <div class="col-md-6">

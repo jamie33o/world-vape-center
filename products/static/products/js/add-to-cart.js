@@ -27,7 +27,6 @@ $(document).ready(function(){
                 $(".cart-qty").text(json.qty);
                 $(".cart-total").text('€ '+ json.cart_total);
             },
-    
             error: function (xhr, errmsg, err) {
                 console.log(err)
             },

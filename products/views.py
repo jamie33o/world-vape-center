@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.views import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-from .models import Product, Review, Category
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from .models import Product, Review, Category, Favourite
 from .forms import ReviewForm, FiltersForm
 
 
@@ -147,3 +149,42 @@ class ReviewsView(View):
             return JsonResponse({'status': 'success', 'message': 'Review deleted successfully'}, status=200)
         else:
             return JsonResponse({'status': 'error', 'message': 'You do not have permission to delete this review'}, status=403)
+        
+
+def search(request):
+    query = request.GET.get('q', '')
+    results = []
+
+    if query:
+        products = Product.objects.filter(slug__icontains=query)[:5]
+
+        for product in products:
+            product_data = {
+                'url': reverse('product_details', args=[product.category.slug, product.slug]),
+                'name': product.name,
+                'price': product.price,
+                'img': product.image.url  # Assuming 'image' is a field in your Product model
+            }
+            results.append(product_data)
+
+    return JsonResponse({'products': results})
+
+
+@login_required
+def add_to_favorites(request, product_id):
+    user = request.user
+    product = get_object_or_404(Product, id=product_id)
+
+    try:
+        # Attempt to get an existing favorite for the user and product
+        favourite = Favourite.objects.get(user=user, product=product)
+        
+        # If the favorite exists, delete it
+        favourite.delete()
+        response_data = {'status': 'success', 'message': 'Product removed from favourites.'}
+    except Favourite.DoesNotExist:
+        # If the favorite does not exist, create a new one
+        Favourite.objects.create(user=user, product=product)
+        response_data = {'status': 'success', 'message': 'Product added to favourites.'}
+
+    return JsonResponse(response_data, status=200)

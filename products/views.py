@@ -6,7 +6,8 @@ from django.views import View
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from .models import Product, Review, Category, Favourite
+from .models import Product, Review, Category
+from profile.models import Favourite
 from .forms import ReviewForm, FiltersForm
 
 
@@ -170,21 +171,28 @@ def search(request):
     return JsonResponse({'products': results})
 
 
+
 @login_required
 def add_to_favorites(request, product_id):
     user = request.user
     product = get_object_or_404(Product, id=product_id)
 
-    try:
-        # Attempt to get an existing favorite for the user and product
-        favourite = Favourite.objects.get(user=user, product=product)
-        
-        # If the favorite exists, delete it
-        favourite.delete()
-        response_data = {'status': 'success', 'message': 'Product removed from favourites.'}
-    except Favourite.DoesNotExist:
-        # If the favorite does not exist, create a new one
-        Favourite.objects.create(user=user, product=product)
-        response_data = {'status': 'success', 'message': 'Product added to favourites.'}
+    # Attempt to get an existing favorite for the user
+    favourite, _ = Favourite.objects.get_or_create(user=user)
+    
+    # Check if the product is already favorited
+    is_favorited = favourite.products.filter(id=product.id).exists()
 
-    return JsonResponse(response_data, status=200)
+    if not is_favorited:
+        favourite.products.add(product)
+        response_data = {'status': 'success', 'message': 'Product added to favourites.'}
+        status_code = 200  # Created
+    else:
+        # If the product is already favorited, remove it
+        favourite.products.remove(product)
+        response_data = {'status': 'success', 'message': 'Product removed from favourites.'}
+        status_code = 200  # No Content
+
+    return JsonResponse(response_data, status=status_code)
+
+

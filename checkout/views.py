@@ -1,19 +1,17 @@
 from decimal import Decimal
 import json
+from profile.forms import CheckoutDetailForm, ShippingAddressForm
 import stripe
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
+from django.template.loader import render_to_string
+from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
 from products.models import Product
+from profile.forms import SigninForm, SignupForm
 from cart.cart import Cart
-from .forms import ShippingDetailsForm
 from .models import Order, OrderLineItem
-from django.template.loader import render_to_string
-from django.core.mail import send_mail
-from django.conf import settings
-
-
 
 
 @require_POST
@@ -38,38 +36,44 @@ def cache_checkout_data(request):
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    
 
     if request.method == 'POST':
         cart = Cart(request)
 
-        form_data = {
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'phone_number': request.POST['phone_number'],
-            'eircode': request.POST['eircode'],
-            'town_or_city': request.POST['town_or_city'],
-            'street_address1': request.POST['street_address1'],
-            'street_address2': request.POST['street_address2'],
-            'county': request.POST['county'],
-        }
+        # form_data = {
+        #     'full_name': request.POST['full_name'],
+        #     'email': request.POST['email'],
+        #     'phone_number': request.POST['phone_number'],
+        #     'eircode': request.POST['eircode'],
+        #     'town_or_city': request.POST['town_or_city'],
+        #     'street_address1': request.POST['street_address1'],
+        #     'street_address2': request.POST['street_address2'],
+        #     'county': request.POST['county'],
+        # }
 
-        shipping_form = ShippingDetailsForm(form_data)
-        if shipping_form.is_valid():
+        shipping_form = ShippingAddressForm(request.POST)
+        profile_detail_form = CheckoutDetailForm(request.POST)
+
+        if shipping_form.is_valid() and profile_detail_form.is_valid():
             address = shipping_form.save(commit=False)
             address.save()
-            
+            profile_details = profile_detail_form.save(commit=False)
             order = Order()
 
             pid = request.POST.get('client_secret').split('_secret')[0]
 
             order.stripe_pid = pid
+            order.first_name = profile_details.first_name
+            order.last_name = profile_details.last_name
+            order.email = profile_details.email
             order.shipping_address = address
             order.delivery_cost = cart.get_delivery_cost()
-            order.order_total = cart.get_total()
+            order.sub_total = cart.get_subtotal()
             order.grand_total = cart.get_grand_total()
             order.order_number = cart.get_order_num()
             order.save()
-            
+
             user = request.user if request.user.is_authenticated else None
 
             for item_id, item_data in cart.cart.items():
@@ -115,7 +119,6 @@ def checkout(request):
             messages.info(request, "There's nothing in your cart at the moment")
             return redirect(reverse('cart-summary'))
 
-
         total = cart.__len__()
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
@@ -124,7 +127,15 @@ def checkout(request):
             currency=settings.STRIPE_CURRENCY,
         )
 
-        order_form = ShippingDetailsForm()
+        if request.user.is_authenticated:
+            user_address_instance = request.user.user_address.first()
+            order_form = ShippingAddressForm(instance=user_address_instance)
+            profile_detail_form = CheckoutDetailForm(instance=request.user)
+        else:
+            order_form = ShippingAddressForm()
+            profile_detail_form = CheckoutDetailForm(auto_id='detail_%s')
+            sign_up_form = SignupForm(auto_id='signup_%s')
+            sign_in_form = SigninForm(auto_id='signin_%s')
 
     if not stripe_public_key:
         messages.warning(request, 'Stripe public key is missing. \
@@ -133,10 +144,15 @@ def checkout(request):
     template = 'checkout/checkout.html'
     context = {
         'order_form': order_form,
+        'profile_detail_form': profile_detail_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
     }
 
+    if not request.user.is_authenticated:
+        context['sign_up_form'] = sign_up_form
+        context['sign_in_form'] = sign_in_form
+    
     return render(request, template, context)
 
 
@@ -147,7 +163,7 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
     messages.success(request, f'Order successfully processed! \
         Your order number is {order_number}. A confirmation \
-        email will be sent to {order.shipping_address.email} .')
+        email will be sent to {order.email} .')
 
     if 'cart' in request.session:
         del request.session['cart']
@@ -173,3 +189,4 @@ def email_customer( email, email_subject):
             html_message=email_content,
             fail_silently=False
         )
+

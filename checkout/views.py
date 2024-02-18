@@ -36,21 +36,9 @@ def cache_checkout_data(request):
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-    
 
     if request.method == 'POST':
         cart = Cart(request)
-
-        # form_data = {
-        #     'full_name': request.POST['full_name'],
-        #     'email': request.POST['email'],
-        #     'phone_number': request.POST['phone_number'],
-        #     'eircode': request.POST['eircode'],
-        #     'town_or_city': request.POST['town_or_city'],
-        #     'street_address1': request.POST['street_address1'],
-        #     'street_address2': request.POST['street_address2'],
-        #     'county': request.POST['county'],
-        # }
 
         shipping_form = ShippingAddressForm(request.POST)
         profile_detail_form = CheckoutDetailForm(request.POST)
@@ -60,28 +48,30 @@ def checkout(request):
             address.save()
             profile_details = profile_detail_form.save(commit=False)
             order = Order()
+            user = request.user if request.user.is_authenticated else None
+            if user:
+                order.user = user
 
             pid = request.POST.get('client_secret').split('_secret')[0]
 
+            order.status = 'pending'
             order.stripe_pid = pid
             order.first_name = profile_details.first_name
             order.last_name = profile_details.last_name
             order.email = profile_details.email
             order.shipping_address = address
+            order.discount = cart.get_discounted_total()
             order.delivery_cost = cart.get_delivery_cost()
             order.sub_total = cart.get_subtotal()
             order.grand_total = cart.get_grand_total()
             order.order_number = cart.get_order_num()
             order.save()
 
-            user = request.user if request.user.is_authenticated else None
-
             for item_id, item_data in cart.cart.items():
                 if item_data.get('discounted_price'):
                     total = Decimal(item_data['discounted_price']) * item_data['qty']
                 else:
                     total = Decimal(item_data['price']) * item_data['qty']
-
                 try:
                     product = Product.objects.get(id=item_id)
                     
@@ -92,6 +82,7 @@ def checkout(request):
                         lineitem_total=total,
                         user= user
                     )
+
                     if item_data.get('product_choice'):
                         order_line_item.product_option=item_data['product_choice'],
 

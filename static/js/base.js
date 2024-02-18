@@ -64,6 +64,8 @@ $(document).ready(function () {
 
     $('.like-form').submit(function (e) {
         e.preventDefault(); // Prevent the form from submitting normally
+
+        const $favouriteCard = $(this).closest('.fav-card')
     
         $.ajax({
             type: 'POST',
@@ -85,7 +87,10 @@ $(document).ready(function () {
                     </div>
                 </div>
               </div>`)
-              $('main').append(message)        
+              $('main').append(message)  
+              if($favouriteCard){
+                $favouriteCard.remove()
+              }      
             },
             error: function(error) {
                 console.log(error);

@@ -7,7 +7,9 @@ from django.contrib import messages
 from checkout.models import Order
 from .models import Favourite, ShippingAddress
 from .forms import ShippingAddressForm, ProfileUpdateForm
-
+from django.contrib.auth import login, authenticate
+from .forms import SignupForm, SigninForm
+from cart.cart import Cart
 
 
 @method_decorator(login_required, name='dispatch')
@@ -16,17 +18,24 @@ class ProfileView(View):
 
     def get(self, request):
         user_address_instance = request.user.user_address.first()  # Assuming there's only one shipping address per user
-
+        
         user_form = ProfileUpdateForm(instance=request.user)
         shipping_address_form = ShippingAddressForm(instance=user_address_instance)
         user_orders = Order.objects.filter(user=request.user)
-        favourites = Favourite.objects.filter(user=request.user)
+        try:
+            favourites = Favourite.objects.get(user=request.user)
+        except Favourite.DoesNotExist:
+            favourites = None
 
+        if favourites:
+            favourite_products = favourites.products.all()
+        else:
+            favourite_products = None
         context = {
             'user_form': user_form,
             'shipping_address_form': shipping_address_form,
             'user_orders': user_orders,
-            'favourites': favourites
+            'favourites': favourite_products
         }
 
         return render(request, self.template_name, context)
@@ -65,3 +74,42 @@ def shipping_address_view(request):
         messages.error(request, 'Error updating shipping address. Please check the form.')
 
     return redirect('profile')
+
+
+@require_POST
+def signup_view(request):
+    if request.method == 'POST':
+        
+        redirect_url = request.POST.get('redirect_url')
+        form = SignupForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, 'Signed up successfully')
+
+            return redirect(redirect_url)
+        messages.error(request, form.errors)
+        return redirect(redirect_url)
+   
+
+@require_POST
+def signin_view(request):
+    if request.method == 'POST':
+        cart = Cart(request)
+        cart_data = cart.cart.copy()
+       
+        cart.clear_cart()
+
+        redirect_url = request.POST.get('redirect_url')
+        form = SigninForm(request, request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+
+            messages.success(request, 'Signed in successfully')
+            request.session['cart'] = cart_data
+            request.session.modified = True
+            return redirect('home')
+        messages.error(request, form.errors)
+        return redirect(redirect_url)
+

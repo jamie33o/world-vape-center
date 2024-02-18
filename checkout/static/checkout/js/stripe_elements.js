@@ -47,6 +47,7 @@ card.addEventListener('change', function (event) {
 
 // Handle form submit
 var form = document.getElementById('payment-form');
+const name = `${form.firrst_name} ${form.last_name}`
 
 form.addEventListener('submit', function(ev) {
     ev.preventDefault();
@@ -70,7 +71,7 @@ form.addEventListener('submit', function(ev) {
             payment_method: {
                 card: card,
                 billing_details: {
-                    name: $.trim(form.full_name.value),
+                    name: $.trim(name),
                     phone: $.trim(form.phone_number.value),
                     email: $.trim(form.email.value),
                     address:{
@@ -83,7 +84,7 @@ form.addEventListener('submit', function(ev) {
                 }
             },
             shipping: {
-                name: $.trim(form.full_name.value),
+                name: $.trim(name),
                 phone: $.trim(form.phone_number.value),
                 address: {
                     line1: $.trim(form.street_address1.value),

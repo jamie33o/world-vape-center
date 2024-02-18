@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'newsletter',
     'help',
     'checkout',
+    'profile',
     # django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -64,6 +65,9 @@ INSTALLED_APPS = [
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+AUTH_USER_MODEL = 'profile.CustomUser'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -37,6 +37,7 @@ urlpatterns = [
     path('newsletter/', include('newsletter.urls')),
     path('help/', include('help.urls')),
     path('checkout/', include('checkout.urls')),
+    path('profile/', include('profile.urls')),
     path("sitemap.xml",
         sitemap,
         {"sitemaps": sitemaps},

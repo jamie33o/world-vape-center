@@ -86,10 +86,15 @@
         </div>
 
         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-            <p style="margin: 0; font-weight: bold; color: #000;">Order Total - </p>
+            <p style="margin: 0; font-weight: bold; color: #000;">Order SubTotal - </p>
             <p style="margin: 0;">€ {{ order.order_total }}</p>
         </div>
-
+        {% if order.discount %}
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <p style="margin: 0; font-weight: bold; color: #000;">Discount - </p>
+                <p style="margin: 0;">€ {{ order.discount }}</p>
+            </div>
+        {% endif %}
         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
             <p style="margin: 0; font-weight: bold; color: #000;">Delivery - </p>
             <p style="margin: 0;">€ {{ order.delivery_cost }}</p>

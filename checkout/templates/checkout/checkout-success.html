@@ -147,13 +147,22 @@
 
                     <div class="row">
                         <div class="col-12 col-md-4">
-                            <p class="mb-0 text-black font-weight-bold">Order Total</p>
+                            <p class="mb-0 text-black font-weight-bold">Order SubTotal</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
                             <p class="mb-0">€ {{ order.sub_total }}</p>
                         </div>
                     </div>
-
+                    {% if order.discount %}
+                        <div class="row">
+                            <div class="col-12 col-md-4">
+                                <p class="mb-0 text-black font-weight-bold">Order Discount</p>
+                            </div>
+                            <div class="col-12 col-md-8 text-md-right">
+                                <p class="mb-0">€ {{ order.discount }}</p>
+                            </div>
+                        </div>
+                    {% endif %}
                     <div class="row">
                         <div class="col-12 col-md-4">
                             <p class="mb-0 text-black font-weight-bold">Delivery</p>

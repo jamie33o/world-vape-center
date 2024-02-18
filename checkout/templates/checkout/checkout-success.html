@@ -13,7 +13,7 @@
                 <hr>
                 <h2 class="logo-font mb-4">Thank You</h2>
                 <hr>
-                <p class="text-black">Your order information is below. A confirmation email will be sent to <strong>{{ order.shipping_address.email }}</strong>.</p>
+                <p class="text-black">Your order information is below. A confirmation email will be sent to <strong>{{ order.email }}</strong>.</p>
             </div>
         </div>
 
@@ -74,7 +74,7 @@
                             <p class="mb-0 text-black font-weight-bold">Full Name</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0">{{ order.shipping_address.full_name }}</p>
+                            <p class="mb-0">{{ order.first_name }} {{ order.last_name }}</p>
                         </div>
                     </div>
 
@@ -150,7 +150,7 @@
                             <p class="mb-0 text-black font-weight-bold">Order Total</p>
                         </div>
                         <div class="col-12 col-md-8 text-md-right">
-                            <p class="mb-0">€ {{ order.order_total }}</p>
+                            <p class="mb-0">€ {{ order.sub_total }}</p>
                         </div>
                     </div>
 

@@ -1,0 +1,43 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+
+
+    <!-- Billing history card-->
+    <div class="card mb-4">
+        <div class="card-header">Order History</div>
+        <div class="card-body p-0">
+            <!-- Billing history table-->
+            <div class="table-responsive table-billing-history">
+                {% if user_orders %}
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="border-gray-200" scope="col">Order number</th>
+                            <th class="border-gray-200" scope="col">Date</th>
+                            <th class="border-gray-200" scope="col">Amount</th>
+                            <th class="border-gray-200" scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in user_orders %}
+                        <tr>
+                            <td>{{ order.order_number  }}</td>
+                            <td>{{ order.date }}</td>
+                            <td>{{ order.grand_total }}</td>
+                            <td><span class="badge bg-light text-dark">{{ order.status }}</span></td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="d-flex align-items-center flex-column justify-content-center px-4">
+                    <h3 class="text-center my-5">No Orders Yet!</h3>
+                    <a class="like btn btn-danger text-white mx-auto my-5" href="{% url 'categories' %}">
+                        Back To Products
+                    </a>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>

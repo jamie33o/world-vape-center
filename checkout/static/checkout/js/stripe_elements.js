@@ -47,9 +47,11 @@ card.addEventListener('change', function (event) {
 
 // Handle form submit
 var form = document.getElementById('payment-form');
+const submitPaymentBtn = $('#submit-button')
+
 const name = `${form.firrst_name} ${form.last_name}`
 
-form.addEventListener('submit', function(ev) {
+submitPaymentBtn.click(function(ev) {
     ev.preventDefault();
     card.update({ 'disabled': true});
     $('#submit-button').attr('disabled', true);
@@ -57,13 +59,13 @@ form.addEventListener('submit', function(ev) {
     $('#loading-overlay').fadeToggle(100);
 
     var saveInfo = Boolean($('#id-save-info').attr('checked'));
-    // From using {% csrf_token %} in the form
     var csrfToken = $('input[name="csrfmiddlewaretoken"]').val();
     var postData = {
         'csrfmiddlewaretoken': csrfToken,
         'client_secret': clientSecret,
         'save_info': saveInfo,
     };
+
     var url = '/checkout/cache_checkout_data/';
 
     $.post(url, postData).done(function () {

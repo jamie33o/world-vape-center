@@ -7,7 +7,7 @@ from django.contrib import messages
 from checkout.models import Order
 from .models import Favourite, ShippingAddress
 from .forms import ShippingAddressForm, ProfileUpdateForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login
 from .forms import SignupForm, SigninForm
 from cart.cart import Cart
 
@@ -109,7 +109,7 @@ def signin_view(request):
             messages.success(request, 'Signed in successfully')
             request.session['cart'] = cart_data
             request.session.modified = True
-            return redirect('home')
+            return redirect(redirect_url)
         messages.error(request, form.errors)
         return redirect(redirect_url)
 

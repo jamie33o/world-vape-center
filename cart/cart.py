@@ -10,10 +10,6 @@ class Cart():
     def __init__(self, request):
 
         self.session = request.session
-        # cart = self.session['cart'] = { }
-        # order_num = self.session['order_num'] = {}
-
-        # Returning user - obtain his/her existing session
 
         cart = self.session.get('cart')
         order_num = self.session.get('order_num')
@@ -23,9 +19,8 @@ class Cart():
         if 'cart' not in request.session:
 
             cart = self.session['cart'] = { }
-            order_num = self.session['order_num'] = self._generate_order_number()
+            order_num = self.session['order_num'] = str(self._generate_order_number())
 
-        
         self.cart = cart
         self.order_num = order_num
 
@@ -33,8 +28,6 @@ class Cart():
     def add(self, product, product_qty, product_choice):
 
         product_id = str(product.id)
-        
-
 
         if product_id in self.cart:
 
@@ -85,7 +78,6 @@ class Cart():
 
 
     def __iter__(self):
-
         all_product_ids = self.cart.keys()
 
         products = Product.objects.filter(id__in=all_product_ids)
@@ -94,18 +86,24 @@ class Cart():
 
         for product in products:
 
-            cart[str(product.id)]['product'] = product
+              cart[str(product.id)]['product'] = {
+                'name': product.name,
+                'price': float(product.price),
+                'discounted_price': product.discounted_price if product.discounted_price else None,
+                'slug': product.slug,
+                'category': {'slug': product.category.slug, 'name': product.category.name},
+                'id': product.id,
+                'image': {'url': product.image.url,} 
+            }
 
         for item in cart.values():
-
-            item['price'] = Decimal(item['price'])
-
+            item['price'] = item['price']
             item['total'] = item['price'] * item['qty']
 
-            yield item    
-
-
+        # Ensure any other Decimal values are converted to float or another JSON-serializable format
+            yield item
     
+
     def get_subtotal(self):
         return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
     
@@ -155,8 +153,10 @@ class Cart():
         return total_discount if total_discount else None
 
 
+    def clear_cart(self):
+        self.session['cart'] = {}
+        self.session.modified = True
 
-    
 
 
 

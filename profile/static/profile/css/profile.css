@@ -1,0 +1,63 @@
+.folder-link {
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    background-color: transparent;
+    border-radius: 0 10px 0 0 ;
+}
+
+.nav-borders {
+    position: absolute;
+    z-index: 1000;
+    top: -9px;
+}
+
+.folder-link:hover {
+    background-color: var(--light-grey);
+}
+.folder-link:focus {
+    box-shadow: none !important;
+}
+
+.file {
+    background-color: #FFF8DC; 
+    border: 1px solid black;
+    border-radius: 20px;
+    margin-bottom: 50px;
+}
+
+.nav-borders button {
+    background-color: #FFF8DC; 
+}
+
+/* ///////////////////////// media queries ///////////////////////// */
+
+/* Media query for screens smaller than 576px (extra small devices) */
+@media (max-width: 575.98px) {
+    .file {
+        border-radius: 10px;
+    }
+    
+}
+
+/* Media query for screens between 576px and 767.98px (small devices) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+    /* Styles for small devices go here */
+
+}
+
+/* Media query for screens between 768px and 991.98px (medium devices) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    /* Styles for medium devices go here */
+
+}
+
+/* Media query for screens between 992px and 1199.98px (large devices) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    /* Styles for large devices go here */
+}
+
+/* Media query for screens 1200px and larger (extra large devices) */
+@media (min-width: 1200px) {
+    /* Styles for extra large devices go here */
+}

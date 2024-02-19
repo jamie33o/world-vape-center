@@ -1,44 +1,40 @@
 {% extends "base.html" %}
 {% load static %}
 
-
 {% block extra_css %}
-<link src="{% static 'profile/css/profile.css' %}">
-
+    <link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">
 {% endblock %}
+
 {% block extra_js %}
     <script src="{% static 'profile/js/profile.js' %}"></script>
-
 {% endblock %}
+
 {% block breadcrumb %}
 {% endblock %}
 
-
 {% block content %}
-<div class="container-xl px-4 mt-4">
-    <!-- Account page navigation-->
-    <nav class="nav nav-borders">
-        <button class="nav-link active ms-0 folder-link" data-id="#profile">Profile</button>
-        <button class="nav-link folder-link " data-id="#address">Shiping Details</button>
-        <button class="nav-link folder-link" data-id="#orders">Orders</button>
-        <button class="nav-link folder-link" data-id="#favs">Favourite Products</button>
-    </nav>
-    <hr class="mt-0 mb-4">
-    <div id="profile" class="folder">
-    {% include 'profile/profile.html' %}
-    </div>
-    <div id="favs" class="folder d-none">
-        {% include 'profile/favourites.html' %}
-    </div>
-    <div id="address" class="folder d-none">
-        {% include 'profile/address.html' %}
-    </div>
-    <div id="orders" class="folder d-none">
-        {% include 'profile/orders.html' %}
-    </div>
+    <div class="container-fluid px-1 px-sm-4 mt-4 pt-5">
+        <!-- Account page navigation-->
+        <nav class="nav nav-borders ml-2 ml-sm-5">
+            <button class="nav-link folder-link btn" data-id="#profile">Profile</button>
+            <button class="nav-link folder-link btn mt-3" data-id="#address">Shiping</button>
+            <button class="nav-link folder-link btn mt-3" data-id="#orders">Orders</button>
+            <button class="nav-link folder-link btn mt-3" data-id="#favs">Favourites</button>
+        </nav>
+        <div class="file p-2 p-sm-5">
+            <div id="profile" class="folder">
+            {% include 'profile/profile.html' %}
+            </div>
+            <div id="favs" class="folder d-none">
+                {% include 'profile/favourites.html' %}
+            </div>
+            <div id="address" class="folder d-none">
+                {% include 'profile/address.html' %}
+            </div>
+            <div id="orders" class="folder d-none">
+                {% include 'profile/orders.html' %}
+            </div>
+        </div>
 
-
-</div>
-
-
+    </div>
 {% endblock %}

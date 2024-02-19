@@ -2,7 +2,8 @@ $(document).ready(function(){
 
     $('.folder-link').click(function(){
         $('.folder').addClass('d-none')
-       
+        $('.folder-link').addClass('mt-3')
+        $(this).removeClass('mt-3')
         $($(this).data('id')).removeClass('d-none')
     })
 

@@ -8,6 +8,19 @@
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
+
+{% block breadcrumb %}
+<div class="container p-0 mt-4">
+    <nav aria-label="breadcrumb" class="d-none bc-con w-100">
+        <ol class="bg-none mt-3 list-unstyled d-flex">
+            <li class="breadcrumb-item" ><a href="{% url 'cart-summary' %}">Cart</a></li>
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'checkout' %}">Checkout</a></li>
+            <li class="breadcrumb-item">Order Success</li> 
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
 {% block content %}
     <div class="overlay"></div>
     <div class="container my-3">

@@ -6,6 +6,18 @@
     <link async rel="stylesheet" href="{% static 'cart/css/cart-summary.css' %}" />
 {% endblock %} 
 
+{% block breadcrumb %}
+<div class="container">
+    <nav aria-label="breadcrumb" class="d-none bc-con w-100">
+        <ol class="bg-none mt-3 list-unstyled d-flex">
+            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'cart-summary' %}">Cart</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'checkout' %}">Checkout</a></li>
+            <li class="breadcrumb-item">Order Success</li> 
+        </ol>
+    </nav>
+</div>
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -45,14 +57,14 @@
                     </div>
 
                     <div>
-                        <div class="row">
+                        <div class="row mb-3">
                             <div class="col-md-4">
                                 <div class="mt-3">
                                     <p class="text-muted mb-2">Price</p>
                                     {% if product.discounted_price %}
                                         <h5 class="mb-0 mt-2">€ {{product.discounted_price }} - <span class="text-muted me-2"><del class="font-size-16 fw-normal">€ {{product.price }}</del></span></h5>
                                     {% else %}
-                                        <h4 class="price text-muted">Price: <span class="price-amount">€ {{ product.price }} </span></h4>
+                                        <h4 class="price text-muted"><span class="price-amount">€ {{ product.price }} </span></h4>
                                     {% endif %}
                                 </div>
                             </div>
@@ -123,7 +135,7 @@
         <!-- end row-->
 
         <div class="col-sm-4">
-            <div class="mt-5 mt-lg-0">
+            <div class="mt-5 mt-sm-0">
                 <div class="card border shadow-none">
                     <div class="card-header bg-transparent border-bottom py-3 px-4">
                         <h5 class="font-size-16 mb-0">
@@ -135,13 +147,13 @@
                             <table class="table mb-0">
                                 <tbody> 
                                     <tr>
-                                        <td>Sub Total :</td>
-                                        <td class="text-end">€ {{ cart.get_subtotal }}</td>
+                                        <td>Sub Total:</td>
+                                        <td class="text-end">€{{ cart.get_subtotal }}</td>
                                     </tr>
                                     {% if cart.get_discounted_total %}
                                         <tr>
                                             <td>Discount :</td>
-                                            <td class="text-end">€ {{ cart.get_discounted_total }}</td>
+                                            <td class="text-end">€{{ cart.get_discounted_total }}</td>
                                         </tr>
                                     {% endif %}
                                    
@@ -152,7 +164,7 @@
                                     <tr class="bg-light">
                                         <th>Total :</th>
                                         <td class="text-end">
-                                            <span class="fw-bold">€ {{ cart.get_grand_total }} </span>
+                                            <span class="fw-bold">€{{ cart.get_grand_total }} </span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -162,17 +174,16 @@
                     </div>
                 </div>
             </div>        
-                <div class="d-flex flex-dir-row justify-content-between">
-                    <a href="{% url 'categories' %}" class="btn btn-info text-white continue-shopping">
-                        <i class="mdi mdi-arrow-left"></i> Continue Shopping
-                    </a>
-               
-                    <div class="text-sm-end mt-sm-0 pull-right">
-                        <a href="{% url 'checkout' %}" class="btn btn-success">
-                            <i class="mdi mdi-cart-outline me-1"></i> Checkout
-                        </a>
-                    </div>
-                </div>
+            <div class="d-flex flex-column flex-lg-row justify-content-between">
+                <a href="{% url 'categories' %}" class="btn btn-info text-white continue-shopping">
+                    <i class="mdi mdi-arrow-left"></i> Continue Shopping
+                </a>
+            
+                <a href="{% url 'checkout' %}" class="btn btn-success mt-4 mt-lg-0">
+                    <i class="mdi mdi-cart-outline me-1"></i> Checkout
+                    <i class="mdi mdi-arrow-right"></i>
+                </a>
+            </div>
                 <!-- end col -->
         </div>
     </div>

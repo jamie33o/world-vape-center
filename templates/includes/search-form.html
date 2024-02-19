@@ -1,5 +1,5 @@
-<form id="search-form" class="form-inline my-lg-0 w-100 d-none position-absolute" method="get" action="{% url 'search' %}">
-    <div class="w-100 d-flex flex-dir-row input-container">
+<form id="search-form" class="bg-dark m-0 form-inline my-lg-0 d-none position-absolute w-100" method="get" action="{% url 'search' %}">
+    <div class="col-12 col-lg-7 d-flex flex-dir-row input-container mx-auto">
       <input type="text" class="w-100" name="q" placeholder="Search..." id="search-input" />
 
       <div class="input-group-append">
@@ -7,11 +7,11 @@
           <i class="fa fa-search"></i>
         </button>
       </div>
-      <button class="btn btn-danger close-search ml-3 d-sm-none">
+      <button class="btn btn-danger close-search ml-3 d-lg-none">
         X
       </button>
     </div>
-    <div class="w-100 h-100 overflow-auto results-container d-none">
+    <div class="col-12 col-lg-7 h-100 overflow-auto results-container d-none mx-auto">
         <div class="w-100 text-white border bg-light px-3 py-2 ">
             <h4>Products</h4>
         </div>

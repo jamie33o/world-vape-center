@@ -5,9 +5,9 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="{% url 'home' %}"><img class="logo" src="{% static 'logo.png' %}" alt="logo" /><p class="d-none d-sm-inline ml-2">World Vape Center</p></a>
+  <a class="navbar-brand" href="{% url 'home' %}"><img class="logo ml-2" src="{% static 'logo.png' %}" alt="logo" /><p class="d-none d-lg-inline ml-2">World Vape Center</p></a>
   <div class="d-flex ml-auto">
-    <a class="text-white mt-2 position-relative d-flex d-sm-none mx-0" href="{% url 'cart-summary' %}">
+    <a class="text-white mt-2 position-relative d-flex d-lg-none mx-0" href="{% url 'cart-summary' %}">
       <i class="fa fa-shopping-cart h4 text-success"></i>
       <span class="cart-qty badge badge-light position-absolute">
         {% with qty_amount=cart|length %}
@@ -17,13 +17,12 @@
                     0
             {% endif %}
         {% endwith %}
-
       </span>
       <span class="ml-2 cart-total">€{{ cart.get_grand_total }}</span>
     </a>
-    <span class="h4 mx-2 text-white d-flex d-sm-none">|</span>
+    <span class="h4 mx-2 text-white d-flex d-lg-none">|</span>
 
-    <p class="h5 my-auto d-inline ml-1 text-white d-sm-none">
+    <p class="h5 my-auto d-inline ml-1 text-white d-lg-none">
       {% if user.is_authenticated %}
         {{ user }}      
       {% else %}
@@ -48,29 +47,29 @@
         <a class="nav-link" href="#help">Help</a>
       </li>
       {% if user.is_authenticated %}
-        <li class="nav-item d-sm-none">
+        <li class="nav-item d-lg-none">
           <a href="{% url 'profile' %}" class="nav-link">
             Profile
           </a>
         </li>
-        <li class="nav-item d-sm-none">
+        <li class="nav-item d-lg-none">
           <a href="{% url 'account_change_password' %}" class="nav-link">
             Change password
           </a>      
         </li>
-        <li class="nav-item d-sm-none">
+        <li class="nav-item d-lg-none">
           <a href="{% url 'account_email' %}" class="nav-link">
             Email Settings
           </a>      
         </li>
-        <li class="nav-item d-sm-none">
+        <li class="nav-item d-lg-none">
           <div class="dropdown-divider"></div>
           <a href="{% url 'account_logout' %}" class="nav-link">
             Logout
           </a>           
         </li>
       {% else %}
-      <li class="nav-item d-sm-none">
+      <li class="nav-item d-lg-none">
         <div class="dropdown-divider"></div>
         <a href="{% url 'account_login' %}" class="nav-link">
           Sign In          
@@ -80,16 +79,16 @@
       {% endif %}
     </ul>
 
-      <button class="search-btn d-none d-sm-flex btn mt-2">
+      <button class="search-btn d-none d-lg-flex btn mt-2">
         <i class="fas fa-search h4"></i>
       </button>
       <span class="h2 mx-2 text-white d-none d-lg-flex">|</span>
 
-    <div class="dropdown d-none d-sm-flex">
+    <div class="dropdown d-none d-lg-flex">
         {% if user.is_authenticated %}
           <a class="dropdown-toggle text-white d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             {% if user.profile.image %}
-              <img class="logo" src="{{ user.profile.image.url }}" alt="logo" />            
+              <img class="logo" src="{{ user.image.url }}" alt="logo" />            
             {% else %}
               <i class="fa-regular fa-circle-user h3 m-0"></i>            
             {% endif %}
@@ -117,11 +116,12 @@
             </a>      
           </div>
       </div>
-      <span class="h2 mx-2 text-white d-none d-sm-flex">|</span>
+      <span class="h2 mx-2 text-white d-none d-lg-flex">|</span>
 
-    <button class="btn text-white mt-2 position-relative d-none d-sm-flex" data-toggle="modal" data-target="#cart-modal">
-      <i class="fa fa-shopping-cart h4 text-success"></i>
-      <span class="cart-qty badge badge-light position-absolute">
+      <button class="text-white mt-2 position-relative d-none d-lg-flex mx-0 btn"  data-toggle="modal" data-target="#cart-modal">
+        <i class="fa fa-shopping-cart h4 text-success"></i>
+
+        <span class="cart-qty badge badge-light position-absolute">
         {% with qty_amount=cart|length %}
             {% if qty_amount > 0 %}
                 {{ qty_amount }}
@@ -129,10 +129,11 @@
                     0
             {% endif %}
         {% endwith %}
-
       </span>
-      <span class="ml-2 cart-total">€ {{ cart.get_grand_total }}</span>
+
+      <span class="ml-2 cart-total">€{{ cart.get_grand_total }}</span>
     </button>
+
     <div class="modal fade" id="cart-modal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="cart modal" aria-hidden="true">
       <div class="modal-dialog float-right" role="document">
         <div class="modal-content">
@@ -227,7 +228,7 @@
       </div>
     </div>
   </div>
-  <form class="form-inline my-2 my-lg-0 w-100 d-sm-none">
+  <form class="form-inline my-2 my-lg-0 w-100 d-lg-none">
     <div class="w-100 d-flex flex-dir-row">
       <input type="text" class="w-100" placeholder="Search..." id="mob-search-input" />
       <div class="input-group-append">

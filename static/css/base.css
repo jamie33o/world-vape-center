@@ -165,11 +165,18 @@ header .navbar {
     right: 20px;
 }
 
+.cart-qty {
+    height: fit-content;
+    width: fit-content;
+    left: 25px;
+
+}
+
 
 /* ////////////// breadcrumbs /////////////////// */
 
 .bc-con {
-    margin: 300px 0 ;
+    margin: 300px 0;
 }
 
 .breadcrumb {
@@ -358,9 +365,7 @@ footer .glyphicon {
 
 /* ///////////////////////// media queries ///////////////////////// */
 
-/* Media query for screens smaller than 576px (extra small devices) */
-@media (max-width: 575.98px) {
-    /* Styles for extra small devices go here */
+@media (max-width: 991.98px) {
     main{
         margin-top: 130px;
     }
@@ -379,26 +384,4 @@ footer .glyphicon {
     .input-container {
         padding: 20px 10px;
     }
-
-}
-
-/* Media query for screens between 576px and 767.98px (small devices) */
-@media (min-width: 576px) and (max-width: 767.98px) {
-    /* Styles for small devices go here */
-}
-
-/* Media query for screens between 768px and 991.98px (medium devices) */
-@media (min-width: 768px) and (max-width: 991.98px) {
-    /* Styles for medium devices go here */
-
-}
-
-/* Media query for screens between 992px and 1199.98px (large devices) */
-@media (min-width: 992px) and (max-width: 1199.98px) {
-    /* Styles for large devices go here */
-}
-
-/* Media query for screens 1200px and larger (extra large devices) */
-@media (min-width: 1200px) {
-    /* Styles for extra large devices go here */
 }

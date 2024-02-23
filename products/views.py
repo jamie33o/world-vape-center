@@ -9,6 +9,7 @@ from django.contrib import messages
 from .models import Product, Review, Category
 from profile.models import Favourite
 from .forms import ReviewForm, FiltersForm
+from cart.forms import AddToCartForm
 
 
 def all_categories(request):
@@ -105,11 +106,17 @@ class ProductDetailView(View):
         product = get_object_or_404(Product, slug=slug)
         reviews = Review.objects.filter(product=product)
         category_products = Product.objects.filter(category=product.category)
+        form = AddToCartForm(
+            product_id = product.id,
+            product_options = product.options.all(),
+            product_option_name = product.options_name
+        )
 
         context = {
             'product': product,
             'reviews': reviews,
-            'category_products': category_products
+            'category_products': category_products,
+            'form': form
         }
 
         return render(request, self.template_name, context)

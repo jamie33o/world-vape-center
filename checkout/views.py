@@ -1,6 +1,7 @@
 from decimal import Decimal
 import json
 from profile.forms import CheckoutDetailForm, ShippingAddressForm
+from profile.forms import SigninForm, SignupForm
 import stripe
 from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
 from django.views.decorators.http import require_POST
@@ -9,7 +10,6 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
 from products.models import Product
-from profile.forms import SigninForm, SignupForm
 from cart.cart import Cart
 from .models import Order, OrderLineItem
 

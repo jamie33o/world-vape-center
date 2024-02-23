@@ -207,6 +207,7 @@
     </div>
 {% endblock %}
 
+
 {% block extra_postloadjs %}
     {{ client_secret|json_script:'id_client_secret' }}
     {{ stripe_public_key|json_script:'id_stripe_public_key' }}

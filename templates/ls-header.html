@@ -211,16 +211,20 @@
         </div>
           <div class="modal-footer">
             {% if cart|length > 0 %}
-              <a href="{% url 'checkout' %}">
-                  <span class="icon">
-                    <i class="fas fa-lock"></i>
-                </span>
-                Secure Checkout 
-              </a>    
+              <button type="button" class="w-25 btn btn-info mr-auto font-weight-bold" data-dismiss="modal" aria-label="Close">
+                <i class="mdi mdi-arrow-left"></i> 
+
+                Close
+              </button>    
+              <a href="{% url 'cart-summary' %}" class="btn btn-success font-weight-bold w-25">                 
+                <i class="mdi mdi-cart-outline me-1"></i> 
+                 Cart
+                <i class="mdi mdi-arrow-right"></i> 
+              </a> 
             {% else %}
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                < KEEP SHOPPING
-              </button>  
+            <button type="button" class="w-50 btn btn-info mr-auto font-weight-bold" data-dismiss="modal" aria-label="Close">
+              < Close
+            </button>      
             {% endif %}
 
           </div>

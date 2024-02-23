@@ -1,10 +1,9 @@
-from django.shortcuts import render
-
-from .cart import Cart
-from products.models import Product
-
+from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
+from django.contrib import messages
+from products.models import Product
+from .cart import Cart
+
 
 
 def cart_summary(request):
@@ -24,23 +23,17 @@ def cart_add(request):
     cart = Cart(request)
 
     if request.method == 'POST':
-
+        redirect_url = request.POST.get('redirect_url')
         product_id = int(request.POST.get('product_id'))
-        product_quantity = int(request.POST.get('product_quantity'))
+
+        product_quantity =  int(request.POST.get('product_quantity'))
         product_choice = request.POST.get('product_choice') if request.POST.get('product_choice') else None
 
         product = get_object_or_404(Product, id=product_id)
 
         cart.add(product=product, product_qty=product_quantity, product_choice=product_choice)
 
-
-        cart_quantity = cart.__len__()
-        cart_total = cart.get_subtotal()
-
-
-        response = JsonResponse({'qty': cart_quantity, 'cart_total': cart_total})
-
-        return response
+        return redirect(redirect_url)
         
 
 
@@ -53,16 +46,11 @@ def cart_delete(request):
         product_id = int(request.POST.get('product_id'))
 
         cart.delete(product=product_id)
+        messages.success(request, 'Product removed!!!')
+        return redirect('cart-summary')
+    messages.error(request, 'Could not remove product')
+    return redirect('cart-summary')
 
-
-        cart_quantity = cart.__len__()
-
-        cart_total = cart.get_subtotal()
-
-
-        response = JsonResponse({'qty':cart_quantity, 'total':cart_total})
-
-        return response
 
 
 
@@ -77,12 +65,7 @@ def cart_update(request):
 
         cart.update(product=product_id, qty=product_quantity)
 
-
-        cart_quantity = cart.__len__()
-
-        cart_total = cart.get_subtotal()
-
-
-        response = JsonResponse({'qty':cart_quantity, 'total':cart_total})
-
-        return response
+        messages.success(request, 'Quantity updated!!!')
+        return redirect('cart-summary')
+    messages.error(request, 'Could not update quantity')
+    return redirect('cart-summary')

@@ -13,6 +13,7 @@ class Cart():
 
         cart = self.session.get('cart')
         order_num = self.session.get('order_num')
+        cart_updated = self.session.get('cart_updated')
 
         # New user - generate a new session
 
@@ -20,21 +21,22 @@ class Cart():
 
             cart = self.session['cart'] = { }
             order_num = self.session['order_num'] = str(self._generate_order_number())
+            cart_updated = self.session['cart_updated'] = {'cart_bool': False,}
 
         self.cart = cart
         self.order_num = order_num
+        self.cart_updated = cart_updated
+
 
 
     def add(self, product, product_qty, product_choice):
+        self.cart_updated['cart_bool'] = True
 
         product_id = str(product.id)
 
         if product_id in self.cart:
-
             self.cart[product_id]['qty'] = product_qty if product_qty > 1 else self.cart[product_id]['qty'] + 1
-
         else:
-
             self.cart[product_id] = {'price': str(product.price), 'qty': product_qty}
 
             if product_choice:
@@ -44,6 +46,7 @@ class Cart():
                 self.cart[product_id]['discounted_price'] = str(product.discounted_price)
 
         self.session.modified = True
+
 
 
 
@@ -76,7 +79,6 @@ class Cart():
         return sum(item['qty'] for item in self.cart.values())
 
 
-
     def __iter__(self):
         all_product_ids = self.cart.keys()
 
@@ -102,11 +104,12 @@ class Cart():
 
         # Ensure any other Decimal values are converted to float or another JSON-serializable format
             yield item
-    
+
 
     def get_subtotal(self):
         return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
-    
+
+
     def get_delivery_cost(self):
         total_cost = sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
 
@@ -120,9 +123,10 @@ class Cart():
             delivery = 2
         else:
             delivery = 0
-        
+
         return delivery
-    
+
+
     def get_grand_total(self):
         delivery = self.get_delivery_cost()
         total = self.get_subtotal()
@@ -132,19 +136,21 @@ class Cart():
             total = total - discount
         if len(self) == 0:
             total = 0
-            
+
         return total
-    
-    
+
+
     def _generate_order_number(self):
         """
         Generate a random, unique order number using UUID
         """
         return uuid.uuid4().hex.upper()[:16]
-    
+
+
     def get_order_num(self):
         return self.order_num
-    
+
+
     def get_discounted_total(self):
         total_discount = sum(
             (Decimal(item['price']) - Decimal(item['discounted_price'])) * item['qty']
@@ -158,13 +164,11 @@ class Cart():
         self.session.modified = True
 
 
+    def get_cart_status(self):
+        status = self.cart_updated['cart_bool']
+        self.cart_updated['cart_bool'] = False
+        self.session.modified = True
+        return status
 
-
-
-
-
-
-
-  
 
 

@@ -85,7 +85,7 @@
             </div>
         </div>
       </div>
-        {% endfor %}
+      {% endfor %}
       
       {% endif %}
       {% block content %}
@@ -118,11 +118,15 @@
         </div>
       </div>
     </div>
- <script>
+
     {% block postloadjs %}
-   
-        // Dynamically adjust the top margin of the main section based on the header's height
+    <script>
+
       $(document).ready(function() {
+
+        {% if cart.get_cart_status %}
+          $('#cart-modal').modal('show')
+        {% endif %}
         
         $('.un-verified').on('click', function(){
           localStorage.setItem('firstVisit', 'true');
@@ -207,9 +211,10 @@
         breadcrumbsList();
           
       });
+    </script>
+
     {% endblock %} 
 
-</script>
 {% block extra_postloadjs %}  
 {% endblock %}    
   </body>

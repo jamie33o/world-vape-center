@@ -1,3 +1,13 @@
+/*
+JavaScript for enhancing user profile page interactivity.
+
+This script utilizes jQuery and handles the following functionality:
+- Toggle between different sections (profile, favorites, shipping, orders) using navigation buttons.
+- Adjust styling for the selected section in the navigation.
+- Display the selected section's content and hide others.
+- Handle the change event of the profile image input, updating the preview and displaying file details.
+
+*/
 $(document).ready(function(){
 
     $('.folder-link').click(function(){

@@ -1,45 +1,49 @@
- <div class="card card-header-actions mb-4">
+<!--
+Template for displaying user favorites in a card format.
+
+This template renders a card displaying user favorites, including product
+images, names, prices, and a button to remove the product from favorites.
+
+Contents:
+- Card header with the title "Favourites."
+- Body of the card containing a loop to display each favorite product.
+- If there are no favorites, a message is displayed with a link to return to products.
+-->
+<div class="card card-header-actions mb-4">
     <div class="card-header">
         Favourites
     </div>
     <div class="card-body px-0">
         {% if favourites %}
-        {% for product in favourites %}
-      
-        <a href="{% url 'product_details' product.category product.slug  %}" class="text-decoration-none w-100">
-
-        <div class="d-flex border-bottom border-top py-2 align-items-center justify-content-between px-4 fav-card">
-
-            <div class="d-flex align-items-center">
-                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded-start mr-3" width="50">
-                <div class="ms-4">
-                    <div class="small">{{ product.name }}</div>
-                    <div class="text-xs text-muted">{{ product.price }}</div>
+            {% for product in favourites %}
+            <a href="{% url 'product_details' product.category product.slug  %}" class="text-decoration-none w-100">
+                <div class="d-flex border-bottom border-top py-2 align-items-center justify-content-between px-4 fav-card">
+                    <div class="d-flex align-items-center">
+                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded-start mr-3" width="50">
+                        <div class="ms-4">
+                            <div class="small">{{ product.name }}</div>
+                            <div class="text-xs text-muted">{{ product.price }}</div>
+                        </div>
+                    </div>
+                    <div class="ms-4 small">
+                        <form class="like-form d-inline" action="{% url 'add_to_favorites' product.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="like btn btn-danger text-white" type="submit">
+                                Remove
+                            </button>
+                        </form>
+                    </div>
                 </div>
-            </div>
-            <div class="ms-4 small">
-                <form class="like-form d-inline" action="{% url 'add_to_favorites' product.id %}" method="POST">
-                    {% csrf_token %}
-                    <button class="like btn btn-danger text-white" type="submit">
-                        Remove
-                    </button>
-                </form>
-            </div>
-        </div>
-    </a>
-
-        {% endfor %}
-        {% else %}
-        <div class="d-flex align-items-center flex-column justify-content-center px-4">
-            <h3 class="text-center my-5">No Favourites Added</h3>
-            <a class="like btn btn-danger text-white mx-auto my-5" href="{% url 'categories' %}">
-                Back To Products
             </a>
-        </div>
 
+            {% endfor %}
+        {% else %}
+            <div class="d-flex align-items-center flex-column justify-content-center px-4">
+                <h3 class="text-center my-5">No Favourites Added</h3>
+                <a class="like btn btn-danger text-white mx-auto my-5" href="{% url 'categories' %}">
+                    Back To Products
+                </a>
+            </div>
         {% endif %}
-
-
-
     </div>
 </div>

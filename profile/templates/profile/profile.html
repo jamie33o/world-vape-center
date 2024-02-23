@@ -1,5 +1,20 @@
+<!--
+Template for user profile editing, including profile picture and account details.
+
+This template renders a form for users to edit their profile information, including
+uploading a profile picture and updating account details.
+
+Contents:
+- Form for editing user profile information.
+- Two main sections: one for profile picture and another for account details.
+- Profile picture section displays the current profile picture or a placeholder if none.
+- Account details section includes a form with crispy form tags for user details editing.
+-->
+
 {% load static %}
+{% comment %} load the crispy form tags {% endcomment %}
 {% load crispy_forms_tags %}
+
 <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="row">

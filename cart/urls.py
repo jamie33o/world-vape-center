@@ -1,3 +1,11 @@
+"""
+Module: urls.py
+Django URL patterns for the cart app.
+
+This module defines the URL patterns for various cart-related views,
+including adding, deleting, updating, and displaying the cart summary.
+"""
+
 from django.urls import path
 from .views import cart_add, cart_delete, cart_summary, cart_update
 

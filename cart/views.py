@@ -1,64 +1,116 @@
-from django.shortcuts import render, redirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.views.decorators.http import require_POST
 from django.contrib import messages
 from products.models import Product
+from cart.forms import AddToCartForm
 from .cart import Cart
 
 
-
 def cart_summary(request):
+    """
+    Display a summary of the shopping cart.
 
-    cart = Cart(request)
+    Args:
+        request (HttpRequest): The HTTP request object.
 
-    discounted_products = Product.objects.filter(discounted_price__gt=0)
+    Returns:
+        HttpResponse: Renders the 'cart-summary.html' template.
 
-    return render(request, 'cart/cart-summary.html',
-                  {'cart':cart,
-                   'discounted_products': discounted_products})
+    Note:
+        Ensure that the 'cart' context processor is added to the Django settings.
+    """
+    try:
+        cart = Cart(request)
+
+        discounted_products = Product.objects.filter(discounted_price__gt=0)
+
+        return render(request, 'cart/cart-summary.html', {
+            'cart': cart,
+            'discounted_products': discounted_products,
+        })
+    except Exception:
+        messages.error(request,
+                       'Error trying to retrieve cart summary!!! Please contact us!!!')
+        return redirect('contact_us')
 
 
-
+@require_POST
 def cart_add(request):
+    """
+    Add a product to the shopping cart.
 
-    cart = Cart(request)
+    Args:
+        request (HttpRequest): The HTTP request object.
 
-    if request.method == 'POST':
-        redirect_url = request.POST.get('redirect_url')
-        product_id = int(request.POST.get('product_id'))
+    Returns:
+        HttpResponseRedirect: Redirects to the specified URL.
 
-        product_quantity =  int(request.POST.get('product_quantity'))
-        product_choice = request.POST.get('product_choice') if request.POST.get('product_choice') else None
+    """
+    try:
+        cart = Cart(request)
+        form = AddToCartForm(request.POST)
 
-        product = get_object_or_404(Product, id=product_id)
+        if form.is_valid():
+            redirect_url = request.POST.get('redirect_url')
+            product_quantity = form.cleaned_data['product_quantity']
+            product_choice = request.POST.get('options')
+            product_id = form.cleaned_data['product_id']
 
-        cart.add(product=product, product_qty=product_quantity, product_choice=product_choice)
+            product = get_object_or_404(Product, id=product_id)
 
-        return redirect(redirect_url)
-        
+            cart.add(product=product,
+                     product_qty=int(product_quantity),
+                     product_choice=product_choice)
+
+            return redirect(redirect_url)
+
+        messages.error(request,
+                       f'Could not add product to cart: {form.errors}')
+        return redirect('cart-summary')
+    except Exception:
+        messages.error(request, 'Could not add product to cart')
+        return redirect('cart-summary')
 
 
+@require_POST
 def cart_delete(request):
+    """
+    Delete a product from the shopping cart.
 
-    cart = Cart(request)
+    Args:
+        request (HttpRequest): The HTTP request object.
 
-    if request.POST.get('action') == 'post':
+    Returns:
+        HttpResponseRedirect: Redirects to the 'cart-summary' page.
+
+    """
+    try:
+        cart = Cart(request)
 
         product_id = int(request.POST.get('product_id'))
 
         cart.delete(product=product_id)
         messages.success(request, 'Product removed!!!')
         return redirect('cart-summary')
-    messages.error(request, 'Could not remove product')
-    return redirect('cart-summary')
+    except Exception:
+        messages.error(request, 'Could not remove product')
+        return redirect('cart-summary')
 
 
-
-
+@require_POST
 def cart_update(request):
+    """
+    Update the quantity of a product in the shopping cart.
 
-    cart = Cart(request)
+    Args:
+        request (HttpRequest): The HTTP request object.
 
-    if request.POST.get('action') == 'post':
+    Returns:
+        HttpResponseRedirect: Redirects to the 'cart-summary' page.
+
+    """
+    try:
+        cart = Cart(request)
 
         product_id = int(request.POST.get('product_id'))
         product_quantity = int(request.POST.get('product_quantity'))
@@ -67,5 +119,7 @@ def cart_update(request):
 
         messages.success(request, 'Quantity updated!!!')
         return redirect('cart-summary')
-    messages.error(request, 'Could not update quantity')
-    return redirect('cart-summary')
+    except Exception:
+
+        messages.error(request, 'Could not update quantity')
+        return redirect('cart-summary')

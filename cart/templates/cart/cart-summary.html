@@ -22,9 +22,7 @@
 
 <div class="container">
     <h1 class="h5">Shopping cart</h1>
-
     <hr />
-
     <div class="row mb-5">
         <div class="col-sm-8">
             {% for item in cart %} 
@@ -49,11 +47,22 @@
                                     <h5 class="h5 pt-2">{{product.name}}<!-- Product title --></h5>
                                 </a>
                                 {% include 'components/ratings.html' with product=product %}
-                                {% if product.options_name %}
-                                    <p class="mb-0 mt-1">{{ product.options_name }}:<span class="fw-medium">{{ item.product_choice }}</span></p>
+                                {% if item.product_choice %}
+                                    <p class="mb-0 mt-1">{{ product.options_name }}: <span class="fw-medium">{{ item.product_choice }}</span></p>
                                 {% endif %}
                             </div>
                         </div>
+                        <form class="like-form d-inline mr-2 ml-4" action="{% url 'add_to_favorites' product.id %}" method="POST">
+                            {% csrf_token %}
+                            <button class="like btn btn-warning text-white" type="submit">
+                                <span class="fa fa-heart"></span>
+                            </button>
+                        </form>
+                        <form method="post" action="{% url 'cart-delete' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <button class="btn btn-danger" type="submit">X</button>
+                        </form>
                     </div>
 
                     <div>
@@ -70,26 +79,29 @@
                             </div>
                             <div class="col-md-5">
                                 <div class="mt-3">
-                                    <p class="text-muted mb-2">Quantity</p>
-                                    <div class="d-inline-flex">
-                                        <select
-                                            id="select{{product.id}}"
-                                            class="form-select form-select-sm w-xl">
-                                            <option selected>
-                  
-                                                {{item.qty}}
-                                          
-                                            </option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                            <option value="5">5</option>
-                                            <option value="6">6</option>
-                                            <option value="7">7</option>
-                                            <option value="8">8</option>
-                                        </select>
-                                    </div>
+                                    <form method="post" action="{% url 'cart-update' %}" enctype="multipart/form-data">
+                                        {% csrf_token %}
+                                        <p class="text-muted mb-2">Quantity</p>
+                                        <div class="d-inline-flex">
+                                            <select
+                                                id="select{{product.id}}" name="product_quantity"
+                                                class="form-select form-select-sm w-xl">
+                                                <option selected>
+                                                    {{item.qty}}
+                                                </option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                                <option value="6">6</option>
+                                                <option value="7">7</option>
+                                                <option value="8">8</option>
+                                            </select>
+                                        </div>
+                                        <input type="hidden" name="product_id" value="{{ product.id }}">
+                                        <button class="btn btn-success" type="submit">Update</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -105,24 +117,6 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- end card -->
-                    <div class="d-flex justify-content-end w-100">
-                        <button
-                            type="button"
-                            data-index="{{product.id}}"
-                            class="btn btn-primary btn-sm update-button mr-3">
-                            Update
-                        </button>
-
-                        &nbsp;
-
-                        <button
-                            type="button"
-                            data-index="{{product.id}}"
-                            class="btn btn-danger btn-sm delete-button mr-3">
-                            Delete
-                        </button>
                     </div>
                 </div>
             </div>
@@ -235,68 +229,4 @@
         </div>
     </div>
 {% endif %}
-{% endblock %}
-
-
-{% block extra_postloadjs %}
-
-<script>
-    // Delete button
-    $(document).on("click", ".delete-button", function (e) {
-        e.preventDefault();
-
-        $.ajax({
-            type: "POST",
-            url: '{% url "cart-delete" %}',
-            data: {
-                product_id: $(this).data("index"),
-                csrfmiddlewaretoken: "{{csrf_token}}",
-                action: "post",
-            },
-
-            success: function (json) {
-                location.reload();
-
-                document.getElementById("cart-qty").textContent = json.qty;
-
-                document.getElementById("total").textContent = json.total;
-            },
-
-            error: function (xhr, errmsg, err) {},
-        });
-    });
-
-    // Update button
-
-    $(document).on("click", ".update-button", function (e) {
-        e.preventDefault();
-
-        var theproductid = $(this).data("index");
-
-        $.ajax({
-            type: "POST",
-            url: '{% url "cart-update" %}',
-            data: {
-                product_id: $(this).data("index"),
-                product_quantity: $("#select" + theproductid + " option:selected").text(),
-                csrfmiddlewaretoken: "{{csrf_token}}",
-                action: "post",
-            },
-
-            success: function (json) {
-                //console.log(json)
-
-                location.reload();
-
-                document.getElementById("cart-qty").textContent = json.qty;
-
-                document.getElementById("total").textContent = json.total;
-            },
-
-            error: function (xhr, errmsg, err) {},
-        });
-    });
-</script>
-
-
 {% endblock %}

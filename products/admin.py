@@ -1,27 +1,55 @@
-# admin.py
 from django.contrib import admin
 from django.urls import path
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.contrib import messages
+from django.template.loader import render_to_string
 
 from .admin_utils.add_discount_actions import (apply_fifty_percentage_discount,
                                                apply_five_percentage_discount,
                                                apply_ten_percentage_discount,
                                                apply_twenty_percentage_discount,
                                                remove_discount)
-from django.template.loader import render_to_string
-
 from .models import Product, Category, Brand, MultiOption
 from .admin_forms import AdminAddMultiOptionForm, AdminAddMultipleBrandsForm, AdminAddPricesForm
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
+    """
+    Admin configuration for the Product model.
+
+    List Display:
+    - name
+    - category
+    - brand
+    - price
+    - discounted_price
+
+    List Filter:
+    - category
+    - brand
+    - options
+
+    List Editable:
+    - price
+
+    Actions:
+    - apply_fifty_percentage_discount
+    - apply_twenty_percentage_discount
+    - apply_ten_percentage_discount
+    - apply_five_percentage_discount
+    - remove_discount
+
+    Custom URLs:
+    - apply_multiple_choices/
+    - apply_brand/
+    - apply_prices/
+
+    """
 
     list_display = ('name', 'category', 'brand', 'price', 'discounted_price')
     list_filter = ('category', 'brand', 'options')
-    list_editable = ('price',)  # Enable editing the price directly in the list view
-
+    list_editable = ('price',)
 
     actions = [apply_fifty_percentage_discount,
                apply_twenty_percentage_discount,
@@ -49,6 +77,10 @@ class ProductAdmin(admin.ModelAdmin):
         return custom_urls + urls
     
     def apply_prices(self, request):
+        """
+        Admin action to apply prices to selected products.
+
+        """
         if request.method == 'POST':
             form = AdminAddPricesForm(request.POST)
          
@@ -76,6 +108,10 @@ class ProductAdmin(admin.ModelAdmin):
 
 
     def apply_brand(self, request):
+        """
+        Admin action to apply brands to selected products.
+
+        """
         if request.method == 'POST':
             form = AdminAddMultipleBrandsForm(request.POST)
          
@@ -104,6 +140,10 @@ class ProductAdmin(admin.ModelAdmin):
 
 
     def apply_multiple_choices(self, request):
+        """
+        Admin action to apply multiple choices to selected products.
+
+        """
         if request.method == 'POST':
             form = AdminAddMultiOptionForm(request.POST)
             if form.is_valid():

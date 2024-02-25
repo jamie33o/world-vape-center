@@ -4,35 +4,98 @@ from django.conf import settings
 from django.views.decorators.http import require_GET
 from django.contrib import messages
 from world_vape_center.urls import sitemaps
-from .forms import ContactForm
 from products.models import Category
+from .forms import ContactForm
 
 @require_GET
 def payments_options(request):
+    """
+    Render the payment options page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered payment options page.
+    """
     return render(request, 'help/payment-options.html')
 
 @require_GET
 def delivery_info(request):
+    """
+    Render the delivery information page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered delivery information page.
+    """
     return render(request, 'help/delivery-info.html')
 
 @require_GET
 def about_us(request):
+    """
+    Render the about us page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered about us page.
+    """
     return render(request, 'help/about-us.html')
 
 @require_GET
 def returns_policy(request):
+    """
+    Render the returns policy page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered returns policy page.
+    """
     return render(request, 'help/returns-policy.html')
 
 @require_GET
 def terms(request):
+    """
+    Render the terms page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered terms page.
+    """
     return render(request, 'help/terms.html')
 
 @require_GET
 def faq(request):
+    """
+    Render the FAQ page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered FAQ page.
+    """
     return render(request, 'help/faq.html')
 
 @require_GET
 def contact_us(request):
+    """
+    Render the contact us page and handle contact form submissions.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered contact us page.
+    """
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -58,6 +121,15 @@ def contact_us(request):
 
 @require_GET
 def sitemap_html(request):
+    """
+    Render the HTML sitemap page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered sitemap page.
+    """
     urls = {}
 
     for key, value in sitemaps.items():

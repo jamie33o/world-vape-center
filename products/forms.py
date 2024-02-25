@@ -3,6 +3,19 @@ from .models import Review, MultiOption
 from .models import Brand
 
 class ReviewForm(forms.ModelForm):
+    """
+    Form for adding or updating a product review.
+
+    Meta:
+    - model (Review): The model associated with the form.
+    - fields (list): The fields to include in the form.
+
+    Widgets:
+    - name (TextInput): Text input widget for the name field.
+    - rating (NumberInput): Number input widget for the rating field.
+    - comment (Textarea): Textarea widget for the comment field.
+
+    """
     class Meta:
         model = Review
         fields = ['name', 'rating', 'comment']
@@ -15,6 +28,14 @@ class ReviewForm(forms.ModelForm):
 
 
 class FiltersForm(forms.Form):
+    """
+    Form for applying filters to product listings.
+
+    Attributes:
+    - brands (ModelMultipleChoiceField): Multiple choice field for brands.
+    - multi_options (ModelMultipleChoiceField): Multiple choice field for multi-options.
+
+    """
     brands = forms.ModelMultipleChoiceField(
         queryset=Brand.objects.all(),
         widget=forms.CheckboxSelectMultiple,
@@ -28,4 +49,3 @@ class FiltersForm(forms.Form):
         required=False,
         to_field_name='slug'
     )
-

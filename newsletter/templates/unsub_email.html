@@ -97,7 +97,7 @@
 
 <footer>
     {% with full_url=request.build_absolute_uri %}
-        <a href="{{ full_url }}{% url 'un_subscribe_newsletter' %}">Subscribe</a>
+        <a href="{{ full_url }}{% url 'subscribe_newsletter' %}">Subscribe</a>
     {% endwith %}
 </footer>
 </html>

@@ -16,12 +16,30 @@ from .models import Order, OrderLineItem
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    Cache checkout data in the PaymentIntent metadata.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: HTTP response with status 200 if successful,
+        400 if an error occurs.
+
+    Note:
+        This view is intended to be used with a Stripe
+        PaymentIntent to cache additional data related to the checkout process.
+        It extracts the PaymentIntent ID (pid) from the request's
+        POST data and modifies the PaymentIntent metadata
+        with cart information, username, and order number.
+        If an error occurs, an error message is displayed,
+        and an HTTP response with status 400 is returned.
+    """
     try:
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'cart': json.dumps(request.session.get('cart', {})),
-            'save_info': request.POST.get('save_info'),
             'username': request.user,
             'order_num': json.dumps(request.session.get('order_num', {})),
 
@@ -34,8 +52,19 @@ def cache_checkout_data(request):
 
 
 def checkout(request):
+    """
+    Process the checkout, handle form submissions, and render the checkout page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered HTML response for the checkout page.
+    """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    save_address =  request.POST.get('save_info')
+
 
     if request.method == 'POST':
         cart = Cart(request)
@@ -45,7 +74,8 @@ def checkout(request):
 
         if shipping_form.is_valid() and profile_detail_form.is_valid():
             address = shipping_form.save(commit=False)
-            address.save()
+            if save_address:
+                address.save()
             profile_details = profile_detail_form.save(commit=False)
             order = Order()
             user = request.user if request.user.is_authenticated else None
@@ -74,7 +104,7 @@ def checkout(request):
                     total = Decimal(item_data['price']) * item_data['qty']
                 try:
                     product = Product.objects.get(id=item_id)
-                    
+
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product,
@@ -84,26 +114,28 @@ def checkout(request):
                     )
 
                     if item_data.get('product_choice'):
-                        order_line_item.product_option=item_data['product_choice'],
+                        order_line_item.product_option = item_data['product_choice']
 
                     order_line_item.save()
-                    
+
                 except Product.DoesNotExist:
                     messages.error(request, (
-                        "One of the products in your bag wasn't found in our database. "
-                        "Please call us for assistance!")
+                        "One of the products in your bag wasn't found in our database."
+                        f"Please contact us for assistance! Your \
+                            order number was {order.order_number} please send it aswell")
                     )
-                    order.delete()
 
-                    return redirect(reverse('cart-summary'))
-                
+                    return redirect('contact_us')
+
             email_customer(request.POST['email'], 'Order Received')
 
-            request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
-            messages.error(request, 'There was an error with your form. \
-                Please double check your information.')
+            if not shipping_form.is_valid():
+                messages.error(request, shipping_form.errors)
+            else:
+                messages.error(request, profile_detail_form.errors)
+            return redirect('checkout')
     else:
         cart = Cart(request)
         if not cart:
@@ -169,15 +201,26 @@ def checkout_success(request, order_number):
 
 
 def email_customer( email, email_subject):
+    """
+    Send an email to the customer.
 
-        email_content = render_to_string('checkout/order_received_email.html')
-        from_email = settings.EMAIL_HOST_USER
-        send_mail(
-            email_subject,
-            '',
-            from_email,
-            [email],
-            html_message=email_content,
-            fail_silently=False
-        )
+    Args:
+        email (str): The customer's email address.
+        email_subject (str): The subject of the email.
+
+    Note:
+        This function sends an email to the customer using the provided email address and subject.
+        The email content is rendered from the 'checkout/order_received_email.html' template.
+    """
+
+    email_content = render_to_string('checkout/order_received_email.html')
+    from_email = settings.EMAIL_HOST_USER
+    send_mail(
+        email_subject,
+        '',
+        from_email,
+        [email],
+        html_message=email_content,
+        fail_silently=False
+    )
 

@@ -1,9 +1,16 @@
-
 import os
 import re
 
-
 def format_string():
+    """
+    Format filenames in a specific folder.
+
+    This function renames files in the specified folder by removing a portion
+    of the filename and appending it to another part of the filename.
+
+    The renaming is based on a specific pattern in the filenames.
+
+    """
     folder_path = "media/vape_kits/"
 
     for filename in os.listdir(folder_path):

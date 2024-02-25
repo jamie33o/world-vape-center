@@ -1,10 +1,11 @@
 import json
 import time
+from decimal import Decimal
+
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
 from django.conf import settings
-from decimal import Decimal
 from products.models import Product
 from .models import Order, OrderLineItem, ShippingAddress
 
@@ -31,7 +32,6 @@ class StripeWH_Handler:
         pid = intent.id
         cart = intent.metadata.cart
         order_num = intent.metadata.order_num
-        save_info = intent.metadata.save_info
 
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
@@ -81,7 +81,7 @@ class StripeWH_Handler:
                 order.stripe_pid = pid
                 order.shipping_address = address
                 order.delivery_cost = cart.get_delivery_cost()
-                order.order_total = cart.get_total()
+                order.sub_total = cart.get_subtotal()
                 order.grand_total = grand_total
                 order.order_number = cart.get_order_num()
                 order.save()
@@ -123,7 +123,17 @@ class StripeWH_Handler:
     
 
     def email_customer(self, email, context, email_subject):
+        """
+        Send an email to the customer.
 
+        Args:
+            email (str): The customer's email address.
+            email_subject (str): The subject of the email.
+
+        Note:
+            This function sends an email to the customer using the provided email address and subject.
+            The email content is rendered from the 'checkout/order_received_email.html' template.
+    """
         email_content = render_to_string('checkout/order_success_email.html', context)
         from_email = settings.EMAIL_HOST_USER
         send_mail(

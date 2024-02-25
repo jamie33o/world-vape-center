@@ -1,10 +1,13 @@
+from profile.models import ShippingAddress
 from django.db import models
 from django.contrib.auth import get_user_model
 from products.models import Product
-from profile.models import ShippingAddress
 
 
-class Order(models.Model):
+class Order(models.Model): 
+    """
+    Model representing an order made by a user.
+    """
     STATUS_CHOICES = (
         ('pending', 'Pending'),
         ('processing', 'Processing'),
@@ -28,6 +31,9 @@ class Order(models.Model):
 
 
 class OrderLineItem(models.Model):
+    """
+    Model representing a line item in an order.
+    """
     order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
     product = models.ForeignKey(Product, null=False, blank=False, on_delete=models.CASCADE)
     product_option = models.CharField(max_length=100, null=True, blank=True)
@@ -37,4 +43,4 @@ class OrderLineItem(models.Model):
 
 
     def __str__(self):
-        return f'SKU {self.product.sku} on order {self.order.order_number}'
+        return f'{self.quantity}x {self.product.name} in Order #{self.order.order_number}'

@@ -51,3 +51,98 @@ When choosing fonts for the site, my main goal was to choose fonts that were eas
 - [Montserrat](https://fonts.google.com/specimen/Montserrat) was used for all other text.
 
 - [Font Awesome](https://fontawesome.com) icons were used throughout the site, such as the social media icons in the footer.
+
+## User Stories
+
+To help with the development of this project, I created user stories to map out tasks I needed to achieve in order to build the website to a good standard. I further split these user stories into epics in order to take an agile approach to its development.
+
+View a full list of user stories [here](https://github.com/jamie33o/world-vape-center/issues) or on the project board [here](https://github.com/users/jamie33o/projects/15/views/1).
+
+View the Sprints here [here](https://github.com/jamie33o/world-vape-center/milestones).
+
+## Wireframes
+
+To help with the design of the site, I created wireframes for each page. To follow best practice, wireframes were developed for mobile, tablet, and desktop sizes.
+I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wireframes.
+
+### Age verification Wireframes
+
+<details>
+<summary>Click to View Age verification wireframes</summary>
+
+![screenshot](docs/wireframes/age-verification.png)
+
+</details>
+
+### Contact Page Wireframes
+
+<details>
+<summary>Click to View Contact Page wireframes</summary>
+
+![screenshot](docs/wireframes/contact-page.png)
+
+</details>
+
+### Drop down menu Wireframes
+
+<details>
+<summary>Click to View Drop down wireframes</summary>
+
+![screenshot](docs/wireframes/dropdown-menu.png)
+
+</details>
+
+### Home Page Wireframes
+
+<details>
+<summary>Click to View Home Page wireframes</summary>
+
+![screenshot](docs/wireframes/homepage.png)
+
+</details>
+
+### Search bar Wireframes
+
+<details>
+<summary>Click to View Search bar wireframe</summary>
+
+![screenshot](docs/wireframes/largescreen-search-bar.png)
+
+</details>
+
+### Mobile filters Wireframes
+
+<details>
+<summary>Click to View Mobile filters wireframe</summary>
+
+![screenshot](docs/wireframes/mobile-filters.png)
+
+</details>
+
+### Product page Wireframes
+
+<details>
+<summary>Click to View Product page wireframe</summary>
+
+![screenshot](docs/wireframes/product-page.png)
+
+</details>
+
+### Sign Up Page Wireframes
+
+<details>
+<summary>Click to View Sign Up Page wireframe</summary>
+
+![screenshot](docs/wireframes/sign-up.png)
+
+
+</details>
+
+### Sign In Page Wireframe
+
+<details>
+<summary>Click to View Sign In Page wireframes</summary>
+
+![screenshot](docs/wireframes/sign-in.png)
+
+</details>

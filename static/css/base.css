@@ -5,7 +5,12 @@
 }
 
 :root {
-    --primary-color: linear-gradient(45deg, var(--light), #94bed1);
+    --magnolia: #F7F0F5;
+    --charcoal: #383F51;
+    --light-blue: #BAD2F2;
+    --muted-green: #87B38D;
+    --warn-red: #E94F37;
+    --primary-color: linear-gradient(45deg, var(--magnolia), var(--light-blue));
     --light-grey: #f3f7f8;
     --accent-color: #ffcc00;
     --font-size: 16px;
@@ -112,6 +117,9 @@ header {
 }
 
 /*////////////////// header //////////////////*/
+header nav {
+    background-color: var(--charcoal);
+}
 header nav .container {
     justify-content: initial !important;
 }
@@ -203,12 +211,12 @@ header .navbar {
 
 /*///////////////// footer styles ////////////////////////*/
 #footer-sub{
-    background-color: var(--light-grey);
+    background-color: var(--magnolia);
     border-top: 1px solid #dbdbdb;
 }
 
 #footer-main{
-    background-color: #012b72;
+    background-color: var(--muted-green);
 }
 
 #footer-sub h5{

@@ -375,3 +375,36 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 ### Future Features
 
 While I feel that the site has an abundance of features, there are several ones I would like to add in the future that didn't fit into the current development cycle for this project. These features have been logged as Won't Have in my MoSCoW prioritization and placed in the backlog of my project's development board.
+
+
+## Tools & Technologies Used
+
+This site couldn't have been created without a variety of tools and technologies. I've listed the ones used below.
+
+- [HTML](https://en.wikipedia.org/wiki/HTML) used for the main site content.
+- [CSS](https://en.wikipedia.org/wiki/CSS) used for the main site design and layout.
+- [CSS :root variables](https://www.w3schools.com/css/css3_variables.asp) used for reusable styles throughout the site.
+- [CSS Flexbox](https://www.w3schools.com/css/css3_flexbox.asp) used for an enhanced responsive layout.
+- [JavaScript](https://www.javascript.com) used for user interaction on the site.
+- [Python](https://www.python.org) used as the back-end programming language.
+- [Git](https://git-scm.com) used for version control. (`git add`, `git commit`, `git push`)
+- [GitHub](https://github.com) used for secure online code storage.
+- [Bootstrap](https://getbootstrap.com) used as the front-end CSS framework for modern responsiveness and pre-built components.
+- [Django](https://www.djangoproject.com) used as the Python framework for the site.
+- [PostgreSQL](https://www.postgresql.org) used as the relational database management.
+- [ElephantSQL](https://www.elephantsql.com) used as the Postgres database.
+- [Heroku](https://www.heroku.com) used for hosting the deployed back-end site.
+- [Stripe](https://stripe.com) used for online secure payments of ecommerce products/services.
+- [AWS S3](https://aws.amazon.com/s3) used for online static file storage.
+- [Django Summernote](https://github.com/summernote/django-summernote) used for the body field for blog posts.
+- [Pillow](https://pypi.org/project/Pillow/) used for handling images.
+
+## Database Design
+
+I created an entity relationship diagram using [Draw.io](https://draw.io). This helped me to visualize the relationships between my data structures and made the development process easier as I had everything mapped out in front of me for reference to avoid having to reference each models.py file individually.
+
+![screenshot]()
+
+I generated an additional entity relationship diagram using [pygraphviz](https://django-extensions.readthedocs.io/en/latest/graph_models.html).
+
+![screenshot](documentation/erd.png)

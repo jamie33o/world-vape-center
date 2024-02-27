@@ -1,7 +1,7 @@
 {% load static %}
 {% load mathfilters %} 
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -26,8 +26,11 @@
       {% if user.is_authenticated %}
         {{ user }}      
       {% else %}
-        <a class="text-white mx-0" href="{% url 'account_login' %}">Sign In</a>
+        <a href="{% url 'account_login' %}" class="btn text-white d-flex">
 
+          <i class="fa-regular fa-circle-user h3 m-0"></i> 
+          <i class="fa-solid fa-plus"></i>         
+        </a>
       {% endif %}
     </p>
   </div>
@@ -47,6 +50,13 @@
         <a class="nav-link" href="#help">Help</a>
       </li>
       {% if user.is_authenticated %}
+        {% if request.user.is_staff %}
+          <li class="nav-item d-lg-none">
+            <a href="{% url 'admin:index' %}" class="nav-link">
+              Admin
+            </a>
+          </li>
+        {% endif %}
         <li class="nav-item d-lg-none">
           <a href="{% url 'profile' %}" class="nav-link">
             Profile
@@ -75,10 +85,8 @@
           Sign In          
         </a>
       </li>
-
       {% endif %}
     </ul>
-
       <button class="search-btn d-none d-lg-flex btn mt-2">
         <i class="fas fa-search h4"></i>
       </button>
@@ -95,12 +103,18 @@
             <p class="h5 my-auto d-inline ml-1">{{ user }}</p>
           </a>
         {% else %}
-          <a href="{% url 'account_login' %}" class="btn text-white d-flex align-items-center">
+          <a href="{% url 'account_login' %}" class="btn text-white d-flex">
+
             <i class="fa-regular fa-circle-user h3 m-0"></i> 
-            <p class="h5 d-inline my-auto ml-1">Sign In</p>           
+            <i class="fa-solid fa-plus"></i>         
           </a>
         {% endif %}
       <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          {% if request.user.is_staff %}
+              <a href="{% url 'admin:index' %}" class="dropdown-item">
+                Admin
+              </a>
+          {% endif %}
           <a href="{% url 'profile' %}" class="dropdown-item">
             Profile
           </a>

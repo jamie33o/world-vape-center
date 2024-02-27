@@ -408,3 +408,112 @@ I created an entity relationship diagram using [Draw.io](https://draw.io). This 
 I generated an additional entity relationship diagram using [pygraphviz](https://django-extensions.readthedocs.io/en/latest/graph_models.html).
 
 ![screenshot](documentation/erd.png)
+
+## Agile Development Process
+
+### GitHub Projects
+
+[GitHub Projects](https://github.com/jamie33o/world-vape-center/projects) served as an Agile tool for this project.
+It isn't a specialized tool, but with the right tags and project creation/issue assignments, it can be made to work.
+
+### GitHub Issues
+
+[GitHub Issues](https://github.com/jamie33o/world-vape-center/issues) served as an another Agile tool.
+There, I used my own **User Story Template** to manage user stories.
+
+It also helped to keep on top of my [milestones](https://github.com/jamie33o/world-vape-center/milestones) for the project.
+
+### MoSCoW Prioritization
+
+I've decomposed my Epics into stories prior to prioritizing and implementing them.
+Using this approach, I was able to apply the MoSCow prioritization and labels to my user stories within the Issues tab.
+
+- **Must Have**: guaranteed to be delivered (*max 60% of stories*)
+- **Should Have**: adds significant value, but not vital (*the rest ~20% of stories*)
+- **Could Have**: has small impact if left out (*20% of stories*)
+- **Won't Have**: not a priority for this iteration
+
+## Ecommerce Business Model
+
+This site sells goods to individual customers, and therefore follows a `Business to Customer` model.
+It is of the simplest **B2C** forms, as it focuses on individual transactions, and doesn't need anything
+such as monthly/annual subscriptions.
+
+It is still in its early development stages, although it already has a newsletter, and links for social media marketing.
+
+Social media can potentially build a community of users around the business, and boost site visitor numbers,
+especially when using larger platforms such a Facebook.
+
+A newsletter list can be used by the business to send regular messages to site users.
+For example, what items are on special offer, new items in stock,
+updates to business hours, notifications of events, and much more!
+
+## Search Engine Optimization (SEO) & Social Media Marketing
+
+### Keywords
+
+I've identified some appropriate keywords to align with my site, that should help users
+when searching online to find my page easily from a search engine.
+This included a series of the following keyword types
+
+- Short-tail (head terms) keywords
+- Long-tail keywords
+
+I also played around with [Word Tracker](https://www.wordtracker.com) a bit
+to check the frequency of some of my site's primary keywords (only until the free trial expired).
+
+### Sitemap
+
+I've used the built in 'django.contrib.sitemaps' app to generate the sitemap.xml I also created a
+html sitemap for users to view.
+
+### Robots
+
+I've created the [robots.txt](robots.txt) file at the root-level.
+Inside, I've included the default settings:
+
+```
+User-agent: *
+Disallow: /admin/
+Sitemap: https://world-vape-center.herokuapp.com/sitemap.xml
+```
+
+Further links for future implementation:
+- [Google search console](https://search.google.com/search-console)
+- [Creating and submitting a sitemap](https://developers.google.com/search/docs/advanced/sitemaps/build-sitemap)
+- [Managing your sitemaps and using sitemaps reports](https://support.google.com/webmasters/answer/7451001)
+- [Testing the robots.txt file](https://support.google.com/webmasters/answer/6062598)
+
+### Social Media Marketing
+
+Creating a strong social base (with participation) and linking that to the business site can help drive sales.
+Using more popular providers with a wider user base, such as Facebook, typically maximizes site views.
+
+I've created a mockup Facebook business account using the
+[Balsamiq template](https://code-institute-org.github.io/5P-Assessments-Handbook/files/Facebook_Mockups.zip)
+provided by Code Institute.
+
+![screenshot](documentation/facebook-mockup.png)
+
+### Newsletter Marketing
+
+I have incorporate a newsletter sign-up form on my application, to allow users to supply their
+email address if they are interested in learning more about what the business has to offer.
+
+I created a custom newsletter app in my project with a custom NewsletterSignup model and added a form to the site's footer to collect user email addresses 
+
+Newsletter model:
+
+```python
+class NewsletterSignup(models.Model):
+    email = models.EmailField(unique=True, null=False, blank=False)
+
+def __str__(self):
+    return self.email
+```
+
+I set the email address to be unique to avoid users signing up multiple times with the same email address. If a user tries to sign up twice with the same address they will be shown a message letting them know they've already signed up.
+
+Once a user signs up, I used the `send_mail()` functionality in the `webhook_handler.py` file to trigger a welcome email for the user to acknowledge that they've successfully signed up for the newsletter.
+
+In this welcome newsletter, I've included a special discount code to entice sign ups to purchase on the site.

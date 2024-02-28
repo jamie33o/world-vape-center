@@ -318,7 +318,7 @@ class Cart():
         status = self.cart_updated['cart_bool']
         self.cart_updated['cart_bool'] = False
         self.session.modified = True
-        return status if status is not None else False
+        return status
 
 
 

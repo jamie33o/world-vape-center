@@ -124,7 +124,7 @@
 
       $(document).ready(function() {
 
-        {% if cart.get_cart_status %}
+        {% if cart and cart.get_cart_status %}
           $('#cart-modal').modal('show')
         {% endif %}
         

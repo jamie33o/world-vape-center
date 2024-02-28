@@ -87,6 +87,8 @@ class Cart():
             If the specified product or product ID exists in the cart, it will be removed.
             The session will be marked as modified to save the changes.
         """
+        self.cart_updated['cart_bool'] = True
+
         product_id = str(product)
 
         if product_id in self.cart:
@@ -110,6 +112,8 @@ class Cart():
             If the specified product or product ID exists in the cart, its quantity will be updated.
             The session will be marked as modified to save the changes.
         """
+        self.cart_updated['cart_bool'] = True
+
         product_id = str(product)
         product_quantity = qty
 
@@ -314,7 +318,7 @@ class Cart():
         status = self.cart_updated['cart_bool']
         self.cart_updated['cart_bool'] = False
         self.session.modified = True
-        return status
+        return status if status is not None else False
 
 
 

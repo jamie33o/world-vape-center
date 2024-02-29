@@ -16,13 +16,14 @@ Contents:
     <div class="card-body px-0">
         {% if favourites %}
             {% for product in favourites %}
-            <a href="{% url 'product_details' product.category product.slug  %}" class="text-decoration-none w-100">
                 <div class="d-flex border-bottom border-top py-2 align-items-center justify-content-between px-4 fav-card">
                     <div class="d-flex align-items-center">
                         <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded-start mr-3" width="50">
                         <div class="ms-4">
-                            <div class="small">{{ product.name }}</div>
-                            <div class="text-xs text-muted">{{ product.price }}</div>
+                            <a href="{% url 'product_details' product.category product.slug  %}" class="text-decoration-none w-100">
+                                <div class="small">{{ product.name }}</div>
+                                <div class="text-xs text-muted">{{ product.price }}</div>
+                            </a>
                         </div>
                     </div>
                     <div class="ms-4 small">
@@ -34,8 +35,6 @@ Contents:
                         </form>
                     </div>
                 </div>
-            </a>
-
             {% endfor %}
         {% else %}
             <div class="d-flex align-items-center flex-column justify-content-center px-4">

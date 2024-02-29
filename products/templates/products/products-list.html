@@ -141,15 +141,15 @@
 {% block extra_postloadjs %}  
 <script>
     $('.filter-btn').on('click', function(){
-        $('.filter-mobile').removeClass('d-none')
-        $('.filter-mobile').addClass('slide-in')
+        $('.filter-mobile').removeClass('d-none');
+        $('.filter-mobile').addClass('slide-in');
     })
 
     $('.hide-filter').on('click', function(){
-        $('.filter-mobile').addClass('slide-out')
+        $('.filter-mobile').addClass('slide-out');
         setTimeout(() => {
-            $('.filter-mobile').removeClass('slide-out')
-            $('.filter-mobile').addClass('d-none')
+            $('.filter-mobile').removeClass('slide-out');
+            $('.filter-mobile').addClass('d-none');
         }, 800);
     })
     document.getElementById('items_per_page').addEventListener('change', function() {

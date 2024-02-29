@@ -89,7 +89,7 @@ class StripeWH_Handler:
 
                 for item_id, item_data in json.loads(cart).items():
                     if item_data['discounted_price']:
-                        total = Decimal(item_data['discounted_price'])
+                        total = Decimal(item_data['discounted_price'])\
                         * item_data['qty']
                     else:
                         total = Decimal(item_data['price']) * item_data['qty']

@@ -69,7 +69,7 @@
     position: absolute;
     top: 20px;
     right: 20px;
-    rotate: 25deg;
+    transform: rotate(25deg);
 }
 
 @media (max-width:  991.98px) {

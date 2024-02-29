@@ -3,7 +3,7 @@
 {% load mathfilters %} 
 
 {% block extra_css %}
-    <link async rel="stylesheet" href="{% static 'cart/css/cart-summary.css' %}">
+    <link rel="stylesheet" href="{% static 'cart/css/cart-summary.css' %}">
 {% endblock %} 
 
 {% block breadcrumb %}
@@ -22,7 +22,7 @@
 
 <div class="container">
     <h1 class="h5">Shopping cart</h1>
-    <hr />
+    <hr>
     <div class="row mb-5">
         <div class="col-sm-8">
             {% for item in cart %} 

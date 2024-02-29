@@ -3,7 +3,11 @@ import json
 from profile.forms import CheckoutDetailForm, ShippingAddressForm
 from profile.forms import SigninForm, SignupForm
 import stripe
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import (render,
+                              redirect,
+                              reverse,
+                              get_object_or_404,
+                              HttpResponse)
 from django.views.decorators.http import require_POST
 from django.template.loader import render_to_string
 from django.core.mail import send_mail
@@ -28,7 +32,8 @@ def cache_checkout_data(request):
 
     Note:
         This view is intended to be used with a Stripe
-        PaymentIntent to cache additional data related to the checkout process.
+        PaymentIntent to cache additional data related to
+        the checkout process.
         It extracts the PaymentIntent ID (pid) from the request's
         POST data and modifies the PaymentIntent metadata
         with cart information, username, and order number.
@@ -53,7 +58,8 @@ def cache_checkout_data(request):
 
 def checkout(request):
     """
-    Process the checkout, handle form submissions, and render the checkout page.
+    Process the checkout, handle form submissions,
+    and render the checkout page.
 
     Args:
         request (HttpRequest): The HTTP request object.
@@ -99,7 +105,8 @@ def checkout(request):
 
             for item_id, item_data in cart.cart.items():
                 if item_data.get('discounted_price'):
-                    total = Decimal(item_data['discounted_price']) * item_data['qty']
+                    total = Decimal(item_data['discounted_price']) * \
+                    item_data['qty']
                 else:
                     total = Decimal(item_data['price']) * item_data['qty']
                 try:
@@ -209,8 +216,10 @@ def email_customer( email, email_subject):
         email_subject (str): The subject of the email.
 
     Note:
-        This function sends an email to the customer using the provided email address and subject.
-        The email content is rendered from the 'checkout/order_received_email.html' template.
+        This function sends an email to the customer
+        using the provided email address and subject.
+        The email content is rendered from the
+        'checkout/order_received_email.html' template.
     """
 
     email_content = render_to_string('checkout/order_received_email.html')
@@ -223,4 +232,3 @@ def email_customer( email, email_subject):
         html_message=email_content,
         fail_silently=False
     )
-

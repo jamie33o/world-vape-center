@@ -215,6 +215,7 @@ vape_brands = [
     "pod-salt"
 ]
 
+
 def create_fixture(model_name, pk, fields):
     """
     Create a fixture dictionary for a Django model.
@@ -233,19 +234,23 @@ def create_fixture(model_name, pk, fields):
         "fields": fields
     }
 
+
 def format_category_name(original_string):
     """
-    Format a category name by replacing underscores with spaces and creating a slug.
+    Format a category name by replacing
+    underscores with spaces and creating a slug.
 
     Parameters:
         original_string (str): The original category name.
 
     Returns:
-        tuple: A tuple containing the formatted category name and its slug.
+        tuple: A tuple containing the formatted
+        category name and its slug.
     """
     formatted_string = original_string.replace('_', ' ')
     slug = slugify(formatted_string)
     return formatted_string, slug
+
 
 def find_brand(input_string):
     """
@@ -262,37 +267,46 @@ def find_brand(input_string):
             return brand
     return False
 
+
 products = []
 categories = []
 brands = []
 
-def create_product_fix(product_id, cat, name_slug_tuple, brand_id, sku, image_url):
+
+def create_product_fix(product_id,
+                       cat,
+                       name_slug_tuple,
+                       brand_id, sku, image_url):
     """
     Create a product fixture and add it to the products list.
 
     Parameters:
         product_id (int): The product's ID.
         cat (int): The category ID.
-        name_slug_tuple (tuple): A tuple containing the formatted product name and its slug.
+        name_slug_tuple (tuple):
+        A tuple containing the formatted product name and its slug.
         brand_id (int): The brand ID.
         sku (str): The product's SKU.
         image_url (str): The URL of the product's image.
     """
     product_fixture = create_fixture("product", product_id, {
-                    "category": cat,  
+                    "category": cat,
                     "slug": name_slug_tuple[1],
                     "sku": f"SKU{sku}",
                     "name": name_slug_tuple[0],
                     "image": image_url,
-                    "brand": brand_id,  
-                    "description": f"A high-quality product for Product {name_slug_tuple[0]}.",
+                    "brand": brand_id,
+                    "description": f"A high-quality \
+                        product for Product {name_slug_tuple[0]}.",
                 })
 
     products.append(product_fixture)
 
+
 def add_extension_to_files_in_folder():
     """
-    Iterate over folders and files, creating fixtures for categories, brands, and products.
+    Iterate over folders and files,
+    creating fixtures for categories, brands, and products.
     """
     product_id = 1
     category_id = 1
@@ -305,8 +319,9 @@ def add_extension_to_files_in_folder():
         if folder != 'jumbotron_images' and os.path.isdir(full_path):
             category_name_n_slug = format_category_name(folder)
             category_fixture = create_fixture("category", category_id,
-                                            {"name":  category_name_n_slug[0],
-                                            "slug": category_name_n_slug[1]})
+                                              {"name": category_name_n_slug[0],
+                                               "slug":
+                                                   category_name_n_slug[1]})
             categories.append(category_fixture)
 
             if os.path.exists(full_path) and len(os.listdir(full_path)) > 0:
@@ -314,13 +329,17 @@ def add_extension_to_files_in_folder():
                     brand = find_brand(filename)
 
                     if brand:
-                        brand_pk = next((fixture['pk'] for fixture in brands if brand in fixture['fields']['slug']), None)
+                        brand_pk = next((fixture['pk'] for fixture
+                                         in brands if brand in
+                                         fixture['fields']['slug']), None)
                         match = brand.replace('-', ' ')
 
                         if brand_pk is None:
                             brand_fixture = create_fixture("brand",
                                                            brand_id,
-                                                           {"name": match, "slug": brand})
+                                                           {"name":
+                                                            match,
+                                                            "slug": brand})
                             brands.append(brand_fixture)
                             brand_pk = brand_id
                             brand_id += 1
@@ -329,7 +348,8 @@ def add_extension_to_files_in_folder():
                     name = file_name_without_ext.replace('-', ' ')
                     slug = filename.rsplit('.', 1)[0]
                     product_name_n_slug = (name, slug)
-                    sku = f"-{category_name_n_slug[0]}_{brand_id}{product_id}{category_id}"
+                    sku = f"-{category_name_n_slug[0]}_{brand_id}\
+                             {product_id}{category_id}"
 
                     create_product_fix(product_id, category_id,
                                        product_name_n_slug,
@@ -343,9 +363,11 @@ def add_extension_to_files_in_folder():
 
             category_id += 1
 
+
 add_extension_to_files_in_folder()
 
 fixtures = categories + brands + products
 
-with open('products/fixtures/product_fixtures.json', 'w', encoding='utf-8') as f:
+with open('products/fixtures/product_fixtures.json',
+          'w', encoding='utf-8') as f:
     json.dump(fixtures, f, indent=2)

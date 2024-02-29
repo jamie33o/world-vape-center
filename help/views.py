@@ -7,6 +7,7 @@ from world_vape_center.urls import sitemaps
 from products.models import Category
 from .forms import ContactForm
 
+
 @require_GET
 def payments_options(request):
     """
@@ -19,6 +20,7 @@ def payments_options(request):
         HttpResponse: Rendered payment options page.
     """
     return render(request, 'help/payment-options.html')
+
 
 @require_GET
 def delivery_info(request):
@@ -33,6 +35,7 @@ def delivery_info(request):
     """
     return render(request, 'help/delivery-info.html')
 
+
 @require_GET
 def about_us(request):
     """
@@ -45,6 +48,7 @@ def about_us(request):
         HttpResponse: Rendered about us page.
     """
     return render(request, 'help/about-us.html')
+
 
 @require_GET
 def returns_policy(request):
@@ -59,6 +63,7 @@ def returns_policy(request):
     """
     return render(request, 'help/returns-policy.html')
 
+
 @require_GET
 def terms(request):
     """
@@ -72,6 +77,7 @@ def terms(request):
     """
     return render(request, 'help/terms.html')
 
+
 @require_GET
 def faq(request):
     """
@@ -84,6 +90,7 @@ def faq(request):
         HttpResponse: Rendered FAQ page.
     """
     return render(request, 'help/faq.html')
+
 
 @require_GET
 def contact_us(request):
@@ -108,16 +115,18 @@ def contact_us(request):
             subject = 'New Contact Form Submission'
             message_body = f'Name: {name}\nEmail: {email}\nMessage: {message}'
             sender_email = email
-            recipient_email = settings.DEFAULT_FROM_EMAIL 
+            recipient_email = settings.DEFAULT_FROM_EMAIL
 
             send_mail(subject, message_body, sender_email, [recipient_email])
-            messages.success(request, 'Your message has been sent successfully!')  # Add success message
+            messages.success(request,
+                             'Your message has been sent successfully!')
 
             return redirect('contact_us')
     else:
         form = ContactForm()
 
     return render(request, 'help/contact-us.html', {'form': form})
+
 
 @require_GET
 def sitemap_html(request):
@@ -137,13 +146,12 @@ def sitemap_html(request):
         sitemap_urls = sitemap_class.get_urls()
         urls[key] = []
         for sitemap_item in sitemap_urls:
-           urls[key].append((
-               sitemap_item['item'],
-               sitemap_item['location']
-           ))
+            urls[key].append((
+                sitemap_item['item'],
+                sitemap_item['location']
+            ))
     categories = Category.objects.all()
-           
+
     context = {'urls': urls,
                'categories': categories}
-    
     return render(request, 'help/sitemap.html', context)

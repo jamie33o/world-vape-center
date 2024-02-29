@@ -31,13 +31,14 @@ class Cart():
         # New user - generate a new session
         if 'cart' not in request.session:
             cart = self.session['cart'] = {}
-            order_num = self.session['order_num'] = str(self._generate_order_number())
-            cart_updated = self.session['cart_updated'] = {'cart_bool': False,}
+            self.session['order_num'] = str(self._generate_order_number())
+            self.session['cart_updated'] = {'cart_bool': False}
+            order_num = self.session['order_num']
+            cart_updated = self.session['cart_updated']
 
         self.cart = cart
         self.order_num = order_num
         self.cart_updated = cart_updated
-
 
     def add(self, product, product_qty, product_choice):
         """
@@ -46,11 +47,13 @@ class Cart():
         Args:
             product (Product): The product to be added.
             product_qty (int): The quantity of the product to be added.
-            product_choice (str): The choice or option selected for the product.
+            product_choice (str): The choice or
+            option selected for the product.
 
 
         Note:
-            If the product is already in the cart, the quantity will be updated.
+            If the product is already in the cart,
+            the quantity will be updated.
             If the product is not in the cart, a new entry will be added.
             The session will be marked as modified to save the changes.
         """
@@ -62,16 +65,17 @@ class Cart():
             self.cart[product_id]['qty'] = product_qty \
                 if product_qty > 1 else self.cart[product_id]['qty'] + 1
         else:
-            self.cart[product_id] = {'price': str(product.price), 'qty': product_qty}
+            self.cart[product_id] = {'price': str(product.price),
+                                     'qty': product_qty}
 
             if product_choice:
                 self.cart[product_id]['product_choice'] = product_choice
 
             if product.discounted_price:
-                self.cart[product_id]['discounted_price'] = str(product.discounted_price)
+                self.cart[product_id]['discounted_price'] = \
+                    str(product.discounted_price)
 
         self.session.modified = True
-
 
     def delete(self, product):
         """
@@ -84,7 +88,8 @@ class Cart():
             None
 
         Note:
-            If the specified product or product ID exists in the cart, it will be removed.
+            If the specified product or product ID exists in the cart,
+            it will be removed.
             The session will be marked as modified to save the changes.
         """
         self.cart_updated['cart_bool'] = True
@@ -95,7 +100,6 @@ class Cart():
             del self.cart[product_id]
 
         self.session.modified = True
-
 
     def update(self, product, qty):
         """
@@ -109,7 +113,8 @@ class Cart():
             None
 
         Note:
-            If the specified product or product ID exists in the cart, its quantity will be updated.
+            If the specified product or product ID exists in the cart,
+            its quantity will be updated.
             The session will be marked as modified to save the changes.
         """
         self.cart_updated['cart_bool'] = True
@@ -122,7 +127,6 @@ class Cart():
 
         self.session.modified = True
 
-
     def __len__(self):
         """
         Get the total number of items in the shopping cart.
@@ -132,19 +136,22 @@ class Cart():
         """
         return sum(item['qty'] for item in self.cart.values())
 
-
-
     def __iter__(self):
         """
-        Iterate through the items in the shopping cart, providing additional product details.
+        Iterate through the items in the shopping cart,
+        providing additional product details.
 
         Yields:
-            dict: A dictionary representing each item in the cart, including product details.
+            dict: A dictionary representing each item in the cart,
+            including product details.
 
         Note:
-            This method enhances the basic iteration over the cart items by providing additional details
-            such as the product name, price, discounted price, slug, category, ID, image URL, and options name.
-            The resulting dictionary for each item also includes the 'total' cost, calculated as the price multiplied
+            This method enhances the basic iteration over the
+            cart items by providing additional details
+            such as the product name, price, discounted price,
+            slug, category, ID, image URL, and options name.
+            The resulting dictionary for each item also includes
+            the 'total' cost, calculated as the price multiplied
             by the quantity of the item in the cart.
         """
         all_product_ids = self.cart.keys()
@@ -157,11 +164,13 @@ class Cart():
             cart[str(product.id)]['product'] = {
                 'name': product.name,
                 'price': float(product.price),
-                'discounted_price': product.discounted_price if product.discounted_price else None,
+                'discounted_price': product.discounted_price
+                if product.discounted_price else None,
                 'slug': product.slug,
-                'category': {'slug': product.category.slug, 'name': product.category.name},
+                'category': {'slug': product.category.slug,
+                             'name': product.category.name},
                 'id': product.id,
-                'image': {'url': product.image.url,},
+                'image': {'url': product.image.url, },
                 'options_name': product.options_name
             }
 
@@ -171,8 +180,6 @@ class Cart():
 
             yield item
 
-
-
     def get_subtotal(self):
         """
         Calculate the subtotal cost for all items in the shopping cart.
@@ -181,22 +188,25 @@ class Cart():
             Decimal: The calculated subtotal amount.
 
         Note:
-            This method calculates the subtotal cost by summing the cost of each item in the cart.
-            The cost is determined by multiplying the price of each item by its quantity.
+            This method calculates the subtotal cost by
+            summing the cost of each item in the cart.
+            The cost is determined by multiplying the
+            price of each item by its quantity.
         """
-        return sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
-
-
+        return sum(Decimal(item['price']) *
+                   item['qty'] for item in self.cart.values())
 
     def get_delivery_cost(self):
         """
-        Calculate the delivery cost based on the total cost of items in the shopping cart.
+        Calculate the delivery cost based on the total
+        cost of items in the shopping cart.
 
         Returns:
             Decimal: The calculated delivery cost.
 
         Note:
-            This method calculates the delivery cost based on the total cost of items in the cart.
+            This method calculates the delivery cost based
+            on the total cost of items in the cart.
             The delivery cost is determined by different price ranges:
             - If total cost is less than 10, delivery cost is 5.
             - If total cost is less than 20, delivery cost is 4.
@@ -204,7 +214,8 @@ class Cart():
             - If total cost is less than 40, delivery cost is 2.
             - If total cost is 40 or more, delivery is free (cost is 0).
         """
-        total_cost = sum(Decimal(item['price']) * item['qty'] for item in self.cart.values())
+        total_cost = sum(Decimal(item['price']) *
+                         item['qty'] for item in self.cart.values())
 
         if total_cost < 10:
             delivery = 5
@@ -219,17 +230,17 @@ class Cart():
 
         return delivery
 
-
-
     def get_grand_total(self):
         """
-        Calculate the grand total for the shopping cart, including delivery cost and discounts.
+        Calculate the grand total for the shopping cart,
+        including delivery cost and discounts.
 
         Returns:
             Decimal: The grand total amount.
 
         Note:
-            This method calculates the grand total by adding the delivery cost and subtotal,
+            This method calculates the grand total by adding
+            the delivery cost and subtotal,
             then deducting any applicable discounts.
             If there are no items in the cart, the grand total is set to 0.
         """
@@ -237,7 +248,7 @@ class Cart():
         total = self.get_subtotal()
         total = delivery + total
         discount = self.get_discounted_total()
-        
+
         if discount:
             total = total - discount
 
@@ -246,14 +257,11 @@ class Cart():
 
         return total
 
-
-
     def _generate_order_number(self):
         """
         Generate a random, unique order number using UUID
         """
         return uuid.uuid4().hex.upper()[:16]
-
 
     def get_order_num(self):
         """
@@ -263,46 +271,48 @@ class Cart():
             str: The unique order number.
 
         Note:
-            This method returns the unique order number generated for the shopping cart.
+            This method returns the unique order number
+            generated for the shopping cart.
             The order number is created using a random, unique UUID.
         """
         return self.order_num
 
-
-
     def get_discounted_total(self):
         """
-        Calculate the total discount for all discounted items in the shopping cart.
+        Calculate the total discount for all
+        discounted items in the shopping cart.
 
         Returns:
-            Decimal or None: The total discount amount if there are discounted items, else None.
+            Decimal or None: The total discount amount if
+            there are discounted items, else None.
 
         Note:
-            This method calculates the total discount by summing the difference between the original price
-            and the discounted price for each item in the cart that has a 'discounted_price' key.
+            This method calculates the total discount by summing the
+            difference between the original price
+            and the discounted price for each item in the cart that
+            has a 'discounted_price' key.
             If there are no discounted items, the method returns None.
         """
         total_discount = sum(
-            (Decimal(item['price']) - Decimal(item['discounted_price'])) * item['qty']
-            for item in self.cart.values() if item.get('discounted_price', False)
+            (Decimal(item['price']) -
+             Decimal(item['discounted_price'])) * item['qty']
+            for item in self.cart.values() if item.get('discounted_price',
+                                                       False)
         )
         return total_discount if total_discount else None
-
-
 
     def clear_cart(self):
         """
         Clear all items from the shopping cart.
 
         Note:
-            This method removes all items from the cart by 
+            This method removes all items from the cart by
             setting the 'cart' key in the session to an empty dictionary.
-            After clearing the cart, the session is marked 
+            After clearing the cart, the session is marked
             as modified to save the changes.
         """
         self.session['cart'] = {}
         self.session.modified = True
-
 
     def get_cart_status(self):
         """
@@ -312,7 +322,7 @@ class Cart():
             bool: The current status of the cart update.
 
         Note:
-            The method returns the current value of 
+            The method returns the current value of
             'cart_bool' from the 'cart_updated' dictionary,
             which indicates whether the shopping cart has been updated.
             After retrieving the status, the 'cart_bool' is reset to False,
@@ -322,6 +332,3 @@ class Cart():
         self.cart_updated['cart_bool'] = False
         self.session.modified = True
         return status
-
-
-

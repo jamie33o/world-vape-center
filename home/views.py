@@ -5,8 +5,6 @@ from products.models import Product
 from products.models import Category
 
 
-
-
 class IndexView(View):
     """
     View class for displaying a list of channels.
@@ -21,8 +19,10 @@ class IndexView(View):
         Returns:
             HttpResponse: Rendered template with channel information.
         """
-        
-        top_rated_products = Product.objects.annotate(avg_rating=Avg('review__rating')).filter(avg_rating__gte=3)
+
+        top_rated_products = Product.objects.annotate(
+            avg_rating=Avg('review__rating')
+            ).filter(avg_rating__gte=3)
         if len(top_rated_products) < 10:
             categories = Category.objects.all()
 
@@ -32,7 +32,8 @@ class IndexView(View):
             # Iterate through each category
             for category in categories:
                 # Query two products from the current category
-                products_in_category = Product.objects.filter(category=category)[:2]
+                products_in_category = Product.objects.\
+                    filter(category=category)[:2]
 
                 # Add the products to the selected list
                 top_rated_products.extend(products_in_category)

@@ -7,8 +7,10 @@ class Subscriber(models.Model):
     Represents a subscriber to the newsletter.
 
     Attributes:
-        email (EmailField): The unique email address of the subscriber.
-        subscribed_at (DateTimeField): The date and time when the subscriber subscribed.
+        email (EmailField): The unique
+        email address of the subscriber.
+        subscribed_at (DateTimeField):
+        The date and time when the subscriber subscribed.
 
     """
     email = models.EmailField(unique=True)

@@ -21,7 +21,6 @@ def all_categories(request):
     """
     categories = Category.objects.all()
 
-
     context = {
         'all_categories': categories
     }
@@ -44,8 +43,9 @@ class CategoryView(View):
         """
         category_instance = get_object_or_404(Category,
                                               slug=category) if category \
-                                                else Category.objects.first()
-        category_products = Product.objects.filter(category=category_instance)
+            else Category.objects.first()
+        category_products = Product.objects.\
+            filter(category=category_instance)
 
         filters_form = FiltersForm(request.GET)
         if filters_form.is_valid():
@@ -57,8 +57,8 @@ class CategoryView(View):
                     filter(brand__slug__in=[brand.slug for brand in brands])
 
             if multi_options:
-                category_products = category_products.filter(options__slug__in=multi_options)
-
+                category_products = category_products.\
+                    filter(options__slug__in=multi_options)
 
         # Default number of items per page
         items_per_page = request.session.get('items_per_page', 24)
@@ -67,7 +67,6 @@ class CategoryView(View):
         if 'items_per_page' in request.GET:
             items_per_page = int(request.GET['items_per_page'])
             request.session['items_per_page'] = items_per_page
-
 
         paginator = Paginator(category_products, items_per_page)
         page = request.GET.get('page')
@@ -81,12 +80,10 @@ class CategoryView(View):
             # If page is out of range (e.g., 9999), deliver the last page
             products = paginator.page(paginator.num_pages)
 
-
         context = {
             'products': products,
             'category': category_instance,
             'items_per_page': items_per_page,
-
         }
         return render(request, self.template_name, context)
 
@@ -110,10 +107,10 @@ class ProductDetailView(View):
         reviews = Review.objects.filter(product=product)
         category_products = Product.objects.filter(category=product.category)
         form = AddToCartForm(
-            product_id = product.id,
-            product_options = product.options.all(),
-            product_option_name = product.options_name
-        )
+                product_id=product.id,
+                product_options=product.options.all(),
+                product_option_name=product.options_name
+               )
 
         context = {
             'product': product,
@@ -157,34 +154,35 @@ class ReviewsView(View):
             product = get_object_or_404(Product, id=product_id)
 
             if form.is_valid():
-                existing_review = Review.objects.filter(product=product,
-                                                        user=request.user).first()
+                existing_review = Review.objects.\
+                 filter(product=product, user=request.user).first()
 
                 if existing_review:
                     existing_review.comment = form.cleaned_data['comment']
                     existing_review.rating = form.cleaned_data['rating']
                     existing_review.save()
                     return JsonResponse({'status': 'success',
-                                         'message': 'Review updated successfully'},
-                                         status=200)
+                                         'message':
+                                             'Review updated successfully'},
+                                        status=200)
                 else:
                     new_review = form.save(commit=False)
                     new_review.product = product
                     new_review.user = request.user
                     new_review.save()
                     return JsonResponse({'status': 'success',
-                                         'message': 'Thank you for your review'},
-                                         status=200)
+                                         'message':
+                                             'Thank you for your review'},
+                                        status=200)
 
             return JsonResponse({'status': 'error',
                                  'message': form.errors},
-                                 status=400)
+                                status=400)
 
         except Exception as e:
             return JsonResponse({'status': 'error',
                                  'message': str(e)},
-                                 status=500)
-
+                                status=500)
 
     def delete(self, request, review_id):
         """
@@ -205,16 +203,18 @@ class ReviewsView(View):
                 review.delete()
                 return JsonResponse({'status': 'success',
                                      'message': 'Review deleted successfully'},
-                                     status=200)
+                                    status=200)
             else:
                 return JsonResponse({'status': 'error',
-                                     'message': 'You do not have permission to delete this review'},
-                                     status=403)
+                                     'message':
+                                         'You do not have permission'
+                                         'to delete this review'},
+                                    status=403)
 
         except Exception as e:
             return JsonResponse({'status': 'error',
                                  'message': str(e)},
-                                 status=500)
+                                status=500)
 
 
 def search(request):
@@ -241,7 +241,7 @@ def search(request):
                                    args=[product.category.slug, product.slug]),
                     'name': product.name,
                     'price': product.price,
-                    'img': product.image.url 
+                    'img': product.image.url
                 }
                 results.append(product_data)
 
@@ -252,14 +252,13 @@ def search(request):
         return JsonResponse(response_data, status=500)
 
 
-
 @login_required
 def add_to_favorites(request, product_id):
     """
     Add or remove a product from the user's favorites.
 
     Requires the user to be logged in.
-    
+
     Parameters:
         request (HttpRequest): The incoming HTTP request.
         product_id (int): The ID of the product

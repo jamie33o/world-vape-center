@@ -1,13 +1,16 @@
 from django import forms
 
+
 class AddToCartForm(forms.Form):
     """
     Form for adding a product to the shopping cart.
 
     Attributes:
         options (forms.ChoiceField): A radio select field for product options.
-        product_quantity (forms.ChoiceField): A select field for choosing the quantity.
-        product_id (forms.IntegerField): A hidden input field for storing the product ID.
+        product_quantity (forms.ChoiceField): A select field for
+        choosing the quantity.
+        product_id (forms.IntegerField): A hidden input field for
+        storing the product ID.
     """
 
     def __init__(self, *args, **kwargs):
@@ -33,14 +36,16 @@ class AddToCartForm(forms.Form):
             self.fields['options'] = forms.ChoiceField(
                 label=product_option_name,
                 widget=forms.RadioSelect,
-                choices=[(option.name, option.name) for option in product_options],
+                choices=[(option.name, option.name)
+                         for option in product_options],
                 required=False,
                 initial=product_options[0].name if product_options else None,
             )
 
         self.fields['product_quantity'] = forms.ChoiceField(
             choices=[(str(i), str(i)) for i in range(1, 9)],
-            widget=forms.Select(attrs={'class': 'form-select form-select-sm form-qty'}),
+            widget=forms.Select(attrs={'class':
+                                'form-select form-select-sm form-qty'}),
             initial='1',
         )
 
@@ -48,4 +53,3 @@ class AddToCartForm(forms.Form):
             widget=forms.HiddenInput(),
             initial=product_id,
         )
-

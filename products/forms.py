@@ -2,6 +2,7 @@ from django import forms
 from .models import Review, MultiOption
 from .models import Brand
 
+
 class ReviewForm(forms.ModelForm):
     """
     Form for adding or updating a product review.
@@ -22,7 +23,9 @@ class ReviewForm(forms.ModelForm):
 
     widgets = {
         'name': forms.TextInput(attrs={'class': 'form-control'}),
-        'rating': forms.NumberInput(attrs={'class': 'form-control', 'min': 0, 'max': 5, 'step': 1}),
+        'rating': forms.NumberInput(attrs={'class': 'form-control',
+                                           'min': 0,
+                                           'max': 5, 'step': 1}),
         'comment': forms.Textarea(attrs={'class': 'form-control'}),
     }
 
@@ -32,8 +35,10 @@ class FiltersForm(forms.Form):
     Form for applying filters to product listings.
 
     Attributes:
-    - brands (ModelMultipleChoiceField): Multiple choice field for brands.
-    - multi_options (ModelMultipleChoiceField): Multiple choice field for multi-options.
+    - brands (ModelMultipleChoiceField):
+    Multiple choice field for brands.
+    - multi_options (ModelMultipleChoiceField):
+    Multiple choice field for multi-options.
 
     """
     brands = forms.ModelMultipleChoiceField(

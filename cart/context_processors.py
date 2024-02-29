@@ -8,11 +8,11 @@ def cart(request):
         request (HttpRequest): The HTTP request object.
 
     Returns:
-        dict: A dictionary containing the 'cart' key with the Cart object.
+        dict: A dictionary containing the
+        'cart' key with the Cart object.
 
     Example:
-        In a Django template, you can access the cart object using {{ cart }}.
-
-
+        In a Django template, you can access 
+        the cart object using {{ cart }}.
     """
     return {'cart': Cart(request)}

@@ -46,7 +46,6 @@ class StripeWH_Handler:
         attempt = 1
         while attempt <= 5:
             try:
-               
                 order = Order.objects.get(order_num=order_num)
 
                 order_exists = True
@@ -58,9 +57,11 @@ class StripeWH_Handler:
             context = {
                 'order': order
             }
-            self.email_customer(billing_details.email, context, 'Order Successfull')
+            self.email_customer(billing_details.email, context,
+                                'Order Successfull')
             return HttpResponse(
-                content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
+                content=f'Webhook received: {event["type"]}'
+                '| SUCCESS: Verified order already in database',
                 status=200)
         else:
             order = None
@@ -86,10 +87,10 @@ class StripeWH_Handler:
                 order.order_number = cart.get_order_num()
                 order.save()
 
-
                 for item_id, item_data in json.loads(cart).items():
                     if item_data['discounted_price']:
-                        total = Decimal(item_data['discounted_price']) * item_data['qty']
+                        total = Decimal(item_data['discounted_price'])
+                        * item_data['qty']
                     else:
                         total = Decimal(item_data['price']) * item_data['qty']
 
@@ -110,7 +111,8 @@ class StripeWH_Handler:
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
         return HttpResponse(
-            content=f'Webhook received: {event["type"]} | SUCCESS: Created order in webhook',
+            content=f'Webhook received: {event["type"]}'
+            '| SUCCESS: Created order in webhook',
             status=200)
 
     def handle_payment_intent_payment_failed(self, event):
@@ -120,7 +122,6 @@ class StripeWH_Handler:
         return HttpResponse(
             content=f'Webhook received: {event["type"]}',
             status=200)
-    
 
     def email_customer(self, email, context, email_subject):
         """
@@ -131,10 +132,13 @@ class StripeWH_Handler:
             email_subject (str): The subject of the email.
 
         Note:
-            This function sends an email to the customer using the provided email address and subject.
-            The email content is rendered from the 'checkout/order_received_email.html' template.
+            This function sends an email to the customer
+            using the provided email address and subject.
+            The email content is rendered from the
+            'checkout/order_received_email.html' template.
     """
-        email_content = render_to_string('checkout/order_success_email.html', context)
+        email_content = render_to_string('checkout/order_success_email.html',
+                                         context)
         from_email = settings.EMAIL_HOST_USER
         send_mail(
             email_subject,

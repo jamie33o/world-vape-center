@@ -1,11 +1,14 @@
 """
 Module URLs Configuration for Help Pages
 
-This module defines URL patterns for various help pages, including payment options, delivery information,
-about us, returns policy, terms, FAQ, contact us, and the HTML sitemap.
+This module defines URL patterns for various help pages,
+including payment options, delivery information,
+about us, returns policy, terms, FAQ, contact us,
+and the HTML sitemap.
 
 Attributes:
-    urlpatterns (list): List of URL patterns mapping to corresponding view functions.
+    urlpatterns (list): List of URL patterns mapping to
+    corresponding view functions.
 """
 from django.urls import path
 from .views import (payments_options, delivery_info,

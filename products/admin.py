@@ -11,7 +11,10 @@ from .admin_utils.add_discount_actions import (apply_fifty_percentage_discount,
                                                apply_twenty_percentage_discount,
                                                remove_discount)
 from .models import Product, Category, Brand, MultiOption
-from .admin_forms import AdminAddMultiOptionForm, AdminAddMultipleBrandsForm, AdminAddPricesForm
+from .admin_forms import (AdminAddMultiOptionForm,
+                          AdminAddMultipleBrandsForm,
+                          AdminAddPricesForm)
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
@@ -47,7 +50,9 @@ class ProductAdmin(admin.ModelAdmin):
 
     """
 
-    list_display = ('name', 'category', 'brand', 'price', 'discounted_price')
+    list_display = ('name', 'category', 'brand',
+                    'price',
+                    'discounted_price')
     list_filter = ('category', 'brand', 'options')
     list_editable = ('price',)
 
@@ -75,7 +80,7 @@ class ProductAdmin(admin.ModelAdmin):
                  name='apply_prices'),
         ]
         return custom_urls + urls
-    
+
     def apply_prices(self, request):
         """
         Admin action to apply prices to selected products.
@@ -83,29 +88,29 @@ class ProductAdmin(admin.ModelAdmin):
         """
         if request.method == 'POST':
             form = AdminAddPricesForm(request.POST)
-         
+
             if form.is_valid():
                 ids = form.cleaned_data['ids']
                 price = form.cleaned_data['price']
 
                 ids_list = [int(id) for id in ids.split(',')]
-                
+
                 queryset = Product.objects.filter(id__in=ids_list)
 
                 for product in queryset:
-                        product.price = price
-                        product.save()
+                    product.price = price
+                    product.save()
                 self.message_user(request, 'Price applied')
                 return HttpResponseRedirect('..')
             self.message_user(request, 'Price not applied')
             return HttpResponseRedirect('..')
 
         form = AdminAddPricesForm()
-        context = {'form': form,}
-        html_content = render_to_string('admin/add-prices.html', context, request=request)
+        context = {'form': form, }
+        html_content = render_to_string('admin/add-prices.html',
+                                        context, request=request)
         response_data = {'html_content': html_content}
         return JsonResponse(response_data)
-
 
     def apply_brand(self, request):
         """
@@ -114,30 +119,31 @@ class ProductAdmin(admin.ModelAdmin):
         """
         if request.method == 'POST':
             form = AdminAddMultipleBrandsForm(request.POST)
-         
+
             if form.is_valid():
                 ids = form.cleaned_data['ids']
                 selected_brand_id = form.cleaned_data['brand']
 
                 ids_list = [int(id) for id in ids.split(',')]
-                
+
                 queryset = Product.objects.filter(id__in=ids_list)
-                selected_brand = get_object_or_404(Brand, id=selected_brand_id)
+                selected_brand = get_object_or_404(Brand,
+                                                   id=selected_brand_id)
 
                 for product in queryset:
-                        product.brand = selected_brand
-                        product.save()
+                    product.brand = selected_brand
+                    product.save()
                 self.message_user(request, 'Brands applied')
                 return HttpResponseRedirect('..')
             self.message_user(request, 'Brands not applied')
             return HttpResponseRedirect('..')
 
         form = AdminAddMultipleBrandsForm()
-        context = {'form': form,}
-        html_content = render_to_string('admin/add-brands.html', context, request=request)
+        context = {'form': form, }
+        html_content = render_to_string('admin/add-brands.html',
+                                        context, request=request)
         response_data = {'html_content': html_content}
         return JsonResponse(response_data)
-
 
     def apply_multiple_choices(self, request):
         """
@@ -149,31 +155,36 @@ class ProductAdmin(admin.ModelAdmin):
             if form.is_valid():
                 selected_choices = form.cleaned_data['choices']
                 options_name = form.cleaned_data['options_name']
-                
+
                 ids = form.cleaned_data['ids']
                 print(ids)
                 ids_list = [int(id) for id in ids.split(',')]
-                
+
                 queryset = Product.objects.filter(id__in=ids_list)
 
-                selected_options = MultiOption.objects.filter(id__in=selected_choices)
+                selected_options = MultiOption.\
+                    objects.filter(id__in=selected_choices)
 
                 for product in queryset:
-                    # Clear existing options and set the selected MultiOption instances
+                    # Clear existing options and set the
+                    # selected MultiOption instances
                     product.options.clear()
                     product.options_name = options_name
                     product.options.add(*selected_options)
                     product.save()
 
-                self.message_user(request, 'Choices applied to selected products.')
-                return HttpResponseRedirect('..')  # Redirect to the changelist page
-            messages.error(request, 'Choices not applied to selected products.')
+                self.message_user(request,
+                                  'Choices applied to selected products.')
+                return HttpResponseRedirect('..')
+            messages.error(request,
+                           'Choices not applied to selected products.')
 
-            return HttpResponseRedirect('..')  # Redirect to the changelist page
+            return HttpResponseRedirect('..')
         else:
             form = AdminAddMultiOptionForm()
-            context = {'form': form,}
-            html_content = render_to_string('admin/admin_add_choices.html', context, request=request)
+            context = {'form': form, }
+            html_content = render_to_string('admin/admin_add_choices.html',
+                                            context, request=request)
             response_data = {'html_content': html_content}
             return JsonResponse(response_data)
 

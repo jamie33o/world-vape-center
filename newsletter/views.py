@@ -41,7 +41,7 @@ def subscribe_newsletter(request):
     form = NewsletterSubscriptionForm(request.POST)
     if form.is_valid():
         email = form.cleaned_data['email']
-            
+
         try:
             # Create a new Subscriber instance
             subscriber = Subscriber.objects.filter(email=email).first()
@@ -68,18 +68,20 @@ def subscribe_newsletter(request):
 
                 response_data = {
                     'status': 'success',
-                    'message': 'Successfully un-subscribed from the newsletter.'
+                    'message':
+                    'Successfully un-subscribed from the newsletter.',
                 }
 
                 return JsonResponse(response_data)
 
             # Create a new Subscriber instance
             subscriber = Subscriber(email=email)
-            subscriber.full_clean()  # Validate the model fields (including uniqueness)
+            subscriber.full_clean()
             subscriber.save()
 
-            context = {'email': subscriber.email,}
-            email_content = render_to_string('sub_thank_you_email.html', context)
+            context = {'email': subscriber.email, }
+            email_content = render_to_string('sub_thank_you_email.html',
+                                             context)
 
             email_subject = 'Thank you for Subscribing'
             recipient_list = [subscriber.email]

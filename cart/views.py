@@ -17,7 +17,8 @@ def cart_summary(request):
         HttpResponse: Renders the 'cart-summary.html' template.
 
     Note:
-        Ensure that the 'cart' context processor is added to the Django settings.
+        Ensure that the 'cart' context processor
+        is added to the Django settings.
     """
     try:
         cart = Cart(request)
@@ -30,7 +31,8 @@ def cart_summary(request):
         })
     except Exception:
         messages.error(request,
-                       'Error trying to retrieve cart summary!!! Please contact us!!!')
+                       'Error trying to retrieve cart \
+                       summary!!! Please contact us!!!')
         return redirect('contact_us')
 
 

@@ -1,6 +1,6 @@
 $(document).ready(function(){
     // Select the element with class 'account-modal-title'
-    const modelTitle = $('.account-modal-title')
+    const modelTitle = $('.account-modal-title');
 
     // Attach a click event handler to elements with class 'toggle-form'
     $('.toggle-form').click(function(){

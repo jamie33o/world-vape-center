@@ -11,11 +11,11 @@ This script utilizes jQuery and handles the following functionality:
 $(document).ready(function(){
 
     $('.folder-link').click(function(){
-        $('.folder').addClass('d-none')
-        $('.folder-link').addClass('mt-3')
-        $(this).removeClass('mt-3')
-        $($(this).data('id')).removeClass('d-none')
-    })
+        $('.folder').addClass('d-none');
+        $('.folder-link').addClass('mt-3');
+        $(this).removeClass('mt-3');
+        $($(this).data('id')).removeClass('d-none');
+    });
 
 
     $('#id_profile_image').change(function () {
@@ -26,14 +26,14 @@ $(document).ready(function(){
         if (file) {
             // You can access file properties such as name, size, type, etc.
             console.log('Selected file:', file.name, ', Size:', file.size, ', Type:', file.type);
-            const $linkContainer = $(".img-link")
+            const $linkContainer = $(".img-link");
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('.img-account-profile').attr('src', e.target.result);
-                $linkContainer.append(`<p class="h6">${file.name} ${file.size} ${file.type}</p>`)
+                $linkContainer.append(`<p class="h6">${file.name} ${file.size} ${file.type}</p>`);
 
             };
             reader.readAsDataURL(file);
         }
     });
-})
+});

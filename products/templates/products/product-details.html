@@ -4,7 +4,7 @@
 {% load crispy_forms_tags %} 
 
 {% block extra_css %}
-    <link async rel="stylesheet" href="{% static 'products/css/product-details.css' %}" />
+    <link rel="stylesheet" href="{% static 'products/css/product-details.css' %}">
 {% endblock %}
 
 
@@ -20,7 +20,7 @@
                 <div class="preview col-md-6">
                     <div class="preview-pic tab-content">
                         <div class="tab-pane active" id="pic-1">
-                            <img src="{{product.image.url}}" />
+                            <img src="{{product.image.url}}" alt="product image">
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                         <!-- end col -->
                         <div class="col-8 col-sm-5 col-md-12 col-lg-5 mt-3 mt-sm-0">
                             <div class="ml-0">
-                                <a {% if cart|length == 0 %}data-toggle="modal" data-target="#cart-modal"{% else%} href="{% url 'cart-summary' %}" {% endif%}class="btn btn-success font-weight-bold w-100">
+                                <a {% if cart|length == 0 %}data-toggle="modal" data-target="#cart-modal"{% else%} href="{% url 'cart-summary' %}" {% endif%} class="btn btn-success font-weight-bold w-100">
                                     
                                     <i class="mdi mdi-cart-outline me-1"></i> 
                                     Shopping Cart
@@ -129,7 +129,7 @@
     </div>
 </div>
 <div class="container-fluid pt-3 px-0 px-md-3 px-lg-5">
-    <hr />
+    <hr>
     <div class="row" style="margin-top: 40px">
         <div class="col-md-6">
             <div class="well well-sm">
@@ -178,9 +178,7 @@
         </div>
         <div class="col-sm-6 reviews-list">
            {% include 'components/reviews.html' with reviews=reviews %}
-        </div>
-            
-        </div>
+        </div> 
     </div>
 </div>
 {% endblock %}

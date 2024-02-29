@@ -6,7 +6,8 @@ class StaticViewSitemap(sitemaps.Sitemap):
     """
     Sitemap for static views.
 
-    This sitemap includes static views such as home, about_us, contact_us, etc.
+    This sitemap includes static views such as home,
+    about_us, contact_us, etc.
     """
     priority = 0.5
     changefreq = "monthly"

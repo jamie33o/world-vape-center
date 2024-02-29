@@ -17,6 +17,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import ShippingAddress, CustomUser
 
+
 class ProfileUpdateForm(forms.ModelForm):
     """
     Form for updating user profile information.
@@ -36,7 +37,9 @@ class ProfileUpdateForm(forms.ModelForm):
         Specifies the model and fields to be included in the form.
         """
         model = CustomUser
-        fields = ['first_name', 'last_name', 'username', 'email', 'profile_image']
+        fields = ['first_name', 'last_name',
+                  'username', 'email', 'profile_image']
+
 
 class ShippingAddressForm(forms.ModelForm):
     """
@@ -58,7 +61,10 @@ class ShippingAddressForm(forms.ModelForm):
         Specifies the model and fields to be included in the form.
         """
         model = ShippingAddress
-        fields = ['phone_number', 'street_address1', 'street_address2', 'town_or_city' , 'county', 'eircode']
+        fields = ['phone_number', 'street_address1',
+                  'street_address2',
+                  'town_or_city', 'county', 'eircode']
+
 
 class CheckoutDetailForm(forms.ModelForm):
     """
@@ -78,6 +84,7 @@ class CheckoutDetailForm(forms.ModelForm):
         """
         model = CustomUser
         fields = ['first_name', 'last_name', 'email']
+
 
 class SignupForm(UserCreationForm):
     """
@@ -100,7 +107,9 @@ class SignupForm(UserCreationForm):
         Specifies the model and fields to be included in the form.
         """
         model = CustomUser
-        fields = ['username', 'email', 'password1', 'password2', 'date_of_birth']
+        fields = ['username', 'email',
+                  'password1', 'password2', 'date_of_birth']
+
 
 class SigninForm(AuthenticationForm):
     """

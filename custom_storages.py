@@ -5,6 +5,7 @@
 from django.conf import settings
 from storages.backends.s3boto3 import S3Boto3Storage
 
+
 class StaticStorage(S3Boto3Storage):
     """
     Custom storage backend for handling static files on Amazon S3.
@@ -35,7 +36,8 @@ class StaticStorage(S3Boto3Storage):
         Return the last accessed time of the file.
         """
         raise NotImplementedError(
-            "Method 'get_accessed_time' must be implemented in your StaticStorage class.")
+            "Method 'get_accessed_time' must be implemented \
+                in your StaticStorage class.")
 
 
 class MediaStorage(S3Boto3Storage):
@@ -68,4 +70,5 @@ class MediaStorage(S3Boto3Storage):
         Return the last accessed time of the file.
         """
         raise NotImplementedError(
-            "Method 'get_accessed_time' must be implemented in your MediaStorage class.")
+            "Method 'get_accessed_time' must be implemented \
+                in your MediaStorage class.")

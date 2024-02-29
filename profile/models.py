@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import get_user_model
 from products.models import Product
 
+
 class CustomUser(AbstractUser):
     """
     Custom User model extending AbstractUser.
@@ -15,6 +16,7 @@ class CustomUser(AbstractUser):
     profile_image = models.ImageField(upload_to='profile_images/',
                                       null=True, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
+
 
 class ShippingAddress(models.Model):
     """
@@ -46,6 +48,7 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return f"{self.user}'s  Shipping Address"
+
 
 class Favourite(models.Model):
     """

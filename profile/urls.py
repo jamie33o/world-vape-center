@@ -1,9 +1,12 @@
 """
 URL patterns for the profile application.
 
-This module defines the URL patterns and routing configuration for the
-application. Each URL pattern is associated with a specific view function or
-class, determining the mapping between URLs and the corresponding
+This module defines the URL patterns and
+routing configuration for the
+application. Each URL pattern is associated
+with a specific view function or
+class, determining the mapping between URLs
+and the corresponding
 presentation logic.
 
 """

@@ -1,7 +1,8 @@
 """
 Admin configuration for the 'profile' app.
 
-This module defines the admin configuration for the 'profile' app, including
+This module defines the admin configuration
+for the 'profile' app, including
 custom admin classes for user-related models.
 
 Contents:
@@ -23,7 +24,11 @@ class CustomUserAdmin(UserAdmin):
     """
 
     model = CustomUser
-    list_display = ['first_name', 'last_name', 'username', 'email', 'profile_image']
+    list_display = ['first_name',
+                    'last_name',
+                    'username',
+                    'email',
+                    'profile_image']
 
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(ShippingAddress)

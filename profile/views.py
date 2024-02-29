@@ -54,7 +54,9 @@ class ProfileView(View):
         user_address_instance = request.user.user_address.first()
 
         user_form = ProfileUpdateForm(instance=request.user)
-        shipping_address_form = ShippingAddressForm(instance=user_address_instance)
+        shipping_address_form = ShippingAddressForm(
+            instance=user_address_instance
+            )
         user_orders = Order.objects.filter(user=request.user)
 
         try:
@@ -82,9 +84,11 @@ class ProfileView(View):
         Handle POST requests for updating the user's profile.
 
         Returns:
-        - HttpResponse: Redirects to the 'profile' page after updating the profile.
+        - HttpResponse: Redirects to the 'profile'
+        page after updating the profile.
         """
-        user_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        user_form = ProfileUpdateForm(request.POST,
+                                      request.FILES, instance=request.user)
 
         if user_form.is_valid():
             user_form.save()
@@ -100,16 +104,20 @@ def shipping_address_view(request):
     """
     Handle updating the user's shipping address.
 
-    This view processes a POST request for updating the user's shipping address.
-    If the user doesn't have a shipping address, a new instance is created.
-    The shipping address form is then populated with the user's address data,
+    This view processes a POST request for
+    updating the user's shipping address.
+    If the user doesn't have a shipping address,
+    a new instance is created.
+    The shipping address form is then populated
+    with the user's address data,
     validated, and saved.
 
     Parameters:
     - request (HttpRequest): The HTTP request object.
 
     Returns:
-    - HttpResponse: Redirects to the 'profile' page after updating the shipping address.
+    - HttpResponse: Redirects to the 'profile' page
+    after updating the shipping address.
     """
     user_address_instance = request.user.user_address.first()
 
@@ -117,16 +125,19 @@ def shipping_address_view(request):
         # If the user doesn't have a shipping address, create a new instance
         user_address_instance = ShippingAddress(user=request.user)
 
-    shipping_address_form = ShippingAddressForm(request.POST, instance=user_address_instance)
+    shipping_address_form = ShippingAddressForm(request.POST,
+                                                instance=user_address_instance)
 
     if shipping_address_form.is_valid():
         shipping_address_form.save()
-        messages.success(request, 'Shipping Address Updated!!')
+        messages.success(request,
+                         'Shipping Address Updated!!')
     else:
-        messages.error(request, 'Error updating shipping address. Please check the form.')
+        messages.error(request,
+                       'Error updating shipping address.\
+                       Please check the form.')
 
     return redirect('profile')
-
 
 
 @require_POST
@@ -163,7 +174,7 @@ def signup_view(request):
 
     except Exception as e:
         messages.error(request, f'We are very sorry, \
-                        an unknown error occurred: {e}... PLEASE CONTACT US!!!')
+                    an unknown error occurred: {e}... PLEASE CONTACT US!!!')
         return redirect('contact_us')
 
 

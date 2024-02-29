@@ -1,6 +1,7 @@
 from decimal import Decimal
 from django.contrib import admin
 
+
 def apply_discount_to_products(queryset, discount_percent):
     """
     Apply a percentage discount to the selected products.
@@ -18,12 +19,14 @@ def apply_discount_to_products(queryset, discount_percent):
         product.discount_percentage = f'{discount_percent}% OFF'
         product.save()
 
+
 @admin.action(description="Apply 5%% discount to selected products")
 def apply_five_percentage_discount(modeladmin, request, queryset):
     """
     Admin action to apply a 5% discount to selected products.
     """
     apply_discount_to_products(queryset, 5)
+
 
 @admin.action(description="Apply 10%% discount to selected products")
 def apply_ten_percentage_discount(modeladmin, request, queryset):
@@ -32,6 +35,7 @@ def apply_ten_percentage_discount(modeladmin, request, queryset):
     """
     apply_discount_to_products(queryset, 10)
 
+
 @admin.action(description="Apply 20%% discount to selected products")
 def apply_twenty_percentage_discount(modeladmin, request, queryset):
     """
@@ -39,12 +43,14 @@ def apply_twenty_percentage_discount(modeladmin, request, queryset):
     """
     apply_discount_to_products(queryset, 20)
 
+
 @admin.action(description="Apply 50%% discount to selected products")
 def apply_fifty_percentage_discount(modeladmin, request, queryset):
     """
     Admin action to apply a 50% discount to selected products.
     """
     apply_discount_to_products(queryset, 50)
+
 
 @admin.action(description="Remove discount")
 def remove_discount(modeladmin, request, queryset):

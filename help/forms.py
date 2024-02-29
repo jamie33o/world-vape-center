@@ -19,7 +19,7 @@ class ContactForm(forms.Form):
     """
   
     name = forms.CharField(max_length=100)
-    email = forms.EmailField()
+    email = forms.EmailField(widget=forms.TextInput(attrs={'id': 'email_contact'}))
     message = forms.CharField(widget=forms.Textarea)
 
     def clean_email(self):

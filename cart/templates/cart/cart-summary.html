@@ -3,7 +3,7 @@
 {% load mathfilters %} 
 
 {% block extra_css %}
-    <link async rel="stylesheet" href="{% static 'cart/css/cart-summary.css' %}" />
+    <link async rel="stylesheet" href="{% static 'cart/css/cart-summary.css' %}">
 {% endblock %} 
 
 {% block breadcrumb %}
@@ -35,7 +35,7 @@
                                 class="img-fluid mx-auto d-block"
                                 width="100px"
                                 alt="Responsive image"
-                                src="{{ product.image.url }}" />
+                                src="{{ product.image.url }}">
                             <!-- Product image -->
                         </div>
                         <div class="flex-grow-1 align-self-center overflow-hidden">
@@ -202,7 +202,7 @@
                                 <div class="owl-item">
                                     <a href="{% url 'product_details' product.category.slug product.slug %}" class="btn text-hover">
                                     <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="bbb_viewed_image"><img src="{{ product.image.url }}" alt=""></div>
+                                        <div class="bbb_viewed_image"><img src="{{ product.image.url }}" alt="product image"></div>
                                         <div class="bbb_viewed_content text-center">
                                             {% if product.discounted_price %}
                                             <div class="bbb_viewed_price">Price: € {{ product.discounted_price }} <span>{{ product.price }} </span></div>

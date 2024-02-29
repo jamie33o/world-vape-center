@@ -1,29 +1,29 @@
 {% load static %}
 <div class="footer" id="footer-sub">
-  <div class="container">
+  <div class="container-fluid px-5">
     <div class="row">
       <div class="col-12 col-sm-6 col-lg-3">
         <h5>HELP</h5>
         <ul>
           <li>
             <a href="{% url 'payments_options' %}">Payments</a>
-            <hr />
+            <hr>
           </li>
           <li>
             <a href="{% url 'delivery_info' %}">Delivery Info</a>
-            <hr />
+            <hr>
           </li>
           <li>
             <a href="{% url 'about_us' %}">About Us</a>
-            <hr />
+            <hr>
           </li>
           <li>
             <a href="{% url 'terms' %}">Terms & conditions</a>
-            <hr />
+            <hr>
           </li>
           <li>
             <a href="{% url 'returns_policy' %}">Returns Policy</a>
-            <hr />
+            <hr>
           </li>
           <li>
             <a href="{% url 'sitemap_html' %}">Sitemap</a> <hr />
@@ -45,8 +45,6 @@
             <button data-url="{% url 'subscribe_newsletter' %}"  class="sub btn btn-success mb-3">Subscribe</button>
           </div>
         </form>
-      
-       
       </div>
 
       <div class="col-12 col-sm-6 col-lg-3">
@@ -85,14 +83,12 @@
           </li>
           <li>
             <p>
-              <strong>Company Registration </strong><p class="mb-0">No.: 1234</p>
-
+              <strong>Company Registration </strong><p class="mb-0">No.: 1234
             </p>
           </li>
           <li>
             <p>
-              <strong>VAT Registration </strong> <p class="mb-0">No.: 1234</p>
-
+              <strong>VAT Registration </strong> <p class="mb-0">No.: 1234
             </p>
           </li>
         </ul>
@@ -133,21 +129,20 @@
   <div class="col-12 col-sm-6">
     <ul class="d-flex justify-content-center justify-content-sm-end list-unstyled my-auto">
         <li>
-            <a href="#"><img style="max-width: 50px;" src="{% static 'twitter.png' %}" /></a>
+            <a href="#"><img style="max-width: 50px;" alt="twitter logo" src="{% static 'twitter.png' %}"></a>
         </li>
         <li>
           <span class="h2 text-white mx-5">|</span>
         </li>
         <li>
-            <a href="#"><img style="max-width: 50px;" src="{% static 'fb.png' %}" /></a>
+            <a href="#"><img style="max-width: 50px;" alt="facebook logo" src="{% static 'fb.png' %}"></a>
         </li>
         <li>
           <span class="h2 text-white mx-5">|</span>
         </li>
         <li>
-            <a href="#"><img style="max-width: 50px;" src="{% static 'insta.png' %}" /></a>
+            <a href="#"><img style="max-width: 50px;" alt="instagram logo" src="{% static 'insta.png' %}"></a>
         </li>
     </ul>
-</div>
-
+  </div>
 </div>

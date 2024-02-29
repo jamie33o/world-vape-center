@@ -295,8 +295,10 @@ class Cart():
         Clear all items from the shopping cart.
 
         Note:
-            This method removes all items from the cart by setting the 'cart' key in the session to an empty dictionary.
-            After clearing the cart, the session is marked as modified to save the changes.
+            This method removes all items from the cart by 
+            setting the 'cart' key in the session to an empty dictionary.
+            After clearing the cart, the session is marked 
+            as modified to save the changes.
         """
         self.session['cart'] = {}
         self.session.modified = True
@@ -310,7 +312,8 @@ class Cart():
             bool: The current status of the cart update.
 
         Note:
-            The method returns the current value of 'cart_bool' from the 'cart_updated' dictionary,
+            The method returns the current value of 
+            'cart_bool' from the 'cart_updated' dictionary,
             which indicates whether the shopping cart has been updated.
             After retrieving the status, the 'cart_bool' is reset to False,
             and the session is marked as modified to save the changes.

@@ -5,7 +5,7 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <a class="navbar-brand" href="{% url 'home' %}"><img class="logo ml-2" src="{% static 'logo.png' %}" alt="logo"><p class="d-none d-lg-inline ml-2">World Vape Center</p></a>
+  <a class="navbar-brand" href="{% url 'home' %}"><img class="logo ml-2" src="{% static 'logo.webp' %}" alt="logo"><p class="d-none d-lg-inline ml-2">World Vape Center</p></a>
   <div class="d-flex ml-auto">
     <a class="text-white mt-2 position-relative d-flex d-lg-none mx-0" href="{% url 'cart-summary' %}">
       <i class="fa fa-shopping-cart h4 text-success"></i>
@@ -88,14 +88,14 @@
       {% endif %}
     </ul>
   </div>
-      <button class="search-btn d-none d-lg-flex btn mt-2">
+      <button class="search-btn d-none d-lg-flex btn mt-2" aria-label="Search bar toggle">
         <i class="fas fa-search h4"></i>
       </button>
       <span class="h2 mx-2 text-white d-none d-lg-flex">|</span>
 
     <div class="dropdown d-none d-lg-flex">
         {% if user.is_authenticated %}
-          <a class="dropdown-toggle text-white d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="dropdown-toggle text-white d-flex align-items-center" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" aria-label="Account dropdown button">
             {% if user.profile.image %}
               <img class="logo" src="{{ user.image.url }}" alt="logo" />            
             {% else %}
@@ -125,8 +125,7 @@
             </div>
         </div>
         {% else %}
-          <a href="{% url 'account_login' %}" class="btn text-white d-flex">
-
+          <a href="{% url 'account_login' %}" class="btn text-white d-flex" aria-label="Sign in or sign up">
             <i class="fa-regular fa-circle-user h3 m-0"></i> 
             <i class="fa-solid fa-plus"></i>         
           </a>

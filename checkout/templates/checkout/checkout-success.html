@@ -5,6 +5,13 @@
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
+{% block extra_meta %}
+<meta name="description" content="Thank you for securely completing your vape product purchase at the World Vape Center. Enjoy a fast and easy checkout process for e-cigarettes, e-liquids, and accessories. Your order is confirmed, and your vaping products will be on their way soon.">
+<meta name="keywords" content="checkout success, order confirmation, vape products, e-cigarettes, e-liquids">
+{% endblock %}
+
+{% block extra_title %}- Order Complete{% endblock %}
+
 {% block breadcrumb %}
 <div class="container-fluid">
     <nav aria-label="breadcrumb" class="d-none bc-con w-100">

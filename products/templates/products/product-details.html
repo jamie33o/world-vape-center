@@ -3,10 +3,16 @@
 {% load custom_filters %} 
 {% load crispy_forms_tags %} 
 
+{% block extra_meta %}
+<meta name="description" content="Explore the details of our premium vape product - {{ product.name }} at the World Vape Center. Discover its unique features, flavors, and specifications. Securely purchase this high-quality e-cigarette for an exceptional vaping experience.">
+<meta name="keywords" content="{{ product.name }}, vape product details, e-cigarette features, premium vape, buy {{ product.name }}">
+{% endblock %}
+
+{% block extra_title %}- Product Details{% endblock %}
+
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'products/css/product-details.css' %}">
 {% endblock %}
-
 
 {% block extra_header %}
     {% include 'products/categories.html' %}
@@ -59,19 +65,19 @@
                     </div>
                     <div class="row my-4">
                         <div class="col-8 col-sm-5 col-md-12 col-lg-5 mb-4">
-                            <a href="{% url 'categories' %}" class="btn btn-info text-white font-weight-bold text-nowrap w-100">
+                            <a href="{% url 'categories' %}" class=" px-1 btn btn-info text-white font-weight-bold text-nowrap w-100">
                                 <i class="mdi mdi-arrow-left"></i> Continue Shopping
                             </a>
                         </div>
                         <!-- end col -->
                         <div class="col-8 col-sm-5 col-md-12 col-lg-5 mt-3 mt-sm-0">
                             <div class="ml-0">
-                                <a {% if cart|length == 0 %}data-toggle="modal" data-target="#cart-modal"{% else%} href="{% url 'cart-summary' %}" {% endif%} class="btn btn-success font-weight-bold w-100">
+                                <button {% if cart|length == 0 %}data-toggle="modal" data-target="#cart-modal"{% else%} href="{% url 'cart-summary' %}" {% endif%} class="btn btn-success font-weight-bold w-100">
                                     
                                     <i class="mdi mdi-cart-outline me-1"></i> 
                                     Shopping Cart
                                     <i class="mdi mdi-arrow-right"></i> 
-                                </a>
+                                </button>
                             </div>
                         </div>
                         <!-- end col -->

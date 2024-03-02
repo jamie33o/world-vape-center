@@ -8,6 +8,11 @@
     <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
+{% block extra_meta %}
+<meta name="description" content="Securely complete your vape product purchase at the world vape center. Fast and easy checkout process for e-cigarettes, e-liquids, and accessories. Provide shipping details and payment information to enjoy your vaping products soon.">
+<meta name="keywords" content="checkout, vapes, cheap vapes, online checkout, e-cigarettes">
+{% endblock %}
+{% block extra_title %}- Checkout{% endblock %}
 
 {% block breadcrumb %}
 <div class="container p-0 mt-4">
@@ -36,15 +41,15 @@
                 <div class="mt-5 mt-lg-0">
                     <div class="card border shadow-none">
                         <div class="card-header bg-transparent border-bottom py-3 px-4">
-                            <h5 class="font-size-16 mb-0">
+                            <h3 class="font-size-16 mb-0 h5">
                                 Order Summary <span class="float-end">(#{{ cart.get_order_num }})</span>
-                            </h5>
+                            </h3>
                         </div>
                         <div class="card-body p-4 pt-2">
                             {% for item in cart %}
                                 <div class="row mb-4">
                                     <div class="col-2 mb-1">
-                                        <a href="{% url 'product_details' item.product.category.slug item.product.id %}">
+                                        <a href="{% url 'product_details' item.product.category.slug item.product.id %}" aria-label="{{ product.name }}">
                                             {% if item.product.image %}
                                                 <img class="w-100" src="{{ item.product.image.url }}" alt="{{ product.name }}">
                                             {% else %}

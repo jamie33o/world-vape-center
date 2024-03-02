@@ -7,6 +7,11 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="robots" content="index, follow">
+        <meta name="author" content="World vape center">
+    {% endblock %}
+
+    {% block extra_meta %}
     {% endblock %}
 
     {% block favicon %}
@@ -42,14 +47,15 @@
         <script src="https://js.stripe.com/v3/"></script>
         <script src="{% static 'home/js/home.js' %}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
-        <script src="{% static 'products/js/add-to-cart.js' %}"></script>
         <script src="{% static 'products/js/product-details.js' %}"></script>
     {% endblock %}
 
     {% block extra_js %}
+      <meta name="description" content="Learn more about the World Vape Center - your trusted source for premium vape products. Discover our mission, values, and commitment to providing a diverse range of high-quality e-cigarettes, e-liquids, and accessories.">
+      <meta name="keywords" content="about us, profile, account, FAQ, sitemap, shipping, help, terms, conditions, World Vape Center, vape products, mission, values, e-cigarettes, e-liquids, accessories">
     {% endblock %}
 
-    <title>World Vape Center</title>
+    <title>World Vape Center {% block extra_title %}{% endblock %}</title>
   </head>
   <body class="d-flex flex-column">
 

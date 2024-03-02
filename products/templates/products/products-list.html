@@ -2,10 +2,12 @@
 {% load static %} 
 {% load mathfilters %} 
 
+{% block extra_meta %}
+<meta name="description" content="Explore our diverse range of vape products at the World Vape Center. Find high-quality e-cigarettes, flavorful e-liquids, and stylish accessories. Discover the perfect vaping solutions to suit your preferences.">
+<meta name="keywords" content="{{ category }}, vape products, e-cigarettes, e-liquids, vaping accessories, high-quality vapes, stylish vape devices">
+{% endblock %}
 
-{% block extra_js %}
-    <script src="{% static 'products/js/add-to-cart.js' %}"></script>
-{% endblock %} 
+{% block extra_title %}- Products{% endblock %}
 
 {% block extra_header %}
     {% include 'products/categories.html' %}

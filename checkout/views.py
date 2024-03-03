@@ -144,7 +144,7 @@ def checkout(request):
 
                     return redirect('contact_us')
 
-            email_customer(email, 'Order Received')
+            email_customer(request.POST['email'], 'Order Received')
 
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:

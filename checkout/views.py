@@ -143,7 +143,16 @@ def checkout(request):
 
                     return redirect('contact_us')
             try:
-                email_customer(email, 'Order Received')
+                email_content = render_to_string('checkout/order_received_email.html')
+                from_email = settings.EMAIL_HOST_USER
+                send_mail(
+                    'Order Received',
+                    '',
+                    from_email,
+                    [email, ],
+                    html_message=email_content,
+                    fail_silently=False
+            )
             except Exception as e:
                 messages.error(request, f'Error: Could not send order success email-- {e}')
 
@@ -217,29 +226,3 @@ def checkout_success(request, order_number):
 
     return render(request, template, context)
 
-
-def email_customer(email, email_subject):
-    """
-    Send an email to the customer.
-
-    Args:
-        email (str): The customer's email address.
-        email_subject (str): The subject of the email.
-
-    Note:
-        This function sends an email to the customer
-        using the provided email address and subject.
-        The email content is rendered from the
-        'checkout/order_received_email.html' template.
-    """
-
-    email_content = render_to_string('checkout/order_received_email.html')
-    from_email = settings.EMAIL_HOST_USER
-    send_mail(
-        email_subject,
-        '',
-        from_email,
-        [email],
-        html_message=email_content,
-        fail_silently=False
-    )

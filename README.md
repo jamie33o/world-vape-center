@@ -843,7 +843,8 @@ I used some media found online throughout this project, in particular for produc
 | --- | --- | --- | --- |
 | [Code Institute](https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg) | Blog | Image | Default blog post image |
 
-
-
-
-
+## Acknowledgements
+- [Code Institute](https://github.com/Code-Institute-Org/full_stack_solutions) for all the material and support offered<br>
+- My mentor [Gareth Mc Girr](https://github.com/Gareth-McGirr) for great tips and his willingness to help me as much as possible with the problems encountered during the development of the project<br>
+- Slack community for great involvement in helping each other<br>
+<hr>

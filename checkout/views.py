@@ -47,7 +47,6 @@ def cache_checkout_data(request):
             'cart': json.dumps(request.session.get('cart', {})),
             'username': request.user,
             'order_num': json.dumps(request.session.get('order_num', {})),
-
         })
         return HttpResponse(status=200)
     except Exception as e:
@@ -143,8 +142,10 @@ def checkout(request):
                     )
 
                     return redirect('contact_us')
-
-            email_customer(request.POST['email'], 'Order Received')
+            try:
+                email_customer(email, 'Order Received')
+            except Exception:
+                messages.error(request, 'Error: Could not send order success email')
 
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:
@@ -217,7 +218,7 @@ def checkout_success(request, order_number):
     return render(request, template, context)
 
 
-def email_customer( email, email_subject):
+def email_customer(email, email_subject):
     """
     Send an email to the customer.
 

@@ -69,20 +69,30 @@ def checkout(request):
     """
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
-    save_address =  request.POST.get('save_info')
-
+    save_address =  request.POST.get('save-info')
 
     if request.method == 'POST':
         cart = Cart(request)
 
         shipping_form = ShippingAddressForm(request.POST)
         profile_detail_form = CheckoutDetailForm(request.POST)
+        
 
         if shipping_form.is_valid() and profile_detail_form.is_valid():
+            first_name = profile_detail_form.cleaned_data['first_name']
+            last_name = profile_detail_form.cleaned_data['last_name']
+            email = profile_detail_form.cleaned_data['email']
             address = shipping_form.save(commit=False)
+
             if save_address:
-                address.save()
-            profile_details = profile_detail_form.save(commit=False)
+                user = request.user
+                address.user = user
+                user.first_name = first_name
+                user.last_name = last_name
+                user.email = email
+                user.save()
+
+            address.save()
             order = Order()
             user = request.user if request.user.is_authenticated else None
             if user:
@@ -92,9 +102,9 @@ def checkout(request):
 
             order.status = 'pending'
             order.stripe_pid = pid
-            order.first_name = profile_details.first_name
-            order.last_name = profile_details.last_name
-            order.email = profile_details.email
+            order.first_name = first_name
+            order.last_name = last_name
+            order.email = email
             order.shipping_address = address
             order.discount = cart.get_discounted_total()
             order.delivery_cost = cart.get_delivery_cost()

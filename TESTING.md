@@ -132,3 +132,79 @@ I've tested my deployed project using the Lighthouse Audit tool to check for any
 | Sign Up | ![screenshot](docs/lighthouse/signup.png) | No major warnings |
 | Sign In | ![screenshot](docs/lighthouse/signin.png) | No major warnings |
 
+
+## Defensive Programming
+
+Defensive programming was manually tested with the below user acceptance testing:
+
+| Page | User Action | Expected Result | Pass/Fail | Comments |
+| --- | --- | --- | --- | --- |
+| **Home Page** | | | | |
+| | Click on Logo | Redirection to Home page | Pass | |
+| | Click on Shop Now button | Redirection to Products page | Pass | |
+| **All Products Page** | | | | |
+| | Click on Products link in navbar | Redirection to Products page | Pass | |
+| | Click on Products category link in navbar | Redirection to product page | Pass | products filtered by clicked category |
+| | Click 48  on items per page dropdown | Redirection to product page | Pass | 48 products shown per page if there is 48 |
+| | Click on Product card image | Redirection to Product Detail page for that product | Pass | |
+| | Click on Product card name | Redirection to Product Detail page for that product | Pass | |
+| | Click on Add to basket button | Product added to basket | Pass | product added to cart and cart modal shown |
+| **Product Detail Page** | | | | |
+| | Click on Product image or name in products page | Redirection to Product Detail page | Pass | |
+| | Click on Keep Shopping button | Redirection to Products page | Pass | |
+| | Click Add To Basket button | Product is added to basket and quantity is set to the user's choice | Pass | |
+| | Click Add Review button | review form shown and review added | Pass | |
+| **Search** | | | | |
+| | Enter letter into search bar | Five products returned | Pass | Products filtered to only show products containing search term |
+| **Contact Page** | | | | |
+| | Click on Contact Us link in footer | Redirection to Contact Us page | Pass | |
+| | Enter name | Form will only submit if all fields are filled | Pass | |
+| | Enter valid email address | Field will only accept email address format | Pass | |
+| | Enter message | Form will only submit if all fields are filled | Pass | |
+| | Click Send with missing fields | Message lets user know all fields are required | Pass | |
+| **Sign Up Page** | | | | |
+| | Click on Register button under account on nav menu | Redirection to Sign Up page | Pass | |
+| | Enter valid email address | Field will only accept email address format | Pass | |
+| | Enter valid password (twice) | Field will only accept password format | Pass | |
+| | Click Sign Up button on sign up page | Sends confirmation email and lets user know to check their email | Pass | |
+| | Click link in confirmation email | Redirects user to sign in page | Pass | |
+| **Sign In Page** | | | | |
+| | Click on the Login button under account on nav menu | Redirection to Login page | Pass | |
+| | Enter valid email address | Field will only accept email address format | Pass | |
+| | Enter valid password | Field will only accept password format | Pass | |
+| | Click Login button on login page | Redirects user to homepage | Pass | |
+| | Click Forgot Password | Redirects user to password reset page | Pass | |
+| | Sign in before confirming account | Redirects to message reminding user to confirm email address | Pass | |
+| **Password Reset Page** | | | | |
+| | Enter valid email address | Field will only accept email address format | Pass | |
+| | Click Reset Password button | Sends email with instructions to reset password | Pass | |
+| **Log Out Page** | | | | |
+| | Click Logout button | Redirects user to logout page | Pass | Confirms logout first |
+| | Click Confirm Logout button | Redirects user to home page | Pass | |
+| **Profile Page** | | | | |
+| | Click on the My Profile link under account on nav menu | Redirection to profile page page | Pass | Only shows for logged in users |
+| | Click Update Information button | Saves form contents to be default information for user | Pass | |
+| | Click Order Number for previous order in Order History | Redirects user to order confirmation page for that order | Pass | |
+| | Brute forcing the URL to profile if not logged in | User given an error | Pass | Redirects user to error page |
+| **Cart** | | | | |
+| | Click Cart icon in main nav | Redirects user to basket page | Pass | Shows back to shop button if basket is empty |
+| | Click Confirm Logout button | Redirects user to home page | Pass | |
+| | Click update button under quantity selector form | Updated quantity of product in basket to number in quantity select form | Pass | |
+| | Click remove button | Removes product from basket completely | Pass | |
+| | Click on Keep Shopping button | Redirection to Products page | Pass | |
+| | Click on Secure Checkout button | Redirection to checkout page | Pass | |
+| **Checkout** | | | | |
+| | Click on Secure Checkout button in basket | Redirection to checkout page | Pass | |
+| | Click Complete Order button without all required fields filled out | Message letting user know that required fields need to be filled out | Pass | |
+| | Click Save delivery information to profile button | User's default information will be set to whatever is filled in at the checkout on order completion | Pass | Only visible to logged in users |
+| | Click on Create an account link | Redirection to sign up page | Pass | Only visible to logged out users |
+| | Click on login link | Redirection to sign in page | Pass | Only visible to logged out users |
+| | Click Complete Order button without card details filled out | Message letting user know that their card number is incomplete | Pass | |
+| | Click Complete Order button with all details filled out | Loading spinner appears and order is processed | Pass | |
+| | Order completed | Order confirmation email is sent to the user and redirection to checkout success page | Pass | |
+| **Checkout Success Page** | | | | |
+| | Order completed | Redirection to checkout success page | Pass | |
+| **Footer** | | | | |
+| | Click on Subscribe button on filled newsletter form | Alert message lets user know they have signed up for the mailing list and welcome email is sent to address provided | Pass | |
+
+

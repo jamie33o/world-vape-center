@@ -144,8 +144,8 @@ def checkout(request):
                     return redirect('contact_us')
             try:
                 email_customer(email, 'Order Received')
-            except Exception:
-                messages.error(request, 'Error: Could not send order success email')
+            except Exception as e:
+                messages.error(request, f'Error: Could not send order success email-- {e}')
 
             return redirect(reverse('checkout_success', args=[order.order_number]))
         else:

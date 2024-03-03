@@ -91,3 +91,44 @@ I have used the recommended [CI Python Linter](https://pep8ci.herokuapp.com) to 
 | profile/models.py | ![screenshot](docs/ci-linter/profile-models.png) | Pass: No Errors |
 | profile/forms.py | ![screenshot](docs/ci-linter/profile-forms.png) | Pass: No Errors |
 
+
+## Browser Compatibility
+
+I've tested my deployed project on multiple browsers to check for compatibility issues.
+
+| Browser | Screenshot | Notes |
+| --- | --- | --- |
+| Chrome | ![screenshot](docs/browsers/chrome.png) | Works as expected |
+| Firefox | ![screenshot](docs/browsers/firefox.png) | Works as expected |
+| Edge | ![screenshot](docs/browsers/edge.png) | Works as expected |
+
+## Responsiveness
+
+I've tested my deployed project on multiple devices to check for responsiveness and found no issues here is an example
+
+| mobile | tablet | laptop|
+| --- | --- | --- | 
+| ![screenshot](docs/responsive/mobile.png) | ![screenshot](docs/responsive/tablet.png) | ![screenshot](docs/responsive/laptop.png) |
+
+
+## Lighthouse Audit
+
+I've tested my deployed project using the Lighthouse Audit tool to check for any major issues.
+
+| Page | Screenshot | Notes |
+| --- | --- | --- |
+| Home | ![screenshot](docs/lighthouse/home-desktop.png) | No major warnings |
+| Products | ![screenshot](docs/lighthouse/products-desktop.png) | Some minor warnings |
+| Product Details | ![screenshot](docs/lighthouse/product-details-desktop.png) | No major warnings |
+| Contact | ![screenshot](docs/lighthouse/contact-desktop.png) | No major warnings |
+| Cart | ![screenshot](docs/lighthouse/cart-desktop.png) | No major warnings |
+| Checkout | ![screenshot](docs/lighthouse/checkout-desktop.png) | No major warnings |
+| Profile | ![screenshot](docs/lighthouse/profile-desktop.png) | No major warnings |
+| Terms | ![screenshot](docs/lighthouse/terms-desktop.png) | No major warnings |
+| About | ![screenshot](docs/lighthouse/about-desktop.png) | No major warnings |
+| Delivery | ![screenshot](docs/lighthouse/delivery-desktop.png) | No major warnings |
+| Payments | ![screenshot](docs/lighthouse/payments-desktop.png) | No major warnings |
+| Sitemap | ![screenshot](docs/lighthouse/sitemap-desktop.png) | No major warnings |
+| Sign Up | ![screenshot](docs/lighthouse/signup.png) | No major warnings |
+| Sign In | ![screenshot](docs/lighthouse/signin.png) | No major warnings |
+

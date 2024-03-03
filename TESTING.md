@@ -208,3 +208,279 @@ Defensive programming was manually tested with the below user acceptance testing
 | | Click on Subscribe button on filled newsletter form | Alert message lets user know they have signed up for the mailing list and welcome email is sent to address provided | Pass | |
 
 
+## User Story and Feature Testing
+All the user stories were tested manually, that including all the representative features, and were described bellow with a summary of the steps made for demonstrating the validation of the tests: <br>
+
+
+### Epic:(User Authentication and Account Management) #1
+<hr>
+
+**User Story #7:**<br>
+As a **visitor** I want **to be able to create a new account** so that **I can save my order details and favourite products** 
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|-------------------|
+| Create account | User provides details | Account created | Works as expected | <img src="docs/test-user-stories/create-account-feat.png" width="70%"> | <img src="docs/test-user-stories/create-account-result.png" width="90%"> |
+<br><br>
+
+**User Story #6:**<br>
+As a **User** , I want to update my profile information, including shipping address and contact details
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|-------------------|
+| Profile details | User provides necessary details | Details stored | Works as expected | <img src="docs/test-user-stories/profile-detail-feat.png" width="70%"> | <img src="docs/test-user-stories/profile-detail-results.png" width="90%"> |
+| Shipping details | User provides necessary details | Details stored | Works as expected | <img src="docs/test-user-stories/shipping-feat.png" width="70%"> | <img src="docs/test-user-stories/shipping-results.png" width="90%"> |
+<br><br>
+
+**User Story #19:**<br>
+As a **registered user** , I want to be able to log in and log out of my account and change my password or email address.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|-------------------|
+| Change Email | User updates email in settings | Email is successfully changed | Works as expected | <img src="docs/test-user-stories/email-feat.png" width="70%"> | <img src="docs/test-user-stories/email-results.png" width="90%"> |
+| Log In | User Enters log in details | User logged in  | Works as expected | <img src="docs/test-user-stories/login-feat.png" width="70%"> | <img src="docs/test-user-stories/login-result.png" width="90%"> |
+| Log Out | User Clicks log out | User logged out | Works as expected | <img src="docs/test-user-stories/logout-feat.png" width="70%"> | <img src="docs/test-user-stories/logout-result.png" width="90%"> |
+| Change Password | User fills out form | Password is successfully changed | Works as expected | <img src="docs/test-user-stories/password-feat.png" width="70%"> | <img src="docs/test-user-stories/password-feat.png" width="90%"> |
+
+<br><br>
+
+### Epic:(Product Catalogue Management)#2
+<hr>
+
+**User Story #16:**<br>
+As an administrator, I want to add, edit, or remove products from the catalogue
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|-------------------|
+| Admin panel | Admin updates products in admin panel | Product updated | Works as expected | <img src="docs/test-user-stories/update-product-feat.png" width="70%"> | <img src="docs/test-user-stories/update-product-results.png" width="90%"> |
+<br><br>
+
+**User Story #13:**<br>
+As a **user** I want to browse a well-organized catalogue of vape products.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|
+| Products page | User navigates to products page | List of products are displayed for easy access | Works as expected | <img src="docs/test-user-stories/products-page.png" width="70%"> |
+<br><br>
+
+**User Story #14:**<br>
+As a **user**, I want to view detailed product information, including images, descriptions, and prices.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|-------------------|
+| Product details page | User clicks a product  | User is brought to details page | <img src="docs/test-user-stories/product-detail.png" width="70%"> | 
+<br><br>
+
+
+**User Story #15:**<br>
+As a **user**, I want to search for products based on categories, brands, or specific attributes.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|
+| Product filter | User apply filter | Filtered results returned | Works as expected | <img src="docs/test-user-stories/filter-results.png" width="90%"> |
+<br><br>
+
+**User Story #18:**<br>
+As an **administrator**, I want to add, edit, or remove multiple products at once from the catalogue.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|-------------------|
+| Edit multiple products  | User clicks add prices to multiple products | Prices are added | Works as expected | <img src="docs/test-user-stories/multi-update.png" width="90%"> | <img src="docs/test-user-stories/multi-update-result.png" width="90%"> |
+<br><br>
+
+
+### Epic:(Shopping Cart and Checkout) #3<br>
+**User Story #8:**<br>
+As a **User**,  I want to add products to my shopping cart and view the cart at any time.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|
+| Add to cart | User clicks add to cart  | Product added and cart modal shown | Works as expected | <img src="docs/test-user-stories/addtocart.png" width="90%"> |
+<br><br>
+
+**User Story #9:**<br>
+As a **User**, I want to update the quantity or remove items from my shopping cart.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|
+| Edit cart | User changes quantity | Quantity is updated | Works as expected | <img src="docs/test-user-stories/cart-quantity-result.png" width="90%"> |
+<br><br>
+
+**User Story #10:**<br>
+As a **User**,  I want to proceed to checkout, providing shipping and payment information.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|
+| Checkout page | User navigates to checkout | checkout page displayed | Works as expected | <img src="docs/test-user-stories/checkout.png" width="90%"> |
+<br><br>
+
+
+**User Story #11:**<br>
+As a **User**,  I want to review my order after confirming the purchase.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|
+| Checkout success page | User pays | Payment is successful | Works as expected | <img src="docs/test-user-stories/checkout-success.png" width="90%"> |
+<br><br>
+
+
+**User Story #12:**<br>
+As a **User**, I want to receive an email confirmation with my order details after completing the purchase.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|
+| Checkout | Pay for items | User receives confirmation email | Works as expected | <img src="" width="90%"> |
+<br><br>
+
+### Epic:(Create help pages) #4
+<hr>
+
+**User Story #19:**<br>
+As a **User** I want to be able to find out the terms and conditions 
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|-------------------|
+| Terms and conditions | User clicks Terms & conditions | Terms & conditions are displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/terms.png" width="90%"> |
+<br><br>
+
+**User Story #20:**<br>
+As a **user** I want to be able to find delivery information 
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|-------------------|
+| delivery information page | User clicks delivery info | delivery information is displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/delivery-info.png" width="90%"> |
+<br><br>
+
+**User Story #21:**<br>
+As an **user**, I want to be able to look up the returns policy.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|-------------------|
+| returns policy page | User clicks returns policy | returns policy is displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/returns-policy.png" width="90%"> |
+<br><br>
+
+**User Story #22:**<br>
+As an **user**, I want to be able to look up the frequently asked questions.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|-------------------|
+| FAQ page | User clicks FAQ | FAQ are displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/faq.png" width="90%"> |
+<br><br>
+
+**User Story #23:**<br>
+As an **user**, I want to be able to look up info about the shop owner in an about section.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|-------------------|
+| about page | User clicks about us | about u page is displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/aboutus.png" width="90%"> |
+<br><br>
+
+**User Story #24:**<br>
+As an **user**, I want to be able to see a page with links to all the pages.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|-------------------|
+| Sitemap page | User clicks sitemap | sitemap is displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/sitemap.png" width="90%"> |
+<br><br>
+
+### Epic:(SEO & Marketing) #25
+<hr>
+
+**User Story #26:**<br>
+As a site user I want to be able to sign up for the site's mailing list so that I can receive offers and news in my inbox.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|-------------------|
+| Newsletter | user enters email and clicks subscribe | User is added | Works as expected | <img src="docs/test-user-stories/newsletter.png" width="70%"> |
+<br><br>
+
+**User Story #27:**<br>
+As a site admin I want to be able to send marketing emails to people who signed up to the mailing list so that I can send out updates and offers to their inboxes.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|-------------------|
+| View Group Channels | User navigates to "Group Channels" | List of group channels is displayed | Works as expected | <img src="docs/read-me-images/channels-new-messages-list.png" width="90%"> |
+<br><br>
+
+**User Story #28:**<br>
+As a site admin I want to be able to set appropriate keywords on site pages so that I can increase the chances potential customers will find the site when searching to purchase records on Google.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Meta keywords | check seo on lighthouse | Seo is 100% | Works as expected 
+<br><br>
+
+
+**User Story #29:**<br>
+As a site admin I want to be able to share the business on Facebook so that I can reach and market to a larger audience.
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Facebook page | Link facebook link | Website has facebook page | Works as expected |
+<br><br>
+
+**User Story #30:**<br>
+As a site admin I want a sitemap.xml so search engines understand the structure of the website and index its content more efficiently
+
+| **Feature** | **Action** | **Expected Result** | **Actual Result** |
+|-------------|------------|---------------------|-------------------|
+| Sitemp.xml | Use django sitemap app | enter sitemap url | Works as expected |
+<br><br>
+
+
+
+## Automated Testing
+
+I have conducted a series of automated tests on my application.
+
+I fully acknowledge and understand that, in a real-world scenario, an extensive set of additional tests would be more comprehensive.
+
+### Python (Unit Testing)
+
+I have used Django's built-in unit testing framework to test the application functionality.
+
+In order to run the tests, I ran the following command in the terminal each time:
+
+`python3 manage.py test `
+
+![screenshot](documentation/testing/automated-tests.png)
+
+| Testing File | Screenshot |
+| --- | --- |
+| [Discount Forms](discount_codes/tests.py) | ![screenshot](documentation/testing/automated-testing-discount-forms.png) |
+| [Blog Forms](blog/test_forms.py) | ![screenshot](documentation/testing/automated-testing-blog-forms.png) |
+| [Blog Views](blog/test_views.py) | ![screenshot](documentation/testing/automated-testing-blog-views.png) |
+| [Product Forms](products/test_forms.py) | ![screenshot](documentation/testing/automated-testing-product-forms.png) |
+| [Product Views](products/test_views.py) | ![screenshot](documentation/testing/automated-testing-product-views.png) |
+| [Contact Forms](contact/test_forms.py) | ![screenshot](documentation/testing/automated-testing-contact-forms.png) |
+| [Contact Views](contact/test_views.py) | ![screenshot](documentation/testing/automated-testing-contact-views.png) |
+| [Basket Views](basket/tests.py) | ![screenshot](documentation/testing/automated-testing-basket-views.png) |
+| [Checkout Forms](checkout/tests.py) | ![screenshot](documentation/testing/automated-testing-checkout-forms.png) |
+| [Profile Views](profiles/tests.py) | ![screenshot](documentation/testing/automated-testing-profile-views.png) |
+| [Homepage Views](homepage/tests.py) | ![screenshot](documentation/testing/automated-testing-homepage-views.png) |
+
+## Bugs
+
+### GitHub **Issues**
+
+I tracked my bugs on GitHub Issues using the BUG label
+
+**Fixed Bugs**
+
+
+| Bug | Status |
+| --- | --- |
+| [BUG: NameError in basket on quantity adjust](https://github.com/adamgilroy22/retro-reboot/issues/30) | Closed |
+| [BUG: Error thrown when trying to access checkout](https://github.com/adamgilroy22/retro-reboot/issues/32) | Closed |
+| [BUG: Quantity selector allows higher value than product stock](https://github.com/adamgilroy22/retro-reboot/issues/33) | Closed |
+| [BUG: Quantity buttons not working in basket](https://github.com/adamgilroy22/retro-reboot/issues/34) | Closed |
+| [BUG: Arcade Machine filter not working](https://github.com/adamgilroy22/retro-reboot/issues/35) | Closed |
+| [BUG: Homepage image not loading on deployed site](https://github.com/adamgilroy22/retro-reboot/issues/37) | Closed |
+| [BUG: Error when adding product to basket if already in basket](https://github.com/adamgilroy22/retro-reboot/issues/38) | Closed |
+| [BUG: Users can add more than product stock on product page](https://github.com/adamgilroy22/retro-reboot/issues/39) | Closed |
+| [BUG: Konami Code easter egg music doesn't play on deployed site](https://github.com/adamgilroy22/retro-reboot/issues/40) | Closed |
+
+
+
+## Unfixed Bugs
+

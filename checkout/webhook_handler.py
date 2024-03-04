@@ -107,7 +107,7 @@ class StripeWH_Handler:
                         product=product,
                         quantity=item_data['qty'],
                         lineitem_total=total,
-                        product_option=item_data['product_choice'],
+                        product_option=item_data['product_choice'] if item_data.get('product_choice') else None,
                         # user= user
                     )
                     order_line_item.save()

@@ -50,7 +50,7 @@ class StripeWH_Handler:
         attempt = 1
         while attempt <= 5:
             try:
-                order = Order.objects.get(order_num=order_num)
+                order = Order.objects.get(order_number=order_num)
 
                 order_exists = True
                 break

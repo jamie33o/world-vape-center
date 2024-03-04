@@ -49,7 +49,7 @@ $(function() {
     var form = document.getElementById('payment-form');
     const submitPaymentBtn = $('#submit-button');
     
-    const name = `${form.firrst_name} ${form.last_name}`;
+    const name = `${form.first_name} ${form.last_name}`;
     
     submitPaymentBtn.click(function(ev) {
         ev.preventDefault();

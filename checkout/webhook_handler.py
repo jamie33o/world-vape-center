@@ -32,6 +32,7 @@ class StripeWH_Handler:
         pid = intent.id
         cart = intent.metadata.cart
         order_num = intent.metadata.order_num
+        print(intent)
 
         billing_details = intent.charges.data[0].billing_details
         shipping_details = intent.shipping
@@ -84,7 +85,7 @@ class StripeWH_Handler:
                 order.delivery_cost = cart.get_delivery_cost()
                 order.sub_total = cart.get_subtotal()
                 order.grand_total = grand_total
-                order.order_number = cart.get_order_num()
+                order.order_number = order_num
                 order.save()
 
                 for item_id, item_data in json.loads(cart).items():

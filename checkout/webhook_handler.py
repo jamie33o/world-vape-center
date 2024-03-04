@@ -34,14 +34,17 @@ class StripeWH_Handler:
         cart = intent.metadata.cart
         order_num = intent.metadata.order_num
         try:
+            print('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww')
             stripe_charge = stripe.Charge.retrieve(
                 intent.latest_charge
             )
+            print('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
 
 
             billing_details = stripe_charge.billing_details
             shipping_details = intent.shipping
             grand_total = round(stripe_charge.amount / 100, 2)
+            
         except Exception as e:
             print(e)
         # Clean data in the shipping details
@@ -66,7 +69,7 @@ class StripeWH_Handler:
             }
             try:
                 self.email_customer(billing_details.email, context,
-                                'Order Successfull')
+                    'Order Successfull')
             except Exception as e:
                 print(f'error: {e}')
             return HttpResponse(

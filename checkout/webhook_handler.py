@@ -61,8 +61,11 @@ class StripeWH_Handler:
             context = {
                 'order': order
             }
-            self.email_customer(billing_details.email, context,
+            try:
+                self.email_customer(billing_details.email, context,
                                 'Order Successfull')
+            except Exception as e:
+                print(f'error: {e}')
             return HttpResponse(
                 content=f'Webhook received: {event["type"]}'
                 '| SUCCESS: Verified order already in database',

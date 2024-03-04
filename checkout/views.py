@@ -152,7 +152,7 @@ def checkout(request):
                     [email, ],
                     html_message=email_content,
                     fail_silently=False
-            )
+                )
             except Exception as e:
                 messages.error(request, f'Error: Could not send order success email-- {e}')
 

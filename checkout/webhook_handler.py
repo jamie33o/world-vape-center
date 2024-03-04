@@ -34,12 +34,9 @@ class StripeWH_Handler:
         cart = intent.metadata.cart
         order_num = intent.metadata.order_num
         try:
-            print('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww')
             stripe_charge = stripe.Charge.retrieve(
                 intent.latest_charge
             )
-            print('eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
-
 
             billing_details = stripe_charge.billing_details
             shipping_details = intent.shipping
@@ -51,13 +48,11 @@ class StripeWH_Handler:
         for field, value in shipping_details.address.items():
             if value == "":
                 shipping_details.address[field] = None
-
         order_exists = False
         attempt = 1
         while attempt <= 5:
             try:
                 order = Order.objects.get(order_number=order_num)
-
                 order_exists = True
                 break
             except Order.DoesNotExist:
@@ -79,7 +74,7 @@ class StripeWH_Handler:
         else:
             order = None
             try:
-                address = ShippingAddress.objects.get(
+                address = ShippingAddress(
                     phone_number=shipping_details.phone,
                     eircode=shipping_details.address.postal_code,
                     town_or_city=shipping_details.address.city,
@@ -87,6 +82,7 @@ class StripeWH_Handler:
                     street_address2=shipping_details.address.line2,
                     county=shipping_details.address.state,
                 )
+                address.save()
 
                 order = Order()
 

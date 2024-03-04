@@ -1,6 +1,7 @@
 import json
 import time
 from decimal import Decimal
+import stripe
 
 from django.http import HttpResponse
 from django.template.loader import render_to_string
@@ -32,11 +33,13 @@ class StripeWH_Handler:
         pid = intent.id
         cart = intent.metadata.cart
         order_num = intent.metadata.order_num
-        print(intent)
+        stripe_charge = stripe.Charge.retrieve(
+            intent.latest_charge
+        )
 
-        billing_details = intent.charges.data[0].billing_details
+        billing_details = stripe_charge.billing_details
         shipping_details = intent.shipping
-        grand_total = round(intent.charges.data[0].amount / 100, 2)
+        grand_total = round(stripe_charge.amount / 100, 2) 
 
         # Clean data in the shipping details
         for field, value in shipping_details.address.items():

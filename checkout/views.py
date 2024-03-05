@@ -101,8 +101,7 @@ def checkout(request):
 
             order.status = 'pending'
             order.stripe_pid = pid
-            order.first_name = first_name
-            order.last_name = last_name
+            order.full_name = first_name + ' ' + last_name
             order.email = email
             order.shipping_address = address
             order.discount = cart.get_discounted_total()

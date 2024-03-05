@@ -222,9 +222,7 @@ def checkout_success(request, order_id):
     if 'cart' in request.session:
         del request.session['cart']
         del request.session['order_num']
-        del request.session['order_subtotal']
-        del request.session['order_delivery']
-        del request.session['order_discount']
+       
 
     template = 'checkout/checkout-success.html'
     context = {

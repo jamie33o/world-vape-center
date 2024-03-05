@@ -33,6 +33,10 @@ class StripeWH_Handler:
         pid = intent.id
         cart = intent.metadata.cart
         order_num = intent.metadata.order_num
+        order_delivery = intent.metadata.order_delivery
+        order_subtotal = intent.metadata.order_subtotal
+        order_discount = intent.metadata.order_discount
+
         try:
             stripe_charge = stripe.Charge.retrieve(
                 intent.latest_charge
@@ -87,8 +91,9 @@ class StripeWH_Handler:
                 order.shipping_address = address
                 order.full_name = billing_details.name
                 order.email = billing_details.email
-                # order.delivery_cost = cart.get_delivery_cost()
-                # order.sub_total = cart.get_subtotal()
+                order.delivery_cost = order_delivery
+                order.discount = order_discount
+                order.sub_total = order_subtotal
                 order.grand_total = grand_total
                 order.order_number = order_num
                 order.save()

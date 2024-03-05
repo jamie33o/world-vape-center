@@ -41,13 +41,23 @@ def cache_checkout_data(request):
         and an HTTP response with status 400 is returned.
     """
     try:
+        cart = Cart(request)
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'cart': json.dumps(request.session.get('cart', {})),
             'username': request.user,
             'order_num': json.dumps(request.session.get('order_num', {})),
+            'order_delivery': cart.get_delivery_cost(),
+            'order_subtotal': cart.get_subtotal(),
+            'order_discount': cart.get_discounted_total(),
         })
+        del request.session['cart']
+        del request.session['order_num']
+        del request.session['order_subtotal']
+        del request.session['order_delivery']
+        del request.session['order_discount']
+
         return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be \
@@ -154,7 +164,7 @@ def checkout(request):
             except Exception as e:
                 messages.error(request, f'Error: Could not send order success email-- {e}')
 
-            return redirect(reverse('checkout_success', args=[order.order_number]))
+            return redirect(reverse('checkout_success', args=[order.id]))
         else:
             if not shipping_form.is_valid():
                 messages.error(request, shipping_form.errors)
@@ -204,18 +214,21 @@ def checkout(request):
     return render(request, template, context)
 
 
-def checkout_success(request, order_number):
+def checkout_success(request, order_id):
     """
     Handle successful checkouts
     """
-    order = get_object_or_404(Order, order_number=order_number)
+    order = get_object_or_404(Order, id=order_id)
     messages.success(request, f'Order successfully processed! \
-        Your order number is {order_number}. A confirmation \
+        Your order number is {order.order_number}. A confirmation \
         email will be sent to {order.email} .')
 
     if 'cart' in request.session:
         del request.session['cart']
         del request.session['order_num']
+        del request.session['order_subtotal']
+        del request.session['order_delivery']
+        del request.session['order_discount']
 
     template = 'checkout/checkout-success.html'
     context = {

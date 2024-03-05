@@ -49,7 +49,7 @@ $(function() {
     var form = document.getElementById('payment-form');
     const submitPaymentBtn = $('#submit-button');
     
-    const name = `${form.first_name} ${form.last_name}`;
+    const name = `${form.first_name.value} ${form.last_name.value}`;
     
     submitPaymentBtn.click(function(ev) {
         ev.preventDefault();
@@ -73,7 +73,7 @@ $(function() {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        name: $.trim(name),
+                        name: name,
                         phone: $.trim(form.phone_number.value),
                         email: $.trim(form.email.value),
                         address:{

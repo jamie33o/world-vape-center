@@ -15,7 +15,7 @@ class Order(models.Model):
         ('delivered', 'Delivered'),
         ('canceled', 'Canceled'),
     )
-    full_name = models.CharField(max_length=64, null=False, editable=False)
+    full_name = models.CharField(max_length=64, null=False)
     email = models.EmailField(null=False)
     status = models.CharField(max_length=20,
                               choices=STATUS_CHOICES, default='draft')

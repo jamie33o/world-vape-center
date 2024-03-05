@@ -87,7 +87,7 @@ class StripeWH_Handler:
                 order.stripe_pid = pid
                 order.shipping_address = address
                 order.full_name = billing_details.name
-                # order.email = billing_details.email
+                order.email = billing_details.email
                 # order.delivery_cost = cart.get_delivery_cost()
                 # order.sub_total = cart.get_subtotal()
                 order.grand_total = grand_total
@@ -108,7 +108,6 @@ class StripeWH_Handler:
                         quantity=item_data['qty'],
                         lineitem_total=total,
                         product_option=item_data['product_choice'] if item_data.get('product_choice') else None,
-                        # user= user
                     )
                     order_line_item.save()
             except Exception as e:

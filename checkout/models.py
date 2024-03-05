@@ -60,9 +60,6 @@ class OrderLineItem(models.Model):
                                          null=False,
                                          blank=False,
                                          editable=False)
-    user = models.ForeignKey(get_user_model(),
-                             on_delete=models.CASCADE,
-                             null=True, blank=True)
 
     def __str__(self):
         return f'{self.quantity}x {self.product.name}\

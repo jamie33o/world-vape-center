@@ -86,7 +86,8 @@ class StripeWH_Handler:
 
                 order.stripe_pid = pid
                 order.shipping_address = address
-                order.full_name = billing_details.full_name
+                order.full_name = billing_details.name
+                # order.email = billing_details.email
                 # order.delivery_cost = cart.get_delivery_cost()
                 # order.sub_total = cart.get_subtotal()
                 order.grand_total = grand_total

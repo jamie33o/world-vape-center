@@ -299,7 +299,7 @@ class Cart():
             for item in self.cart.values() if item.get('discounted_price',
                                                        False)
         )
-        return total_discount if total_discount else None
+        return total_discount if total_discount else 0
 
     def clear_cart(self):
         """

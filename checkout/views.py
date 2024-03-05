@@ -168,7 +168,8 @@ def checkout(request):
             messages.info(request, "There's nothing in your cart at the moment")
             return redirect(reverse('cart-summary'))
 
-        stripe_total = round(cart.get_grand_total())
+        total = cart.get_grand_total()
+        stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,

@@ -62,11 +62,8 @@ class StripeWH_Handler:
             context = {
                 'order': order
             }
-            try:
-                self.email_customer(billing_details.email, context,
-                    'Order Successfull')
-            except Exception as e:
-                print(f'error: {e}')
+            self.email_customer(billing_details.email, context,
+                'Order Successfull')
             return HttpResponse(
                 content=f'Webhook received: {event["type"]}'
                 '| SUCCESS: Verified order already in database',
@@ -88,6 +85,8 @@ class StripeWH_Handler:
 
                 order.stripe_pid = pid
                 order.shipping_address = address
+                order.full_name = billing_details.full_name
+                order.email = billing_details.email
                 # order.delivery_cost = cart.get_delivery_cost()
                 # order.sub_total = cart.get_subtotal()
                 order.grand_total = grand_total
@@ -117,6 +116,11 @@ class StripeWH_Handler:
                 return HttpResponse(
                     content=f'Webhook received: {event["type"]} | ERROR: {e}',
                     status=500)
+        context = {
+                'order': order
+            }
+        self.email_customer(billing_details.email, context,
+                'Order Successfull')
         return HttpResponse(
             content=f'Webhook received: {event["type"]}'
             '| SUCCESS: Created order in webhook',

@@ -125,7 +125,6 @@ def checkout(request):
                         product=product,
                         quantity=item_data['qty'],
                         lineitem_total=total,
-                        user= user
                     )
 
                     if item_data.get('product_choice'):

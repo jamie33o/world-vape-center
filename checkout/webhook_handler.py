@@ -39,7 +39,6 @@ class StripeWH_Handler:
             )
 
             billing_details = stripe_charge.billing_details
-            print(billing_details)
             shipping_details = intent.shipping
             grand_total = round(stripe_charge.amount / 100, 2)
             

@@ -52,11 +52,6 @@ def cache_checkout_data(request):
             'order_subtotal': cart.get_subtotal(),
             'order_discount': cart.get_discounted_total(),
         })
-        del request.session['cart']
-        del request.session['order_num']
-        del request.session['order_subtotal']
-        del request.session['order_delivery']
-        del request.session['order_discount']
 
         return HttpResponse(status=200)
     except Exception as e:
@@ -174,7 +169,8 @@ def checkout(request):
     else:
         cart = Cart(request)
         if not cart:
-            messages.info(request, "There's nothing in your cart at the moment")
+            messages.info(request,
+                          "There's nothing in your cart at the moment")
             return redirect(reverse('cart-summary'))
 
         total = cart.get_grand_total()
@@ -196,7 +192,7 @@ def checkout(request):
             sign_in_form = SigninForm(auto_id='signin_%s')
 
     if not stripe_public_key:
-        messages.warning(request, 'Stripe public key is missing. \
+        messages.warning(request, 'Stripe public key is missing.\
             Did you forget to set it in your environment?')
 
     template = 'checkout/checkout.html'
@@ -236,4 +232,3 @@ def checkout_success(request, order_id):
     }
 
     return render(request, template, context)
-

@@ -86,7 +86,7 @@ $(function() {
                     }
                 },
                 shipping: {
-                    name: $.trim(name),
+                    name: name,
                     phone: $.trim(form.phone_number.value),
                     address: {
                         line1: $.trim(form.street_address1.value),

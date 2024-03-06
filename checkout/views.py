@@ -3,6 +3,7 @@ import json
 from profile.forms import CheckoutDetailForm, ShippingAddressForm
 from profile.forms import SigninForm, SignupForm
 import stripe
+from stripe.error import StripeError
 from django.shortcuts import (render,
                               redirect,
                               reverse,
@@ -44,14 +45,19 @@ def cache_checkout_data(request):
         cart = Cart(request)
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
-        stripe.PaymentIntent.modify(pid, metadata={
-            'cart': json.dumps(request.session.get('cart', {})),
-            'username': request.user,
-            'order_num': json.dumps(request.session.get('order_num', {})),
-            'order_delivery': cart.get_delivery_cost(),
-            'order_subtotal': cart.get_subtotal(),
-            'order_discount': cart.get_discounted_total(),
-        })
+
+        try:
+            stripe.PaymentIntent.modify(pid, metadata={
+                'cart': json.dumps(request.session.get('cart', {})),
+                'username': str(request.user),  # Convert request.user to a string
+                'order_num': json.dumps(request.session.get('order_num', {})),
+                'order_delivery': cart.get_delivery_cost(),
+                'order_subtotal': cart.get_subtotal(),
+                'order_discount': cart.get_discounted_total(),
+            })
+        except StripeError as e:
+            # Handle the exception here
+            print(f"Stripe Error: {e}")
 
         return HttpResponse(status=200)
     except Exception as e:

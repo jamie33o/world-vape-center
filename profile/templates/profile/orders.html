@@ -22,9 +22,67 @@
                             <td>{{ order.date }}</td>
                             <td>{{ order.grand_total }}</td>
                             <td><span class="badge bg-light text-dark">{{ order.status }}</span></td>
+                            <td>
+                                <button
+                                    class="btn btn-info"
+                                    data-toggle="collapse"
+                                    data-target="#collapse{{order.id}}"
+                                    aria-expanded="true"
+                                    aria-controls="collapse{{order.id}}">
+                                    View More
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <div
+                                    id="collapse{{order.id}}"
+                                    class="collapse"
+                                    aria-labelledby="heading{{order.id}}"
+                                    data-parent="#accordion">
+                                    <div class="card-body">
+                                        <table class="table mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="border-gray-200" scope="col">Product Image</th>
+                                                    <th class="border-gray-200" scope="col">Name</th>
+                                                    <th class="border-gray-200" scope="col">Choice</th>
+                                                    <th class="border-gray-200" scope="col">Quantity</th>
+                                                    <th class="border-gray-200" scope="col">lineitem_total</th>
+                                                    <th class="border-gray-200" scope="col"></th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {% for item in order.lineitems.all %}
+                                                <tr>
+                                                    <td><img width="50" src="{{ item.product.image.url }}" alt="Product image"></td>
+                                                    <td>{{ item.product.name }}</td>
+                                                    <td>{{ item.product_option }}</td>
+                                                    <td>{{ item.quantity }}</td>
+                                                    <td>{{ item.lineitem_total }}</td>
+                                                    <td>
+                                                        <form method="post" action="{% url 'cart-add' %}" >
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="product_quantity" value="1">
+                                                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
+
+                                                            <input type="hidden" name="redirect_url" value="{% url 'profile' %}">
+                                
+                                                            <button class="btn btn-warning text-white font-weight-bold" type="submit">
+                                                                Add To Cart
+                                                            </button>                   
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                         {% endfor %}
-
                     </tbody>
                 </table>
                 {% else %}

@@ -329,7 +329,7 @@ As a **User**, I want to receive an email confirmation with my order details aft
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
 |-------------|------------|---------------------|-------------------|-------------------|
-| Checkout | Pay for items | User receives confirmation email | Works as expected | <img src="" width="90%"> |
+| Checkout | Pay for items | User receives confirmation email | Works as expected | <img src="docs/test-user-stories/success-email.png" width="90%"> |
 <br><br>
 
 ### Epic:(Create help pages) #4
@@ -338,49 +338,49 @@ As a **User**, I want to receive an email confirmation with my order details aft
 **User Story #19:**<br>
 As a **User** I want to be able to find out the terms and conditions 
 
-| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
-|-------------|------------|---------------------|-------------------|---------------------|-------------------|
-| Terms and conditions | User clicks Terms & conditions | Terms & conditions are displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/terms.png" width="90%"> |
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|
+| Terms and conditions | User clicks Terms & conditions | Terms & conditions are displayed | Works as expected | <img src="docs/test-user-stories/terms.png" width="90%"> |
 <br><br>
 
 **User Story #20:**<br>
 As a **user** I want to be able to find delivery information 
 
-| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
-|-------------|------------|---------------------|-------------------|---------------------|-------------------|
-| delivery information page | User clicks delivery info | delivery information is displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/delivery-info.png" width="90%"> |
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|
+| delivery information page | User clicks delivery info | delivery information is displayed | Works as expected | <img src="docs/test-user-stories/delivery-info.png" width="90%"> |
 <br><br>
 
 **User Story #21:**<br>
 As an **user**, I want to be able to look up the returns policy.
 
-| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
-|-------------|------------|---------------------|-------------------|---------------------|-------------------|
-| returns policy page | User clicks returns policy | returns policy is displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/returns-policy.png" width="90%"> |
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|
+| returns policy page | User clicks returns policy | returns policy is displayed | Works as expected | <img src="docs/test-user-stories/returns-policy.png" width="90%"> |
 <br><br>
 
 **User Story #22:**<br>
 As an **user**, I want to be able to look up the frequently asked questions.
 
-| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
-|-------------|------------|---------------------|-------------------|---------------------|-------------------|
-| FAQ page | User clicks FAQ | FAQ are displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/faq.png" width="90%"> |
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|
+| FAQ page | User clicks FAQ | FAQ are displayed | Works as expected | <img src="docs/test-user-stories/faq.png" width="90%"> |
 <br><br>
 
 **User Story #23:**<br>
 As an **user**, I want to be able to look up info about the shop owner in an about section.
 
-| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
-|-------------|------------|---------------------|-------------------|---------------------|-------------------|
-| about page | User clicks about us | about u page is displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/aboutus.png" width="90%"> |
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|
+| about page | User clicks about us | about u page is displayed | Works as expected |  <img src="docs/test-user-stories/aboutus.png" width="90%"> |
 <br><br>
 
 **User Story #24:**<br>
 As an **user**, I want to be able to see a page with links to all the pages.
 
-| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Feature Image** | **Result Image** |
-|-------------|------------|---------------------|-------------------|---------------------|-------------------|
-| Sitemap page | User clicks sitemap | sitemap is displayed | Works as expected | <img src="docs/read-me-images/add-channel.png" width="70%"> | <img src="docs/test-user-stories/sitemap.png" width="90%"> |
+| **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
+|-------------|------------|---------------------|-------------------|---------------------|
+| Sitemap page | User clicks sitemap | sitemap is displayed | Works as expected | <img src="docs/test-user-stories/sitemap.png" width="90%"> |
 <br><br>
 
 ### Epic:(SEO & Marketing) #25
@@ -390,7 +390,7 @@ As an **user**, I want to be able to see a page with links to all the pages.
 As a site user I want to be able to sign up for the site's mailing list so that I can receive offers and news in my inbox.
 
 | **Feature** | **Action** | **Expected Result** | **Actual Result** | **Result Image** |
-|-------------|------------|---------------------|-------------------|---------------------|-------------------|
+|-------------|------------|---------------------|-------------------|---------------------|
 | Newsletter | user enters email and clicks subscribe | User is added | Works as expected | <img src="docs/test-user-stories/newsletter.png" width="70%"> |
 <br><br>
 
@@ -470,15 +470,7 @@ I tracked my bugs on GitHub Issues using the BUG label
 
 | Bug | Status |
 | --- | --- |
-| [BUG: NameError in basket on quantity adjust](https://github.com/adamgilroy22/retro-reboot/issues/30) | Closed |
-| [BUG: Error thrown when trying to access checkout](https://github.com/adamgilroy22/retro-reboot/issues/32) | Closed |
-| [BUG: Quantity selector allows higher value than product stock](https://github.com/adamgilroy22/retro-reboot/issues/33) | Closed |
-| [BUG: Quantity buttons not working in basket](https://github.com/adamgilroy22/retro-reboot/issues/34) | Closed |
-| [BUG: Arcade Machine filter not working](https://github.com/adamgilroy22/retro-reboot/issues/35) | Closed |
-| [BUG: Homepage image not loading on deployed site](https://github.com/adamgilroy22/retro-reboot/issues/37) | Closed |
-| [BUG: Error when adding product to basket if already in basket](https://github.com/adamgilroy22/retro-reboot/issues/38) | Closed |
-| [BUG: Users can add more than product stock on product page](https://github.com/adamgilroy22/retro-reboot/issues/39) | Closed |
-| [BUG: Konami Code easter egg music doesn't play on deployed site](https://github.com/adamgilroy22/retro-reboot/issues/40) | Closed |
+| [BUG: NameError in basket on quantity adjust](https://github.com/issues/30) | Closed |
 
 
 

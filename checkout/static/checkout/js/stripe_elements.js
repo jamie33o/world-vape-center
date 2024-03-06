@@ -50,6 +50,7 @@ $(function() {
     const submitPaymentBtn = $('#submit-button');
     
     const name = $.trim(form.first_name.value) + ' ' + $.trim(form.last_name.value);
+    console.log(name)
 
     submitPaymentBtn.click(function(ev) {
         ev.preventDefault();
@@ -119,7 +120,7 @@ $(function() {
             });
         }).fail(function () {
             // just reload the page, the error will be in django messages
-            location.reload();
+            //location.reload();
         });
     });
     });

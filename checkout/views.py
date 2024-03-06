@@ -86,7 +86,7 @@ def checkout(request):
 
         shipping_form = ShippingAddressForm(request.POST)
         profile_detail_form = CheckoutDetailForm(request.POST)
-        
+
 
         if shipping_form.is_valid() and profile_detail_form.is_valid():
             first_name = profile_detail_form.cleaned_data['first_name']

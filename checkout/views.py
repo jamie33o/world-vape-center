@@ -202,6 +202,7 @@ def checkout(request):
             Did you forget to set it in your environment?')
 
     template = 'checkout/checkout.html'
+
     context = {
         'order_form': order_form,
         'profile_detail_form': profile_detail_form,
@@ -212,7 +213,7 @@ def checkout(request):
     if not request.user.is_authenticated:
         context['sign_up_form'] = sign_up_form
         context['sign_in_form'] = sign_in_form
-    
+
     return render(request, template, context)
 
 
@@ -228,7 +229,7 @@ def checkout_success(request, order_id):
     if 'cart' in request.session:
         del request.session['cart']
         del request.session['order_num']
-       
+
 
     template = 'checkout/checkout-success.html'
     context = {

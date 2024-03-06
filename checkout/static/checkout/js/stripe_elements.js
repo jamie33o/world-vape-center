@@ -50,7 +50,6 @@ $(function() {
     const submitPaymentBtn = $('#submit-button');
     
     const name = $.trim(form.first_name.value) + ' ' + $.trim(form.last_name.value);
-    console.log(name)
 
     submitPaymentBtn.click(function(ev) {
         ev.preventDefault();

@@ -332,13 +332,12 @@ class Cart():
         self.cart_updated['cart_bool'] = False
         self.session.modified = True
         return status
-    
+
 
     def get_meta_data(self):
         cart = self.cart.copy()
         meta_data = {}
         for product_id, item in cart.items():
-
             meta_data[product_id] = {
                 'qty': item['qty'],
                 'discounted_price': item['discounted_price']
@@ -346,6 +345,5 @@ class Cart():
                 'price': item['price'],
                 'total': item['price'] * item['qty']
             }
-
         return meta_data
 

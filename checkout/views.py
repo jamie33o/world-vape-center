@@ -48,8 +48,8 @@ def cache_checkout_data(request):
 
         try:
             stripe.PaymentIntent.modify(pid, metadata={
-                'cart': json.dumps(request.session.get('cart', {})),
-                'username': str(request.user),  # Convert request.user to a string
+                'cart': json.dumps(cart.get_meta_data()),
+                'username': str(request.user),  
                 'order_num': json.dumps(request.session.get('order_num', {})),
                 'order_delivery': cart.get_delivery_cost(),
                 'order_subtotal': cart.get_subtotal(),

@@ -1,5 +1,6 @@
 import uuid
 from decimal import Decimal
+from django.shortcuts import get_object_or_404
 from products.models import Product
 
 
@@ -154,14 +155,13 @@ class Cart():
             the 'total' cost, calculated as the price multiplied
             by the quantity of the item in the cart.
         """
-        all_product_ids = self.cart.keys()
-
-        products = Product.objects.filter(id__in=all_product_ids)
 
         cart = self.cart.copy()
 
-        for product in products:
-            cart[str(product.id)]['product'] = {
+        for product_id, item in cart.items():
+            product = get_object_or_404(Product, id=product_id)
+
+            item['product'] = {
                 'name': product.name,
                 'price': float(product.price),
                 'discounted_price': product.discounted_price
@@ -332,3 +332,20 @@ class Cart():
         self.cart_updated['cart_bool'] = False
         self.session.modified = True
         return status
+    
+
+    def get_meta_data(self):
+        cart = self.cart.copy()
+        meta_data = {}
+        for product_id, item in cart.items():
+
+            meta_data[product_id] = {
+                'qty': item['qty'],
+                'discounted_price': item['discounted_price']
+                if item.get('discounted_price') else None,
+                'price': item['price'],
+                'total': item['price'] * item['qty']
+            }
+
+        return meta_data
+

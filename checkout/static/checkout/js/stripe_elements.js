@@ -49,8 +49,8 @@ $(function() {
     var form = document.getElementById('payment-form');
     const submitPaymentBtn = $('#submit-button');
     
-    const name = `${form.first_name.value} ${form.last_name.value}`;
-    
+    const name = form.first_name.value + ' ' + form.last_name.value;
+
     submitPaymentBtn.click(function(ev) {
         ev.preventDefault();
         card.update({ 'disabled': true});
@@ -81,6 +81,7 @@ $(function() {
                             line2: $.trim(form.street_address2.value),
                             city: $.trim(form.town_or_city.value),
                             country: 'IE',
+                            postal_code: $.trim(form.eircode.value),
                             state: $.trim(form.county.value),
                         }
                     }

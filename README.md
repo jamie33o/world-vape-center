@@ -28,7 +28,7 @@ In essence, the site prioritizes simplicity and transparency, contributing to an
 
 I used [coolors.co](https://coolors.co/383f51-bad2f2-f7f0f5-87b38d-e94f37) to generate my colour palette.
 
-![screenshot](documentation/coolors.png)
+![screenshot](docs/color-scheme/colors.png)
 
 I've used CSS `:root` variables to easily update the global colour scheme by changing only one value, instead of everywhere in the CSS file.
 
@@ -146,7 +146,6 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 ![screenshot](docs/wireframes/sign-in.png)
 
 </details>
-
 
 ## Features
 
@@ -268,7 +267,6 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
     - If a user is trying to log in and has forgotten their password they can visit the password reset page. Here a user must enter their email address they used to sign up with and an email will be sent to them with further instructions on resetting their password to regain access to their account.
 
     ![screenshot](docs/features/password-reset.png)
-
 
 - **User Profile**
 

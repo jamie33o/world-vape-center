@@ -168,7 +168,7 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
     - Each product has its own card which contains the product's price, image, name, favourite button and review count if there are any.
     - If the user is logged in, they will also see a favourite button to add products to there favourites section in there profile.
 
-    ![screenshot](docs/features/product-card.png)
+    ![screenshot](docs/features/product-cart.png)
 
 
 - **Product detail page**

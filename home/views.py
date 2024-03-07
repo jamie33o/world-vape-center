@@ -6,7 +6,6 @@ from products.models import Product
 from products.models import Category
 
 
-
 class IndexView(View):
     """
     View class for displaying a list of channels.

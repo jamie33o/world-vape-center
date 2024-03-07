@@ -233,7 +233,7 @@ def search(request):
         results = []
 
         if query:
-            products = Product.objects.filter(slug__icontains=query)[:5]
+            products = Product.objects.filter(name__icontains=query)[:5]
 
             for product in products:
                 product_data = {

@@ -347,28 +347,19 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
     ![screenshot](docs/features/order-received-email.png)
 
-- **Order Confirmation Page**
-
-    - After the order has been completed, the user is redirected to a confirmation page letting them know an order confirmation email has been sent to their provided email address.
-    - This page contains a final rundown of the order and what the user purchased.
-    - This page can be accessed again from the user's profile if they have an account on the site by clicking the order number from the list of past orders.
-
-    ![screenshot]()
-
-    ![screenshot]()
-
-    ![screenshot]()
-
 
 - **Error Pages**
 
     - If a user ends up on a page that either doesn't exist or that they shouldn't be on (regular user using admin page links or trying to edit/delete something through a link) then they'll be shown an error page with a button to bring them back to the shop.
 
-    ![screenshot]()
+    ![screenshot](docs/features/400page.png)
 
-    ![screenshot]()
+    ![screenshot](docs/features/403page.png)
 
-    ![screenshot]()
+    ![screenshot](docs/features/404page.png)
+
+    ![screenshot](docs/features/500page.png)
+
 
 ### Future Features
 
@@ -401,11 +392,7 @@ This site couldn't have been created without a variety of tools and technologies
 
 I created an entity relationship diagram using [Draw.io](https://draw.io). This helped me to visualize the relationships between my data structures and made the development process easier as I had everything mapped out in front of me for reference to avoid having to reference each models.py file individually.
 
-![screenshot]()
-
-I generated an additional entity relationship diagram using [pygraphviz](https://django-extensions.readthedocs.io/en/latest/graph_models.html).
-
-![screenshot](documentation/erd.png)
+![screenshot](docs/db-diagram.png)
 
 ## Agile Development Process
 

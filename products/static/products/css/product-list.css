@@ -67,9 +67,9 @@
 
 .percentage {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    transform: rotate(25deg);
+    top: 10px;
+    left: 10px;
+    transform: rotate(-15deg);
 }
 
 @media (max-width:  991.98px) {

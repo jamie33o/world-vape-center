@@ -19,7 +19,6 @@ In essence, the site prioritizes simplicity and transparency, contributing to an
 
 ### Colour Scheme
 
-
 - `#F7F0F5` and `#3DA5D9` used for the site background.
 - `#E84610` used for primary text across the site.
 - `#00bfc3` used for secondary text.

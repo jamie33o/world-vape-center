@@ -53,6 +53,9 @@
                     <div class="col-12 col-md-12 col-lg-12 col-xl-3 border rounded align-items-center">
 
                         <div class="row flex-column bg-white product-card">
+                            {% if product.discounted_price %}
+                                <span class="percentage text-danger text-bold font-weight-bold">{{ product.discount_percentage|default:'' }}</span>
+                            {% endif %}
                             <div class="w-100 d-flex justify-content-end p-2">
                                 {% include 'components/favourite-btn.html' %}
                             </div>
@@ -81,7 +84,6 @@
                                 <p class="strike-text text-danger text-bold font-weight-bold posotion-relative">
                                     <del>€ {{ product.price }}</del>
                                     <br>
-                                    <span class="percentage">{{ product.discount_percentage|default:'' }}</span>
                                 </p>
                                 {% endif %}
                                 {% if product.free_shipping %}

@@ -9,7 +9,7 @@
 
     <div class="row mt-5">
         <div class="col-12">
-            <img class="img-fluid border rounded" src="{% static 'payments_type.jpg' %}" alt="Payments options">
+            <img class="img-fluid border rounded" src="{% static 'payments_type.webp' %}" alt="Payments options">
         </div>
     </div>
 
@@ -64,17 +64,17 @@
     <div class="row mt-5">
         <div class="col-12">
             <strong>Bank Details</strong>
-            <p>Account Name: </p>
-            <p>IBAN: </p>
+            <p>Account Name: BOI</p>
+            <p>IBAN: IE123456789</p>
             <p>Currency: EUR</p>
 
             <p>All prices are displayed and charged in Euro. You will receive an e-mail with a receipt as soon as we start to process the order.
                 Your order won’t be shipped until we receive full payment.
                 Do you need more info about shopping at Vapeape? Visit our
-                <a href="" style="color: #000080;">T&amp;C</a>,
-                <a href="" style="color: #000080;">Privacy Policy</a>
+                <a href="{% url 'terms' %}" style="color: #000080;">T&amp;C</a>,
+                <a href="{% url 'returns_policy' %}" style="color: #000080;">Returns Policy</a>
                 or
-                <a href="" style="color: #000080;">Delivery Info</a>.
+                <a href="{% url 'delivery_info' %}" style="color: #000080;">Delivery Info</a>.
             </p>
         </div>
     </div>

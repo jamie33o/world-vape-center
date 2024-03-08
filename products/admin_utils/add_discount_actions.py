@@ -14,7 +14,7 @@ def apply_discount_to_products(queryset, discount_percent):
         None
     """
     for product in queryset:
-        discount_amount = Decimal(discount_percent) * Decimal(product.price)
+        discount_amount = Decimal(discount_percent) * Decimal(product.price) / 100
         product.discounted_price = product.price - discount_amount
         product.discount_percentage = f'{discount_percent}% OFF'
         product.save()

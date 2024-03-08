@@ -14,6 +14,8 @@ Contents:
 
 """
 from django import forms
+from django.forms import DateInput
+
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .models import ShippingAddress, CustomUser
 
@@ -28,6 +30,7 @@ class ProfileUpdateForm(forms.ModelForm):
     - username (CharField): User's username.
     - email (EmailField): User's email address.
     - profile_image (ImageField): User's profile image.
+    - date_of_birth (DateField): User's date of birth.
     """
 
     class Meta:
@@ -37,8 +40,16 @@ class ProfileUpdateForm(forms.ModelForm):
         Specifies the model and fields to be included in the form.
         """
         model = CustomUser
-        fields = ['first_name', 'last_name',
-                  'username', 'email', 'profile_image']
+        fields = ['first_name',
+                  'last_name',
+                  'username',
+                  'email',
+                  'profile_image',
+                  'date_of_birth']
+
+        widgets = {
+            'date_of_birth': DateInput(attrs={'type': 'date'}),
+        }
 
 
 class ShippingAddressForm(forms.ModelForm):

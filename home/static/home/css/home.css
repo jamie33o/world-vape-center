@@ -34,7 +34,6 @@ div {
 .bbb_viewed_title {
     margin-bottom: 16px;
     margin-top: 8px;
-
 }
 
 .bbb_viewed_nav_container {
@@ -75,15 +74,11 @@ div {
     width: 100%;
     background: #FFFFFF;
     border-radius: 2px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    padding-left: 30px;
-    padding-right: 30px
 }
 
 .bbb_viewed_image {
-        width: 150px;
-   height: 150px;
+    width: 150px;
+    height: 150px;
 }
 
 .bbb_viewed_image img {
@@ -126,7 +121,10 @@ div {
 }
 
 .bbb_viewed_name {
-    margin-top: 3px
+    margin: 0 auto;
+    width: 200px;
+    margin-top: 3px;
+    padding: 10px;
 }
 
 .bbb_viewed_name a {
@@ -176,4 +174,10 @@ div {
 
 .bbb_viewed_item.is_new .item_new {
     display: inline-block
+}
+
+@media (max-width: 575.98px) {
+   .bbb_viewed_item {
+        margin-left: 50px;
+   }
 }

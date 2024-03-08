@@ -30,6 +30,21 @@
     --hover-color: #94bed1;
 }
 
+a {
+    color: var(--charcoal)
+}
+
+#cookies-modal {
+    text-align: center;
+    bottom: 0;
+    width: 100%;
+    height: fit-content;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
 h1, h2, h3 {
     font-family: var(--headings);
 }

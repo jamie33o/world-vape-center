@@ -91,6 +91,18 @@ def faq(request):
     """
     return render(request, 'help/faq.html')
 
+@require_GET
+def privacy_policy(request):
+    """
+    Render the cookie policy page.
+
+    Args:
+        request (HttpRequest): The HTTP request object.
+
+    Returns:
+        HttpResponse: Rendered cookie policy page.
+    """
+    return render(request, 'help/privacy-policy.html')
 
 @require_GET
 def contact_us(request):

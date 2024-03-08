@@ -18,6 +18,7 @@ from .views import (payments_options, delivery_info,
                     faq,
                     contact_us,
                     sitemap_html,
+                    privacy_policy
                     )
 
 urlpatterns = [
@@ -29,4 +30,6 @@ urlpatterns = [
     path('faq/', faq, name='faq'),
     path('contact-us.html/', contact_us, name='contact_us'),
     path('sitemap.html', sitemap_html, name='sitemap_html'),
+    path('privacy_policy', privacy_policy, name='privacy_policy'),
+
 ]

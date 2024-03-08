@@ -125,6 +125,15 @@
       </div>
     </div>
 
+    
+    <div class="modal border bg-white  mt-auto" id="cookies-modal" tabindex="-1" role="dialog">
+        <div class="modal-body">
+          This website uses cookies. By using this site, you agree to our <a class="text-info" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+          .
+          <button class="btn btn-info" data-dismiss="modal">Accept</button>
+        </div>
+    </div>
+
     {% block postloadjs %}
     <script>
 
@@ -140,6 +149,7 @@
 
         if(localStorage.getItem('firstVisit') != 'false') {
           $('#age-modal').modal('show');
+          $('#cookies-modal').modal('show');
           localStorage.setItem('firstVisit', 'false');
         }
 

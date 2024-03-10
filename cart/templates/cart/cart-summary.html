@@ -1,6 +1,5 @@
 {% extends "base.html" %} 
 {% load static %} 
-{% load mathfilters %} 
 
 {% block extra_css %}
     <link rel="stylesheet" href="{% static 'cart/css/cart-summary.css' %}">
@@ -79,7 +78,7 @@
                                 <div class="mt-3">
                                     <p class="text-muted mb-2">Price</p>
                                     {% if product.discounted_price %}
-                                        <h5 class="mb-0 mt-2">€ {{product.discounted_price }} - <span class="text-muted me-2"><del class="font-size-16 fw-normal">€ {{product.price }}</del></span></h5>
+                                        <h5 class="mb-0 mt-2">€ {{ product.discounted_price }} - <span class="text-muted me-2"><del class="font-size-16 fw-normal">€ {{product.price }}</del></span></h5>
                                     {% else %}
                                         <h4 class="price text-muted"><span class="price-amount">€ {{ product.price }} </span></h4>
                                     {% endif %}
@@ -116,11 +115,7 @@
                                 <div class="mt-3">
                                     <p class="text-muted mb-2">Total</p>
                                     <h5>
-                                        {% if product.discounted_price %} 
-                                            € {{product.discounted_price|mul:item.qty}} 
-                                        {% else %}
-                                            € {{product.price|mul:item.qty}} 
-                                        {% endif %}
+                                        € {{ item.total }} 
                                     </h5>
                                 </div>
                             </div>
@@ -222,7 +217,6 @@
                                         {% if product.discount_percentage %}
                                             <ul class="item_marks">
                                                 <li class="item_mark item_discount">{{ product.discount_percentage }}</li>
-                                                <li class="item_mark item_new">new</li>
                                             </ul>
                                         {% endif %}
                                     </div>

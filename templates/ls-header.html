@@ -1,5 +1,4 @@
 {% load static %}
-{% load mathfilters %} 
 
 <nav class="navbar navbar-expand-lg navbar-dark">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -184,8 +183,8 @@
                                   <p class="my-0 small">{% if item.product.options_name %}{{ item.product.options_name |upper }}: {{ item.product_choice|upper }}{% else %}N/A{% endif %}</p>
                                   <p class="my-0 small text-muted">Qty: {{ item.qty }}</p>
                               </div>
-                              <div class="col-2 text-right">
-                                  <p class="my-0 small text-muted">€ {{item.product.price|mul:item.qty}} </p>
+                              <div class="col-2 text-right text-nowrap">
+                                  <p class="my-0 small text-muted">€ {{ item.total }} </p>
                               </div>
                           </div>
                       {% endfor %}

@@ -139,9 +139,9 @@ class Product(models.Model):
                               )
     description = models.TextField(null=True, blank=True)
     price = models.DecimalField(
-        max_digits=7, decimal_places=2, null=True, blank=True)
+        max_digits=4, decimal_places=2, null=True, blank=True)
     discounted_price = models.DecimalField(
-        max_digits=7, decimal_places=2, null=True, blank=True)
+        max_digits=4, decimal_places=2, null=True, blank=True)
     countInStock = models.IntegerField(null=True, blank=True, default=0)
     free_shipping = models.BooleanField(default=False,
                                         help_text='Is shipping free?')

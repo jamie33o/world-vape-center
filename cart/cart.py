@@ -155,16 +155,18 @@ class Cart():
             the 'total' cost, calculated as the price multiplied
             by the quantity of the item in the cart.
         """
+        all_product_ids = self.cart.keys()
+
+        products = Product.objects.filter(id__in=all_product_ids)
 
         cart = self.cart.copy()
 
-        for product_id, item in cart.items():
-            product = get_object_or_404(Product, id=product_id)
+        for product in products:
 
-            item['product'] = {
+            cart[str(product.id)]['product'] = {
                 'name': product.name,
-                'price': float(product.price),
-                'discounted_price': product.discounted_price
+                'price': str(product.price),
+                'discounted_price': str(product.discounted_price)\
                 if product.discounted_price else None,
                 'slug': product.slug,
                 'category': {'slug': product.category.slug,
@@ -175,8 +177,11 @@ class Cart():
             }
 
         for item in cart.values():
-            item['price'] = item['price']
-            item['total'] = item['price'] * item['qty']
+            
+            item['total'] = Decimal(item['discounted_price']) * item['qty']\
+                    if item.get('discounted_price')\
+                    else Decimal(item['price']) * item['qty']
+            item['total'] = str(item['total'])
 
             yield item
 

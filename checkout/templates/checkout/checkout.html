@@ -63,7 +63,7 @@
                                         <p class="my-0 small text-muted">Qty: {{ item.qty }}</p>
                                     </div>
                                     <div class="col-2 text-right">
-                                        <p class="my-0 small text-muted">€ {{ item.product.price|mul:item.qty }} </p>
+                                        <p class="my-0 small text-muted">€ {{ item.total }} </p>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -197,7 +197,7 @@
                         <span class="icon">
                             <i class="fas fa-exclamation-circle"></i>
                         </span>
-                        <span>Your card will be charged <strong>€ {{ cart.get_grand_total|floatformat:2 }}</strong></span>
+                        <span>Your card will be charged <strong>€ {{ cart.get_grand_total}}</strong></span>
                     </p>
                 </form>
             </div>

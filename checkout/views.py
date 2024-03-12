@@ -162,8 +162,8 @@ def checkout(request):
                     html_message=email_content,
                     fail_silently=False
                 )
-            except Exception as e:
-                messages.error(request, f'Error: Could not send order success email-- {e}')
+            except Exception:
+                messages.error(request, 'Error: Could not send order success email')
 
             return redirect(reverse('checkout_success', args=[order.id]))
         else:

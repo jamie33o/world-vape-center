@@ -27,7 +27,7 @@
         {% for item in order.lineitems.all %}
         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
             <p style="margin: 0; font-weight: bold; color: #000;">
-                {{ item.product.name }}{% if item.product.options_name %} - {{ item.product.options_name }} {{ item.product_option }}{% endif %}
+                {{ item.product.name }} {% if item.product.options_name %} - {{ item.product.options_name }} {{ item.product_option }}{% endif %}
             </p>
             <p style="margin: 0; font-size: small;"> {{ item.quantity }} @ €{{ item.product.price }} each</p>
         </div>

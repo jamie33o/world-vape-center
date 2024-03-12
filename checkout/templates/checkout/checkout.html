@@ -118,55 +118,14 @@
 							{% if user.is_authenticated %}
 								<label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>
                                 <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
-							{% else %}
-								<label class="form-check-label" for="id-save-info">
-                                        <!-- Button trigger modal -->
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                        Create an account or login to save this information
-                                    </button>
-                                     <!-- Modal -->
-                                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                                        <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                            <h5 class="account-modal-title">Sign In</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="form container card p-3 d-none">
-                                                    <p>Already have an account? <a href="#" class="toggle-form btn btn-info">Sign In</a></p>
+                            {% else %}
 
-                                                    <form action="{% url 'sign_up' %}" method="POST">
-                                                        {% csrf_token%}
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                    Create an account or login to save this information
+                                </button>
+                            {% endif %}
 
-                                                        {{ sign_up_form | crispy }}
-                                                        <input type="hidden" name="redirect_url" value="checkout">
-
-                                                        <button type="submit" class="btn btn-success">
-                                                            Submit
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                                <div class="form container card p-3">
-                                                    <p>Dont have an account? <a href="#" class="toggle-form btn btn-info">Sign Up</a></p>
-                                                    <form action="{% url 'sign_in' %}" method="POST" >
-                                                        {% csrf_token%}
-                                                        {{ sign_in_form | crispy }}
-                                                        <input type="hidden" name="redirect_url" value="checkout">
-
-                                                        <button type="submit" class="btn btn-success">
-                                                            Submit
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        </div>
-                                    </div>
-                                  </label>
-							{% endif %}
 						</div>
                     </fieldset>
                     <fieldset class="px-3">
@@ -210,6 +169,50 @@
             </span>
         </h1>
     </div>
+    
+    {% if not user.is_authenticated %}
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="account-modal-title">Sign In</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form container card p-3 d-none">
+                            <p>Already have an account? <a href="#" class="toggle-form btn btn-info">Sign In</a></p>
+
+                            <form action="{% url 'sign_up' %}" method="POST">
+                                {% csrf_token%}
+
+                                {{ sign_up_form | crispy }}
+                                <input type="hidden" name="redirect_url" value="checkout">
+
+                                <button type="submit" class="btn btn-success">
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+                        <div class="form container card p-3">
+                            <p>Dont have an account? <a href="#" class="toggle-form btn btn-info">Sign Up</a></p>
+                            <form action="{% url 'sign_in' %}" method="POST" >
+                                {% csrf_token%}
+                                {{ sign_in_form | crispy }}
+                                <input type="hidden" name="redirect_url" value="checkout">
+
+                                <button type="submit" class="btn btn-success">
+                                    Submit
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+    {% endif %}
+
 {% endblock %}
 
 

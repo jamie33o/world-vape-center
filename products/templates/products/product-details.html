@@ -72,12 +72,12 @@
                         <!-- end col -->
                         <div class="col-8 col-sm-5 col-md-12 col-lg-5 mt-3 mt-sm-0">
                             <div class="ml-0">
-                                <button {% if cart|length == 0 %}data-toggle="modal" data-target="#cart-modal"{% else%} href="{% url 'cart-summary' %}" {% endif%} class="btn btn-success font-weight-bold w-100">
+                                <a {% if cart|length == 0 %}data-toggle="modal" data-target="#cart-modal"{% else%} href="{% url 'cart-summary' %}" {% endif%} class="btn btn-success font-weight-bold w-100">
                                     
                                     <i class="mdi mdi-cart-outline me-1"></i> 
                                     Shopping Cart
                                     <i class="mdi mdi-arrow-right"></i> 
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <!-- end col -->

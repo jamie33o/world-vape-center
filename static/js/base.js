@@ -79,7 +79,6 @@ $(document).ready(function () {
             url: $(this).attr('action'),
             data: $(this).serialize(), // Serialize the form data
             success: function (response) {
-                console.log(response);
                 $('.messages').remove();
                 const message = $(`
                     <div class="row justify-content-end m-0 messages">
@@ -100,7 +99,21 @@ $(document).ready(function () {
                 }      
             },
             error: function(error) {
-                console.log(error);
+                $('.messages').remove();
+                const message = $(`
+                    <div class="row justify-content-end m-0 messages">
+                        <div class="mr-5">
+                            <div class="alert bg-light mx-auto border-dark">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                                    ×</button> 
+                                <strong>Error:</strong>
+                                <hr class="message-inner-separator">
+                                <p>${error}</p>
+                            </div>
+                        </div>
+                    </div>
+                `);
+                $('main').append(message);            
             }
         });
     });

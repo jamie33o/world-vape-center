@@ -187,7 +187,7 @@
     <!-- end row -->
 </div>
 {% if discounted_products %}
-    <div class="bbb_viewed container bg-transparent mb-5">
+    <div class="bbb_viewed container-fluid bg-transparent p-0">
         <div class="container-fluid">
             <div class="row">
                 <div class="col p-0">
@@ -215,9 +215,7 @@
                                             <div class="bbb_viewed_name">{{ product.name }}</div>
                                         </div>
                                         {% if product.discount_percentage %}
-                                            <ul class="item_marks">
-                                                <li class="item_mark item_discount">{{ product.discount_percentage }}</li>
-                                            </ul>
+                                        <span class="percentage text-danger text-bold font-weight-bold">{{ product.discount_percentage }}</span>
                                         {% endif %}
                                     </div>
                                 </a>

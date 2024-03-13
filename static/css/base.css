@@ -50,6 +50,10 @@ h1, h2, h3, h4, h5 {
     font-family: var(--headings);
 }
 
+#reviews, #help {
+    scroll-margin-top: 200px;
+}
+
 p, a, div, li {
     font-family: var(--paragraphs);
 }
@@ -59,10 +63,10 @@ h4, h5 {
 }
 
 .messages {
-    position: absolute;
-    top: 100px;
+    position: fixed;
+    top: 170px;
     z-index: 1000;
-    right: 20px;
+    right: 40px;
     transition: opacity 0.5s ease; 
 }
 

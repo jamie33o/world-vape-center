@@ -52,6 +52,7 @@ class ProfileUpdateForm(forms.ModelForm):
         }
 
 
+
 class ShippingAddressForm(forms.ModelForm):
     """
     Form for handling user shipping address.
@@ -61,9 +62,51 @@ class ShippingAddressForm(forms.ModelForm):
     - street_address1 (CharField): First line of street address.
     - street_address2 (CharField, optional): Second line of street address.
     - town_or_city (CharField): Town or city for shipping.
-    - county (CharField, optional): County for shipping.
+    - county (ChoiceField): County for shipping.
     - eircode (CharField, optional): Eircode for shipping.
     """
+
+    COUNTY_CHOICES = [
+        ('Antrim', 'Antrim'),
+        ('Armagh', 'Armagh'),
+        ('Carlow', 'Carlow'),
+        ('Cavan', 'Cavan'),
+        ('Clare', 'Clare'),
+        ('Cork', 'Cork'),
+        ('Derry', 'Derry'),
+        ('Donegal', 'Donegal'),
+        ('Down', 'Down'),
+        ('Dublin', 'Dublin'),
+        ('Fermanagh', 'Fermanagh'),
+        ('Galway', 'Galway'),
+        ('Kerry', 'Kerry'),
+        ('Kildare', 'Kildare'),
+        ('Kilkenny', 'Kilkenny'),
+        ('Laois', 'Laois'),
+        ('Leitrim', 'Leitrim'),
+        ('Limerick', 'Limerick'),
+        ('Longford', 'Longford'),
+        ('Louth', 'Louth'),
+        ('Mayo', 'Mayo'),
+        ('Meath', 'Meath'),
+        ('Monaghan', 'Monaghan'),
+        ('Offaly', 'Offaly'),
+        ('Roscommon', 'Roscommon'),
+        ('Sligo', 'Sligo'),
+        ('Tipperary', 'Tipperary'),
+        ('Tyrone', 'Tyrone'),
+        ('Waterford', 'Waterford'),
+        ('Westmeath', 'Westmeath'),
+        ('Wexford', 'Wexford'),
+        ('Wicklow', 'Wicklow')
+    ]
+
+    phone_number = forms.CharField()
+    street_address1 = forms.CharField()
+    street_address2 = forms.CharField(required=False)
+    town_or_city = forms.CharField()
+    county = forms.ChoiceField(choices=COUNTY_CHOICES)
+    eircode = forms.CharField(required=False)
 
     class Meta:
         """
@@ -72,9 +115,9 @@ class ShippingAddressForm(forms.ModelForm):
         Specifies the model and fields to be included in the form.
         """
         model = ShippingAddress
-        fields = ['phone_number', 'street_address1',
-                  'street_address2',
+        fields = ['phone_number', 'street_address1', 'street_address2',
                   'town_or_city', 'county', 'eircode']
+
 
 
 class CheckoutDetailForm(forms.ModelForm):
@@ -95,6 +138,11 @@ class CheckoutDetailForm(forms.ModelForm):
         """
         model = CustomUser
         fields = ['first_name', 'last_name', 'email']
+
+    def __init__(self, *args, **kwargs):
+        super(CheckoutDetailForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.required = True
 
 
 class SignupForm(UserCreationForm):

@@ -14,7 +14,8 @@
     --light-grey: #f3f7f8;
     --accent-color: #ffcc00;
     --font-size: 16px;
-    --font-family: 'Roboto', sans-serif;
+    --headings: 'Roboto', sans-serif; 
+    --paragraphs: Arial, sans-serif; 
     --line-height: 1.5;
     --background-color: #f9f9f9;
     --border-radius: 4px;
@@ -45,8 +46,12 @@ a:hover {
     text-decoration: none;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5 {
     font-family: var(--headings);
+}
+
+p, a, div, li {
+    font-family: var(--paragraphs);
 }
 
 h4, h5 {

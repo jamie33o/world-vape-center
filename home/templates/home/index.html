@@ -48,10 +48,8 @@
                                             <div class="bbb_viewed_name">{{ product.name }}</div>
                                         </div>
                                         {% if product.discount_percentage %}
-                                            <ul class="item_marks">
-                                                <li class="item_mark item_discount">{{ product.discount_percentage }}</li>
-                                                <li class="item_mark item_new">new</li>
-                                            </ul>
+                                        <span class="percentage text-danger text-bold font-weight-bold">{{ product.discount_percentage|default:'' }}</span>
+
                                         {% endif %}
                                     </div>
                                 </a>

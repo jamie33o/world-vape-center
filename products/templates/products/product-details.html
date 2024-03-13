@@ -36,7 +36,7 @@
                         <h5 class="font-weight-bold text-info">{{ product.brand.name }}</h5>
                         <div class="d-inline">
                             {% include 'components/ratings.html' with product=product %}
-                            <span class="text-info">{{ product.num_reviews }} reviews</span>
+                            <a href="#reviews" class="text-info">{{ product.num_reviews }} reviews</a>
                         </div>
                     </div>
                     <hr>
@@ -181,7 +181,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 reviews-list">
+        <div class="col-sm-6 reviews-list" id="reviews">
            {% include 'components/reviews.html' with reviews=reviews %}
         </div> 
     </div>

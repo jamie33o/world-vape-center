@@ -94,6 +94,9 @@ $(document).ready(function () {
                     </div>
                 `);
                 $('main').append(message);
+                    setTimeout(() => {
+                      $(message).remove()
+                    }, 3000); 
                 if ($favouriteCard) {
                     $favouriteCard.remove();
                 }      

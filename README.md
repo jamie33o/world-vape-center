@@ -45,9 +45,9 @@ I've used CSS `:root` variables to easily update the global colour scheme by cha
 
 When choosing fonts for the site, my main goal was to choose fonts that were easily readable for users. 
 
-- [Caprasimo](https://fonts.google.com/specimen/Caprasimo) was used for the logo text in the main nav bar and the large text on the home page.
+- [Roboto](https://fonts.google.com/specimen/Roboto) was used for headings.
 
-- [Montserrat](https://fonts.google.com/specimen/Montserrat) was used for all other text.
+- [Arial](https://fonts.google.com/specimen/Montserrat) was used for all other text.
 
 - [Font Awesome](https://fontawesome.com) icons were used throughout the site, such as the social media icons in the footer.
 
@@ -61,7 +61,7 @@ View the Sprints here [here](https://github.com/jamie33o/world-vape-center/miles
 
 ## Wireframes
 
-To help with the design of the site, I created wireframes for each page. To follow best practice, wireframes were developed for mobile, tablet, and desktop sizes.
+To help with the design of the site, I created wireframes for each page. To follow best practice, wireframes were developed for mobile and desktop sizes.
 I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wireframes.
 
 ### Age verification Wireframes
@@ -156,9 +156,9 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
     ![screenshot](docs/features/homepage-lg.png)
 
-- **All Products Page**
+- **Products Page**
 
-    - This is a page containing all products that the site sells.
+    - This is the page containing the products that the site sells.
 
     ![screenshot](docs/features/all-products.png)
 
@@ -179,7 +179,7 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
     ![screenshot](docs/features/cart-summary-modal.png)
 
-    ![screenshot](docs/features/product-card.png)
+    ![screenshot](docs/features/product-cart.png)
 
 - **Product Sorting**
 
@@ -242,7 +242,7 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
 - **User Sign Up**
 
-    - Users without an account can register for one through the register link in the header. This will present them with a form to add their details and created a profile for that user on completion.
+    - Users without an account can register for one through the register link in the header. This will present them with a form to add their details and create an account.
 	- Users are sent a confirmation email to complete their account sign up to help avoid people from creating spam accounts on the site.
 
     ![screenshot](docs/features/sign-up.png)
@@ -496,11 +496,9 @@ def __str__(self):
     return self.email
 ```
 
-I set the email address to be unique to avoid users signing up multiple times with the same email address. If a user tries to sign up twice with the same address they will be shown a message letting them know they've already signed up.
+I set the email address to be unique to avoid users signing up multiple times with the same email address. 
 
-Once a user signs up, I used the `send_mail()` functionality in the `webhook_handler.py` file to trigger a welcome email for the user to acknowledge that they've successfully signed up for the newsletter.
-
-In this welcome newsletter, I've included a special discount code to entice sign ups to purchase on the site.
+Once a user signs up, I used the `send_mail()` functionality to trigger a welcome email for the user to acknowledge that they've successfully signed up for the newsletter.
 
 ## Testing
 
@@ -809,15 +807,10 @@ I used some online resources to help me overcome some challenges I faced during 
 | Source | Location | Notes |
 | --- | --- | --- |
 | [Markdown Builder](https://traveltimn.github.io/markdown-builder) | README and TESTING | tool to help generate the Markdown files |
-| [Go Make Things](https://gomakethings.com/how-to-create-a-konami-code-easter-egg-with-vanilla-js/) | Site-wide Konami Code easter egg trigger | "How to create a Konami Code easter egg with vanilla JS" |
-| [StackOverflow](https://stackoverflow.com/questions/849142/how-to-limit-the-maximum-value-of-a-numeric-field-in-a-django-model) | Discount code creation - max and min values | How to limit the maximum value of a numeric field in a Django model |
 | [StackOverflow](https://stackoverflow.com/questions/298772/how-to-use-the-variables-from-views-py-in-javasscript-script-script-in) | Setting quantity selector max value to be the product's stock | How to use the variables from "views.py" in JavasScript, `<script></script>` in Django Template? |
 | [StackOverflow](https://stackoverflow.com/questions/25839043/how-do-i-remove-label-text-in-django-generated-form) | Removing label from discount and newsletter forms | How do I remove Label text in Django generated form? |
-| [StackOverflow](https://stackoverflow.com/questions/4919076/outline-effect-to-text) | Outline on homepage text to avoid contrast clashes with background image elements on smaller screens | Outline effect to text |
-| [Get Bootstrap](https://getbootstrap.com/docs/4.6/components/modal/) | Konami Code easter egg modal | Modal |
 | [Code Institute](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+EA101+2021_T1/courseware/eb05f06e62c64ac89823cc956fcd8191/3adff2bf4a78469db72c5330b1afa836/) | Project foundations | Boutique Ado Walkthrough Project |
-| [Code Institute](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+FST101+2021_T1/courseware/b31493372e764469823578613d11036b/fe4299adcd6743328183aab4e7ec5d13/) | Blog | I Think Therefore I Blog Walkthrough Project |
-| [GitHub](https://github.com/summernote/django-summernote) | Blog Creation | Django Summernote implementation on the front end for admin's to create blog posts |
+
 
 ### Media
 

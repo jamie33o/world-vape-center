@@ -79,17 +79,15 @@
       {% if messages %}
       
       {% for message in messages %}
-        <div class="row position-relative justify-content-end m-0 messages">
-          <div class="col-sm-3 col-md-3 position-absolute mr-5">
-              <div class="alert bg-{% if not message.tags == 'error' %}{{message.tags}}{% else %}danger{% endif %} mx-auto">
-                  <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                      ×</button>
-                <span class="glyphicon glyphicon-ok"></span> <strong>{{message.tags}}</strong>
-                  <hr class="message-inner-separator">
-                  <p>
-                    {{ message }}</p>
-              </div>
-          </div>
+        <div class="messages">
+            <div class="alert bg-{% if not message.tags == 'error' %}{{message.tags}}{% else %}danger{% endif %} mx-auto">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+                    ×</button>
+              <span class="glyphicon glyphicon-ok"></span> <strong>{{message.tags}}</strong>
+                <hr class="message-inner-separator">
+                <p>
+                  {{ message }}</p>
+            </div>
         </div>
       {% endfor %}
       
@@ -138,7 +136,10 @@
     <script>
 
       $(document).ready(function() {
-
+        setTimeout(() => {
+          $('.messages').remove()
+        }, 3000); 
+        
         {% if cart and cart.get_cart_status %}
           $('#cart-modal').modal('show')
         {% endif %}
@@ -218,10 +219,7 @@
                 }
             });
         }
-        
-    
         breadcrumbsList();
-          
       });
     </script>
 

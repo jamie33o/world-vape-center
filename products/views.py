@@ -3,9 +3,10 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views import View
+from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from cart.forms import AddToCartForm
 
 from .models import Product, Review, Category
@@ -58,7 +59,7 @@ class CategoryView(View):
 
             if multi_options:
                 category_products = category_products.\
-                    filter(options__slug__in=multi_options)
+                    filter(options__slug__in=[option.slug for option in multi_options])
 
         # Default number of items per page
         items_per_page = request.session.get('items_per_page', 24)
@@ -102,23 +103,32 @@ class ProductDetailView(View):
         Returns:
             HttpResponse: Rendered template with channel information.
         """
+        try:
+            product = get_object_or_404(Product, slug=slug)
+        except Exception:
 
-        product = get_object_or_404(Product, slug=slug)
-        reviews = Review.objects.filter(product=product)
-        category_products = Product.objects.filter(category=product.category)
-        form = AddToCartForm(
-                product_id=product.id,
-                product_options=product.options.all(),
-                product_option_name=product.options_name
-               )
+            messages.error(request, 'We are Sorry...\
+                           There was an error retrieving the product.\
+                            The Admin has being notified')
+            return redirect('categories')
+        try:
+            reviews = Review.objects.filter(product=product)
+            category_products = Product.objects.filter(category=product.category)
+            form = AddToCartForm(
+                    product_id=product.id,
+                    product_options=product.options.all(),
+                    product_option_name=product.options_name
+                )
 
-        context = {
-            'product': product,
-            'reviews': reviews,
-            'category_products': category_products,
-            'form': form
-        }
+            context = {
+                'product': product,
+                'reviews': reviews,
+                'category_products': category_products,
+                'form': form
+            }
 
+        except Exception as e:
+            messages.error(request, {e})
         return render(request, self.template_name, context)
 
 

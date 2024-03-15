@@ -136,24 +136,31 @@
     <script>
 
       $(document).ready(function() {
+        // Remove messages after 3 seconds
+
         setTimeout(() => {
           $('.messages').remove()
         }, 3000); 
         
+        // Show cart modal if cart exists and has a cart status which means it has bein updated
         {% if cart and cart.get_cart_status %}
-          $('#cart-modal').modal('show')
+          if(window.innerWidth > 575.98){
+              $('#cart-modal').modal('show')
+          }
         {% endif %}
         
         $('.un-verified').on('click', function(){
           localStorage.setItem('firstVisit', 'true');
         })
 
+        // Show age and cookies modal on first visit
         if(localStorage.getItem('firstVisit') != 'false') {
           $('#age-modal').modal('show');
           $('#cookies-modal').modal('show');
           localStorage.setItem('firstVisit', 'false');
         }
 
+        // Handle newsletter form submission via AJAX
         $('.sub').click(function(e) {
           e.preventDefault();
           let nlMsg = $('.nl-msg')
@@ -175,26 +182,28 @@
               }
           });
         });
+      
+        // Function to generate breadcrumbs
+        function breadcrumbsList() {
+          const breadcrumbContainer = $('.breadcrumb');
+          let homeItem = null;
+      
+          const path = window.location.pathname;
+          const pathParts = path.split('/').filter(Boolean);
+          if(pathParts.length > 0){
+            $('.bc-con').addClass('d-lg-inline')
+            homeItem = $('<li>', { class: 'breadcrumb-item' });
+            let homeLink = $('<a>', { href: '/', text: 'Home' });
+            homeItem.append(homeLink);
 
-          function breadcrumbsList() {
-            const breadcrumbContainer = $('.breadcrumb');
-            let homeItem = null;
-        
-            const path = window.location.pathname;
-            const pathParts = path.split('/').filter(Boolean);
-            if(pathParts.length > 0){
-              $('.bc-con').addClass('d-lg-inline')
-              homeItem = $('<li>', { class: 'breadcrumb-item' });
-              let homeLink = $('<a>', { href: '/', text: 'Home' });
-              homeItem.append(homeLink);
-
-            }else{
-              $('.bc-con').removeClass('d-lg-inline')
-            }
-        
-            renderBreadcrumbs(breadcrumbContainer, pathParts, homeItem);
+          }else{
+            $('.bc-con').removeClass('d-lg-inline')
+          }
+      
+          renderBreadcrumbs(breadcrumbContainer, pathParts, homeItem);
         }
         
+        // Function to render breadcrumbs
         function renderBreadcrumbs(container, pathParts, homeItem) {
             container.empty();
         

@@ -45,7 +45,7 @@ class StripeWH_Handler:
             billing_details = stripe_charge.billing_details
             shipping_details = intent.shipping
             grand_total = round(stripe_charge.amount / 100, 2)
-            
+
         except Exception as e:
             print(e)
         # Clean data in the shipping details

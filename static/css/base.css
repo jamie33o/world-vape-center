@@ -51,7 +51,7 @@ h1, h2, h3, h4, h5 {
 }
 
 #reviews, #help {
-    scroll-margin-top: 200px;
+    scroll-margin-top: 230px;
 }
 
 p, a, div, li {
@@ -383,6 +383,11 @@ footer .glyphicon {
 .user_card input, .user_card button {
     max-width: 100% !important;
     margin-bottom: 5px;
+}
+
+.user_card input[type="radio"], .user_card input[type="checkbox"]{
+    max-width: fit-content !important;
+    display: inline;
 }
 
 .user_card .form {

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'help',
     'checkout',
     'profile',
+    'dashboard',
     # django apps
     'django.contrib.admin',
     'django.contrib.auth',

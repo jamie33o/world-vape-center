@@ -70,6 +70,7 @@
     top: 10px;
     left: 10px;
     transform: rotate(-15deg);
+    z-index: 100;
 }
 
 @media (max-width:  991.98px) {

@@ -410,7 +410,6 @@ As a site admin I want to be able to set appropriate keywords on site pages so t
 | Meta keywords | check seo on lighthouse | Seo is 100% | Works as expected 
 <br><br>
 
-
 **User Story #29:**<br>
 As a site admin I want to be able to share the business on Facebook so that I can reach and market to a larger audience.
 
@@ -427,38 +426,6 @@ As a site admin I want a sitemap.xml so search engines understand the structure 
 | Sitemp.xml | Use django sitemap app | enter sitemap url | Works as expected |
 <br><br>
 
-
-
-## Automated Testing
-
-I have conducted a series of automated tests on my application.
-
-I fully acknowledge and understand that, in a real-world scenario, an extensive set of additional tests would be more comprehensive.
-
-### Python (Unit Testing)
-
-I have used Django's built-in unit testing framework to test the application functionality.
-
-In order to run the tests, I ran the following command in the terminal each time:
-
-`python3 manage.py test `
-
-![screenshot](documentation/testing/automated-tests.png)
-
-| Testing File | Screenshot |
-| --- | --- |
-| [Discount Forms](discount_codes/tests.py) | ![screenshot](documentation/testing/automated-testing-discount-forms.png) |
-| [Blog Forms](blog/test_forms.py) | ![screenshot](documentation/testing/automated-testing-blog-forms.png) |
-| [Blog Views](blog/test_views.py) | ![screenshot](documentation/testing/automated-testing-blog-views.png) |
-| [Product Forms](products/test_forms.py) | ![screenshot](documentation/testing/automated-testing-product-forms.png) |
-| [Product Views](products/test_views.py) | ![screenshot](documentation/testing/automated-testing-product-views.png) |
-| [Contact Forms](contact/test_forms.py) | ![screenshot](documentation/testing/automated-testing-contact-forms.png) |
-| [Contact Views](contact/test_views.py) | ![screenshot](documentation/testing/automated-testing-contact-views.png) |
-| [Basket Views](basket/tests.py) | ![screenshot](documentation/testing/automated-testing-basket-views.png) |
-| [Checkout Forms](checkout/tests.py) | ![screenshot](documentation/testing/automated-testing-checkout-forms.png) |
-| [Profile Views](profiles/tests.py) | ![screenshot](documentation/testing/automated-testing-profile-views.png) |
-| [Homepage Views](homepage/tests.py) | ![screenshot](documentation/testing/automated-testing-homepage-views.png) |
-
 ## Bugs
 
 ### GitHub **Issues**
@@ -467,12 +434,9 @@ I tracked my bugs on GitHub Issues using the BUG label
 
 **Fixed Bugs**
 
-
 | Bug | Status |
 | --- | --- |
 | [BUG: NameError in basket on quantity adjust](https://github.com/issues/30) | Closed |
-
-
 
 ## Unfixed Bugs
 

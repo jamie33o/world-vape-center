@@ -35,6 +35,7 @@ Contents:
             <button class="nav-link folder-link btn mt-3" data-id="#address">Shipping</button>
             <button class="nav-link folder-link btn mt-3" data-id="#orders">Orders</button>
             <button class="nav-link folder-link btn mt-3" data-id="#favs">Favourites</button>
+            <button class="ticket-btn nav-link folder-link btn mt-3" data-id="#tickets">Tickets</button>
         </nav>
         <div class="file p-2 p-sm-5">
             <div id="profile" class="folder">
@@ -49,7 +50,18 @@ Contents:
             <div id="orders" class="folder d-none">
                 {% include 'profile/orders.html' %}
             </div>
+            <div id="tickets" class="folder d-none">
+                {% include 'profile/tickets.html' %}
+            </div>
         </div>
-
     </div>
+{% endblock %}
+
+{% block extra_postloadj %}
+<script>
+    {% if open_ticket %}
+    $('.ticket-btn').click()
+    {% endif %}
+
+</script>
 {% endblock %}

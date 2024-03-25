@@ -15,6 +15,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from django.conf import settings
 from products.models import Product
+from dashboard.models import Ticket
 from cart.cart import Cart
 from .models import Order, OrderLineItem
 
@@ -55,11 +56,22 @@ def cache_checkout_data(request):
                 'order_subtotal': cart.get_subtotal(),
                 'order_discount': cart.get_discounted_total(),
             })
+            return HttpResponse(status=200)
         except StripeError as e:
-            # Handle the exception here
-            print(f"Stripe Error: {e}")
+            try:
+                ticket = Ticket(title='site_error',
+                                description=f'cache_checkout_data error: {e}',
+                                user=request.user if request.user else None
+                                )
+                ticket.save()
+                messages.error(request, 'We are very sorry, \
+                        an unknown error occurred: But the Admin has been notified')
 
-        return HttpResponse(status=200)
+            except Exception:
+                messages.error(request, 'We are very sorry, \
+                        an unknown error occurred: Please contact us')
+            return HttpResponse(status=400)
+
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be \
             processed right now. Please try again later.')
@@ -162,9 +174,20 @@ def checkout(request):
                     html_message=email_content,
                     fail_silently=False
                 )
-            except Exception:
-                messages.error(request, 'Error: Could not send order success email')
+            except Exception as e:
+                try:
+                    ticket = Ticket(title='site_error',
+                                    description=f'checkout function error: {e}',
+                                    user=request.user if request.user else None
+                                    )
+                    ticket.save()
+                    messages.error(request, 'We are very sorry, \
+                            Could not send order success email:\
+                                    But the Admin has been notified')
 
+                except Exception:
+                    messages.error(request, 'We are very sorry, \
+                            an unknown error occurred: Please contact us')
             return redirect(reverse('checkout_success', args=[order.id]))
         else:
             if not shipping_form.is_valid():

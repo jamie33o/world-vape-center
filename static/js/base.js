@@ -4,6 +4,19 @@ $(document).ready(function () {
         $('#search-form').removeClass('d-none');
     });
 
+    $('[data-toggle="collapse"]').click(changeText)
+
+    function changeText(){
+        let self = $(this)
+        let buttonText = self.text().trim().toLowerCase(); // Convert text to lowercase and remove leading/trailing spaces
+
+        if(buttonText == 'view more'){
+            self.text('View Less') 
+        }else{
+            self.text('View More')
+        }
+    }
+
     // Handle click event on the close-search button
     $('.close-search').click(() => $('#search-form').addClass('d-none'));
 

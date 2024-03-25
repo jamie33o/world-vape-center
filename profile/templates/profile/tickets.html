@@ -1,0 +1,99 @@
+{% load static %}
+{% load crispy_forms_tags %} 
+
+
+ <div class="card mb-4">
+  <div class="card-header">Tickets</div>
+  <div class="card-body p-0">
+      <div class="table-responsive table-billing-history">
+          {% if user_tickets %}
+          <table class="table mb-0 text-nowrap">
+              <thead>
+                  <tr>
+                      <th class="border-gray-200" scope="col">Id</th>
+                      <th class="border-gray-200" scope="col">Date</th>
+                      <th class="border-gray-200" scope="col">Title</th>
+                      <th class="border-gray-200" scope="col">Message</th>
+                      <th class="border-gray-200" scope="col">Status</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for ticket in user_tickets %}
+                  <tr>
+                      <td>{{ ticket.id  }}</td>
+                      <td>{{ ticket.created_at }}</td>
+                      <td>{{ ticket.title }}</td>
+                      <td>{{ ticket.description }}</td>
+                      <td><span class="badge bg-light text-dark">{{ ticket.status }}</span></td>
+                      <td>
+                          <button
+                              class="btn btn-info"
+                              data-toggle="collapse"
+                              data-target="#collapse{{ticket.id}}"
+                              aria-expanded="true"
+                              aria-controls="collapse{{ticket.id}}">
+                              View More
+                          </button>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td colspan="5">
+                          <div
+                              id="collapse{{ticket.id}}"
+                              class="collapse"
+                              aria-labelledby="heading{{ticket.id}}"
+                              data-parent="#accordion">
+                              <div class="card-body">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <div class="row border bold">
+                                                <div class="col-2 border-gray-200"><strong>Sender</strong></div>
+                                                <div class="col-4 border-gray-200"><strong>Date</strong></div>
+                                                <div class="col-6 border-gray-200"><strong>Message</strong></div>
+                                            </div>
+                                            <div class="overflow-y-auto">
+                                                {% for message in ticket.ticket_messages.all %}
+                                                <div class="row border">
+                                                    <div class="col-2">{% if message.sender == request.user %}{{ message.sender }}{% else %}Admin{% endif %}</div>
+                                                    <div class="col-4 text-wrap">{{ message.created_at }}</div>
+                                                    <div class="col-6 text-wrap">{{ message.message }}</div>
+                                                </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <form method="post" action="{% url 'ticket_response' ticket.id %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="url" value="{% url 'profile' 'open_ticket' %}">
+                                                {{ ticket_response_form | crispy }}
+                                                <button type="submit" class="btn btn-primary">Submit</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                      </td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+          {% else %}
+          <div class="d-flex align-items-center flex-column justify-content-center px-4">
+              <h3 class="text-center my-5">Open a Ticket</h3>
+              <form method="post" action="{% url 'open_ticket' %}" class="mb-5">
+                {% csrf_token %}
+                <input type="hidden" name="url" value="{% url 'profile' 'open_ticket' %}">
+
+                {{ ticket_form | crispy }}
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+          </div>
+          {% endif %}
+
+      </div>
+  </div>
+</div>
+
+

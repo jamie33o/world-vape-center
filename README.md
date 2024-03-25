@@ -93,8 +93,7 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
 ### Home Page Wireframes
 
-<details>
-<summary>Click to View Home Page wireframes</summary>
+<details><summary>Click to View Home Page wireframes</summary>
 
 ![screenshot](docs/wireframes/homepage.png)
 
@@ -468,16 +467,6 @@ Further links for future implementation:
 - [Managing your sitemaps and using sitemaps reports](https://support.google.com/webmasters/answer/7451001)
 - [Testing the robots.txt file](https://support.google.com/webmasters/answer/6062598)
 
-### Social Media Marketing
-
-Creating a strong social base (with participation) and linking that to the business site can help drive sales.
-Using more popular providers with a wider user base, such as Facebook, typically maximizes site views.
-
-I've created a mockup Facebook business account using the
-[Balsamiq template](https://code-institute-org.github.io/5P-Assessments-Handbook/files/Facebook_Mockups.zip)
-provided by Code Institute.
-
-![screenshot](documentation/facebook-mockup.png)
 
 ### Newsletter Marketing
 
@@ -806,10 +795,8 @@ I used some online resources to help me overcome some challenges I faced during 
 
 | Source | Location | Notes |
 | --- | --- | --- |
-| [Markdown Builder](https://traveltimn.github.io/markdown-builder) | README and TESTING | tool to help generate the Markdown files |
-| [StackOverflow](https://stackoverflow.com/questions/298772/how-to-use-the-variables-from-views-py-in-javasscript-script-script-in) | Setting quantity selector max value to be the product's stock | How to use the variables from "views.py" in JavasScript, `<script></script>` in Django Template? |
-| [StackOverflow](https://stackoverflow.com/questions/25839043/how-do-i-remove-label-text-in-django-generated-form) | Removing label from discount and newsletter forms | How do I remove Label text in Django generated form? |
-| [Code Institute](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+EA101+2021_T1/courseware/eb05f06e62c64ac89823cc956fcd8191/3adff2bf4a78469db72c5330b1afa836/) | Project foundations | Boutique Ado Walkthrough Project |
+| [Bootsnipp](https://bootsnipp.com/) | Templates | Used to get some bootstrap snippets |
+| [Bootstrap](https://getbootstrap.com/docs/4.0/components/modal/) | Modal | Used to get Modals |
 
 
 ### Media
@@ -818,7 +805,8 @@ I used some media found online throughout this project, in particular for produc
 
 | Source | Location | Type | Notes |
 | --- | --- | --- | --- |
-| [Code Institute](https://codeinstitute.s3.amazonaws.com/fullstack/blog/default.jpg) | Blog | Image | Default blog post image |
+| [Join the vape life](https://jointhevapelife.ie/) | product | Image | All product images |
+
 
 ## Acknowledgements
 - [Code Institute](https://github.com/Code-Institute-Org/full_stack_solutions) for all the material and support offered<br>

@@ -19,6 +19,7 @@ from .views import (ProfileView,
 
 urlpatterns = [
     path('', ProfileView.as_view(), name='profile'),
+    path('<str:open_ticket>', ProfileView.as_view(), name='profile'),
     path('shipping_address_view/',
          shipping_address_view,
          name='shipping_address_view'),

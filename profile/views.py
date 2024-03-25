@@ -25,6 +25,9 @@ from django.contrib.auth import login
 from django.utils.decorators import method_decorator
 from django.contrib import messages
 from checkout.models import Order
+from dashboard.forms import TicketForm, TicketResponseForm
+from dashboard.models import Ticket
+
 from .models import Favourite, ShippingAddress
 from .forms import ShippingAddressForm, ProfileUpdateForm
 from .forms import SignupForm, SigninForm
@@ -44,13 +47,21 @@ class ProfileView(View):
 
     template_name = 'profile/base.html'
 
-    def get(self, request):
+    def get(self, request, **kwargs):
         """
         Handle GET requests for the user's profile.
 
         Returns:
         - HttpResponse: Rendered profile page.
         """
+
+        ticket_form = TicketForm()
+
+        ticket_response_form = TicketResponseForm()
+
+        # Get the user's ticket
+        user_tickets = Ticket.objects.filter(user=request.user)
+
         user_address_instance = request.user.user_address.first()
 
         user_form = ProfileUpdateForm(instance=request.user)
@@ -73,8 +84,17 @@ class ProfileView(View):
             'user_form': user_form,
             'shipping_address_form': shipping_address_form,
             'user_orders': user_orders,
-            'favourites': favourite_products
+            'favourites': favourite_products,
+            'ticket_form': ticket_form,
+            'user_tickets': user_tickets,
+            'ticket_response_form': ticket_response_form
         }
+        
+        # Access the 'open_ticket' argument
+        ticket = self.kwargs.get('ticket')
+
+        if ticket:
+            context['open_ticket'] = True
 
         return render(request, self.template_name, context)
 

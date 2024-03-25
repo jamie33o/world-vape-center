@@ -1,0 +1,112 @@
+{% extends "dashboard/dashboard.html" %}
+
+{% block dashboard_content %}
+
+<div class="row">
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <h3 class="text-danger">{{ new_daily_users }}</h3>
+              <p class="mb-0"><span class="font-weight-bold">{{ current_time|date:"l" }}</span> New Users</p>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-user-plus text-danger fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <h3 class="text-success">{{ monthly_user }}</h3>
+              <p class="mb-0"><span class="font-weight-bold">{{ current_time|date:"F" }}</span> New Users</p>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-user-plus text-success fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <h3 class="text-warning">{{ last_month_users }}</h3>
+              <p class="mb-0"><span class="font-weight-bold">Last month</span> New Users</p>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-user-plus text-warning fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <h3 class="text-warning">{{ new_users_annualy }}</h3>
+              <p class="mb-0"><span class="font-weight-bold">{{ current_time|date:"Y" }}</span> New Users</p>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-user-plus text-info fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="row">
+    <div class="col-xl-6 col-md-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between p-md-1">
+            <div class="d-flex flex-row">
+              <div class="align-self-center">
+                <h2 class="h1 mb-0 mr-4">€ {{ monthly_sales }}</h2>
+              </div>
+              <div>
+                <h4>Monthly Sales</h4>
+                <p class="mb-0">Monthly Sales Amount</p>
+              </div>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-euro-sign text-danger fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-md-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between p-md-1">
+            <div class="d-flex flex-row">
+              <div class="align-self-center">
+                <h2 class="h1 mb-0 mr-4">€ {{ annual_sales }}</h2>
+              </div>
+              <div>
+                <h4>Annual Sales</h4>
+                <p class="mb-0">Annual Sales Amount</p>
+              </div>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-wallet text-success fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

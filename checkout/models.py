@@ -13,7 +13,7 @@ class Order(models.Model):
         ('processing', 'Processing'),
         ('shipped', 'Shipped'),
         ('delivered', 'Delivered'),
-        ('canceled', 'Canceled'),
+        ('cancelled', 'Cancelled'),
     )
     full_name = models.CharField(max_length=64, null=False)
     email = models.EmailField(null=False)

@@ -57,11 +57,12 @@ Contents:
     </div>
 {% endblock %}
 
-{% block extra_postloadj %}
-<script>
-    {% if open_ticket %}
-    $('.ticket-btn').click()
-    {% endif %}
-
-</script>
+{% block extra_postloadjs %}
+    <script>
+        {% if 'open_ticket' in request.path %}
+            $(document).ready(function() {
+                $('.ticket-btn').click();
+            });
+        {% endif %}
+    </script>
 {% endblock %}

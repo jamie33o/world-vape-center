@@ -1,0 +1,135 @@
+{% extends "dashboard/dashboard.html" %}
+
+{% block dashboard_content %}
+
+<div class="row">
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+            <a href="{% url 'orders_list' status='pending' %}">
+              <h3 class="text-danger">{{ pending_orders }}</h3>
+              <p class="mb-0">Pending</p>
+            </a>
+            </div>
+            <div class="align-self-center">
+              <i class="far fa-clock text-info fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'orders_list' status='shipped' %}">
+                <h3 class="text-success">{{ shipped_orders }}</h3>
+                <p class="mb-0">Shipped</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-truck text-warning fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'orders_list' status='delivered' %}">
+                <h3 class="text-warning">{{ delivered_orders }}</h3>
+                <p class="mb-0">Delivered</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-check-circle text-success fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'orders_list' status='cancelled' %}">
+                <h3 class="text-info">{{ cancelled_orders }}</h3>
+                <p class="mb-0">Cancelled</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-exclamation-circle text-danger fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'orders_list' status='processing' %}">
+                <h3 class="text-info">{{ processing_orders }}</h3>
+                <p class="mb-0">Processing</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-sync text-primary fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row"> 
+    <div class="col-xl-6 col-md-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between p-md-1">
+            <div class="d-flex flex-row">
+              <div class="align-self-center">
+                <h2 class="h2 mb-0 mr-4">{{ monthly_orders }}</h2>
+              </div>
+              <div>
+                <h4>{{ current_time|date:"F" }}</h4>
+                <p class="mb-0">Monthly orders</p>
+              </div>
+            </div>
+            <div class="align-self-center">
+              <i class="far fa-calendar text-danger fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-md-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between p-md-1">
+            <div class="d-flex flex-row">
+              <div class="align-self-center">
+                <h2 class="h2 mb-0 mr-4">{{ total_orders }}</h2>
+              </div>
+              <div>
+                <h4>{{ current_time|date:"F" }}</h4>
+                <p class="mb-0">Annual orders</p>
+              </div>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-calendar-check text-success fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,6 +1,6 @@
 from django import forms
 from checkout.models import Order
-from .models import Ticket, Ticket_messages
+from .models import Ticket, TicketMessages
 
 
 class OrderStatusForm(forms.ModelForm):
@@ -32,7 +32,7 @@ class TicketResponseForm(forms.ModelForm):
     Form for responding to a ticket.
     """
     class Meta:
-        model = Ticket_messages
+        model = TicketMessages
         fields = ['message']
 
 

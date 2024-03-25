@@ -1,0 +1,40 @@
+<!--Main Navigation-->
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">  
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+  />
+{% endblock %}
+
+{% block extra_js %}
+    <script async src="{% static 'js/dashboard.js' %}"></script>
+{% endblock %}
+
+{% block breadcrumb %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container-fluid px-1 px-sm-4 mt-4 pt-5">
+  <!-- Account page navigation-->
+  <nav class="nav nav-borders ml-2 ml-sm-5">
+      <a href="{% url 'overview' %}" class="nav-link folder-link btn {% if 'overview' not in request.path %}mt-3{% endif %}">Overview</a>
+      <a href="{% url 'orders' %}" class="nav-link folder-link btn {% if 'orders' not in request.path %}mt-3{% endif %}">Orders</a>
+      <a href="{% url 'tickets' %}" class="nav-link folder-link btn {% if 'tickets' not in request.path %}mt-3{% endif %}">Tickets</a>
+  </nav>
+  <div class="file p-2 p-sm-5">
+      <div class="folder">
+        {% block dashboard_content %}
+        {% endblock %}
+      </div>
+  </div>
+
+</div>
+
+{% endblock %}
+

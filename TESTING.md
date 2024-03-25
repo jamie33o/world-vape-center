@@ -436,7 +436,12 @@ I tracked my bugs on GitHub Issues using the BUG label
 
 | Bug | Status |
 | --- | --- |
-| [BUG: NameError in basket on quantity adjust](https://github.com/issues/30) | Closed |
+| [Bug: change logo extension](https://github.com/jamie33o/world-vape-center/issues/35) | Closed |
+| [Bug: Order form submits without all the information ](https://github.com/jamie33o/world-vape-center/issues/34) | Closed |
+| [Bug: fix js for opening the ticket tab in profile when the open ticket link is clicked in the header ](https://github.com/jamie33o/world-vape-center/issues/33) | Closed |
+| [Bug: remove crispy forms filter and change to as_p because it was creating double the amount of fields ](https://github.com/jamie33o/world-vape-center/issues/32) | Closed |
+| [Bug: missing closing div ](https://github.com/jamie33o/world-vape-center/issues/31) | Closed |
 
 ## Unfixed Bugs
 
+There are no known bugs unfixed

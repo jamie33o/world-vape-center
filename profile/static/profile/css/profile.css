@@ -15,19 +15,20 @@
 .folder-link:hover {
     background-color: var(--light-grey);
 }
+
 .folder-link:focus {
     box-shadow: none !important;
 }
 
 .file {
-    background-color: #FFF8DC; 
+    background-color: var(--muted-green); 
     border: 1px solid black;
     border-radius: 20px;
     margin-bottom: 50px;
 }
 
 .nav-borders button {
-    background-color: #FFF8DC; 
+    background-color: var(--muted-green);  
 }
 
 /* ///////////////////////// media queries ///////////////////////// */

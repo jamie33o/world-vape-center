@@ -1,0 +1,191 @@
+{% extends "dashboard/dashboard.html" %}
+
+
+{% block dashboard_content %}
+
+<div class="row">
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'ticket' title='question' %}">
+                <h3 class="text-danger">{{ questions }}</h3>
+                <p class="mb-0">Questions</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-question-circle text-success fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'ticket' title='feedback' %}">
+                <h3 class="text-success">{{ feedback }}</h3>
+                <p class="mb-0">Feedback</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-comment text-success fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'ticket' title='site_error' %}">
+                <h3 class="text-warning">{{ site_error }}</h3>
+                <p class="mb-0">Site Errors</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-exclamation-triangle text-danger fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'ticket' title='account_issue' %}">
+                <h3 class="text-info">{{ account_issue }}</h3>
+                <p class="mb-0">Account Issue</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-user-slash text-danger fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'ticket' title='order_issue' %}">
+                <h3 class="text-danger">{{ order_issue }}</h3>
+                <p class="mb-0">Order Issues</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-times text-danger fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'ticket' title='delivery_issue' %}">
+                <h3 class="text-success">{{ delivery_issue }}</h3>
+                <p class="mb-0">Delivery Issues</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-shipping-fast text-danger fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'ticket' title='refund_request' %}">
+                <h3 class="text-warning">{{ refund_request }}</h3>
+                <p class="mb-0">Refund Request</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-euro-sign text-warning fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
+              <a href="{% url 'ticket' title='other' %}">
+                <h3 class="text-info">{{ other }}</h3>
+                <p class="mb-0">Other</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-ellipsis-h text-info fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xl-6 col-md-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between p-md-1">
+            <div class="d-flex flex-row">
+              <div class="align-self-center">
+                <h2 class="h1 mb-0 mr-4">{{ total_open }}</h2>
+              </div>
+              <div>
+                  <h4>Total Open</h4>
+                  <p class="mb-0">Total Open Tickets</p>
+              </div>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-exclamation-circle text-danger fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-6 col-md-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between p-md-1">
+            <div class="d-flex flex-row">
+              <div class="align-self-center">
+                <h2 class="h1 mb-0 mr-4">{{ total_closed }}</h2>
+              </div>
+              <div>
+                <h4>Total Closed</h4>
+                <p class="mb-0">Total Closed Tickets</p>
+              </div>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-check-circle text-success fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

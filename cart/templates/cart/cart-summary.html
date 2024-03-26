@@ -59,12 +59,14 @@
                                 {% endif %}
                             </div>
                         </div>
+                        {% if request.user.is_authenticated %}
                         <form class="like-form d-inline mr-2 ml-4" action="{% url 'add_to_favorites' product.id %}" method="POST">
                             {% csrf_token %}
                             <button class="like btn btn-warning text-white" type="submit" aria-label="add to favourites">
                                 <span class="fa fa-heart"></span>
                             </button>
                         </form>
+                        {% endif %}
                         <form method="post" action="{% url 'cart-delete' %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <input type="hidden" name="product_id" value="{{ product.id }}">

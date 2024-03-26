@@ -63,7 +63,8 @@ def cart_add(request):
             cart.add(product=product,
                      product_qty=int(product_quantity),
                      product_choice=product_choice)
-
+            messages.success(request,
+                            'Product added to cart')
             return redirect(redirect_url)
 
         messages.error(request,

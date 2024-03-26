@@ -144,6 +144,7 @@ header {
 header nav {
     background-color: var(--charcoal);
 }
+
 header nav .container {
     justify-content: initial !important;
 }
@@ -317,6 +318,14 @@ footer .glyphicon {
 #side-padding{
     padding: 0px;
     margin: 0px;
+}
+
+.bbb_viewed_nav_container i {
+    color: var(--charcoal) !important;
+}
+
+.owl-item img {
+    border: 1px solid var(--muted-green)
 }
 
 /* //////////////////// allauth templates //////////////////// */

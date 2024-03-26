@@ -187,6 +187,21 @@ header .navbar {
     background-color: transparent;
 }
 
+.search-btn:hover {
+    color: var(--muted-green);
+    background-color: transparent;
+}
+
+#navbarDropdown:hover p,#navbarDropdown:hover i {
+    color: var(--muted-green);
+
+}
+
+button[data-target="#cart-modal"]:hover {
+    box-shadow: -5px 5px 10px var(--muted-green);
+
+}
+
 .dropdown-toggle:hover {
     height: fit-content;
     text-decoration: none;

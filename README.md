@@ -383,7 +383,12 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
 ### Future Features
 
-While I feel that the site has an abundance of features, there are several ones I would like to add in the future that didn't fit into the current development cycle for this project. These features have been logged as Won't Have in my MoSCoW prioritization and placed in the backlog of my project's development board.
+While I feel that the site has an abundance of features, there are several ones I would like to add in the future that didn't fit into the current development cycle for this project. 
+
+- I would like to add a form to the dashboard or admin form sending out newsletters
+- I would add more crud functionality to the dashboard tickets and maybe orders list
+- I would add a form for staff for creating special deals like 2 for 1
+
 
 
 ## Tools & Technologies Used

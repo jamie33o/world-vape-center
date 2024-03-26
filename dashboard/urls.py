@@ -27,7 +27,8 @@ from .views import (
 urlpatterns = [
     path("orders", orders_dashboard, name="orders"),
     path("orders/<str:status>", orders, name="orders_list"),
-    path("change_status/<int:order_id>", change_order_status, name="change_status"),
+    path("change_status/<int:order_id>",
+         change_order_status, name="change_status"),
     path("overview", overview_dashboard, name="overview"),
     path("tickets", tickets_dashboard, name="tickets"),
     path("tickets/<str:title>", tickets, name="ticket"),
@@ -37,5 +38,6 @@ urlpatterns = [
         name="change_ticket_status",
     ),
     path("open_ticket/", open_ticket, name="open_ticket"),
-    path("ticket_response/<int:ticket_id>", ticket_response, name="ticket_response"),
+    path("ticket_response/<int:ticket_id>",
+         ticket_response, name="ticket_response"),
 ]

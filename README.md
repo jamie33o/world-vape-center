@@ -389,8 +389,6 @@ While I feel that the site has an abundance of features, there are several ones 
 - I would add more crud functionality to the dashboard tickets and maybe orders list
 - I would add a form for staff for creating special deals like 2 for 1
 
-
-
 ## Tools & Technologies Used
 
 This site couldn't have been created without a variety of tools and technologies. I've listed the ones used below.

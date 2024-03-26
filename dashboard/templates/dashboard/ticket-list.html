@@ -33,7 +33,9 @@
                             <td>{{ ticket.created_at }}</td>
                             <td>{{ ticket.description }}</td>
                             <td><span id="status{{ ticket.id }}" class="badge bg-light text-dark ">{{ ticket.status }}</span></td>
+                            {% if ticket.user %}
                             <td>
+
                                 <button
                                     class="btn btn-info"
                                     data-toggle="collapse"
@@ -42,7 +44,9 @@
                                     aria-controls="collapse{{ticket.id}}">
                                     View More
                                 </button>
+
                             </td>
+                            {% endif %}
                         </tr>
                         <tr>
                             <td colspan="5">

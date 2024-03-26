@@ -185,14 +185,15 @@ def signup_view(request):
 
         if form.is_valid():
             user = form.save()
-            login(request, user)
+            login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, 'Signed up successfully')
             return redirect(redirect_url)
-
+    
         messages.error(request, form.errors)
         return redirect(redirect_url)
 
     except Exception as e:
+        print(e)
         messages.error(request, f'We are very sorry, \
                     an unknown error occurred: {e}... PLEASE CONTACT US!!!')
         return redirect('contact_us')

@@ -167,7 +167,7 @@ class SignupForm(UserCreationForm):
         """
         model = CustomUser
         fields = ['username', 'email',
-                  'password1', 'password2', 'date_of_birth']
+                  'password1', 'password2']
 
 
 class SigninForm(AuthenticationForm):

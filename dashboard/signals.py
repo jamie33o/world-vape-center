@@ -20,7 +20,7 @@ def send_ticket_opened_email(sender, instance, created, **kwargs):
     """
     if created:
         subject = "World Vape Center... Ticket Notification"
-        message = f"A new ticket has been opened\nDetails:\nTitle: {instance.title}\nCreated at: {instance.created_at}"
+        message = f"A new ticket has been opened\nDetails: {instance.description}\nTitle: {instance.title}\nCreated at: {instance.created_at}"
         recipient_list = [settings.EMAIL_HOST_USER]
         if instance.user:
             recipient_list.append(instance.user.email)

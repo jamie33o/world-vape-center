@@ -149,6 +149,22 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
 ### Existing Features
 
+- **Dashboard**
+
+  - This page is for the site's staff users here the staff users can view orders and set the status of an order and see order details the staff user can also view any tickets that users have open and reply to the user also the staff user gets an overview of new user daily monthly and annually along with monthly and annual sales
+  
+![screenshot](docs/features/dashboard-link.png)
+
+![screenshot](docs/features/dashboard-overview.png)
+
+![screenshot](docs/features/dashboard-orders.png)
+  
+![screenshot](docs/features/dashboard-order-list.png)
+  
+![screenshot](docs/features/dashboard-tickets.png)
+
+![screenshot](docs/features/dashboard-ticket-list.png)
+
 - **Landing Page**
 
     - This is the page a user lands on when arriving at the site. It welcomes them to the site and gives them an idea of what the site sells. A button is present that will bring the user to the site's product page.

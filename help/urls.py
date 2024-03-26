@@ -28,7 +28,7 @@ urlpatterns = [
     path('returns_policy/', returns_policy, name='returns_policy'),
     path('terms/', terms, name='terms'),
     path('faq/', faq, name='faq'),
-    path('contact-us.html/', contact_us, name='contact_us'),
+    path('contact-us/', contact_us, name='contact_us'),
     path('sitemap.html', sitemap_html, name='sitemap_html'),
     path('privacy_policy', privacy_policy, name='privacy_policy'),
 

@@ -105,7 +105,6 @@ def privacy_policy(request):
     return render(request, 'help/privacy-policy.html')
 
 
-@require_GET
 def contact_us(request):
     """
     Render the contact us page and handle contact form submissions.

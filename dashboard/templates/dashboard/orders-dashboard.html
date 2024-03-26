@@ -25,6 +25,23 @@
         <div class="card-body">
           <div class="d-flex justify-content-between px-md-1">
             <div>
+              <a href="{% url 'orders_list' status='processing' %}">
+                <h3 class="text-info">{{ processing_orders }}</h3>
+                <p class="mb-0">Processing</p>
+              </a>
+            </div>
+            <div class="align-self-center">
+              <i class="fas fa-sync text-primary fa-3x"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 col-12 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex justify-content-between px-md-1">
+            <div>
               <a href="{% url 'orders_list' status='shipped' %}">
                 <h3 class="text-success">{{ shipped_orders }}</h3>
                 <p class="mb-0">Shipped</p>
@@ -66,23 +83,6 @@
             </div>
             <div class="align-self-center">
               <i class="fas fa-exclamation-circle text-danger fa-3x"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-xl-3 col-sm-6 col-12 mb-4">
-      <div class="card">
-        <div class="card-body">
-          <div class="d-flex justify-content-between px-md-1">
-            <div>
-              <a href="{% url 'orders_list' status='processing' %}">
-                <h3 class="text-info">{{ processing_orders }}</h3>
-                <p class="mb-0">Processing</p>
-              </a>
-            </div>
-            <div class="align-self-center">
-              <i class="fas fa-sync text-primary fa-3x"></i>
             </div>
           </div>
         </div>

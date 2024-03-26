@@ -9,7 +9,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from cart.forms import AddToCartForm
 from dashboard.models import Ticket
-
 from .models import Product, Review, Category
 from .forms import ReviewForm, FiltersForm
 
@@ -94,7 +93,6 @@ class ProductDetailView(View):
     """
     View class for displaying a list of channels.
     """
-
     template_name = 'products/product-details.html'
 
     def get(self, request, slug, *args, **kwargs):

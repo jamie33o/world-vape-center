@@ -1,7 +1,6 @@
 from datetime import timedelta
 from profile.models import CustomUser
 from django.shortcuts import render, get_object_or_404, redirect
-from django.http import JsonResponse
 from django.db.models import Count, Sum
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import user_passes_test
@@ -9,7 +8,10 @@ from django.contrib import messages
 from django.utils import timezone
 from checkout.models import Order
 from .models import Ticket
-from .forms import OrderStatusForm, TicketStatusForm, TicketForm, TicketResponseForm
+from .forms import (OrderStatusForm,
+                    TicketStatusForm,
+                    TicketForm,
+                    TicketResponseForm)
 
 
 @user_passes_test(lambda u: u.is_staff)
@@ -71,8 +73,8 @@ def orders(request, status):
     """
     template_name = "dashboard/order-list.html"
 
-    orders = Order.objects.filter(status=status)
-    paginator = Paginator(orders, 10)
+    order_objects = Order.objects.filter(status=status).order_by('-date')
+    paginator = Paginator(order_objects, 10)
     page = request.GET.get("page")
 
     try:
@@ -106,7 +108,7 @@ def change_order_status(request, order_id):
         messages.success(request,
                          f'Error updating status {form.errors}')
         return redirect('orders')
-    
+
     messages.success(request, 'Error updating status')
     return redirect('orders')
 
@@ -236,8 +238,7 @@ def tickets(request, title):
     """
     template_name = "dashboard/ticket-list.html"
 
-    # Retrieve all orders for the given status
-    ticket_list = Ticket.objects.filter(title=title)
+    ticket_list = Ticket.objects.filter(title=title).order_by('-created_at')
 
     # Paginate the orders
     paginator = Paginator(ticket_list, 10)
@@ -259,7 +260,9 @@ def tickets(request, title):
         response_form = TicketResponseForm()
         forms.append((ticket, form, response_form))
 
-    context = {"title": title, "forms": forms, "ticket_list": ticket_list}
+    context = {"title": title,
+               "forms": forms,
+               "ticket_list": ticket_list}
 
     return render(request, template_name, context)
 

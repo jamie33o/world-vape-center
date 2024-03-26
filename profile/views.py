@@ -60,8 +60,8 @@ class ProfileView(View):
         ticket_response_form = TicketResponseForm()
 
         # Get the user's ticket
-        user_tickets = Ticket.objects.filter(user=request.user)
-
+        user_tickets = Ticket.objects.filter(user=request.user).order_by('-created_at')
+        
         user_address_instance = request.user.user_address.first()
 
         user_form = ProfileUpdateForm(instance=request.user)
@@ -188,7 +188,7 @@ def signup_view(request):
             login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             messages.success(request, 'Signed up successfully')
             return redirect(redirect_url)
-    
+
         messages.error(request, form.errors)
         return redirect(redirect_url)
 

@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from cart.forms import AddToCartForm
+from dashboard.models import Ticket
 
 from .models import Product, Review, Category
 from .forms import ReviewForm, FiltersForm
@@ -105,7 +106,18 @@ class ProductDetailView(View):
         """
         try:
             product = get_object_or_404(Product, slug=slug)
-        except Exception:
+        except Exception as e:
+            try:
+                ticket = Ticket(title='site_error',
+                                description=f'product detail view error: {e}',
+                                user=request.user if request.user else None
+                                )
+                ticket.save()
+
+            except Exception:
+                messages.error(request, 'We are very sorry, \
+                        an unknown error occurred: Please contact us')
+                return redirect('contact_us')
 
             messages.error(request, 'We are Sorry...\
                            There was an error retrieving the product.\
@@ -128,7 +140,19 @@ class ProductDetailView(View):
             }
 
         except Exception as e:
-            messages.error(request, {e})
+            try:
+                ticket = Ticket(title='site_error',
+                                description=f'product detail view error: {e}',
+                                user=request.user if request.user else None
+                                )
+                ticket.save()
+
+            except Exception:
+                messages.error(request, 'We are very sorry, \
+                        an unknown error occurred: Please contact us')
+                return redirect('contact_us')
+            messages.error(request, 'We are very sorry, \
+                        an unknown error occurred: Admin has been notified')
         return render(request, self.template_name, context)
 
 
@@ -190,8 +214,20 @@ class ReviewsView(View):
                                 status=400)
 
         except Exception as e:
+            try:
+                ticket = Ticket(title='site_error',
+                                description=f'Review view error: {e}',
+                                user=request.user if request.user else None
+                                )
+                ticket.save()
+
+            except Exception:
+                messages.error(request, 'We are very sorry, \
+                        an unknown error occurred: Please contact us')
+                return redirect('contact_us')
             return JsonResponse({'status': 'error',
-                                 'message': str(e)},
+                                 'message': 'We are very sorry, \
+                        an unknown error occurred: Admin has been notified'},
                                 status=500)
 
     def delete(self, request, review_id):
@@ -222,8 +258,20 @@ class ReviewsView(View):
                                     status=403)
 
         except Exception as e:
+            try:
+                ticket = Ticket(title='site_error',
+                                description=f'review delete view error: {e}',
+                                user=request.user if request.user else None
+                                )
+                ticket.save()
+
+            except Exception:
+                messages.error(request, 'We are very sorry, \
+                        an unknown error occurred: Please contact us')
+                return redirect('contact_us')
             return JsonResponse({'status': 'error',
-                                 'message': str(e)},
+                                 'message':'We are very sorry, \
+                        an unknown error occurred: Admin has been notified'},
                                 status=500)
 
 
@@ -258,7 +306,19 @@ def search(request):
         return JsonResponse({'products': results})
 
     except Exception as e:
-        response_data = {'error': str(e)}
+        try:
+            ticket = Ticket(title='site_error',
+                            description=f'search view error: {e}',
+                            user=request.user if request.user else None
+                            )
+            ticket.save()
+
+        except Exception:
+            messages.error(request, 'We are very sorry, \
+                    an unknown error occurred: Please contact us')
+            return redirect('contact_us')
+        response_data = {'error': 'We are very sorry, \
+                    an unknown error occurred: Admin has been notified'}
         return JsonResponse(response_data, status=500)
 
 
@@ -302,10 +362,21 @@ def add_to_favorites(request, product_id):
 
         return JsonResponse(response_data, status=status_code)
 
-    except Exception:
+    except Exception as e:
+        try:
+            ticket = Ticket(title='site_error',
+                            description=f'Favourites view error: {e}',
+                            user=request.user if request.user else None
+                            )
+            ticket.save()
+
+        except Exception:
+            messages.error(request, 'We are very sorry, \
+                    an unknown error occurred: Please contact us')
+            return redirect('contact_us')
         response_data = {'status': 'error',
                          'message': 'An error occurred while processing \
-                            your request. Please try again later.'}
+                            your request. Admin have bein notified.'}
         status_code = 500
 
         return JsonResponse(response_data, status=status_code)

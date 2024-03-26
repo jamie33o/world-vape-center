@@ -97,19 +97,18 @@ def change_order_status(request, order_id):
     """
     order = get_object_or_404(Order, pk=order_id)
 
-    if (
-        request.method == "POST"
-        and request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
-    ):
+    if request.method == "POST":
         form = OrderStatusForm(request.POST, instance=order)
         if form.is_valid():
             form.save()
-            return JsonResponse(
-                {"status": "success", "message": "Status updated"}, status=200
-            )
-    return JsonResponse(
-        {"status": "error", "message": "Could not update Status"}, status=500
-    )
+            messages.success(request, 'Status updated')
+            return redirect('orders')
+        messages.success(request,
+                         f'Error updating status {form.errors}')
+        return redirect('orders')
+    
+    messages.success(request, 'Error updating status')
+    return redirect('orders')
 
 
 @user_passes_test(lambda u: u.is_staff)
@@ -274,19 +273,16 @@ def change_ticket_status(request, ticket_id):
     """
     ticket = get_object_or_404(Ticket, pk=ticket_id)
 
-    if (
-        request.method == "POST"
-        and request.META.get("HTTP_X_REQUESTED_WITH") == "XMLHttpRequest"
-    ):
+    if request.method == "POST":
         form = TicketStatusForm(request.POST, instance=ticket)
         if form.is_valid():
             form.save()
-            return JsonResponse(
-                {"status": "success", "message": "Status updated"}, status=200
-            )
-    return JsonResponse(
-        {"status": "error", "message": "Could not update Status"}, status=500
-    )
+            messages.success(request, 'Status updated')
+            return redirect('ticket', ticket.title)
+        messages.error(request, form.errors)
+        return redirect('ticket', ticket.title)
+    messages.error(request, 'Method not allowed')
+    return redirect('ticket', ticket.title)
 
 
 def open_ticket(request):

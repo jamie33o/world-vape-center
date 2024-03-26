@@ -216,7 +216,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 col-lg-5">
-                                            <form id="status-form" action="{% url 'change_status' order_id=order.id %}" method="post">
+                                            <form action="{% url 'change_status' order_id=order.id %}" method="post">
                                                 {% csrf_token %}
                                                 {{ form|crispy }}
                                                 <input class="btn btn-success" type="submit" value="Submit">

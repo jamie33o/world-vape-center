@@ -4,7 +4,7 @@ $(document).ready(function () {
         $('#search-form').removeClass('d-none');
     });
 
-    $('[data-toggle="collapse"]').click(changeText)
+    $('main [data-toggle="collapse"]').click(changeText)
 
     function changeText(){
         let self = $(this)

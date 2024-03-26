@@ -174,7 +174,7 @@
               url: url,
               data: $('#nl_form').serialize(),
               success: function(data) {
-                nlMsg.prepend(`<div class="bg-${data.status}  text-white"><p> ${data.message} </p></div>`);
+                nlMsg.prepend(`<div class="bg-${data.status} text-white"><p> ${data.message} </p></div>`);
               },
               error: function(xhr, textStatus, errorThrown) {
                 nlMsg.prepend('<div class="bg-danger text-white"><p>An error occurred. Please try again.</p></div>');

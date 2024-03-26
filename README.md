@@ -255,6 +255,12 @@ I've used [Balsamiq](https://balsamiq.com/wireframes) to design my site wirefram
 
     ![screenshot](docs/features/apply-prices-modal.png)
 
+- **Add discount to multiple products**
+
+    - If the user is logged in and has admin permissions, they can add discount prices to multiple products at once.
+
+    ![screenshot](docs/features/add-discounts.png)
+
 - **User Sign Up**
 
     - Users without an account can register for one through the register link in the header. This will present them with a form to add their details and create an account.

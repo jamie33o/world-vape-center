@@ -241,12 +241,20 @@
               <button type="button" class="w-25 btn btn-info mr-auto font-weight-bold" data-dismiss="modal" aria-label="Close">
                 <i class="mdi mdi-arrow-left"></i> 
                 Close
-              </button>    
-              <a href="{% url 'cart-summary' %}" class="btn btn-success font-weight-bold w-25">                 
-                <i class="mdi mdi-cart-outline me-1"></i> 
-                 Cart
-                <i class="mdi mdi-arrow-right"></i> 
-              </a> 
+              </button>   
+              {% if 'checkout' in request.path %} 
+                <a href="{% url 'cart-summary' %}" class="btn btn-success font-weight-bold w-25">                 
+                  <i class="mdi mdi-cart-outline me-1"></i> 
+                  Cart
+                  <i class="mdi mdi-arrow-right"></i> 
+                </a> 
+              {% else %}
+                  <a href="{% url 'checkout' %}" class="btn btn-success font-weight-bold w-50">                 
+                    <i class="fas fa-lock me-1"></i> 
+                      Checkout
+                    <i class="mdi mdi-arrow-right"></i> 
+                  </a> 
+              {% endif %}
             {% else %}
             <button type="button" class="w-50 btn btn-info mr-auto font-weight-bold" data-dismiss="modal" aria-label="Close">
               &lt; Close

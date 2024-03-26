@@ -159,7 +159,7 @@ class StripeWH_Handler:
             email_subject,
             '',
             from_email,
-            [email],
+            [email, from_email],
             html_message=email_content,
             fail_silently=False
         )

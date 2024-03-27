@@ -6,10 +6,10 @@
  <!-- Billing history card-->
  <div class="card mb-4">
     <div class="card-header d-inline d-flex flex-dir-row">
-        <a class="btn btn-link btn-sm m-0 position-absolute" href="{% url 'tickets' %}">
+        <a class="btn btn-outline-dark" href="{% url 'tickets' %}">
             << Back
         </a>
-        <h3 class="mx-auto">{{ status|capfirst }} Tickets List</h3>
+        <h3 class="mx-auto">{{ title|capfirst }}'s</h3>
     </div>
     <div class="card-body p-0">
         <!-- Billing history table-->

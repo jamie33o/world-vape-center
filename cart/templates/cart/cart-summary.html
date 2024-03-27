@@ -31,7 +31,7 @@
     <h1 class="h5">Shopping cart</h1>
     <hr>
     <div class="row mb-5">
-        <div class="col-sm-8">
+        <div class="col-12 col-lg-8">
             {% for item in cart %} 
             {% with product=item.product %}
             <div class="card border shadow-none">
@@ -133,7 +133,7 @@
 
         <!-- end row-->
 
-        <div class="col-sm-4">
+        <div class="col-12 col-lg-4">
             <div class="mt-5 mt-sm-0">
                 <div class="card border shadow-none">
                     <div class="card-header bg-transparent border-bottom py-3 px-4">
@@ -173,12 +173,12 @@
                     </div>
                 </div>
             </div>        
-            <div class="d-flex flex-column flex-lg-row justify-content-between">
-                <a href="{% url 'categories' %}" class="btn btn-info text-white continue-shopping">
+            <div class="d-flex flex-column flex-xl-row justify-content-between">
+                <a href="{% url 'categories' %}" class="btn btn-info text-white continue-shopping  m-1 mt-xl-0">
                     <i class="mdi mdi-arrow-left"></i> Continue Shopping
                 </a>
             
-                <a href="{% url 'checkout' %}" class="btn btn-success mt-4 mt-lg-0">
+                <a href="{% url 'checkout' %}" class="btn btn-success m-1 mt-xl-0">
                     <i class="fas fa-lock me-1"></i> </i> Checkout
                     <i class="mdi mdi-arrow-right"></i>
                 </a>

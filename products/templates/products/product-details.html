@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="{% static 'products/css/product-details.css' %}">
 {% endblock %}
 
+
+{% block extra_js %}
+    <script src="{% static 'checkout/js/account-modal.js' %}"></script>
+{% endblock %}
+
 {% block extra_header %}
     {% include 'products/categories.html' %}
 {% endblock %}
@@ -136,22 +141,62 @@
 <div class="container-fluid pt-3 px-0 px-md-3 px-lg-5">
     <hr>
     <div class="row mx-0 " style="margin-top: 40px">
-        <div class="col-md-6 px-0">
+        <div class="col-md-6 p-1">
             <div class="well well-sm">
                 <div class="text-right bg-light border rounded">
-                    {% if user.is_authenticated %}
+                    {% if request.user.is_authenticated %}
                     <a class="btn btn-success btn-green m-2" 
                     href="#reviews-anchor" 
                     id="open-review-box">Leave a Review</a>
                     {% else %}
-                    <a class="btn btn-danger btn-red m-2"
-                        href="{% url 'account_login' %}"
-                        id="open-review-box">
-                        Sign in to leave review</a>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                        Sign in to leave review
+                    </button>
+
+                        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="account-modal-title">Sign In</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form container card p-3 d-none">
+                                        <p>Already have an account? <a href="#" class="toggle-form btn btn-info">Sign In</a></p>
+            
+                                        <form action="{% url 'sign_up' %}" method="POST">
+                                            {% csrf_token%}
+            
+                                            {{ sign_up_form | crispy }}
+                                            <input type="hidden" name="redirect_url" value="{% url 'product_details' product.category product.slug  %}">
+            
+                                            <button type="submit" class="btn btn-success">
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                    <div class="form container card p-3">
+                                        <p>Dont have an account? <a href="#" class="toggle-form btn btn-info">Sign Up</a></p>
+                                        <form action="{% url 'sign_in' %}" method="POST" >
+                                            {% csrf_token%}
+                                            {{ sign_in_form | crispy }}
+                                            <input type="hidden" name="redirect_url" value="{% url 'product_details' product.category product.slug  %}">
+            
+                                            <button type="submit" class="btn btn-success">
+                                                Submit
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
 
-                <div class="row d-none" id="post-review-box">
+                <div class="row d-none p-1" id="post-review-box">
                     <div class="col-md-12">
                         <form
                             class="review-form"
@@ -181,7 +226,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-sm-6 reviews-list px-0" id="reviews">
+        <div class="col-sm-6 reviews-list p-1" id="reviews">
            {% include 'components/reviews.html' with reviews=reviews %}
         </div> 
     </div>

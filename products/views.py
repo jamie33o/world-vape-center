@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from cart.forms import AddToCartForm
 from dashboard.models import Ticket
+from profile.forms import SigninForm, SignupForm
 from .models import Product, Review, Category
 from .forms import ReviewForm, FiltersForm
 
@@ -129,6 +130,8 @@ class ProductDetailView(View):
                     product_options=product.options.all(),
                     product_option_name=product.options_name
                 )
+            sign_up_form = SignupForm(auto_id='signup_%s')
+            sign_in_form = SigninForm(auto_id='signin_%s')
 
             context = {
                 'product': product,
@@ -136,6 +139,9 @@ class ProductDetailView(View):
                 'category_products': category_products,
                 'form': form
             }
+            if not request.user.is_authenticated:
+                context['sign_up_form'] = sign_up_form
+                context['sign_in_form'] = sign_in_form
 
         except Exception as e:
             try:

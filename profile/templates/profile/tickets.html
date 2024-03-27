@@ -31,22 +31,20 @@
                       <td>{{ ticket.description }}</td>
                       <td><span class="badge bg-light text-dark">{{ ticket.status }}</span></td>
                       <td>
-                          <button
-                              class="btn btn-info"
+                          <button class="btn btn-info"
                               data-toggle="collapse"
-                              data-target="#collapse{{ticket.id}}"
+                              data-target="#collapseticket{{ ticket.id }}"
                               aria-expanded="true"
-                              aria-controls="collapse{{ticket.id}}">
+                              aria-controls="collapse">
                               View More
                           </button>
                       </td>
                   </tr>
                   <tr>
                       <td colspan="5">
-                          <div
-                              id="collapse{{ticket.id}}"
+                          <div id="collapseticket{{ ticket.id }}"
                               class="collapse"
-                              aria-labelledby="heading{{ticket.id}}"
+                              aria-labelledby="headingticket{{ ticket.id }}"
                               data-parent="#accordion">
                               <div class="card-body">
                                 <div class="container-fluid">
@@ -59,11 +57,11 @@
                                             </div>
                                             <div class="overflow-y-auto">
                                                 {% for message in ticket.ticket_messages.all %}
-                                                <div class="row border">
-                                                    <div class="col-2">{% if message.sender == request.user %}{{ message.sender }}{% else %}Admin{% endif %}</div>
-                                                    <div class="col-4 text-wrap">{{ message.created_at }}</div>
-                                                    <div class="col-6 text-wrap">{{ message.message }}</div>
-                                                </div>
+                                                    <div class="row border">
+                                                        <div class="col-2">{% if message.sender == request.user %}{{ message.sender }}{% else %}Admin{% endif %}</div>
+                                                        <div class="col-4 text-wrap">{{ message.created_at }}</div>
+                                                        <div class="col-6 text-wrap">{{ message.message }}</div>
+                                                    </div>
                                                 {% endfor %}
                                             </div>
                                         </div>

@@ -242,7 +242,7 @@
                 <i class="mdi mdi-arrow-left"></i> 
                 Close
               </button>   
-              {% if 'checkout' in request.path %} 
+              {% if 'cart' not in request.path %} 
                 <a href="{% url 'cart-summary' %}" class="btn btn-success font-weight-bold w-25">                 
                   <i class="mdi mdi-cart-outline me-1"></i> 
                   Cart

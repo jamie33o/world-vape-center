@@ -91,12 +91,13 @@ def cart_delete(request):
         cart = Cart(request)
 
         product_id = int(request.POST.get('product_id'))
-
-        cart.delete(product=product_id)
+        product_choice = request.POST.get('product_choice')
+        cart.delete(product=product_id,
+                    product_choice=product_choice)
         messages.success(request, 'Product removed!!!')
         return redirect('cart-summary')
     except Exception:
-        messages.error(request, 'Could not remove product')
+        messages.error(request, f'{e}Could not remove product')
         return redirect('cart-summary')
 
 
@@ -117,8 +118,10 @@ def cart_update(request):
 
         product_id = int(request.POST.get('product_id'))
         product_quantity = int(request.POST.get('product_quantity'))
+        product_choice = request.POST.get('product_choice')
 
-        cart.update(product=product_id, qty=product_quantity)
+        cart.update(product=product_id, qty=product_quantity,
+                    product_choice=product_choice)
 
         messages.success(request, 'Quantity updated!!!')
         return redirect('cart-summary')

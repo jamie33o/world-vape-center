@@ -41,6 +41,7 @@ class Cart():
         self.order_num = order_num
         self.cart_updated = cart_updated
 
+
     def add(self, product, product_qty, product_choice):
         """
         Add a product to the shopping cart.
@@ -59,26 +60,29 @@ class Cart():
             The session will be marked as modified to save the changes.
         """
         self.cart_updated['cart_bool'] = True
+        product_key = product.id
 
-        product_id = str(product.id)
+        if product_choice:
+            product_key = f"{product.id}-{product_choice}"
 
-        if product_id in self.cart:
-            self.cart[product_id]['qty'] = product_qty \
-                if product_qty > 1 else self.cart[product_id]['qty'] + 1
+        if product_key in self.cart:
+            self.cart[product_key]['qty'] = product_qty if \
+                product_qty > 1 else self.cart[product_key].get('qty') + 1
         else:
-            self.cart[product_id] = {'price': str(product.price),
-                                     'qty': product_qty}
-
-            if product_choice:
-                self.cart[product_id]['product_choice'] = product_choice
+            self.cart[product_key] = {'price': str(product.price),
+                                      'qty': product_qty}
 
             if product.discounted_price:
-                self.cart[product_id]['discounted_price'] = \
+                self.cart[product_key]['discounted_price'] = \
                     str(product.discounted_price)
+
+        if product_choice:
+            self.cart[product_key]['product_choice'] = product_choice
 
         self.session.modified = True
 
-    def delete(self, product):
+
+    def delete(self, product, product_choice):
         """
         Delete a product from the shopping cart.
 
@@ -96,13 +100,16 @@ class Cart():
         self.cart_updated['cart_bool'] = True
 
         product_id = str(product)
+        product_key = product_id
+        if product_choice:
+            product_key = f"{product_id}-{product_choice}"
 
-        if product_id in self.cart:
-            del self.cart[product_id]
+        if product_key in self.cart:
+            del self.cart[product_key]
 
         self.session.modified = True
 
-    def update(self, product, qty):
+    def update(self, product, qty, product_choice):
         """
         Update the quantity of a product in the shopping cart.
 
@@ -121,12 +128,17 @@ class Cart():
         self.cart_updated['cart_bool'] = True
 
         product_id = str(product)
+        product_key = product_id
+        if product_choice:
+            product_key = f"{product_id}-{product_choice}"
+
         product_quantity = qty
 
-        if product_id in self.cart:
-            self.cart[product_id]['qty'] = product_quantity
+        if product_key in self.cart:
+            self.cart[product_key]['qty'] = product_quantity
 
         self.session.modified = True
+
 
     def __len__(self):
         """
@@ -136,6 +148,7 @@ class Cart():
             int: The total number of items in the cart.
         """
         return sum(item['qty'] for item in self.cart.values())
+
 
     def __iter__(self):
         """
@@ -155,35 +168,35 @@ class Cart():
             the 'total' cost, calculated as the price multiplied
             by the quantity of the item in the cart.
         """
-        all_product_ids = self.cart.keys()
 
-        products = Product.objects.filter(id__in=all_product_ids)
 
         cart = self.cart.copy()
 
-        for product in products:
+        for product_key, item in cart.items():
+            if '-' in product_key:
+                product_key, product_choice = product_key.split('-') 
+            product = get_object_or_404(Product, id=product_key) 
 
-            cart[str(product.id)]['product'] = {
+            item['product'] = {
                 'name': product.name,
                 'price': str(product.price),
-                'discounted_price': str(product.discounted_price)\
-                if product.discounted_price else None,
+                'discounted_price': str(product.discounted_price) \
+                    if product.discounted_price else None,
                 'slug': product.slug,
                 'category': {'slug': product.category.slug,
                              'name': product.category.name},
                 'id': product.id,
-                'image': {'url': product.image.url, },
+                'image': {'url': product.image.url},
                 'options_name': product.options_name
             }
 
-        for item in cart.values():
-            
-            item['total'] = Decimal(item['discounted_price']) * item['qty']\
-                    if item.get('discounted_price')\
-                    else Decimal(item['price']) * item['qty']
+            item['total'] = Decimal(item['discounted_price'])\
+                  * item['qty'] if item.get('discounted_price') else Decimal(
+                item['price']) * item['qty']
             item['total'] = str(item['total'])
 
             yield item
+
 
     def get_subtotal(self):
         """
@@ -351,4 +364,3 @@ class Cart():
                 'total': item['price'] * item['qty']
             }
         return meta_data
-

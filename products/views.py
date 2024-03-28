@@ -132,12 +132,16 @@ class ProductDetailView(View):
                 )
             sign_up_form = SignupForm(auto_id='signup_%s')
             sign_in_form = SigninForm(auto_id='signin_%s')
+            url = reverse('category',
+                          kwargs={'category': product.category.slug})
+
 
             context = {
                 'product': product,
                 'reviews': reviews,
                 'category_products': category_products,
-                'form': form
+                'form': form,
+                'url': url
             }
             if not request.user.is_authenticated:
                 context['sign_up_form'] = sign_up_form

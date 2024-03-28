@@ -141,6 +141,8 @@ def checkout(request):
                 else:
                     total = Decimal(item_data['price']) * item_data['qty']
                 try:
+                    if '-' in item_id:
+                        item_id = item_id.split('-')[0]
                     product = Product.objects.get(id=item_id)
 
                     order_line_item = OrderLineItem(

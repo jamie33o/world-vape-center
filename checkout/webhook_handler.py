@@ -105,13 +105,16 @@ class StripeWH_Handler:
                     else:
                         total = Decimal(item_data['price']) * item_data['qty']
 
+                    if '-' in item_id:
+                        item_id = item_id.split('-')[0]
                     product = Product.objects.get(id=item_id)
                     order_line_item = OrderLineItem(
                         order=order,
                         product=product,
                         quantity=item_data['qty'],
                         lineitem_total=total,
-                        product_option=item_data['product_choice'] if item_data.get('product_choice') else None,
+                        product_option=item_data['product_choice'] if \
+                            item_data.get('product_choice') else None,
                     )
                     order_line_item.save()
             except Exception as e:

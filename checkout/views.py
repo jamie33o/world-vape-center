@@ -51,7 +51,7 @@ def cache_checkout_data(request):
             stripe.PaymentIntent.modify(pid, metadata={
                 'cart': json.dumps(cart.get_meta_data()),
                 'username': str(request.user),  
-                'order_num': json.dumps(request.session.get('order_num', {})),
+                'order_num': request.session.get('order_num', {}),
                 'order_delivery': cart.get_delivery_cost(),
                 'order_subtotal': cart.get_subtotal(),
                 'order_discount': cart.get_discounted_total(),

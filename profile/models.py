@@ -47,7 +47,7 @@ class ShippingAddress(models.Model):
         verbose_name_plural = 'Shipping Addresses'
 
     def __str__(self):
-        return f"{self.user}'s  Shipping Address"
+        return f"{self.user}'s  Shipping Address" if self.user else 'Shipping Address'
 
 
 class Favourite(models.Model):

@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .underline-hover {
+        @apply relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 
+               before:h-[2px] before:bg-linksHover before:transition-all before:duration-300 
+               hover:before:w-full;
+    }
+}

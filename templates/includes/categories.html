@@ -1,0 +1,27 @@
+<ul class="main-nav flex flex-col justify-evenly xl:flex-row divide-y-2 divide-border w-full overflow-y-auto">
+    {% for category in all_categories|slice:":10" %}
+    <li>
+        <a href="{% url 'category' category=category.slug %}" class="p-4 xl:p-0 flex w-fit items-center underline-hover text-links hover:text-linksHover text-lg font-semibold">
+            {{ category | upper }}
+        </a>
+    </li>
+    {% endfor %}
+
+    {% if all_categories|length > 10 %}
+        <!-- "More" Dropdown -->
+        <li class="relative">
+            <button class="more-btn flex items-center text-links underline-hover text-lg font-semibold px-2">
+                MORE... <i class="more-icon fa-solid fa-chevron-down ml-1 transition-transform duration-300"></i>
+            </button>
+            <ul class="more-dropdown absolute right-0 mt-2 text-link hidden shadow-lg w-[200px] p-2 flex flex-col gap-2 bg-secondaryBackground">
+                {% for category in all_categories|slice:"10:" %}
+                <li>
+                    <a href="{% url 'category' category=category.slug %}" class="flex w-fit items-center underline-hover text-links text-lg font-semibold px-2">
+                        {{ category | upper }}
+                    </a>
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+    {% endif %}
+</ul>

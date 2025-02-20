@@ -1,21 +1,15 @@
-<form id="search-form" class="bg-dark m-0 form-inline my-lg-0 d-none position-absolute w-100" method="get" action="{% url 'search' %}">
-    <div class="col-12 col-lg-7 d-flex flex-dir-row input-container mx-auto">
-      <input type="text" class="w-100" name="q" placeholder="Search..." id="search-input">
+<form id="search-form" class="bg-gray-900 hidden absolute w-full p-4" method="get" action="{% url 'search' %}">
+  <div class="max-w-2xl mx-auto flex flex-row items-center space-x-2">
+      <input type="text" name="q" placeholder="Search..." id="search-input"
+          class="w-full px-4 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
 
-      <div class="input-group-append">
-        <button type="submit" value="Search" class="btn btn-secondary btn-number">
+      <button type="submit" value="Search"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition">
           <i class="fa fa-search"></i>
-        </button>
-      </div>
-      <button class="btn btn-danger close-search ml-3 d-lg-none">
-        X
       </button>
-    </div>
-    <div class="col-12 col-lg-7 h-100 overflow-auto results-container d-none mx-auto">
-        <div class="w-100 text-white border bg-light px-3 py-2 ">
-            <h4>Products</h4>
-        </div>
-      <div class="results mx-auto bg-light p-3 border rounded ">
-      </div>
-    </div>
+
+      <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg transition lg:hidden close-search">
+          X
+      </button>
+  </div>
 </form>

@@ -1,0 +1,20 @@
+{% if breadcrumbs %}
+    <div class="text-sm absolute px-2 bg-dark py-1 -z-50 mt-2 w-full overflow-x-auto">
+        <nav class="flex">
+            <ul class="flex items-center whitespace-nowrap">
+                {% for breadcrumb in breadcrumbs %} 
+                    {% if forloop.last %}
+                        <li class="text-white font-semibold">{{ breadcrumb.name }}</li>
+                    {% else %}
+                        <li class="flex items-center">
+                            <a href="{{ breadcrumb.url }}" class="text-white hover:underline"
+                                >{{ breadcrumb.name }}</a
+                            >
+                            <span class="mx-2 text-white">/</span>
+                        </li>
+                    {% endif %} 
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+{% endif %}

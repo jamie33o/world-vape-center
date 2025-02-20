@@ -1,239 +1,281 @@
 {% load static %}
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    {% block meta %}
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="robots" content="index, follow">
-        <meta name="author" content="World vape center">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="robots" content="index, follow" />
+		<meta name="author" content="World vape center" />
+
+		{% block extra_meta %}
+		<meta
+			name="description"
+			content="Learn more about the World Vape Center - your trusted source for premium vape products. Discover our mission, values, and commitment to providing a diverse range of high-quality e-cigarettes, e-liquids, and accessories." />
+		<meta
+			name="keywords"
+			content="about us, profile, account, FAQ, sitemap, shipping, help, terms, conditions, World Vape Center, vape products, mission, values, e-cigarettes, e-liquids, accessories" />
+
+		{% endblock %}
+
+		<link rel="icon" sizes="192x192" href="{% static 'images/favicon/logo192.png' %}" />
+		<link
+			rel="apple-touch-icon"
+			sizes="180x180"
+			href="{% static 'images/favicon/applelogo.png' %}" />
+		<link rel="icon" href="{% static 'images/favicon/favicon.ico' %}" type="image/x-icon" />
+		<link rel="icon" sizes="32x32" href="{% static 'images/favicon/logo32.png' %}" />
+		<link rel="icon" sizes="16x16" href="{% static 'images/favicon/logo16.png' %}" />
+		<link rel="icon" sizes="32x32" href="{% static 'images/favicon/logo512.png' %}" />
+
+		<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
+			integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc="
+			crossorigin="anonymous" />
+		{% comment %}
+		<link rel="stylesheet" href="{% static 'css/base.css' %}" />
+		<link rel="stylesheet" href="{% static 'home/css/home.css' %}" />
+		<link rel="stylesheet" href="{% static 'products/css/product-list.css' %}" />
+		{% endcomment %}
+		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+
+		{% comment %}
+		<script type="application/ld+json">
+			{
+				"@context": "https://schema.org",
+				"@type": "Organization",
+				"url": "https://www.qrmemorialvideo.ie",
+				"logo": "{% static 'images/logo.webp' %}"
+			}
+		</script>
+		{% endcomment %}
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		{% block extra_css %} {% endblock %}
+
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<script
+			async
+			src="https://kit.fontawesome.com/2be66b3e41.js"
+			crossorigin="anonymous"></script>
+		<script async src="{% static 'js/base.js' %}"></script>
+		<script src="https://js.stripe.com/v3/"></script>
+		<script async src="{% static 'products/js/product-details.js' %}"></script>
+
+		{% block extra_js %} 
     {% endblock %}
 
-    {% block extra_meta %}
-        <meta name="description" content="Learn more about the World Vape Center - your trusted source for premium vape products. Discover our mission, values, and commitment to providing a diverse range of high-quality e-cigarettes, e-liquids, and accessories.">
-        <meta name="keywords" content="about us, profile, account, FAQ, sitemap, shipping, help, terms, conditions, World Vape Center, vape products, mission, values, e-cigarettes, e-liquids, accessories">
-  
-    {% endblock %}
+		<title>World Vape Center {% block extra_title %}{% endblock %}</title>
+	</head>
+	<body>
+		<header
+			class="py-2 fixed top-0 left-0 right-0 z-50 bg-header shadow-lg border-0 rounded-t-none">
+			{% block header %}
+			<div class="flex items-center justify-between px-4">
+				<div class="flex">
+					<a
+						href="{% url 'home' %}"
+						class="flex items-center gap-x-2 bg-white rounded-full"
+						aria-label="Homepage">
+						<img
+							src="{% static 'logo.webp' %}"
+							alt="QRMemorialVideo Logo"
+							class="w-[60px] lg:w-[80px] h-auto" />
+					</a>
+				</div>
+				
+        {% include 'includes/search-form.html' %}
+        <div class="ml-auto flex divide-x divide-white">
+       
+          {% include 'includes/cart-btn.html' %}
+          {% include 'includes/menu-btn.html' %}
+       
+          <div class="hidden xl:flex">
+            {% include 'includes/account_menu.html' %}
+           </div>
+        </div>
+			</div>
+			<div class="laptop hidden xl:flex w-full flex items-center justify-center">
+				<nav class="bg-secondaryBackground w-full m-2 p-2">
+          {% include 'includes/categories.html' %}
+        </nav>
+			</div>
+			  {% include 'includes/mobile-menu.html' %} 
+			{% endblock %} 
+		</header>
 
-    {% block favicon %}
-        <link rel="icon" sizes="192x192" href="{% static 'images/favicon/logo192.png' %}">
-        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/applelogo.png' %}">
-        <link rel="icon" href="{% static 'images/favicon/favicon.ico' %}" type="image/x-icon">
-        <link rel="icon" sizes="32x32" href="{% static 'images/favicon/logo32.png' %}">
-        <link rel="icon" sizes="16x16" href="{% static 'images/favicon/logo16.png' %}">
-        <link rel="icon" sizes="32x32" href="{% static 'images/favicon/logo512.png' %}">
-    {% endblock %}   
+		<main>
+      {% include 'includes/breadcrumbs.html' %}
+			<div
+				id="messages"
+				class="fixed hidden top-20 right-0 lg:right-20 w-screen-xl container mx-auto p-4 max-w-sm z-50"
+				data-message>
+				{% if messages %} {% for message in messages %}
+				<div
+					class="new-message mb-4 p-4 rounded-lg shadow-lg transition-opacity duration-300 opacity-100 {% if message.tags == 'success' %} bg-green-500 text-white {% elif message.tags == 'error' %} bg-red-500 text-white {% elif message.tags == 'warning' %} bg-yellow-500 text-black {% elif message.tags == 'info' %} bg-blue-500 text-white {% endif %}">
+					<span>{{ message }} </span>
+					<button
+						class="ml-2 text-lg font-bold cursor-pointer float-right dismiss-message">
+						✕
+					</button>
+				</div>
+				{% endfor %} {% endif %}
+			</div>
+
+			{% block content %} {% endblock %}
+		</main>
+
+		<footer class="mt-5" id="help">
+			{% block page_footer %} {% include 'ls-footer.html' %} {% endblock %} {% comment %}
+			<ul
+				class="h-[300px] flex flex-col justify-evenly xl:h-5 xl:flex-row xl:border-x xl:divide-x">
+				<li>
+					<a
+						href="{% url 'home' %}"
+						class="flex w-fit items-center {% if request.path == '/' %} hover:text-links text-linksHover scale-105 hover:scale-100 {% else %} text-links hover:text-linksHover hover:scale-105 {% endif %} text-sm font-semibold px-2"
+						><i class="fa-solid fa-house mr-2"></i>Home</a
+					>
+				</li>
+				<li>
+					<a
+						href="{% url 'categories' %}"
+						class="flex w-fit items-center text-sm font-semibold px-2 {% if request.path == '/memorial/create/' %} hover:text-white text-secondary scale-105 hover:scale-100 {% else %} text-white hover:text-secondary hover:scale-105 {% endif %}"
+						><i class="fa-solid fa-plus-square mr-2"></i
+					></a>
+				</li>
+				<li>
+					<a
+						href="{% url 'profile' 'open_ticket' %}"
+						class="flex w-fit items-center text-sm font-semibold px-2 {% if 'search' in request.path %} hover:text-white text-secondary scale-105 hover:scale-100 {% else %} text-white hover:text-secondary hover:scale-105 {% endif %}"
+						><i class="fa-solid fa-search mr-2"> </i> Search Memorials</a
+					>
+				</li>
+				<li>
+					<a
+						href="{% url 'contact_us' %}"
+						class="flex w-fit items-center text-sm font-semibold px-2 {% if request.path == '/contact-us/' %} hover:text-white text-secondary scale-105 hover:scale-100 {% else %} text-white hover:text-secondary hover:scale-105 {% endif %}"
+						><i class="fa-solid fa-phone mr-2"></i>Contact Us</a
+					>
+				</li>
+				<li>
+					<a
+						href="{% url 'orders' %}"
+						class="flex w-fit items-center text-sm font-semibold px-2 {% if request.path == '/how-it-works/' %} hover:text-white text-secondary scale-105 hover:scale-100 {% else %} text-white hover:text-secondary hover:scale-105 {% endif %}"
+						><i class="fa-solid fa-circle-question mr-2"></i>How it works</a
+					>
+				</li>
+			</ul>
+			{% endcomment %}
+		</footer>
+
+		<div class="modal" id="age-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">Age Verification</h5>
+					</div>
+					<div class="modal-body">
+						<p>Are you 18 years old or older?</p>
+						<p>
+							By entering this site, you confirm that you are 18 years old or older.
+							Age verification will be required at checkout.
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary verified" data-dismiss="modal">
+							Yes, I'm 18+
+						</button>
+						<a href="javascript:history.back()" class="btn btn-secondary un-verified"
+							>No, I'm under 18</a
+						>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal border bg-white mt-auto" id="cookies-modal" tabindex="-1" role="dialog">
+			<div class="modal-body">
+				This website uses cookies. By using this site, you agree to our
+				<a class="text-info" href="{% url 'privacy_policy' %}">Privacy Policy</a>
+				.
+				<button class="btn btn-info" data-dismiss="modal">Accept</button>
+			</div>
+		</div>
+
+		{% block postloadjs %} {% endblock %}
+		<script>
+			$(document).ready(function () {
+				$(".user-menu-button").click(function (event) {
+					event.stopPropagation(); // Prevents event bubbling
+					$(".user-menu")
+						.toggleClass("hidden")
+						.toggleClass("opacity-0")
+						.toggleClass("opacity-100");
+					$(".chev-down").toggleClass("rotate-90");
+				});
+
+				// Close menu when clicking outside
+				$(document).click(function (event) {
+					if (!$(event.target).closest(".user-menu, .user-menu-button").length) {
+						$(".user-menu").addClass("hidden").removeClass("opacity-100").addClass("opacity-0");
+						$(".chev-down").removeClass("rotate-90");
+					}
+				});
+
+				$(".new-message").parent().removeClass("hidden");
+
+				// Auto fade out messages after 3 seconds
+				setTimeout(function () {
+					$("[data-message]").fadeOut(500, function () {
+						$(this).addClass("hidden"); // Fully hide after fadeout
+					});
+				}, 3000);
+
+				// Allow manual dismiss of messages
+				$(".dismiss-message").click(function () {
+					$("[data-message]").fadeOut(500, function () {
+						$(this).addClass("hidden"); // Fully hide after fadeout
+					});
+				});
+			});
+			// Mobile menu
+			$(".menu-btn").click(function () {
+        $('body').css('overflow', 'hidden');
+				$(".mobile-menu-container").removeClass("translate-x-full").addClass("translate-x-0");
+				$(".mobile-menu-overlay").removeClass("opacity-0").addClass("opacity-100");
+			});
+
+			$(".close-menu").click(function () {
+        $('body').css('overflow', 'auto');
+
+				$(".mobile-menu-container").removeClass("translate-x-0").addClass("translate-x-full");
+				$(".mobile-menu-overlay").removeClass("opacity-100").addClass("opacity-0");
+			});
+
+
+        $(".more-btn").click(function (e) {
+            e.preventDefault();
     
-    {% block corecss %}   
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">  
-        <link rel="stylesheet" href="{% static 'home/css/home.css' %}">  
-        <link rel="stylesheet" href="{% static 'products/css/product-list.css' %}">  
-      
-    {% endblock %}
-
-    {% block extra_css %}
-    {% endblock %}
-
-    {% block corejs %}
-        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-        <script async src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script async src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <script async src="https://kit.fontawesome.com/2be66b3e41.js" crossorigin="anonymous"></script>
-        <script async src="{% static 'js/base.js' %}"></script>
-        <script src="https://js.stripe.com/v3/"></script>
-        <script async src="{% static 'home/js/home.js' %}"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/owl.carousel.js"></script>
-        <script async src="{% static 'products/js/product-details.js' %}"></script>
-    {% endblock %}
-
-    {% block extra_js %}
-    {% endblock %}
-
-    <title>World Vape Center {% block extra_title %}{% endblock %}</title>
-  </head>
-  <body class="d-flex flex-column">
-
-    <header class="container-fluid fixed-top p-0">
-      {% block page_header %}
-        {% include 'ls-header.html' %}
-      {% endblock %}
-      {% block extra_header %}
-      {% endblock %}
-    </header>
-  
-    <main>
-      {% block breadcrumb %}
-        <div class="container-fluid">
-          <nav aria-label="breadcrumb" class="d-none bc-con w-100">
-            <ol class="breadcrumb bg-none mx-5 mt-5 p-3">
-            </ol>
-          </nav>
-        </div>
-      {% endblock %}
-      {% if messages %}
-      
-      {% for message in messages %}
-        <div class="messages">
-            <div class="alert bg-{% if not message.tags == 'error' %}{{message.tags}}{% else %}danger{% endif %} mx-auto">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                    ×</button>
-              <span class="glyphicon glyphicon-ok"></span> <strong>{{message.tags}}</strong>
-                <hr class="message-inner-separator">
-                <p>
-                  {{ message }}</p>
-            </div>
-        </div>
-      {% endfor %}
-      
-      {% endif %}
-      {% block content %}
-      {% endblock %}    
-    </main>
-
-    <footer class="mt-5" id="help">
-      {% block page_footer %}
-        {% include 'ls-footer.html' %}
-      {% endblock %}
-    </footer>
-
-
-    <div class="modal" id="age-modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Age Verification</h5>
-          </div>
-          <div class="modal-body">
-            <p>Are you 18 years old or older?</p>
-            <p>By entering this site, 
-              you confirm that you are 18 years old or older. 
-              Age verification will be required at checkout.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary verified" data-dismiss="modal">Yes, I'm 18+</button>
-            <a href="javascript:history.back()" class="btn btn-secondary un-verified" >No, I'm under 18</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
+            // Toggle dropdown
+            $(".more-dropdown").toggleClass("hidden");
     
-    <div class="modal border bg-white  mt-auto" id="cookies-modal" tabindex="-1" role="dialog">
-        <div class="modal-body">
-          This website uses cookies. By using this site, you agree to our <a class="text-info" href="{% url 'privacy_policy' %}">Privacy Policy</a>
-          .
-          <button class="btn btn-info" data-dismiss="modal">Accept</button>
-        </div>
-    </div>
-
-    {% block postloadjs %}
-    <script>
-
-      $(document).ready(function() {
-        // Remove messages after 3 seconds
-
-        setTimeout(() => {
-          $('.messages').remove()
-        }, 3000); 
-        
-        // Show cart modal if cart exists and has a cart status which means it has bein updated
-        {% if cart and cart.get_cart_status %}
-          if(window.innerWidth > 575.98){
-              $('#cart-modal').modal('show')
-          }
-        {% endif %}
-        
-        $('.un-verified').on('click', function(){
-          localStorage.setItem('firstVisit', 'true');
-        })
-
-        // Show age and cookies modal on first visit
-        if(localStorage.getItem('firstVisit') != 'false') {
-          $('#age-modal').modal('show');
-          $('#cookies-modal').modal('show');
-          localStorage.setItem('firstVisit', 'false');
-        }
-
-        // Handle newsletter form submission via AJAX
-        $('.sub').click(function(e) {
-          e.preventDefault();
-          let nlMsg = $('.nl-msg')
-          nlMsg.empty()
-
-          let url = $(this).data('url')
-
-          $.ajax({
-              type: 'POST',
-              url: url,
-              data: $('#nl_form').serialize(),
-              success: function(data) {
-                nlMsg.prepend(`<div class="bg-${data.status} text-white"><p> ${data.message} </p></div>`);
-              },
-              error: function(xhr, textStatus, errorThrown) {
-                nlMsg.prepend('<div class="bg-danger text-white"><p>An error occurred. Please try again.</p></div>');
-              }
-          });
+            // Rotate icon
+            $(".more-icon").toggleClass("rotate-180");
         });
-      
-        // Function to generate breadcrumbs
-        function breadcrumbsList() {
-          const breadcrumbContainer = $('.breadcrumb');
-          let homeItem = null;
-      
-          const path = window.location.pathname;
-          const pathParts = path.split('/').filter(Boolean);
-          if(pathParts.length > 0){
-            $('.bc-con').addClass('d-lg-inline')
-            homeItem = $('<li>', { class: 'breadcrumb-item' });
-            let homeLink = $('<a>', { href: '/', text: 'Home' });
-            homeItem.append(homeLink);
-
-          }else{
-            $('.bc-con').removeClass('d-lg-inline')
-          }
-      
-          renderBreadcrumbs(breadcrumbContainer, pathParts, homeItem);
-        }
-        
-        // Function to render breadcrumbs
-        function renderBreadcrumbs(container, pathParts, homeItem) {
-            container.empty();
-        
-            let currentPath = '';
-            pathParts.forEach((part, index) => {
-                currentPath += `/${part}`;
-        
-                const breadcrumbItem = $('<li>', { class: 'breadcrumb-item' });
-                let link = $('<a>', { href: currentPath, text: part });
-        
-                if (index === pathParts.length - 1) {
-                    link = $('<p>', { text: part });
-                    link.addClass('text-dark d-inline');
-                } else {
-                    link.addClass('text-dark');
-                }
-        
-                breadcrumbItem.append(link);
-                container.append(breadcrumbItem);
-                if(homeItem){
-                  container.prepend(homeItem);
-                }
-            });
-        }
-        breadcrumbsList();
-      });
-    </script>
-
-    {% endblock %} 
-
-{% block extra_postloadjs %}  
-{% endblock %}    
-  </body>
+    
+        // Hide dropdown when clicking outside
+        $(document).click(function (event) {
+            if (!$(event.target).closest(".more-btn, .more-dropdown").length) {
+                $(".more-dropdown").addClass("hidden");
+                $(".more-icon").removeClass("rotate-180");
+            }
+        });
+    
+    
+		</script>
+		{% block extra_postloadjs %} {% endblock %}
+	</body>
 </html>

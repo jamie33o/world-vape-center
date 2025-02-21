@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_meta %}
+    <meta name="description" content="Explore our diverse range of vape products at the World Vape Center. Find high-quality e-cigarettes, flavorful e-liquids, and stylish accessories. Discover the perfect vaping solutions to suit your preferences.">
+    <meta name="keywords" content="{{ category }}, vape products, e-cigarettes, e-liquids, vaping accessories, high-quality vapes, stylish vape devices">
+{% endblock %}
+
+{% block extra_title %}- Products{% endblock %}
+
+{% block content %}
+<div class="container mx-auto my-5 px-4">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        
+        <!-- Sidebar Filters (Hidden on Mobile) -->
+        {% comment %} <div class="hidden md:block col-span-1 bg-gray-100 p-4 rounded-lg shadow-md">
+            {% include 'products/filters.html' with category=category %}
+        </div> {% endcomment %}
+
+        <!-- Main Product List -->
+        <div class="col-span-3">
+            <div class="bg-white shadow-md rounded-lg p-4">
+                <div class="flex justify-between items-center border-b pb-3">
+                    
+                    <!-- Mobile Filter Button -->
+                    <button class="filter-btn md:hidden bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md">
+                        <i class="fa-solid fa-filter"></i> Filter
+                    </button>
+
+                    <!-- Category Title -->
+                    <h2 class="text-xl font-bold text-gray-800 uppercase">Search Results</h2>
+                </div>
+
+                <!-- Product Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6">
+                    {% for product in products %}
+                    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                        
+                        <!-- Discount Badge -->
+                        {% if product.discounted_price %}
+                            <span class="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+                                {{ product.discount_percentage|default:'' }}% OFF
+                            </span>
+                        {% endif %}
+                        
+                        <!-- Product Image -->
+                        {% comment %} <a href="{% url 'product_details' category=category.slug slug=product.slug %}">
+                            <img class="w-full h-48 object-cover" src="{{ product.image.url }}" alt="{{ product.name }}">
+                        </a> {% endcomment %}
+
+                        <!-- Product Info -->
+                        <div class="p-4">
+                            <p class="text-gray-600 text-sm uppercase">{{ product.brand.name }}</p>
+                            <h3 class="text-lg font-bold text-gray-900">{{ product.name }}</h3>
+                            
+                            <!-- Price -->
+                            <div class="flex items-center mt-2">
+                                <h4 class="text-lg font-semibold text-blue-500">€ 
+                                    {% if not product.discounted_price %}
+                                        {{ product.price }}
+                                    {% else %}
+                                        {{ product.discounted_price }}
+                                    {% endif %}
+                                </h4>
+                                {% if product.discounted_price %}
+                                <p class="text-gray-400 line-through ml-2">€{{ product.price }}</p>
+                                {% endif %}
+                            </div>
+
+                            <!-- Free Shipping -->
+                            {% if product.free_shipping %}
+                            <p class="text-green-500 text-sm font-semibold mt-1">Free shipping</p>
+                            {% endif %}
+
+                            <!-- Reviews -->
+                            {% if product.num_reviews > 0 %}
+                                <div class="flex items-center mt-2">
+                                    {% include 'components/ratings.html' with product=product %}
+                                    <span class="ml-2 text-gray-600 text-sm">{{ product.num_reviews }} reviews</span>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Mobile Filter Panel -->
+<div class="filter-mobile fixed inset-0 bg-gray-900 bg-opacity-50 hidden flex items-center justify-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-lg">
+        <button class="hide-filter absolute top-2 right-2 text-red-500 text-lg">&times;</button>
+        {% comment %} {% include 'products/filters.html' with category=category %} {% endcomment %}
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_postloadjs %}  
+<script>
+    // Toggle Filter Panel
+    $('.filter-btn').on('click', function(){
+        $('.filter-mobile').removeClass('hidden').addClass('flex');
+    });
+
+    $('.hide-filter').on('click', function(){
+        $('.filter-mobile').addClass('hidden').removeClass('flex');
+    });
+</script>
+{% endblock %}

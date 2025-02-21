@@ -296,22 +296,15 @@ def search(request):
     """
     try:
         query = request.GET.get('q', '')
-        results = []
 
-        if query:
-            products = Product.objects.filter(name__icontains=query)[:5]
+        products = Product.objects.filter(name__icontains=query)[:5]
+        
+        context = {
+            'query': query,
+            'products': products
+        }
 
-            for product in products:
-                product_data = {
-                    'url': reverse('product_details',
-                                   args=[product.category.slug, product.slug]),
-                    'name': product.name,
-                    'price': product.price,
-                    'img': product.image.url
-                }
-                results.append(product_data)
-
-        return JsonResponse({'products': results})
+        return render(request, 'products/search-results.html', context)
 
     except Exception as e:
         try:
@@ -321,13 +314,14 @@ def search(request):
                             )
             ticket.save()
 
-        except Exception:
+        except Exception as e:
+            print(e)
             messages.error(request, 'We are very sorry, \
                     an unknown error occurred: Please contact us')
             return redirect('contact_us')
-        response_data = {'error': 'We are very sorry, \
-                    an unknown error occurred: Admin has been notified'}
-        return JsonResponse(response_data, status=500)
+        messages.error(request, 'We are very sorry, \
+                    an unknown error occurred: Admin has been notified')
+        return redirect('categories')
 
 
 @login_required

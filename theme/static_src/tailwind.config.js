@@ -44,21 +44,30 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                button: "#1D4ED8", // Custom blue
-                buttonHover: "#374151", // Custom gray
-                header: "#1A202C", // Custom gray
-                links: " #2563EB", // Custom blue
-                linksHover: " #3B82F6", // Custom blue
-                mainBackground: "#F9FAFB", // Custom gray
-                secondaryBackground: "#E5E7EB", // Custom gray
-                footer: "#1A202C", // Custom gray
-                button: "#1D4ED8", // Custom blue
-                buttonHover: "#374151", // Custom gray
-                buttonText: "#FFFFFF", // Custom white
-                buttonTextHover: "#FFFFFF", // Custom white
+                links: " #f7f3ea", // Custom blue
+                linksHover: " #F9FAFB", // Custom blue
+                mainBackground: " #F9FAFB", // Custom gray
+                footer: " #1A202C", // Custom gray
+
+                button: " #2c3e50", 
+                buttonHover: " #5584b0 ", 
+                buttonText: " #f7f3ea", // Custom white
+                buttonTextHover: "rgb(4, 24, 91)", // Custom white
 
               },
-
+              backgroundImage: {
+                'button1': "radial-gradient(180deg, #f7f3ea 0%, #5584b0 100%)",
+                'header': "linear-gradient(180deg, #2c3e50, #254e7a)",
+                'secondaryBackground': "radial-gradient(circle, #5584b0  100%, #2c3e50 0%)",
+                'button': "linear-gradient(0deg, #254e7a, #82c2e6)",
+                'buttonHover': "radial-gradient(circle, #5584b0, #cbe3ef)",
+              },
+              fontFamily: {
+                poppins: ["Poppins", "sans-serif"],
+                roboto: ["Roboto", "sans-serif"],
+                montserrat: ["Montserrat", "sans-serif"],
+                linksFont: ["Fjalla One", "sans-serif"]
+              },
         },
         keyframes: {
             underlineGrow: {
@@ -78,7 +87,9 @@ module.exports = {
         "hover:text-linksHover",
         "bg-mainBackground",
         "bg-secondaryBackground",
-        "bg-footer"
+        "bg-footer",
+        "max-h-[500px]", 
+        "opacity-100"
     ],
     plugins: [
         /**

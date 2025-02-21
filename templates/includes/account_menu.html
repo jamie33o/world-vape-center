@@ -1,20 +1,36 @@
 {% if user.is_authenticated %}
 <div class="relative inline-block">
-<button class="user-menu-button font-bold text-xl text-white px-4 py-2 rounded-md">
-  {{ user.username|default:"user"|capfirst }} <span class="chev-down fa-solid fa-chevron-down"></span>
-</button>
-<div class="z-50 user-menu absolute right-0 top-[50px] bg-white shadow-lg rounded-md mt-2 w-40 hidden opacity-0 transition-opacity duration-300">
-  <a href="{% url 'profile' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Profile</a>
+	<button
+		class="user-menu-button font-bold text-xl px-4 py-2 rounded-md text-buttonText hover:text-buttonTextHover">
+		{{ user.username|default:"user"|capfirst }}
+		<span class="chev-down fa-solid fa-chevron-down"></span>
+	</button>
+	<div
+		class="z-50 user-menu absolute right-0 top-[50px] bg-white shadow-lg rounded-md mt-2 w-40 hidden opacity-0 transition-opacity duration-300">
+		<a href="{% url 'profile' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+			>Profile</a
+		>
 
-    <a href="{% url 'account_email' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Manage Emails</a>
-    <a href="{% url 'account_change_password' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-200">Change Password</a>
-    <a href="{% url 'account_logout' %}?next={{ request.path }}" class="block px-4 py-2 text-red-500 hover:bg-gray-200">Logout</a>
-</div>
+		<a href="{% url 'account_email' %}" class="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+			>Manage Emails</a
+		>
+		<a
+			href="{% url 'account_change_password' %}"
+			class="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+			>Change Password</a
+		>
+		<a
+			href="{% url 'account_logout' %}?next={{ request.path }}"
+			class="block px-4 py-2 text-red-500 hover:bg-gray-200"
+			>Logout</a
+		>
+	</div>
 </div>
 {% else %}
-<a href="{% url 'account_login' %}?next={{ request.path }}" class="flex items-center text-white hover:text-secondary font-semibold text-sm px-2 hover:scale-105">
-  Login / Sign Up 
-<i class="pl-3 fa-solid fa-arrow-right p-0 leading-none text-lg"></i>
+<a
+	href="{% url 'account_login' %}?next={{ request.path }}"
+	class="flex underline-hover items-center text-buttonText  font-semibold text-xl mx-2">
+	Login / Sign Up
+	<i class="pl-3 fa-solid fa-arrow-right leading-none text-lg"></i>
 </a>
 {% endif %}
-

@@ -28,7 +28,9 @@
 		<link rel="icon" sizes="32x32" href="{% static 'images/favicon/logo32.png' %}" />
 		<link rel="icon" sizes="16x16" href="{% static 'images/favicon/logo16.png' %}" />
 		<link rel="icon" sizes="32x32" href="{% static 'images/favicon/logo512.png' %}" />
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&family=Roboto:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
+    
 		<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
 		<link
 			rel="stylesheet"
@@ -87,23 +89,34 @@
 					</a>
 				</div>
 				
-        {% include 'includes/search-form.html' %}
-        <div class="ml-auto flex divide-x divide-white">
-       
+        <div class="ml-auto flex divide-x-2 divide-white">
+          <div class="flex">
+            <div class="large-search-form hidden  items-center lg:flex">
+            {% include 'includes/search-form.html' %}
+            </div>
+            <button class="search-btn block lg:hidden px-3 text-buttonText hover:text-buttonTextHover">
+              <i class="fa-solid fa-search text-xl"></i>
+            </button>
+          </div>
+  
           {% include 'includes/cart-btn.html' %}
           {% include 'includes/menu-btn.html' %}
-       
+         
           <div class="hidden xl:flex">
             {% include 'includes/account_menu.html' %}
            </div>
         </div>
 			</div>
 			<div class="laptop hidden xl:flex w-full flex items-center justify-center">
-				<nav class="bg-secondaryBackground w-full m-2 p-2">
+				<nav class="w-full m-2">
           {% include 'includes/categories.html' %}
         </nav>
 			</div>
 			  {% include 'includes/mobile-menu.html' %} 
+      <div class="mobile-search-form max-h-0 opacity-0 p-2 flex lg:hidden transition-all duration-500 ease-in-out">
+        {% include 'includes/search-form.html' %}
+      </div>
+
 			{% endblock %} 
 		</header>
 
@@ -273,6 +286,46 @@
                 $(".more-icon").removeClass("rotate-180");
             }
         });
+
+        let searchInput = $('.large-search-form .search-input');
+        let text = [
+            "Search for vape products...",
+            "Find your favorite e-liquid!",
+            "Discover new flavors today...",
+            "Explore top-rated devices!",
+            "Start your vaping journey..."
+        ];// Change this to whatever text you want
+        let index = 0;
+        let lineIndex = 0;
+        if(window.innerWidth > 1022){
+          console.log('mobile') 
+          let typingEffect = setInterval(function () {          
+
+            // If the input is still empty, keep adding letters
+            if (searchInput.val() === '' && index < text[lineIndex].length) {
+              searchInput.attr("placeholder", text[lineIndex].substring(0, index + 1));
+              index++;
+            } else if (searchInput.val() !== '') {
+                // Stop typing effect if user types manually
+                clearInterval(typingEffect);
+                searchInput.attr("placeholder", "search...");
+
+            }else{
+              index=0;
+              searchInput.attr("placeholder", "");
+              if (lineIndex >= text.length - 1) {
+                lineIndex = 0;
+              } else {
+                lineIndex++;
+              }              
+            }
+          }, 200); // Adjust speed (300ms per letter)
+        }
+
+      $('.search-btn').click(function () {
+        $('.mobile-search-form').toggleClass("max-h-[500px] opacity-100").toggleClass("max-h-0 opacity-0");
+        $('.mobile-search-form').find('input').focus()
+      });
     
     
 		</script>

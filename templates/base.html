@@ -113,36 +113,41 @@
         </nav>
 			</div>
 			  {% include 'includes/mobile-menu.html' %} 
-      <div class="mobile-search-form max-h-0 opacity-0 p-2 flex lg:hidden transition-all duration-500 ease-in-out">
+      <div class="mobile-search-form max-h-0 opacity-0 flex lg:hidden transition-all duration-500 ease-in-out">
         {% include 'includes/search-form.html' %}
       </div>
 
 			{% endblock %} 
 		</header>
 
-		<main>
+		<main class="mt-[100px] xl:mt-[130px]">
       {% include 'includes/breadcrumbs.html' %}
 			<div
 				id="messages"
 				class="fixed hidden top-20 right-0 lg:right-20 w-screen-xl container mx-auto p-4 max-w-sm z-50"
 				data-message>
-				{% if messages %} {% for message in messages %}
-				<div
-					class="new-message mb-4 p-4 rounded-lg shadow-lg transition-opacity duration-300 opacity-100 {% if message.tags == 'success' %} bg-green-500 text-white {% elif message.tags == 'error' %} bg-red-500 text-white {% elif message.tags == 'warning' %} bg-yellow-500 text-black {% elif message.tags == 'info' %} bg-blue-500 text-white {% endif %}">
-					<span>{{ message }} </span>
-					<button
-						class="ml-2 text-lg font-bold cursor-pointer float-right dismiss-message">
-						✕
-					</button>
-				</div>
-				{% endfor %} {% endif %}
+				{% if messages %} 
+          {% for message in messages %}
+          <div
+            class="new-message mb-4 p-4 rounded-lg shadow-lg transition-opacity duration-300 opacity-100 {% if message.tags == 'success' %} bg-green-500 text-white {% elif message.tags == 'error' %} bg-red-500 text-white {% elif message.tags == 'warning' %} bg-yellow-500 text-black {% elif message.tags == 'info' %} bg-blue-500 text-white {% endif %}">
+            <span>{{ message }} </span>
+            <button
+              class="ml-2 text-lg font-bold cursor-pointer float-right dismiss-message">
+              ✕
+            </button>
+          </div>
+          {% endfor %} 
+        {% endif %}
 			</div>
 
-			{% block content %} {% endblock %}
+			{% block content %} 
+      {% endblock %}
 		</main>
 
 		<footer class="mt-5" id="help">
-			{% block page_footer %} {% include 'ls-footer.html' %} {% endblock %} {% comment %}
+			{% block page_footer %} 
+      {% include 'ls-footer.html' %} 
+      {% endblock %} {% comment %}
 			<ul
 				class="h-[300px] flex flex-col justify-evenly xl:h-5 xl:flex-row xl:border-x xl:divide-x">
 				<li>
@@ -329,6 +334,7 @@
     
     
 		</script>
-		{% block extra_postloadjs %} {% endblock %}
+		{% block extra_postloadjs %}
+     {% endblock %}
 	</body>
 </html>

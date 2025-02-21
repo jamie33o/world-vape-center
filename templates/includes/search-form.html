@@ -1,4 +1,4 @@
-<form class="w-full mr-2" method="post" action="{% url 'search' %}">
+<form class="w-full mr-2 p-2" method="post" action="{% url 'search' %}">
   {% csrf_token %}
   <div class="w-full flex flex-row ">
       <input type="text" name="q" placeholder="Search..." value="{{query}}"

@@ -1,67 +1,41 @@
-{% extends "base.html" %} 
-{% load static %} 
-
-{% block extra_meta %}
-<meta name="description" content="Discover a world of premium vape products at the World Vape Center. Explore a diverse selection of e-cigarettes, e-liquids, and accessories. enjoy a secure online shopping experience.">
-<meta name="keywords" content="vape products, e-cigarettes, e-liquids, online vape store, vaping accessories, latest trends in vaping">
-{% endblock %}
-
-{% block extra_title %}- Home{% endblock %}
+{% extends 'base.html' %} {% load static %} {% block extra_meta %}
+  <meta name="description" content="Discover a world of premium vape products at the World Vape Center. Explore a diverse selection of e-cigarettes, e-liquids, and accessories. enjoy a secure online shopping experience." />
+  <meta name="keywords" content="vape products, e-cigarettes, e-liquids, online vape store, vaping accessories, latest trends in vaping" />
+{% endblock %} {% block extra_title %}
+  - Home
+{% endblock %} 
 
 {% block extra_css %}
-{% endblock %}
+<link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+
+{% endblock %} 
 
 {% block content %}
-    <!-- Jumbotron -->
-    <div class="position-relative m-lg-5 shadow">
-        <a href="{% url 'categories' %}" role="button">
-            <img src="{% static 'hero-wvc.webp' %}" class="w-100" alt="homepage hero image">
-        </a>
-    </div>
-    <!-- Jumbotron -->
+  <!-- Jumbotron -->
+ 
+  <div class="p-5 w-full min-h-96 flex">
+    <div class="flex flex-col-reverse md:flex-row p-10 w-full h-full border border-gray-200 shadow-lg rounded-lg bg-secondaryBackground">
+    
+      <div class="flex flex-col justify-center p-4">
+          {% if hero.title %}<h2 class="text-xl md:text-5xl font-linksFont font-extrabold text-buttonTextHover">{{ hero.title }}</h2>{% endif %}
 
-    <div class="bbb_viewed px-0 px-lg-5 bg-transparent mb-0 mb-lg-3">
-        <div class="container-fluid shadow">
-            <div class="row">
-                <div class="col p-0">
-                   <div class="bbb_main_container">
-                    <div class="bbb_viewed_title_container">
-                        <h3 class="bbb_viewed_title">Best selling products</h3>
-                        <div class="bbb_viewed_nav_container">
-                            <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
-                            <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
-                        </div>
-                    </div>
-                    <div class="bbb_viewed_slider_container">
-                        <div class="owl-carousel owl-theme bbb_viewed_slider">
-                            {% for product in top_rated_products %}
-                                <div class="owl-item">
-                                    <a href="{% url 'product_details' product.category.slug product.slug %}" class="text-hover">
-                                    <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="bbb_viewed_image"><img src="{{ product.image.url }}" alt="product image"></div>
-                                        <div class="bbb_viewed_content text-center">
-                                            {% if product.discounted_price %}
-                                            <div class="bbb_viewed_price">Price: € {{ product.discounted_price }} <span>{{ product.price }} </span></div>
-                                            {% else %}
-                                            <div class="bbb_viewed_price">Price: € {{ product.price }} </div>
-                                            {% endif %}
-                                            <div class="bbb_viewed_name">{{ product.name }}</div>
-                                        </div>
-                                        {% if product.discount_percentage %}
-                                        <span class="percentage text-danger text-bold font-weight-bold">{{ product.discount_percentage|default:'' }}</span>
-
-                                        {% endif %}
-                                    </div>
-                                </a>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                   </div> 
-                </div>
-            </div>
-        </div>
+          {% if hero.subtitle %}<p class="w-fit px-5 py-3 shadow-lg text-lg mt-2 clip-path-custom bg-white">Only <strong>{{ hero.subtitle }}</strong></p>{% endif %}
+          <a href="{{ hero.link }}" class="w-fit mt-4 px-6 py-2 bg-button text-buttonText font-semibold rounded-lg hover:bg-buttonHover">{{ hero.link_text|upper }}</a>
+      </div>
+      {% if hero.image %}
+          <img src="{{ hero.image.url }}" class="w-96 h-auto object-contain mx-auto" alt="{{ hero.title }}" />
+      {% endif %}
     </div>
+  </div>
+   
+  <div class="p-5 mx-auto px-4 py-8 w-full">
+    {% include 'includes/carousel.html' with products=top_rated_products heading='Best Selling Products' %}
+
+  </div>
+
+{% endblock %} 
+{% block postloadjs %}
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  <script src="{% static 'js/carousel.js' %}"></script>
+
 {% endblock %}
-
-

@@ -2,7 +2,7 @@
 $(document).ready(function () {
     let currentIndex = 0;
     const slides = $("#carousel-inner .carousel-slide");
-    const cardsPerslide = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 640 ? 2 : 1; // lg:3, sm:2, mobile:1
+    const cardsPerslide = window.innerWidth >= 1280 ? 5 : window.innerWidth >= 765 ? 3 :  window.innerWidth >= 640 ? 2 : 1; // lg:3, sm:2, mobile:1
     
     const totalSlides = slides.length % cardsPerslide === 0 ? slides.length / cardsPerslide : Math.floor(slides.length / cardsPerslide) + 1;
 

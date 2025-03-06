@@ -49,18 +49,17 @@ module.exports = {
                 mainBackground: " #F9FAFB", // Custom gray
                 footer: " #1A202C", // Custom gray
 
-                button: " #2c3e50", 
                 buttonHover: " #5584b0 ", 
                 buttonText: " #f7f3ea", // Custom white
                 buttonTextHover: "rgb(4, 24, 91)", // Custom white
 
               },
               backgroundImage: {
-                'button1': "radial-gradient(180deg, #f7f3ea 0%, #5584b0 100%)",
+                'button1': "radial-gradient(circle, #f7f3ea, #5584b0 )",
                 'header': "linear-gradient(180deg, #2c3e50, #254e7a)",
-                'secondaryBackground': "radial-gradient(circle, #5584b0  100%, #2c3e50 0%)",
-                'button': "linear-gradient(0deg, #254e7a, #82c2e6)",
-                'buttonHover': "radial-gradient(circle, #5584b0, #cbe3ef)",
+                'secondaryBackground': "radial-gradient(circle,#f7f3ea, #5584b0 )",
+                'button': "linear-gradient(0deg, #254e7a, #82c2e6,  #254e7a)",
+                'buttonHover': "radial-gradient(circle, #5584b0,  #2c3e50, #254e7a)",
               },
               fontFamily: {
                 poppins: ["Poppins", "sans-serif"],

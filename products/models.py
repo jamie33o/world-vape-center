@@ -20,6 +20,10 @@ class Category(models.Model):
     """
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=255, null=True, blank=True)
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='children', on_delete=models.CASCADE)
+    description = models.TextField(blank=True, null=True)
+    category_image = models.ImageField(upload_to="categories", blank=True)
+
 
     def __str__(self):
         """
@@ -48,6 +52,7 @@ class Brand(models.Model):
     name = models.CharField(max_length=254)
     slug = models.SlugField(max_length=255, null=True, blank=True)
 
+
     def save(self, *args, **kwargs):
         """
         Overrides the save method to automatically generate a slug.
@@ -64,36 +69,6 @@ class Brand(models.Model):
 
     class Meta:
         verbose_name_plural = 'Brands'
-
-
-class MultiOption(models.Model):
-    """
-    Model representing a multi-option for products.
-
-    Attributes:
-    - name (str): The name of the multi-option.
-    - slug (str): The slugified version of the multi-option name.
-
-    Methods:
-    - save(): Overrides the save method to automatically generate a slug.
-
-    """
-    name = models.CharField(max_length=254, default='')
-    slug = models.SlugField(max_length=255, null=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        """
-        Overrides the save method to automatically generate a slug.
-        """
-        if not self.slug:
-            self.slug = slugify(self.name)
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        """
-        Returns a string representation of the multi-option.
-        """
-        return self.name
 
 
 class Product(models.Model):
@@ -127,11 +102,8 @@ class Product(models.Model):
     category = models.ForeignKey('Category', null=True, blank=True,
                                  on_delete=models.SET_NULL)
     slug = models.SlugField(max_length=255, null=True, blank=True)
-
-    sku = models.CharField(max_length=254, null=True, blank=True)
     name = models.CharField(max_length=254)
-    image_url = models.URLField(max_length=1024, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
+    rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     brand = models.ForeignKey('Brand',
                               null=True,
                               blank=True,
@@ -142,13 +114,6 @@ class Product(models.Model):
         max_digits=4, decimal_places=2, null=True, blank=True)
     discounted_price = models.DecimalField(
         max_digits=4, decimal_places=2, null=True, blank=True)
-    countInStock = models.IntegerField(null=True, blank=True, default=0)
-    free_shipping = models.BooleanField(default=False,
-                                        help_text='Is shipping free?')
-    discount_percentage = models.CharField(max_length=254,
-                                           null=True, blank=True)
-    options_name = models.CharField(max_length=254, null=True, blank=True)
-    options = models.ManyToManyField(MultiOption, blank=True)
 
     def __str__(self):
         """
@@ -181,6 +146,39 @@ class Product(models.Model):
         average_rating = Review.objects.filter(product=self)\
             .aggregate(Avg('rating'))['rating__avg']
         return round(average_rating) if average_rating is not None else 0
+
+
+class ProductVariant(models.Model):
+    """
+    Model representing a variant of a product.
+
+    Attributes:
+    - product (Product): The main product this variant belongs to.
+    - sku (str): The stock keeping unit of the variant.
+    - name (str): The name of the variant.
+    - price (Decimal): The price of the variant.
+    - discounted_price (Decimal): The discounted price of the variant.
+    - countInStock (int): The quantity of the variant in stock.
+    - additional_info (str): Additional information specific to the variant.
+
+    Methods:
+    - __str__(): Returns a string representation of the product variant.
+    """
+    OPTION_CHOICES = [
+        ('flavor', 'Flavor'),
+        ('nicotine', 'Nicotine Strength'),
+        ('size', 'Size'),
+        ('color', 'Color'),
+    ]
+    product = models.ForeignKey(Product, related_name='variants', on_delete=models.CASCADE)
+    image = models.ImageField(null=True, blank=True)
+    variant_type = models.CharField(max_length=50, choices=OPTION_CHOICES, null=True, blank=True)
+    sku = models.CharField(max_length=254, unique=True, null=True, blank=True)
+    countInStock = models.IntegerField(null=True, blank=True, default=0)
+    additional_info = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.product.name} - {self.variant_type} - Stock: {self.countInStock}"
 
 
 class Review(models.Model):

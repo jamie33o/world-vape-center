@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.db.models import Avg
 from products.models import Product
 from products.models import Category
+from django.db import models
+from .models import HeroSection
 
 
 class IndexView(View):
@@ -27,6 +29,8 @@ class IndexView(View):
                 avg_rating=Avg('review__rating')
             ).filter(avg_rating__gte=3)
 
+            hero_section = HeroSection.objects.first()
+
             if len(top_rated_products) < 10:
                 # Query all categories
                 categories = Category.objects.all()
@@ -46,12 +50,15 @@ class IndexView(View):
                 # Update the top_rated_products variable
                 top_rated_products = selected_products
 
+            
+
         except Exception:
             messages.error(request, 'Error retrieving top rated products')
 
         # Prepare context for rendering the template
         context = {
             'top_rated_products': top_rated_products,
+            'hero': hero_section,
         }
 
         # Render the template with the context

@@ -9,4 +9,10 @@
                hover:before:w-full;
     }
 
+
+}
+@layer utilities {
+    .clip-path-custom {
+      clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0% 100%);
+    }
 }

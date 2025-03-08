@@ -57,7 +57,7 @@ module.exports = {
               backgroundImage: {
                 'button1': "radial-gradient(circle, #f7f3ea, #5584b0 )",
                 'header': "linear-gradient(180deg, #2c3e50, #254e7a)",
-                'secondaryBackground': "radial-gradient(circle,#f7f3ea, #5584b0 )",
+                'secondaryBackground': "radial-gradient(circle, #f7f3ea, #5584b0 )",
                 'button': "linear-gradient(0deg, #254e7a, #82c2e6,  #254e7a)",
                 'buttonHover': "radial-gradient(circle, #5584b0,  #2c3e50, #254e7a)",
               },

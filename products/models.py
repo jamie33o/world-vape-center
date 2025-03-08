@@ -114,6 +114,7 @@ class Product(models.Model):
         max_digits=4, decimal_places=2, null=True, blank=True)
     discounted_price = models.DecimalField(
         max_digits=4, decimal_places=2, null=True, blank=True)
+    image = models.ImageField(upload_to='products', null=True, blank=True)
 
     def __str__(self):
         """
@@ -173,12 +174,13 @@ class ProductVariant(models.Model):
     product = models.ForeignKey(Product, related_name='variants', on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
     variant_type = models.CharField(max_length=50, choices=OPTION_CHOICES, null=True, blank=True)
+    name = models.CharField(max_length=254, null=True, blank=True)
     sku = models.CharField(max_length=254, unique=True, null=True, blank=True)
     countInStock = models.IntegerField(null=True, blank=True, default=0)
     additional_info = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.product.name} - {self.variant_type} - Stock: {self.countInStock}"
+        return f"{self.name} - {self.variant_type} - Stock: {self.countInStock}"
 
 
 class Review(models.Model):

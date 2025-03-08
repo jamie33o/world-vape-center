@@ -1,7 +1,7 @@
 <ul class="main-nav flex flex-col bg-secondaryBackground xl:bg-header justify-evenly xl:flex-row divide-y-2 xl:divide-y-0 divide-border w-full overflow-y-auto">
     {% for category in all_categories|slice:":10" %}
     <li>
-        <a href="{% url 'category' category=category.slug %}" class="font-linksFont p-4 xl:p-0 flex w-fit items-center hover:bg-header xl:hover:bg-header w-full xl:underline-hover text-links hover:text-linksHover text-lg font-medium">
+        <a href="{% url 'category' category=category.slug %}" class="font-linksFont p-4 xl:p-0 flex w-fit items-center w-full xl:underline-hover text-links hover:text-linksHover text-lg font-medium">
             {{ category | upper }}
         </a>
     </li>

@@ -1,136 +1,154 @@
 $(document).ready(function () {
-    // Handle click event on the mobile search input
-    $('#mob-search-input').on('click', function(){
-        $('#search-form').removeClass('d-none');
-    });
+	$("#nl_form").submit(function (e) {
+		e.preventDefault(); // Prevent form from refreshing the page
 
-    $('main .accordion-control [data-toggle="collapse"]').click(changeText)
+		let formData = $(this).serialize(); // Serialize form data
+		let formUrl = $(this).attr("action"); // Get the form URL
 
-    function changeText(){
-        let self = $(this)
-        let buttonText = self.text().trim().toLowerCase(); // Convert text to lowercase and remove leading/trailing spaces
+		$.ajax({
+			type: "POST",
+			url: formUrl,
+			data: formData,
+			dataType: "json",
+			success: function (response) {
+				$("#nl_message")
+					.removeClass("hidden text-red-500")
+					.addClass("text-green-500")
+					.text(response.message);
+				$("#nl_form")[0].reset(); // Clear the form
+			},
+			error: function (xhr) {
+				let errorMsg = "An error occurred. Please try again.";
 
-        if(buttonText == 'view more'){
-            self.text('View Less') 
-        }else{
-            self.text('View More')
-        }
-    }
+				if (xhr.responseJSON && xhr.responseJSON.error) {
+					errorMsg = xhr.responseJSON.error;
+				}
 
-    // Handle click event on the close-search button
-    $('.close-search').click(() => $('#search-form').addClass('d-none'));
+				$("#nl_message")
+					.removeClass("hidden text-green-500")
+					.addClass("text-red-500")
+					.text(errorMsg);
+			},
+		});
+	});
 
-    // Handle click event on the general search button
-    $(".search-btn").on("click", function () {
-        $("#search-form").toggleClass("d-none");
-    });
+	// Show Age Verification Modal if not previously accepted
+	if (!localStorage.getItem("ageVerified")) {
+		$("#age-modal").removeClass("hidden");
+	}
 
-    // Handle form submission for the search form
-    $('#search-form').submit(function(event) {
-        event.preventDefault();
-        search();
-    });
+	$("#age-verified").click(function () {
+		localStorage.setItem("ageVerified", "true"); // Save verification
+		$("#age-modal").addClass("hidden");
+	});
 
-    // Handle input event on the search input field
-    $('#search-form input').on('input', function() {
-        search();
-    });
+	// Show Cookies Modal if not accepted
+	if (!localStorage.getItem("cookiesAccepted")) {
+		$("#cookies-modal").removeClass("hidden");
+	}
 
-    // Define the search function
-    function search() {
-        var query = $('#search-input').val();
-        var formAction = $('#search-form').attr('action');
+	$("#cookies-accept").click(function () {
+		localStorage.setItem("cookiesAccepted", "true"); // Save acceptance
+		$("#cookies-modal").addClass("hidden");
+	});
 
-        $.ajax({
-            url: formAction,
-            type: 'GET',
-            data: {q: query},
-            success: function(data) {
-                const $cartContainer = $('.results');
-                $cartContainer.empty();
-                const product = data.products;
-                if(product.length > 0){
-                    $('.results-container').removeClass('d-none');
-                } else {
-                    $('.results-container').addClass('d-none');
-                }
+	$(".user-menu-button").click(function (event) {
+		event.stopPropagation(); // Prevents event bubbling
+		$(".user-menu").toggleClass("hidden").toggleClass("opacity-0").toggleClass("opacity-100");
+		$(".chev-down").toggleClass("rotate-90");
+	});
 
-                // Loop through the products and create HTML content
-                product.forEach(item => {
-                    const itemHTML = `
-                        <a href="${item.url}" class="text-decoration-none">
-                            <div class="card mb-4 border rounded p-3">
-                                <div class="d-flex flex-dir-row">
-                                    <img src="${item.img}" alt="${item.name}" class="img-fluid rounded-start mr-3" width="50">
-                                    <div class="card-body p-0">
-                                        <p class="card-title">${item.name}</p>
-                                        <p class="card-text"><strong>${item.price}</strong></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    `;
+	// Close menu when clicking outside
+	$(document).click(function (event) {
+		if (!$(event.target).closest(".user-menu, .user-menu-button").length) {
+			$(".user-menu").addClass("hidden").removeClass("opacity-100").addClass("opacity-0");
+			$(".chev-down").removeClass("rotate-90");
+		}
+	});
 
-                    // Append the item HTML to the cart container using jQuery
-                    $cartContainer.append(itemHTML); 
-                });             
-            },
-            error: function(error) {
-                console.log(error);
-            }
-        });
-    }
+	$(".new-message").parent().removeClass("hidden");
 
-    // Handle form submission for the like-form
-    $('.like-form').submit(function (e) {
-        e.preventDefault(); // Prevent the form from submitting normally
+	// Auto fade out messages after 3 seconds
+	setTimeout(function () {
+		$("[data-message]").fadeOut(500, function () {
+			$(this).addClass("hidden"); // Fully hide after fadeout
+		});
+	}, 3000);
 
-        const $favouriteCard = $(this).closest('.fav-card');
-    
-        $.ajax({
-            type: 'POST',
-            url: $(this).attr('action'),
-            data: $(this).serialize(), // Serialize the form data
-            success: function (response) {
-                $('.messages').remove();
-                const message = $(`
-                    <div class="row justify-content-end m-0 messages">
-                        <div class="mr-5">
-                            <div class="alert bg-light mx-auto border-dark">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                                    ×</button> 
-                                <strong>${response.status}</strong>
-                                <hr class="message-inner-separator">
-                                <p>${response.message}</p>
-                            </div>
-                        </div>
-                    </div>
-                `);
-                $('main').append(message);
-                    setTimeout(() => {
-                      $(message).remove()
-                    }, 3000); 
-                if ($favouriteCard) {
-                    $favouriteCard.remove();
-                }      
-            },
-            error: function(error) {
-                $('.messages').remove();
-                const message = $(`
-                    <div class="row justify-content-end m-0 messages">
-                        <div class="mr-5">
-                            <div class="alert bg-light mx-auto border-dark">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                                    ×</button> 
-                                <strong>Error:</strong>
-                                <hr class="message-inner-separator">
-                                <p>${error}</p>
-                            </div>
-                        </div>
-                    </div>
-                `);
-                $('main').append(message);            
-            }
-        });
-    });
+	// Allow manual dismiss of messages
+	$(".dismiss-message").click(function () {
+		$("[data-message]").fadeOut(500, function () {
+			$(this).addClass("hidden"); // Fully hide after fadeout
+		});
+	});
+
+	// Mobile menu
+	$(".menu-btn").click(function () {
+		$("body").css("overflow", "hidden");
+		$(".mobile-menu-container").removeClass("translate-x-full").addClass("translate-x-0");
+		$(".mobile-menu-overlay").removeClass("opacity-0").addClass("opacity-100");
+	});
+
+	$(".close-menu").click(function () {
+		$("body").css("overflow", "auto");
+		$(".mobile-menu-container").removeClass("translate-x-0").addClass("translate-x-full");
+		$(".mobile-menu-overlay").removeClass("opacity-100").addClass("opacity-0");
+	});
+
+	$(".more-btn").click(function (e) {
+		e.preventDefault();
+
+		// Toggle dropdown
+		$(".more-dropdown").toggleClass("hidden");
+
+		// Rotate icon
+		$(".more-icon").toggleClass("rotate-180");
+	});
+
+	// Hide dropdown when clicking outside
+	$(document).click(function (event) {
+		if (!$(event.target).closest(".more-btn, .more-dropdown").length) {
+			$(".more-dropdown").addClass("hidden");
+			$(".more-icon").removeClass("rotate-180");
+		}
+	});
+
+	let searchInput = $(".large-search-form .search-input");
+	let text = [
+		"Search for vape products...",
+		"Find your favorite e-liquid!",
+		"Discover new flavors today...",
+		"Explore top-rated devices!",
+		"Start your vaping journey...",
+	]; // Change this to whatever text you want
+	let index = 0;
+	let lineIndex = 0;
+	if (window.innerWidth > 1022) {
+		let typingEffect = setInterval(function () {
+			// If the input is still empty, keep adding letters
+			if (searchInput.val() === "" && index < text[lineIndex].length) {
+				searchInput.attr("placeholder", text[lineIndex].substring(0, index + 1));
+				index++;
+			} else if (searchInput.val() !== "") {
+				// Stop typing effect if user types manually
+				clearInterval(typingEffect);
+				searchInput.attr("placeholder", "search...");
+			} else {
+				index = 0;
+				searchInput.attr("placeholder", "");
+				if (lineIndex >= text.length - 1) {
+					lineIndex = 0;
+				} else {
+					lineIndex++;
+				}
+			}
+		}, 200); // Adjust speed (300ms per letter)
+	}
+
+	$(".search-btn").click(function () {
+		$(".mobile-search-form")
+			.toggleClass("max-h-[500px] opacity-100")
+			.toggleClass("max-h-0 opacity-0");
+		$(".mobile-search-form").find("input").focus();
+	});
 });

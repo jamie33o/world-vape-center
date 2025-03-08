@@ -1,141 +1,84 @@
 {% load static %}
-<div class="footer" id="footer-sub">
-  <div class="container-fluid px-5">
-    <div class="row">
-      <div class="col-12 col-sm-6 col-lg-3">
-        <h5>HELP</h5>
-        <ul>
-          <li>
-            <a href="{% url 'payments_options' %}">Payments</a>
-            <hr>
-          </li>
-          <li>
-            <a href="{% url 'delivery_info' %}">Delivery Info</a>
-            <hr>
-          </li>
-          <li>
-            <a href="{% url 'about_us' %}">About Us</a>
-            <hr>
-          </li>
-          <li>
-            <a href="{% url 'terms' %}">Terms & conditions</a>
-            <hr>
-          </li>
-          <li>
-            <a href="{% url 'returns_policy' %}">Returns Policy</a>
-            <hr>
-          </li>
-          <li>
-            <a href="{% url 'privacy_policy' %}">Privacy Policy</a>
-            <hr>
-          </li>
-          <li>
-            <a href="{% url 'sitemap_html' %}">Sitemap</a> 
-            <hr>
-          </li>
-          <li>
-            <a href="{% url 'faq' %}">FAQ</a>
-          </li>
+
+<div class="bg-gray-900 text-white py-10">
+  <div class="container mx-auto px-5">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Help Section -->
+      <div>
+        <h5 class="text-lg font-semibold mb-4 border-b-2 pb-2">HELP</h5>
+        <ul class="flex flex-col gap-2">
+          <li><a href="{% url 'payments_options' %}" class="underline-hover">Payments</a></li>
+          <li><a href="{% url 'delivery_info' %}" class="underline-hover">Delivery Info</a></li>
+          <li><a href="{% url 'about_us' %}" class="underline-hover">About Us</a></li>
+          <li><a href="{% url 'terms' %}" class="underline-hover">Terms & Conditions</a></li>
+          <li><a href="{% url 'returns_policy' %}" class="underline-hover">Returns Policy</a></li>
+          <li><a href="{% url 'privacy_policy' %}" class="underline-hover">Privacy Policy</a></li>
+          <li><a href="{% url 'sitemap_html' %}" class="underline-hover">Sitemap</a></li>
+          <li><a href="{% url 'faq' %}" class="underline-hover">FAQ</a></li>
         </ul>
       </div>
-
-      <div class="col-12 col-sm-6 col-lg-3">
-        <h5 class="mb-4">NEWS LETTER</h5>
-        <div class="nl-msg"></div>
-        <form id="nl_form" method="post">
+      <!-- Newsletter Section -->
+      <div>
+        <h5 class="text-lg font-semibold mb-4 border-b-2 pb-2">NEWSLETTER</h5>
+        <form id="nl_form" action="{% url 'subscribe_newsletter' %}" method="post" class="space-y-3">
           {% csrf_token %}
-          <div class="nl-input-con">
-            {{ newsletter_form.as_p }}
-          
-            <button data-url="{% url 'subscribe_newsletter' %}"  class="sub btn btn-success mb-3">Subscribe</button>
+          <div class="flex flex-col space-y-2">
+            <label for="{{ newsletter_form.email.id_for_label }}" class="text-white font-semibold">Email:</label>
+          {{ newsletter_form.email }}
+            <button type="submit" class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition">
+              Subscribe
+            </button>
           </div>
+          <p id="nl_message" class="hidden text-sm mt-2"></p> <!-- Response Message -->
         </form>
       </div>
 
-      <div class="col-12 col-sm-6 col-lg-3">
-        <h5>CONTACT INFO</h5>
-        <ul>
-          <li>
-            <p>
-              <strong>Address: </strong><i class="fa-solid fa-location-dot"></i><br> 123 Main Street, <br>Cityville, <br>State, <br>Zip Code
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Phone:</strong> <i class="fa-solid fa-phone"></i><br><a href="tel:+1234567890">+1234567890</a>
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Email:</strong> <i class="fa-regular fa-envelope"></i><br> <a href="mailto:giftsforyou83@gmail.com">giftsforyou83@gmail.com</a> 
-            </p>
-          </li>
+      <!-- Contact Info -->
+      <div>
+        <h5 class="text-lg font-semibold mb-4 border-b-2 pb-2">CONTACT INFO</h5>
+        <ul class="space-y-2">
+          <li><i class="fa-solid fa-location-dot mr-2"></i> 123 Main Street, Cityville, State, Zip Code</li>
+          <li><i class="fa-solid fa-phone mr-2"></i> <a href="tel:+1234567890" class="hover:text-linksHover">+1234567890</a></li>
+          <li><i class="fa-regular fa-envelope mr-2"></i> <a href="mailto:giftsforyou83@gmail.com" class="hover:text-linksHover">giftsforyou83@gmail.com</a></li>
         </ul>
       </div>
-      
-      <div class="col-12 col-sm-6 col-lg-3">
-        <h5>FREE DELIVERY</h5>
-        <ul>
-          <li>
-            <p>
-              Purchase anything over €40 & get free delivery anywhere in Ireland!
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>YOU MUST BE 18+ TO PURCHASE ANYTHING ON THIS SITE</strong>
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>Company Registration </strong><p class="mb-0">No.: 1234
-            </p>
-          </li>
-          <li>
-            <p>
-              <strong>VAT Registration </strong> <p class="mb-0">No.: 1234
-            </p>
-          </li>
-        </ul>
+
+      <!-- Free Delivery Info -->
+      <div>
+        <h5 class="text-lg font-semibold mb-4 border-b-2 pb-2">FREE DELIVERY</h5>
+        <p>Purchase anything over €40 & get free delivery anywhere in Ireland!</p>
+        <p class="mt-3 font-bold">YOU MUST BE 18+ TO PURCHASE ANYTHING ON THIS SITE</p>
+        <p class="mt-3"><strong>Company Registration:</strong> No. 1234</p>
+        <p><strong>VAT Registration:</strong> No. 1234</p>
       </div>
     </div>
 
-    <hr style="margin-bottom: 0px; margin-top: 30px; padding: 0px">
-    <div class="row" id="sub-two">
-      <div class="col-md-4">
-        <div class="vertical-line text-center">
-          <span class="fa-solid fa-location-dot text-dark h2"></span>
-          <h4>TRACK YOUR ORDER</h4>
-        </div>
+    <!-- Order Tracking, Returns, and Cancellations -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 text-center mt-10 gap-4 border-t border-gray-700 pt-6">
+      <div class="flex flex-col items-center">
+        <i class="fa-solid fa-location-dot text-2xl"></i>
+        <h4 class="text-lg mt-2">TRACK YOUR ORDER</h4>
       </div>
-
-      <div class="col-md-4">
-        <div class="vertical-line text-center">
-          <span class="fa-solid fa-arrows-rotate text-dark h2"></span>
-          <h4>FREE & EASY RETURNS</h4>
-        </div>
+      <div class="flex flex-col items-center">
+        <i class="fa-solid fa-arrows-rotate text-2xl"></i>
+        <h4 class="text-lg mt-2">FREE & EASY RETURNS</h4>
       </div>
-
-      <div class="col-md-4">
-        <div style="margin: 8px" class="text-center">
-          <span class="fa-regular fa-circle-xmark text-dark h2"></span>
-          <h4 style="color: #6d6c6c">ONLINE CANCELLATIONS</h4>
-        </div>
+      <div class="flex flex-col items-center">
+        <i class="fa-regular fa-circle-xmark text-2xl"></i>
+        <h4 class="text-lg mt-2 text-gray-400">ONLINE CANCELLATIONS</h4>
       </div>
     </div>
-    <hr style="margin-bottom: 30px; margin-top: 0px; padding: 0px">
   </div>
-</div>
-<div class="row p-3 m-0 flex-column-reverse flex-sm-row" id="footer-main">
-  <div class="text-white text-center text-sm-left col-12 col-sm-6 my-auto">
-    <h4 class="text-white"><i class="fa-regular fa-copyright"></i> WORLD VAPE CENTER</h4>
-  </div>
-  <hr class="my-4 bg-light d-sm-none border">
-  <div class="col-12 col-sm-6">
-    <ul class="d-flex justify-content-center justify-content-sm-end list-unstyled my-auto">
-        <li>
-            <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/people/World-Vape-Center-Carlow/100031348585629/"><img style="max-width: 50px;" alt="facebook logo" src="{% static 'fb.webp' %}"></a>
-        </li>
-    </ul>
+
+  <!-- Footer Bottom -->
+  <div class="mt-10 bg-gray-800 py-4">
+    <div class="container mx-auto flex flex-col sm:flex-row items-center justify-between px-5">
+      <h4 class="text-sm sm:text-base"><i class="fa-regular fa-copyright"></i> WORLD VAPE CENTER</h4>
+      <div>
+        <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/people/World-Vape-Center-Carlow/100031348585629/">
+          <img class="max-w-[50px]" alt="facebook logo" src="{% static 'fb.webp' %}">
+        </a>
+      </div>
+    </div>
   </div>
 </div>

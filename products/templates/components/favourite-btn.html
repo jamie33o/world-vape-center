@@ -1,8 +1,0 @@
-{% if user.is_authenticated %}
-<form class="like-form d-inline" action="{% url 'add_to_favorites' product.id %}" method="POST">
-    {% csrf_token %}
-    <button class="like btn btn-warning text-white" type="submit" aria-label="favourite button"> 
-        <span class="fa fa-heart"></span>
-    </button>
-</form>
-{% endif %}

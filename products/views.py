@@ -1,5 +1,5 @@
 from profile.models import Favourite
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views import View
@@ -352,17 +352,12 @@ def add_to_favorites(request, product_id):
 
         if not is_favourite:
             favourite.products.add(product)
-            response_data = {'status': 'success',
-                             'message': 'Product added to favourites.'}
-            status_code = 200
+            messages.success(request, 'Product added to favourites.')
         else:
             # If the product is already favorited, remove it
             favourite.products.remove(product)
-            response_data = {'status': 'success',
-                             'message': 'Product removed from favourites.'}
-            status_code = 200
-
-        return JsonResponse(response_data, status=status_code)
+            messages.success(request, 'Product removed from favourites.')
+        return HttpResponse(status=200)
 
     except Exception as e:
         try:
@@ -376,9 +371,7 @@ def add_to_favorites(request, product_id):
             messages.error(request, 'We are very sorry, \
                     an unknown error occurred: Please contact us')
             return redirect('contact_us')
-        response_data = {'status': 'error',
-                         'message': 'An error occurred while processing \
-                            your request. Admin have bein notified.'}
-        status_code = 500
-
-        return JsonResponse(response_data, status=status_code)
+       
+        messages.error(request, 'We are very sorry, \
+                    an unknown error occurred: Admin has been notified')
+        return HttpResponse(status=500)

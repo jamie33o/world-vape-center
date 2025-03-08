@@ -1,0 +1,66 @@
+{% for product in products %}
+  <div class="border rounded bg-white flex flex-col items-center shadow-[0_0_8px_rgba(0,0,0,0.3)] hover:shadow-[0_0_8px_rgba(0,0,0,0.5)]">
+    {% if product.discounted_price %}
+      <span class="text-red-500 font-bold">{{ product.discount_percentage|default:'' }}</span>
+    {% endif %}
+
+    <a href="{% url 'product_details' category=category.slug slug=product.slug %}" class="group w-full border-0 h-full">
+      <div class="w-full h-64 overflow-hidden">
+        {% if product.image %}
+          <img class="m-auto w-full h-auto object-contain" src="{{ product.image.url }}" alt="product image" />
+        {% else %}
+          <div class="mx-auto w-full h-full bg-gray-200 flex items-center justify-center text-gray-600 text-lg font-semibold">No Image</div>
+        {% endif %}
+      </div>
+
+      <div class="flex flex-col">
+        <div class="w-full text-left p-2 min-h-24">
+          <h5 class="underline-hover text-xl text-button group-hover:text-buttonHover font-medium font-montserrat tracking-tight">{{ product.name|title }}</h5>
+        </div>
+        <div class="w-full flex items-center space-x-2 px-2 h-12">
+          <h4 class="text-2xl font-medium font-linksFont">
+            €{% if not product.discounted_price %}
+              {{ product.price }}
+            {% else %}
+              {{ product.discounted_price }}
+            {% endif %}
+          </h4>
+          {% if product.discounted_price %}
+            <p class="text-red-500 font-bold">
+              <del>€ {{ product.price }}</del>
+            </p>
+          {% endif %}
+          {% if product.free_shipping %}
+            <h6 class="text-green-500">Free shipping</h6>
+          {% endif %}
+        </div>
+
+        <div class="w-full text-left flex flex-wrap h-24">
+          <div class="flex items-center gap-x-2 {% if product.variants.all %} border-t border-b {% endif %} w-full border-black p-2 h-8">
+            {% for varient in product.variants.all %}
+              {% if varient.variant_type == 'nicotine' %}
+                <span class="text-gray-500 font-medium">{{ varient.name }}</span>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="flex items-center gap-x-2 h-8">
+            {% for varient in product.variants.all %}
+              {% if varient.variant_type == 'flavor' %}
+                <span class="text-gray-500 font-medium">{{ varient.name }}</span>   
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </a>
+    <div class="w-full flex divide-x-2 divide-gray-200 border-t-2">
+      <div class="w-full text-left flex items-center flex-wrap px-2">
+        {% include 'components/ratings.html' with product=product %}
+        <span>({{ product.num_reviews }})</span>
+      </div>
+      <div class="group/item flex items-center">
+        {% include 'includes/favourite-btn.html' %}
+      </div>
+    </div>
+  </div>
+{% endfor %}

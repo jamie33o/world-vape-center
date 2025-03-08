@@ -25,11 +25,11 @@
                         </div>
                         <div class="hidden lg:flex w-1/3 justify-center text-xl font-semibold">
                             <span class="mx-2">|</span>
-                            <span>{%  if query  %} Search Results {% else %}  {{category.name}} {% endif %}</span>
+                            <span>{%  if category  %}{{category.name}} {% else %}  Search Results  {% endif %}</span>
                             <span class="mx-2">|</span>
                         </div>
                         <div class="w-1/2 lg:w-1/3 flex items-center justify-end">
-                            <form method="get" action="{% url 'category' category %}">
+                            <form method="get" action="{% url 'products_list_by_category' category %}">
                                 <label for="items_per_page">Items per page:</label>
                                 <select name="items_per_page" id="items_per_page" class="ml-2 p-1 border" onchange="this.form.submit()">
                                     <option value="24" {% if items_per_page == 24 %}selected{% endif %}>24</option>

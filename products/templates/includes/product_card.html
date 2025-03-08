@@ -4,7 +4,7 @@
       <span class="text-red-500 font-bold">{{ product.discount_percentage|default:'' }}</span>
     {% endif %}
 
-    <a href="{% url 'product_details' category=category.slug slug=product.slug %}" class="group w-full border-0 h-full">
+    <a href="{% url 'product_details' slug=product.slug %}" class="group w-full border-0 h-full">
       <div class="w-full h-64 overflow-hidden">
         {% if product.image %}
           <img class="m-auto w-full h-auto object-contain" src="{{ product.image.url }}" alt="product image" />
@@ -15,10 +15,10 @@
 
       <div class="flex flex-col">
         <div class="w-full text-left p-2 min-h-24">
-          <h5 class="underline-hover text-xl text-button group-hover:text-buttonHover font-medium font-montserrat tracking-tight">{{ product.name|title }}</h5>
+          <h5 class="underline-hover text-lg text-button group-hover:text-buttonHover font-semibold font-montserrat tracking-tight">{{ product.name|title }}</h5>
         </div>
         <div class="w-full flex items-center space-x-2 px-2 h-12">
-          <h4 class="text-2xl font-medium font-linksFont">
+          <h4 class="text-2xl font-semibold font-linksFont text-buttonHover">
             €{% if not product.discounted_price %}
               {{ product.price }}
             {% else %}
@@ -62,5 +62,9 @@
         {% include 'includes/favourite-btn.html' %}
       </div>
     </div>
+  </div>
+{% empty %}
+  <div class="w-full flex justify-center text-center items-center h-96 col-span-4">
+    <h2 class="text-2xl font-semibold w-fit mx-auto">No products found.</h2>
   </div>
 {% endfor %}

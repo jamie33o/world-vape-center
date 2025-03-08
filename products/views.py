@@ -45,15 +45,14 @@ class CategoryView(View):
         """
         query = request.GET.get('q', '')
         
-        category_instance = get_object_or_404(Category,
-                                            slug=category) if category \
-            else Category.objects.first()
-        
+        category_instance = Category.objects.get(slug=category) if category else None
         if query:
-            category_products = Product.objects.filter(name__icontains=query)[:5]
-        else:
-            category_products = Product.objects.\
+            products = Product.objects.filter(name__icontains=query)
+        elif category_instance:
+            products = Product.objects.\
                 filter(category=category_instance)
+        else:
+            products = Product.objects.all()
 
         filters_form = FiltersForm(request.GET)
         if filters_form.is_valid():
@@ -61,11 +60,11 @@ class CategoryView(View):
             multi_options = filters_form.cleaned_data.get('multi_options')
 
             if brands:
-                category_products = category_products.\
+                products = products.\
                     filter(brand__slug__in=[brand.slug for brand in brands])
 
             if multi_options:
-                category_products = category_products.\
+                products = products.\
                     filter(options__slug__in=[option.slug for option in multi_options])
 
         # Default number of items per page
@@ -76,7 +75,7 @@ class CategoryView(View):
             items_per_page = int(request.GET['items_per_page'])
             request.session['items_per_page'] = items_per_page
 
-        paginator = Paginator(category_products, items_per_page)
+        paginator = Paginator(products, items_per_page)
         page = request.GET.get('page')
 
         try:
@@ -132,7 +131,7 @@ class ProductDetailView(View):
             messages.error(request, 'We are Sorry...\
                            There was an error retrieving the product.\
                             The Admin has being notified')
-            return redirect('categories')
+            return redirect('products_list')
         try:
             reviews = Review.objects.filter(product=product)
             category_products = Product.objects.filter(category=product.category)
@@ -143,7 +142,7 @@ class ProductDetailView(View):
                 )
             sign_up_form = SignupForm(auto_id='signup_%s')
             sign_in_form = SigninForm(auto_id='signin_%s')
-            url = reverse('category',
+            url = reverse('products_list_by_category',
                           kwargs={'category': product.category.slug})
 
 

@@ -1,7 +1,7 @@
 <ul class="main-nav flex flex-col bg-secondaryBackground xl:bg-header justify-evenly xl:flex-row divide-y-2 xl:divide-y-0 divide-border w-full overflow-y-auto">
     {% for category in all_categories|slice:":10" %}
     <li>
-        <a href="{% url 'category' category=category.slug %}" class="font-linksFont p-4 xl:p-0 flex w-fit items-center w-full xl:underline-hover text-links hover:text-linksHover text-lg font-medium">
+        <a href="{% url 'products_list_by_category' category=category.slug %}" class="font-linksFont p-4 xl:p-0 flex w-fit items-center w-full xl:underline-hover text-links hover:text-linksHover text-lg font-medium">
             {{ category | upper }}
         </a>
     </li>
@@ -16,7 +16,7 @@
             <ul class="more-dropdown absolute right-0 mt-2 text-link hidden shadow-lg w-[200px] p-2 flex flex-col gap-2 bg-secondaryBackground">
                 {% for category in all_categories|slice:"10:" %}
                 <li>
-                    <a href="{% url 'category' category=category.slug %}" class="flex w-fit items-center  underline-hover text-links text-lg font-semibold px-2">
+                    <a href="{% url 'products_list_by_category' category=category.slug %}" class="flex w-fit items-center  underline-hover text-links text-lg font-semibold px-2">
                         {{ category | upper }}
                     </a>
                 </li>

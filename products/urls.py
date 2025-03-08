@@ -26,11 +26,11 @@ from .views import (ProductDetailView,
                     add_to_favorites)
 
 urlpatterns = [
-    path('', CategoryView.as_view(), name='categories'),
+    path('', CategoryView.as_view(), name='products_list'),
     path('<str:category>/',
          CategoryView.as_view(),
-         name='category'),
-    path('<str:category>/<str:slug>/',
+         name='products_list_by_category'),
+    path('<str:slug>/',
          ProductDetailView.as_view(),
          name='product_details'),
     path('post_review/<int:product_id>',
@@ -38,8 +38,6 @@ urlpatterns = [
     path('delete_review/<int:review_id>',
          ReviewsView.as_view(),
          name='delete_review'),
-    path('<str:category>', CategoryView.as_view(),
-         name='filter'),
     path('add_to_favorites/<int:product_id>',
          add_to_favorites, name='add_to_favorites'),
 ]

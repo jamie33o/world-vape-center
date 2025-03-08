@@ -1,7 +1,7 @@
 <div class="mb-4 filters border-1 shadow-lg bg-white">
     <button class="hide-filter  lg:hidden">X</button>
     <h3 class="text-center mb-5">Filters</h3>
-    <form method="get" action="{% url 'filter' category=category.slug %}">
+    <form method="get" action="{% if category %}{% url 'products_list_by_category' category=category.slug %} {% else %}{% url 'products_list' %}{% endif %}">
         {{ filters_form.as_p }}
         <button class="bg-gray-200 mx-3" type="submit">Apply Filters</button>
     </form>

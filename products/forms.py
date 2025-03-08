@@ -1,5 +1,5 @@
 from django import forms
-from .models import Review, MultiOption
+from .models import Review
 from .models import Brand
 
 
@@ -48,9 +48,9 @@ class FiltersForm(forms.Form):
         to_field_name='slug'
     )
 
-    multi_options = forms.ModelMultipleChoiceField(
-        queryset=MultiOption.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
-        required=False,
-        to_field_name='slug'
-    )
+    # multi_options = forms.ModelMultipleChoiceField(
+    #     queryset=MultiOption.objects.all(),
+    #     widget=forms.CheckboxSelectMultiple,
+    #     required=False,
+    #     to_field_name='slug'
+    # )

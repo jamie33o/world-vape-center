@@ -23,11 +23,9 @@ from django.urls import path
 from .views import (ProductDetailView,
                     ReviewsView,
                     CategoryView,
-                    search,
                     add_to_favorites)
 
 urlpatterns = [
-    path('search', search, name='search'),
     path('', CategoryView.as_view(), name='categories'),
     path('<str:category>/',
          CategoryView.as_view(),

@@ -43,11 +43,17 @@ class CategoryView(View):
         Returns:
             HttpResponse: Rendered template with channel information.
         """
+        query = request.GET.get('q', '')
+        
         category_instance = get_object_or_404(Category,
-                                              slug=category) if category \
+                                            slug=category) if category \
             else Category.objects.first()
-        category_products = Product.objects.\
-            filter(category=category_instance)
+        
+        if query:
+            category_products = Product.objects.filter(name__icontains=query)[:5]
+        else:
+            category_products = Product.objects.\
+                filter(category=category_instance)
 
         filters_form = FiltersForm(request.GET)
         if filters_form.is_valid():
@@ -87,7 +93,12 @@ class CategoryView(View):
             'category': category_instance,
             'items_per_page': items_per_page,
         }
+
+        if query:
+            context['query'] = query
         return render(request, self.template_name, context)
+    
+
 
 
 class ProductDetailView(View):
@@ -281,47 +292,6 @@ class ReviewsView(View):
                                  'message':'We are very sorry, \
                         an unknown error occurred: Admin has been notified'},
                                 status=500)
-
-
-def search(request):
-    """
-    Perform a product search based on the provided query parameter.
-
-    Parameters:
-        request (HttpRequest): The incoming HTTP request.
-
-    Returns:
-        JsonResponse: A JSON response containing a
-        list of product data matching the search query.
-    """
-    try:
-        query = request.GET.get('q', '')
-
-        products = Product.objects.filter(name__icontains=query)[:5]
-        
-        context = {
-            'query': query,
-            'products': products
-        }
-
-        return render(request, 'products/search-results.html', context)
-
-    except Exception as e:
-        try:
-            ticket = Ticket(title='site_error',
-                            description=f'search view error: {e}',
-                            user=request.user if request.user else None
-                            )
-            ticket.save()
-
-        except Exception as e:
-            print(e)
-            messages.error(request, 'We are very sorry, \
-                    an unknown error occurred: Please contact us')
-            return redirect('contact_us')
-        messages.error(request, 'We are very sorry, \
-                    an unknown error occurred: Admin has been notified')
-        return redirect('categories')
 
 
 @login_required

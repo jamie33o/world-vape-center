@@ -1,12 +1,12 @@
-<form class="w-full mr-2 p-2" method="post" action="{% url 'search' %}">
-  {% csrf_token %}
-  <div class="w-full flex flex-row ">
-      <input type="text" name="q" placeholder="Search..." value="{{query}}"
-          class="search-input w-full bg-white py-2 mr-2 text-black  focus:outline-none focus:ring-none" />
-
-      <button type="submit" value="Search"
-          class="bg-button hover:bg-buttonHover text-white px-4 py-2 rounded-lg transition">
-          <i class="fa fa-search"></i>
-      </button>
-  </div>
-</form>
+<form class="w-full mr-2 p-2" method="get" action="{% url 'categories' %}">
+    <div class="w-full flex flex-row">
+        <input type="text" name="q" placeholder="Search..." value="{{ query }}"
+            class="search-input w-full bg-white py-2 mr-2 text-black focus:outline-none focus:ring-none" />
+  
+        <button type="submit" value="Search"
+            class="bg-button hover:bg-buttonHover text-white px-4 py-2 rounded-lg transition">
+            <i class="fa fa-search"></i>
+        </button>
+    </div>
+  </form>
+  

@@ -2,7 +2,7 @@
     <!-- Close button for mobile -->
     <button class="hide-filter lg:hidden absolute top-2 right-2 text-white rounded p-2 bg-red-500 font-bold">X</button>
   
-    <h3 class="text-center mb-5 text-lg font-semibold">Product Filters</h3>
+    <h3 class="text-center mb-5 text-lg lg:text-2xl font-semibold font-montserrat text-button border-b">Filter Products</h3>
   
     <form method="get" 
       action="{% if category %}{% url 'products_list_by_category' category=category.slug %} {% else %}{% url 'products_list' %}{% endif %}" 

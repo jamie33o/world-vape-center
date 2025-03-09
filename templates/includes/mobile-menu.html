@@ -4,17 +4,17 @@
     <div
         class="mobile-menu-container xl:hidden z-50 fixed inset-0 flex justify-end transition-transform duration-300 translate-x-full">
         <div
-            class="w-[90%] sm:w-[40%] bg-white shadow-[30px] shadow-black h-full shadow-lg  relative bg-custom-gradient">
+            class="w-[90%] sm:w-[40%] bg-white shadow-[30px] shadow-black h-full shadow-lg relative bg-tertiaryBackground">
             <button
                 class="close-menu absolute z-50 top-3 left-[-20px] text-white bg-red-500 hover:bg-red-700 py-2 px-3 rounded-lg"
                 aria-label="close menu">
                 <i class="fa-solid fa-x"></i>
             </button>
             <div class="mobile-menu h-full">
-                <div class="flex relative justify-end bg-header py-6 px-5">
+                <div class="flex relative justify-end bg-header py-4 px-5">
                     {% include 'includes/account_menu.html' %}
                 </div>
-                <div class="flex relative w-full h-[600px]">
+                <div class="flex relative w-full h-[550px]">
                     {% include 'includes/categories.html' %}
                 </div>
             </div>

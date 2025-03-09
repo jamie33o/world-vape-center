@@ -1,8 +1,61 @@
-<div class="mb-4 filters border-1 shadow-lg bg-white">
-    <button class="hide-filter  lg:hidden">X</button>
-    <h3 class="text-center mb-5">Filters</h3>
-    <form method="get" action="{% if category %}{% url 'products_list_by_category' category=category.slug %} {% else %}{% url 'products_list' %}{% endif %}">
-        {{ filters_form.as_p }}
-        <button class="bg-gray-200 mx-3" type="submit">Apply Filters</button>
+<div class="mb-4 filters border border-gray-300 shadow-lg bg-white p-4 rounded-lg relative">
+    <!-- Close button for mobile -->
+    <button class="hide-filter lg:hidden absolute top-2 right-2 text-white rounded p-2 bg-red-500 font-bold">X</button>
+  
+    <h3 class="text-center mb-5 text-lg font-semibold">Product Filters</h3>
+  
+    <form method="get" 
+      action="{% if category %}{% url 'products_list_by_category' category=category.slug %} {% else %}{% url 'products_list' %}{% endif %}" 
+      class="space-y-4" 
+      id="filtersForm">
+      
+      <!-- Brands Filter -->
+      <div class="border-b border-gray-300 pb-2">
+        <h4 class="filter-heading flex justify-between items-center cursor-pointer text-gray-700 font-medium p-2 rounded-lg bg-gray-100 hover:bg-gray-200">
+          Brands
+          <span class="icon transition-transform duration-300">▼</span>
+        </h4>
+        <div class="filter-section space-y-2 p-2">
+          {% for brand in filters_form.brands.field.queryset %}
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" name="brands" value="{{ brand.slug }}"
+              class="rounded border-gray-300 focus:ring-buttonHover"
+              {% if brand in filters_form.brands.value %}checked{% endif %}
+              onchange="document.getElementById('filtersForm').submit();">
+            <span class="text-gray-600">
+              {{ brand.name }} ({{ brand.product_count }})
+            </span>
+          </label>
+          {% endfor %}
+        </div>
+      </div>
+  
+      <!-- Variants Filter (Grouped by Type) -->
+      {% for variant_type, variants in filters_form.grouped_variants.items %}
+      <div class="border-b border-gray-300 pb-2">
+        <h4 class="filter-heading flex justify-between items-center cursor-pointer text-gray-700 font-medium p-2 rounded-lg bg-gray-100 hover:bg-gray-200">
+          {{ variant_type }}
+          <span class="icon transition-transform duration-300">▼</span>
+        </h4>
+        <div class="filter-section space-y-2 p-2">
+          {% for slug, name in variants %}
+          {% for variant in filters_form.variants.field.queryset %}
+          {% if variant.name == name %}
+          <label class="flex items-center space-x-2">
+            <input type="checkbox" name="variants" value="{{ slug }}"
+              class="rounded border-gray-300 focus:ring-buttonHover"
+              {% if slug in filters_form.variants.value %}checked{% endif %}
+              onchange="document.getElementById('filtersForm').submit();">
+            <span class="text-gray-600">
+              {{ name }} ({{ variant.variant_count }})
+            </span>
+          </label>
+          {% endif %}
+          {% endfor %}
+          {% endfor %}
+        </div>
+      </div>
+      {% endfor %}
     </form>
-</div>
+  </div>
+  

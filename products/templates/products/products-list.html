@@ -14,11 +14,16 @@
     <div class="w-full bg-tertiaryBackground h-32 flex rounded-lg my-10">
         <h1 class="text-lg md:text-2xl font-semibold p-10 text-white font-montserrat">{%  if category  %}{{category.name|capfirst}} {% else %}  Search Results  {% endif %}</h1>
     </div>
-    <div class="flex flex-row justify-center mb-10">
-        <p class="text-md ">{{ category.description }}</p>
-    </div>
+    {% if category.description %}
+        <div class="flex flex-row justify-center mb-10">
+            <p class="text-md ">{{ category.description }}</p>
+        </div>
+    {% endif %}
+    
     <div class="flex flex-row justify-center mb-5">
-        <div class="hidden xl:flex w-1/5 p-0 filter-mobile overflow-auto h-full">
+        <div class="fixed top-0 w-full h-full bg-black opacity-50 filter-overlay hidden"></div>
+            
+        <div class="z-10 z-0 absolute transform -translate-x-full lg:translate-x-0 transition-transform duration-300 left-0 w-2/3 lg:relative xl:flex lg:w-1/5 p-0 filter-mobile overflow-auto h-full">
             {% include 'includes/filters.html' with category=category %}
         </div>
         <div class="w-full lg:w-4/5">
@@ -26,7 +31,7 @@
                 <div class="border-b py-2">
                     <div class="flex flex-wrap">
                         <div class="flex items-center">
-                            <button class="btn filter-btn block lg:hidden"><i class="fa-solid fa-filter"></i> Filter</button>
+                            <button class="filter-btn block lg:hidden"><i class="fa-solid fa-filter"></i> Filter</button>
                         </div>
                        
                         <div class="flex items-center justify-end ml-auto">
@@ -84,42 +89,16 @@
 {% endblock %}
 {% block extra_postloadjs %}  
 <script>
-    $('.filter-btn').on('click', function(){
-        $('.filter-mobile').removeClass('d-none');
-        $('.filter-mobile').addClass('slide-in');
-    })
-
-    $('.hide-filter').on('click', function(){
-        $('.filter-mobile').addClass('slide-out');
-        setTimeout(() => {
-            $('.filter-mobile').removeClass('slide-out');
-            $('.filter-mobile').addClass('d-none');
-        }, 800);
-    })
     document.getElementById('items_per_page').addEventListener('change', function() {
         const selectedValue = this.value;
         const currentUrl = window.location.href;
         const updatedUrl = new URL(currentUrl);
         updatedUrl.searchParams.set('items_per_page', selectedValue);
         window.location.href = updatedUrl.toString();
-    });
-
-    $(".fav-form").submit(function (event) {
-        event.preventDefault(); // Prevent default form submission
-
-        $.ajax({
-            type: "POST",
-            url: $(this).attr("action"),
-            data: $(this).serialize(), // Serialize form data
-            success: function (response) {
-                location.reload();
-            },
-            error: function (xhr, status, error) {
-                location.reload();
-            }
-        });
-    });
+    });  
 </script>
 
+<script src="{% static 'products/js/filter.js' %}"></script>
+<script src="{% static 'products/js/fav_btn.js' %}"></script>
 
 {% endblock %}  

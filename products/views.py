@@ -96,8 +96,6 @@ class CategoryView(View):
         if query:
             context['query'] = query
         return render(request, self.template_name, context)
-    
-
 
 
 class ProductDetailView(View):
@@ -135,11 +133,11 @@ class ProductDetailView(View):
         try:
             reviews = Review.objects.filter(product=product)
             category_products = Product.objects.filter(category=product.category)
-            form = AddToCartForm(
-                    product_id=product.id,
-                    product_options=product.options.all(),
-                    product_option_name=product.options_name
-                )
+            # form = AddToCartForm(
+            #         product_id=product.id,
+            #         product_options=product.options.all(),
+            #         product_option_name=product.options_name
+            #     )
             sign_up_form = SignupForm(auto_id='signup_%s')
             sign_in_form = SigninForm(auto_id='signin_%s')
             url = reverse('products_list_by_category',
@@ -150,7 +148,7 @@ class ProductDetailView(View):
                 'product': product,
                 'reviews': reviews,
                 'category_products': category_products,
-                'form': form,
+                # 'form': form,
                 'url': url
             }
             if not request.user.is_authenticated:
@@ -158,6 +156,7 @@ class ProductDetailView(View):
                 context['sign_in_form'] = sign_in_form
 
         except Exception as e:
+            print(e)
             try:
                 ticket = Ticket(title='site_error',
                                 description=f'product detail view error: {e}',
@@ -165,7 +164,8 @@ class ProductDetailView(View):
                                 )
                 ticket.save()
 
-            except Exception:
+            except Exception as e:
+                print(e)
                 messages.error(request, 'We are very sorry, \
                         an unknown error occurred: Please contact us')
                 return redirect('contact_us')
@@ -276,6 +276,7 @@ class ReviewsView(View):
                                     status=403)
 
         except Exception as e:
+            messages.error(request, 'We are very sorry, an unknown error occurred: Please contact us')
             try:
                 ticket = Ticket(title='site_error',
                                 description=f'review delete view error: {e}',

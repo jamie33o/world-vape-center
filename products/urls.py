@@ -27,10 +27,10 @@ from .views import (ProductDetailView,
 
 urlpatterns = [
     path('', CategoryView.as_view(), name='products_list'),
-    path('<str:category>/',
+    path('product_list/<str:category>/',
          CategoryView.as_view(),
          name='products_list_by_category'),
-    path('<str:slug>/',
+    path('product_detail/<str:slug>/',
          ProductDetailView.as_view(),
          name='product_details'),
     path('post_review/<int:product_id>',

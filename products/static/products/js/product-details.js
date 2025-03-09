@@ -1,117 +1,124 @@
-$(document).ready(function(){
+$(document).ready(function () {
+	var reviewBox = $("#post-review-box");
+	var newReview = $("#new-review");
+	var openReviewBtn = $("#open-review-box");
+	var closeReviewBtn = $("#close-review-box");
+	var ratingsField = $("#ratings-hidden");
 
-  var reviewBox = $('#post-review-box');
-  var newReview = $('#new-review');
-  var openReviewBtn = $('#open-review-box');
-  var closeReviewBtn = $('#close-review-box');
-  var ratingsField = $('#ratings-hidden');
+	// Open Review Form
+	openReviewBtn.click(function (e) {
+		e.preventDefault();
+		reviewBox.removeClass("hidden").slideDown(400, function () {
+			newReview.focus();
+		});
+		openReviewBtn.fadeOut(100);
+		closeReviewBtn.removeClass("hidden");
+		addStars("#post-review-box");
+	});
 
-  openReviewBtn.click(function (e) {
-      e.preventDefault();
-      reviewBox.removeClass('d-none');
-      reviewBox.slideDown(400, function () {
-        $('#new-review').trigger('autosize.resize');
-        newReview.focus();
-    });
-      openReviewBtn.fadeOut(100);
-      closeReviewBtn.show();
-      addStars('#post-review-box');
-  });
+	// Close Review Form
+	closeReviewBtn.click(function (e) {
+		e.preventDefault();
+		reviewBox.slideUp(300, function () {
+			openReviewBtn.fadeIn(200);
+		});
+		closeReviewBtn.addClass("hidden");
+		$(".starrr i").remove();
+	});
 
-  closeReviewBtn.click(function (e) {
-      e.preventDefault();
-      reviewBox.slideUp(300, function () {
-          newReview.focus();
-          openReviewBtn.fadeIn(200);
-      });
-      closeReviewBtn.hide();
-      $('.starrr i').remove();
-  });
+	// Function to Add Dynamic Star Ratings
+	function addStars(parent, rating = 0) {
+		let starContainer = $(`${parent} .starrr`);
+		starContainer.html(""); // Clear previous stars
 
-  $('.starrr').on('starrr:change', function (e, value) {
-      ratingsField.val(value);
-  });
+		for (let i = 1; i <= 5; i++) {
+			let isActive = i <= rating ? "fa-solid text-yellow-500" : "fa-regular text-gray-400";
+			starContainer.append(
+				`<i value="${i}" class="fa-star cursor-pointer text-xl ${isActive}"></i>`
+			);
+		}
 
-  function addStars(parent) {
-    for(let i = 1; i < 6; i++){
-      $(`${parent} .starrr`).append(`<i value="${i}" class="fa-regular fa-star"></i>`);
-    }
+		// Hover Effect
+		starContainer.find("i").on("mouseover", function () {
+			let val = $(this).attr("value");
+			starContainer.find("i").each(function () {
+				$(this).toggleClass("fa-solid text-yellow-500", $(this).attr("value") <= val);
+				$(this).toggleClass("fa-regular text-gray-400", $(this).attr("value") > val);
+			});
+		});
 
-    $(`${parent} .starrr i`).on('mouseover', function(){
-      for(let x=0; x <= $(this).attr('value'); x++){
-      $(`${parent} .starrr i[value=${x}]`).removeClass('fa-regular').addClass('fa-solid');
-      }
-    });
-    
-    $(`${parent} .starrr i`).on('mouseout', function(){
-      $(`${parent} .starrr i`).each(function(){
-        $(this).removeClass('fa-solid').addClass('fa-regular');
-      });
-    });
-    $(`${parent} .starrr i`).on('click', function(){
-      $(`${parent} .starrr i`).off();
-      $(`${parent} #ratings-hidden`).val($(this).attr('value'));
-    });
+		// Click Event (Set Rating)
+		starContainer.find("i").on("click", function () {
+			let val = $(this).attr("value");
+			ratingsField.val(val); // Update hidden input value
 
-  }
+			starContainer.find("i").each(function () {
+				$(this).toggleClass("fa-solid text-yellow-500", $(this).attr("value") <= val);
+				$(this).toggleClass("fa-regular text-gray-400", $(this).attr("value") > val);
+			});
+		});
+	}
 
-  $(document).on('submit', '.review-form', function(e) {
-        e.preventDefault();
+	// Open Edit Modal with Data
+	$(document).on("click", ".edt-btn", function () {
+		let reviewText = $(this).closest(".review-card").find(".review-text").text();
+		let reviewRating = $(this).closest(".review-card").find(".fa-star.fa-solid").length;
+		openReviewBtn.click(); // Open Review Box
+		newReview.text(reviewText);
+		ratingsField.val(reviewRating);
+		addStars("#post-review-box", reviewRating);
+		$([document.documentElement, document.body]).animate(
+			{
+				scrollTop: $(".review-form").offset().top - 200,
+			},
+			2000
+		);
+	});
 
-        // Serialize form data
-        var formData = $(this).serialize();
-        
-        // Send AJAX request
-        $.ajax({
-            type: 'POST',
-            url: $(e.target).data('url'),  // Replace with the correct URL
-            data: formData,
-            success: function(response) {
-              location.reload();
+	$("#message-cancel-delete").click(function () {
+		$("#message-delete-confirm-modal").addClass("hidden");
+	});
 
-            },
-            error: function(response) {
-                // Handle error response
-                console.log(response);
-                // You can display error messages or handle form errors here
-            }
-        });
-    });
+	// Handle delete message
+	$(document).on("click", ".delete-btn", function () {
+		let messageId = $(this).data("id");
 
+		$("#message-delete-confirm-modal").removeClass("hidden");
 
-  $(document).on('click', '.delete-review', function(e) {
-      e.preventDefault();
+		$("#message-confirm-delete").click(function () {
+			$.ajax({
+				url: `/products/delete_review/${messageId}`,
+				type: "DELETE",
+				headers: { "X-CSRFToken": $("input[name=csrfmiddlewaretoken]").val() },
+				success: function (response) {
+					$(`.delete-btn`)
+						.closest(".review-card")
+						.fadeOut(300, function () {
+							$(this).remove();
+						});
+					$("#message-delete-confirm-modal").addClass("hidden");
+				},
+				error: function () {
+					location.reload();
+				},
+			});
+		});
+	});
 
-      let review_card = $(this).closest('.row');
-      let csrfToken = $(this).data('csrf');
-      $('.modal-backdrop').removeClass('show');
-        $.ajax({
-          type: 'DELETE',
-          url: $(e.target).data('url'),
-          headers: {
-            'X-CSRFToken': csrfToken,
-          },
-          
-          success: function(response) {
-            setTimeout(() => {
-              review_card.remove();
-            }, 1000);    
-          },
-          error: function(response) {
-              // Handle error response
-              console.log(response);
-              // You can display error messages or handle form errors here
-          }
-      });
-  });
-
-  $(document).on('click', '.edit-btn', function(e) {
-    addStars('#edit-modal');
-});
-
-
-  $(document).on('click', '.custom-radio', function(){
-    $('.cur_choice').text($(this).find('input').val());
-  } );
-
+	// AJAX Submit Review
+	$(document).on("submit", ".review-form", function (e) {
+		e.preventDefault();
+		var formData = $(this).serialize();
+		$.ajax({
+			type: "POST",
+			url: $(this).data("url"),
+			data: formData,
+			success: function (response) {
+				location.reload();
+			},
+			error: function (response) {
+				console.log(response);
+			},
+		});
+	});
 });

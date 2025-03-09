@@ -1,11 +1,11 @@
-<form class="w-full mr-2 p-2" method="get" action="{% url 'products_list' %}">
+<form class="w-80 mx-auto p-2 relative" method="get" action="{% url 'products_list' %}">
     <div class="w-full flex flex-row">
         <input type="text" name="q" placeholder="Search..." value="{{ query }}"
             class="search-input w-full bg-white py-2 mr-2 text-black focus:outline-none focus:ring-none" />
   
         <button type="submit" value="Search"
-            class="bg-button hover:bg-buttonHover text-white px-4 py-2 rounded-lg transition">
-            <i class="fa fa-search"></i>
+            class="absolute right-6 top-4 text-button  rounded-lg transition">
+            <i class="fa fa-search hover:text-buttonHover hover:scale-105"></i>
         </button>
     </div>
   </form>

@@ -1,7 +1,7 @@
 {% if user.is_authenticated %}
-<div class="relative inline-block">
+<div class="relative inline-block w-24">
 	<button
-		class="user-menu-button font-bold text-xl mx-2 py-2 rounded-md text-buttonText underline-hover">
+		class="user-menu-button font-bold text-xl mx-2 py-2 rounded-md text-buttonText">
 		{{ user.username|default:"user"|capfirst }}
 		<span class="chev-down fa-solid fa-chevron-down"></span>
 	</button>

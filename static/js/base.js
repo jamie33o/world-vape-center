@@ -55,14 +55,14 @@ $(document).ready(function () {
 	$(".user-menu-button").click(function (event) {
 		event.stopPropagation(); // Prevents event bubbling
 		$(".user-menu").toggleClass("hidden").toggleClass("opacity-0").toggleClass("opacity-100");
-		$(".chev-down").toggleClass("rotate-90");
+		$(".chev-down").toggleClass("rotate-180");
 	});
 
 	// Close menu when clicking outside
 	$(document).click(function (event) {
 		if (!$(event.target).closest(".user-menu, .user-menu-button").length) {
 			$(".user-menu").addClass("hidden").removeClass("opacity-100").addClass("opacity-0");
-			$(".chev-down").removeClass("rotate-90");
+			$(".chev-down").removeClass("rotate-180");
 		}
 	});
 

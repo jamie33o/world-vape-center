@@ -57,20 +57,24 @@
                     {% endfor %}
                 </div>
                 
-                <div class="border p-3">
-                    <div class="flex justify-center space-x-2">
+                <div class="p-3">
+                    <div class="flex justify-between divide-x-2 space-x-2 border-t-2">
                         {% if products.has_previous %}
-                            <a class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition duration-300" href="?page={{ products.previous_page_number }}">&lt;&lt; previous</a>
+                        <a class="underline-hover text-button font-semibold py-2 px-4 rounded-lg flex items-center justify-center space-x-2" 
+                            href="?page={{ products.previous_page_number }}">
+                            <i class="fa fa-chevron-left"></i>
+                            <span>Previous</span>
+                        </a>
                         {% endif %}
                         <span class="lg:hidden">Page {{ products.number }} of {{ products.paginator.num_pages }}.</span>
-                        <div class="hidden lg:flex space-x-2">
+                        <div class="hidden lg:flex space-x-2 text-xl divide-x-2">
                             {% for i in products.paginator.page_range %}
                                 {% if products.number == i %}
-                                    <span class="border rounded p-2 bg-blue-500 text-white">{{ i }}</span>
+                                    <span class="p-2 text-button">{{ i }}</span>
                                 {% elif i > products.number|sub:3 and i < products.number|add:3 %}
-                                    <a class="border rounded p-2 bg-blue-500 text-white" href="?page={{ i }}">{{ i }}</a>
+                                    <a class="p-2 underline-hover text-button hover:text-buttonHover" href="?page={{ i }}">{{ i }}</a>
                                 {% elif i == products.paginator.num_pages or i == 1 %}
-                                    <a class="border rounded p-2 bg-blue-500 text-white" href="?page={{ i }}">{{ i }}</a>
+                                    <a class="p-2 underline-hover text-button hover:text-buttonHover" href="?page={{ i }}">{{ i }}</a>
                                 {% endif %}
                                 {% if i == 1 and products.number > 4 or i == products.paginator.num_pages|sub:1 and products.number < products.paginator.num_pages|sub:3 %}
                                     <span class="ellipsis">…</span>
@@ -78,7 +82,12 @@
                             {% endfor %}
                         </div>
                         {% if products.has_next %}
-                            <a class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded-lg transition duration-300" href="?page={{ products.next_page_number }}">next &gt;&gt;</a>
+                        <a class="underline-hover text-button font-semibold py-2 px-4 flex items-center justify-center space-x-2" 
+                            href="?page={{ products.next_page_number }}">
+                            <span>Next</span> 
+                            <i class="fa fa-chevron-right"></i>
+                        </a>
+                     
                         {% endif %}
                     </div>                
                 </div>

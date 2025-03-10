@@ -33,7 +33,6 @@
             <h6 class="text-green-500">Free shipping</h6>
           {% endif %}
         </div>
-
         <div class="w-full text-left flex flex-wrap h-24">
           <div class="flex items-center gap-x-2 {% if product.variants.all %} border-t border-b {% endif %} w-full border-black p-2 h-8">
             {% for varient in product.variants.all %}
@@ -54,7 +53,7 @@
     </a>
     <div class="w-full flex divide-x-2 divide-gray-200 border-t-2">
       <div class="w-full text-left flex items-center flex-wrap px-2">
-        {% include 'components/ratings.html' with product=product %}
+        {% include 'includes/ratings.html' with product=product %}
         <span>({{ product.num_reviews }})</span>
       </div>
       <div class="group/item flex items-center">

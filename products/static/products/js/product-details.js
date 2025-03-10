@@ -41,6 +41,8 @@ $(document).ready(function () {
 		// Hover Effect
 		starContainer.find("i").on("mouseover", function () {
 			let val = $(this).attr("value");
+			ratingsField.val(val); // Update hidden input value
+
 			starContainer.find("i").each(function () {
 				$(this).toggleClass("fa-solid text-yellow-500", $(this).attr("value") <= val);
 				$(this).toggleClass("fa-regular text-gray-400", $(this).attr("value") > val);

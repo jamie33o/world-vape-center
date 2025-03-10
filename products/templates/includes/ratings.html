@@ -2,7 +2,7 @@
     {% for i in "12345"|make_list %}
         {% with i|add:0 as integer_value %}
             {% if integer_value <= product.average_rating %}
-                    <i class="fa fa-star text-warning text-sm"></i>
+                    <i class="fa fa-star text-yellow-500 text-sm"></i>
                 {% else %}
                     <i class="fa fa-star text-sm"></i>
             {% endif %}

@@ -51,7 +51,7 @@
                     <div class="d-flex justify-content-between">
                         <h5 class="font-weight-bold text-info">{{ product.brand.name }}</h5>
                         <div class="flex">
-                            {% include 'components/ratings.html' with product=product %}
+                            {% include 'includes/ratings.html' with product=product %}
                             <a href="#reviews" class="ml-2 text-gray-600">{{ product.num_reviews }} reviews</a>
                         </div>
                     </div>

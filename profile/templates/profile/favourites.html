@@ -9,40 +9,26 @@ Contents:
 - Body of the card containing a loop to display each favorite product.
 - If there are no favorites, a message is displayed with a link to return to products.
 -->
+{% extends 'profile/base.html' %}
+
+{% block profile %}
 <div class="card card-header-actions mb-4">
-    <div class="card-header">
+    <h1 class="text-lg font-semibold border-b pb-2 mb-4">
         Favourites
-    </div>
+    </h1>
     <div class="card-body px-0">
-        {% if favourites %}
-            {% for product in favourites %}
-                <div class="d-flex border-bottom border-top py-2 align-items-center justify-content-between px-4 fav-card">
-                    <div class="d-flex align-items-center">
-                        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded-start mr-3" width="50">
-                        <div class="ms-4">
-                            <a href="{% url 'product_details' product.category product.slug  %}" class="text-decoration-none w-100">
-                                <div class="small">{{ product.name }}</div>
-                                <div class="text-xs text-muted">{{ product.price }}</div>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="ms-4 small">
-                        <form class="like-form d-inline" action="{% url 'add_to_favorites' product.id %}" method="POST">
-                            {% csrf_token %}
-                            <button class="like btn btn-danger text-white" type="submit">
-                                Remove
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <div class="d-flex align-items-center flex-column justify-content-center px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4 p-4">
+        {% for product in favourites %}
+           {% include "includes/product_card.html" with products=product %}
+        {% empty %}
+            <div class="flex-col h-screen col-span-4 flex px-4">
                 <h3 class="text-center my-5">No Favourites Added</h3>
-                <a class="like btn btn-danger text-white mx-auto my-5" href="{% url 'categories' %}">
+                <a class="rounded-lg p-3 bg-button hover:bg-buttonHover text-white my-5 mx-auto" href="{% url 'products_list' %}">
                     Back To Products
                 </a>
             </div>
-        {% endif %}
+        {% endfor %}
+        </div>
     </div>
 </div>
+{% endblock %}

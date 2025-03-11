@@ -1,27 +1,20 @@
-<!--
-Template for displaying and editing user shipping details.
-
-This template renders a form for users to view and edit their shipping details.
-
-Contents:
-- Form for editing user shipping details.
-- Card with a header indicating "Shipping Details."
--->
+{% extends 'profile/base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
 
-<div class="container">
-    <!-- Account details card-->
-    <div class="card mb-4">
-        <div class="card-header">Shipping Details</div>
-        <div class="card-body">
-            <form method="post" action="{% url 'shipping_address_view' %}" enctype="multipart/form-data">
-                {% csrf_token %}               
-                {{ shipping_address_form | crispy }}
-                <!-- Save changes button-->
-                <button class="btn btn-primary" type="submit">Save changes</button>
-            </form>
-        </div>
+{% block profile %}
+<div class="max-w-3xl mx-auto">
+    <!-- Account details card -->
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-lg font-semibold border-b pb-2 mb-4">Shipping Details</h2>
+        <form method="post" action="{% url 'shipping_address_view' %}" enctype="multipart/form-data" class="space-y-4">
+            {% csrf_token %}
+            {{ form | crispy }}
+            <!-- Save changes button -->
+            <button class="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition">
+                Save Changes
+            </button>
+        </form>
     </div>
 </div>
-
+{% endblock %}

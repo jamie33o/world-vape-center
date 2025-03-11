@@ -10,14 +10,6 @@ This script utilizes jQuery and handles the following functionality:
 */
 $(document).ready(function(){
 
-    $('.folder-link').click(function(){
-        $('.folder').addClass('d-none');
-        $('.folder-link').addClass('mt-3');
-        $(this).removeClass('mt-3');
-        $($(this).data('id')).removeClass('d-none');
-    });
-
-
     $('#id_profile_image').change(function () {
         // Get the selected file
         var fileInput = $(this)[0];

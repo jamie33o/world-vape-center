@@ -61,3 +61,4 @@ class Favourite(models.Model):
 
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
     products = models.ManyToManyField(Product)
+

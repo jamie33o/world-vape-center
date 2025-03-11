@@ -33,132 +33,121 @@ from .forms import ShippingAddressForm, ProfileUpdateForm
 from .forms import SignupForm, SigninForm
 
 
-@method_decorator(login_required, name='dispatch')
-class ProfileView(View):
-    """
-    Display and handle updates for the user's profile.
+@login_required
+def profile_view(request):
 
-    This view allows users to view and update their profile information,
-    including shipping address, orders, and favorites.
-
-    Attributes:
-    - template_name (str): The template used to render the profile page.
-    """
-
-    template_name = 'profile/base.html'
-
-    def get(self, request, **kwargs):
-        """
-        Handle GET requests for the user's profile.
-
-        Returns:
-        - HttpResponse: Rendered profile page.
-        """
-
-        ticket_form = TicketForm()
-
-        ticket_response_form = TicketResponseForm()
-
-        # Get the user's ticket
-        user_tickets = Ticket.objects.filter(user=request.user).order_by('-created_at')
-        
-        user_address_instance = request.user.user_address.first()
-
-        user_form = ProfileUpdateForm(instance=request.user)
-        shipping_address_form = ShippingAddressForm(
-            instance=user_address_instance
-            )
-        user_orders = Order.objects.filter(user=request.user)
-
-        try:
-            favourites = Favourite.objects.get(user=request.user)
-        except Favourite.DoesNotExist:
-            favourites = None
-
-        if favourites:
-            favourite_products = favourites.products.all()
-        else:
-            favourite_products = None
-
-        context = {
-            'user_form': user_form,
-            'shipping_address_form': shipping_address_form,
-            'user_orders': user_orders,
-            'favourites': favourite_products,
-            'ticket_form': ticket_form,
-            'user_tickets': user_tickets,
-            'ticket_response_form': ticket_response_form
-        }
-        
-        # Access the 'open_ticket' argument
-        ticket = self.kwargs.get('ticket')
-
-        if ticket:
-            context['open_ticket'] = True
-
-        return render(request, self.template_name, context)
-
-    @method_decorator(require_POST)
-    def post(self, request):
-        """
-        Handle POST requests for updating the user's profile.
-
-        Returns:
-        - HttpResponse: Redirects to the 'profile'
-        page after updating the profile.
-        """
-        user_form = ProfileUpdateForm(request.POST,
-                                      request.FILES, instance=request.user)
-
+    if request.method == 'POST':
+        user_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
         if user_form.is_valid():
             user_form.save()
             messages.success(request, 'Profile Updated!!')
         else:
             messages.error(request, user_form.errors)
-
         return redirect('profile')
+    else:
+        user_form = ProfileUpdateForm(instance=request.user)
 
+    context = {
+            'user_form': user_form,
+        }
+    
+    return render(request, 'profile/profile.html', context)
+ 
 
-@require_POST
+@login_required
 def shipping_address_view(request):
     """
-    Handle updating the user's shipping address.
+    Handle displaying and updating the user's shipping address.
 
-    This view processes a POST request for
-    updating the user's shipping address.
-    If the user doesn't have a shipping address,
-    a new instance is created.
-    The shipping address form is then populated
-    with the user's address data,
-    validated, and saved.
+    - GET: Displays the shipping address form pre-filled with existing data.
+    - POST: Updates the shipping address if the form is valid.
 
     Parameters:
     - request (HttpRequest): The HTTP request object.
 
     Returns:
-    - HttpResponse: Redirects to the 'profile' page
-    after updating the shipping address.
+    - HttpResponse: Redirects to 'profile' after successful update or renders the form on GET.
     """
     user_address_instance = request.user.user_address.first()
 
-    if user_address_instance is None:
-        # If the user doesn't have a shipping address, create a new instance
-        user_address_instance = ShippingAddress(user=request.user)
+    if request.method == "POST":
+        if user_address_instance is None:
+            user_address_instance = ShippingAddress(user=request.user)
 
-    shipping_address_form = ShippingAddressForm(request.POST,
-                                                instance=user_address_instance)
+        shipping_address_form = ShippingAddressForm(request.POST, instance=user_address_instance)
 
-    if shipping_address_form.is_valid():
-        shipping_address_form.save()
-        messages.success(request,
-                         'Shipping Address Updated!!')
+        if shipping_address_form.is_valid():
+            shipping_address_form.save()
+            messages.success(request, "Shipping Address Updated!")
+            return redirect("shipping_address_view")
+        else:
+            messages.error(request, "Error updating shipping address. Please check the form.")
+
     else:
-        messages.error(request,
-                       'Error updating shipping address.\
-                       Please check the form.')
+        # GET request: Populate the form with existing address data
+        shipping_address_form = ShippingAddressForm(instance=user_address_instance)
 
-    return redirect('profile')
+    return render(request, "profile/address.html", {"form": shipping_address_form})
 
+@login_required
+def favourites_view(request):
+    """
+    Handle displaying the user's favourite products.
+
+    Parameters:
+    - request (HttpRequest): The HTTP request object.
+
+    Returns:
+    - HttpResponse: Rendered favourites page.
+    """
+    try:
+        favourites = Favourite.objects.get(user=request.user)
+        favourite_products = favourites.products.all()
+    except Favourite.DoesNotExist:
+        favourites = None
+        favourite_products = None
+
+    return render(request, 'profile/favourites.html', {'favourites': favourite_products})
+
+@login_required
+def orders_view(request):
+    """
+    Handle displaying the user's orders.
+
+    Parameters:
+    - request (HttpRequest): The HTTP request object.
+
+    Returns:
+    - HttpResponse: Rendered orders page.
+    """
+    user_orders = Order.objects.filter(user=request.user)
+    return render(request, 'profile/orders.html', {'user_orders': user_orders})
+
+
+@login_required
+def tickets_view(request):
+    """
+    Handle displaying the user's tickets.
+
+    Parameters:
+    - request (HttpRequest): The HTTP request object.
+
+    Returns:
+    - HttpResponse: Rendered tickets page.
+    """
+    ticket_form = TicketForm()
+
+    ticket_response_form = TicketResponseForm()
+
+    user_tickets = Ticket.objects.filter(user=request.user).order_by('-created_at')
+
+    context ={
+    'ticket_response_form': ticket_response_form,
+    'ticket_form': ticket_form,
+    'user_tickets': user_tickets
+    }
+
+    return render(request, 'profile/tickets.html', context)
 
 @require_POST
 def signup_view(request):
@@ -193,7 +182,6 @@ def signup_view(request):
         return redirect(redirect_url)
 
     except Exception as e:
-        print(e)
         messages.error(request, f'We are very sorry, \
                     an unknown error occurred: {e}... PLEASE CONTACT US!!!')
         return redirect('contact_us')

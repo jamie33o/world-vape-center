@@ -1,99 +1,98 @@
+{% extends 'profile/base.html' %}
 
-    <!-- Billing history card-->
-    <div class="card mb-4">
-        <div class="card-header">Order History</div>
-        <div class="card-body p-0">
-            <!-- Billing history table-->
-            <div class="table-responsive table-billing-history">
-                {% if user_orders %}
-                <table class="table mb-0 text-nowrap">
-                    <thead>
-                        <tr>
-                            <th class="border-gray-200" scope="col">Order number</th>
-                            <th class="border-gray-200" scope="col">Date</th>
-                            <th class="border-gray-200" scope="col">Amount</th>
-                            <th class="border-gray-200" scope="col">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for order in user_orders %}
-                        <tr>
-                            <td>{{ order.order_number  }}</td>
-                            <td>{{ order.date }}</td>
-                            <td>{{ order.grand_total }}</td>
-                            <td><span class="badge bg-light text-dark">{{ order.status }}</span></td>
-                            <td>
-                                <button
-                                    class="btn btn-info"
-                                    data-toggle="collapse"
-                                    data-target="#collapse{{order.id}}"
-                                    aria-expanded="true"
-                                    aria-controls="collapse{{order.id}}">
-                                    View More
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">
-                                <div
-                                    id="collapse{{order.id}}"
-                                    class="collapse"
-                                    aria-labelledby="heading{{order.id}}"
-                                    data-parent="#accordion">
-                                    <div class="card-body">
-                                        <table class="table mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="border-gray-200" scope="col">Product Image</th>
-                                                    <th class="border-gray-200" scope="col">Name</th>
-                                                    <th class="border-gray-200" scope="col">Choice</th>
-                                                    <th class="border-gray-200" scope="col">Quantity</th>
-                                                    <th class="border-gray-200" scope="col">lineitem_total</th>
-                                                    <th class="border-gray-200" scope="col"></th>
-
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {% for item in order.lineitems.all %}
-                                                <tr>
-                                                    <td><img width="50" src="{{ item.product.image.url }}" alt="Product image"></td>
-                                                    <td>{{ item.product.name }}</td>
-                                                    <td>{{ item.product_option }}</td>
-                                                    <td>{{ item.quantity }}</td>
-                                                    <td>{{ item.lineitem_total }}</td>
-                                                    <td>
-                                                        <form method="post" action="{% url 'cart-add' %}" >
-                                                            {% csrf_token %}
-                                                            <input type="hidden" name="product_quantity" value="1">
-                                                            <input type="hidden" name="product_id" value="{{ item.product.id }}">
-
-                                                            <input type="hidden" name="redirect_url" value="{% url 'profile' %}">
-                                
-                                                            <button class="btn btn-warning text-white font-weight-bold" type="submit">
-                                                                Add To Cart
-                                                            </button>                   
-                                                        </form>
-                                                    </td>
-                                                </tr>
-                                                {% endfor %}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-                {% else %}
-                <div class="d-flex align-items-center flex-column justify-content-center px-4">
-                    <h3 class="text-center my-5">No Orders Yet!</h3>
-                    <a class="like btn btn-danger text-white mx-auto my-5" href="{% url 'categories' %}">
-                        Back To Products
-                    </a>
-                </div>
-                {% endif %}
-
+{% block profile %}
+    <div class="bg-white shadow-md rounded-lg p-6 mb-4">
+        <div class="text-lg font-semibold border-b pb-2 mb-4">Order History</div>
+        <div class="overflow-x-auto">
+            {% if user_orders %}
+            <table class="w-full text-sm text-left text-gray-700 border border-gray-200">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="px-4 py-2 border">Order Number</th>
+                        <th class="px-4 py-2 border">Date</th>
+                        <th class="px-4 py-2 border">Amount</th>
+                        <th class="px-4 py-2 border">Status</th>
+                        <th class="px-4 py-2 border">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in user_orders %}
+                    <tr class="border-b">
+                        <td class="px-4 py-2">{{ order.order_number }}</td>
+                        <td class="px-4 py-2">{{ order.date }}</td>
+                        <td class="px-4 py-2">{{ order.grand_total }}</td>
+                        <td class="px-4 py-2">
+                            <span class="px-2 py-1 text-xs font-semibold text-gray-700 bg-gray-200 rounded">
+                                {{ order.status }}
+                            </span>
+                        </td>
+                        <td class="px-4 py-2">
+                            <button
+                                class="bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-1 rounded transition"
+                                onclick="toggleDetails('collapse{{ order.id }}')">
+                                View More
+                            </button>
+                        </td>
+                    </tr>
+                    <tr id="collapse{{ order.id }}" class="hidden">
+                        <td colspan="5">
+                            <div class="p-4 bg-gray-50 rounded-lg">
+                                <table class="w-full text-sm text-gray-700 border border-gray-200">
+                                    <thead class="bg-gray-100">
+                                        <tr>
+                                            <th class="px-4 py-2 border">Product Image</th>
+                                            <th class="px-4 py-2 border">Name</th>
+                                            <th class="px-4 py-2 border">Choice</th>
+                                            <th class="px-4 py-2 border">Quantity</th>
+                                            <th class="px-4 py-2 border">Total</th>
+                                            <th class="px-4 py-2 border"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in order.lineitems.all %}
+                                        <tr class="border-b">
+                                            <td class="px-4 py-2">
+                                                <img class="w-12 h-12 object-cover rounded" src="{{ item.product.image.url }}" alt="Product image">
+                                            </td>
+                                            <td class="px-4 py-2">{{ item.product.name }}</td>
+                                            <td class="px-4 py-2">{{ item.product_option }}</td>
+                                            <td class="px-4 py-2">{{ item.quantity }}</td>
+                                            <td class="px-4 py-2">{{ item.lineitem_total }}</td>
+                                            <td class="px-4 py-2">
+                                                <form method="post" action="{% url 'cart-add' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="product_quantity" value="1">
+                                                    <input type="hidden" name="product_id" value="{{ item.product.id }}">
+                                                    <input type="hidden" name="redirect_url" value="{% url 'profile' %}">
+                                                    <button class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-3 py-1 rounded transition" type="submit">
+                                                        Add To Cart
+                                                    </button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="flex flex-col items-center justify-center px-4">
+                <h3 class="text-lg font-semibold my-5">No Orders Yet!</h3>
+                <a class="bg-button hover:bg-buttonHover text-white px-4 py-2 rounded transition" href="{% url 'products_list' %}">
+                    Back To Products
+                </a>
             </div>
+            {% endif %}
         </div>
     </div>
+
+    <script>
+        function toggleDetails(id) {
+            document.getElementById(id).classList.toggle("hidden");
+        }
+    </script>
+{% endblock %}

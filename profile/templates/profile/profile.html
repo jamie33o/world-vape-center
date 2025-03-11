@@ -1,55 +1,35 @@
-<!--
-Template for user profile editing, including profile picture and account details.
-
-This template renders a form for users to edit their profile information, including
-uploading a profile picture and updating account details.
-
-Contents:
-- Form for editing user profile information.
-- Two main sections: one for profile picture and another for account details.
-- Profile picture section displays the current profile picture or a placeholder if none.
-- Account details section includes a form with crispy form tags for user details editing.
--->
-
-{% load static %}
-{% comment %} load the crispy form tags {% endcomment %}
+{% extends 'profile/base.html' %}
 {% load crispy_forms_tags %}
 
-<form method="post" action="{% url 'profile' %}" enctype="multipart/form-data">
-    {% csrf_token %}
-    <div class="row">
-
-        <div class="col-xl-4">
-           
-            <!-- Profile picture card-->
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Profile Picture</div>
-                <div class="card-body text-center">
-                    <!-- Profile picture image-->
+{% block profile %}
+    <form method="post" action="{% url 'profile' %}" enctype="multipart/form-data" class="w-full mx-auto">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Profile Picture Section -->
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-lg font-semibold border-b pb-2 mb-4">Profile Picture</h2>
+                <div class="flex flex-col items-center">
                     {% if request.user.profile_image %}
-                    <img class="img-account-profile img-thumbnail rounded-circle mb-2" src="{{ request.user.profile_image.url }}" height="415" width="415" alt="profile picture">
-
+                        <img class="w-32 h-32 object-cover rounded-full border border-gray-300 mb-2" src="{{ request.user.profile_image.url }}" alt="Profile picture">
                     {% else %}
-                    <img class="img-account-profile img-thumbnail rounded-circle mb-2" src="{% static 'profile_placeholder.webp' %}" height="415" width="415" alt="profile picture">
+                        <div class="rounded-full w-32 h-32 bg-gray-200 flex items-center justify-center text-gray-600 text-4xl">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
                     {% endif %}
-                    <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                    <div class="img-link"></div>
-                   
+                    <p class="text-sm text-gray-500 mt-2">JPG or PNG no larger than 5 MB</p>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-8">
-            <!-- Account details card-->
-            <div class="card mb-4">
-                <div class="card-header">Account Details</div>
-                <div class="card-body">
-                     {{ user_form | crispy }}
-                    <!-- Save changes button-->
-                    <button class="btn btn-primary" type="submit">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form>
 
+            <!-- Account Details Section -->
+            <div class="col-span-2 bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-lg font-semibold border-b pb-2 mb-4">Account Details</h2>
+                <div class="space-y-4">
+                    {{ user_form | crispy }}
+                </div>
+                <button class="mt-4 w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

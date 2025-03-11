@@ -1,24 +1,5 @@
-<!--
-Template for the user profile page.
-
-This template extends the 'base.html' template and includes sections for displaying
-different aspects of the user profile, such as profile information, favorites, shipping
-details, and orders.
-
-Contents:
-- Static file loading for CSS and JavaScript.
-- Custom CSS and JavaScript files for styling and interactivity.
-- Block definitions for extra CSS, extra JS, breadcrumb, and content.
-- Navigation buttons for different sections of the user profile.
-- Sections for displaying user profile, favorites, shipping details, and orders.
--->
-
 {% extends "base.html" %}
 {% load static %}
-
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'profile/css/profile.css' %}">
-{% endblock %}
 
 {% block extra_js %}
     <script src="{% static 'profile/js/profile.js' %}"></script>
@@ -28,41 +9,33 @@ Contents:
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid px-1 px-sm-4 mt-4 pt-5 accordion-control">
-        <!-- Account page navigation-->
-        <nav class="nav nav-borders ml-2 ml-sm-5">
-            <button class="nav-link folder-link btn px-2 px-lg-4" data-id="#profile">Profile</button>
-            <button class="nav-link folder-link btn mt-3 px-2 px-lg-4" data-id="#address">Shipping</button>
-            <button class="nav-link folder-link btn mt-3 px-2 px-lg-4" data-id="#orders">Orders</button>
-            <button class="nav-link folder-link btn mt-3 px-2 px-lg-4" data-id="#favs">Favs</button>
-            <button class="ticket-btn nav-link folder-link btn mt-3 px-2 px-lg-4" data-id="#tickets">Tickets</button>
-        </nav>
-        <div class="file p-2 p-sm-5">
-            <div id="profile" class="folder">
-            {% include 'profile/profile.html' %}
-            </div>
-            <div id="favs" class="folder d-none">
-                {% include 'profile/favourites.html' %}
-            </div>
-            <div id="address" class="folder d-none">
-                {% include 'profile/address.html' %}
-            </div>
-            <div id="orders" class="folder d-none">
-                {% include 'profile/orders.html' %}
-            </div>
-            <div id="tickets" class="folder d-none">
-                {% include 'profile/tickets.html' %}
-            </div>
+    <div class="container sm:px-8 mt-4 pt-5">
+        <div class="md:ml-5 z-10">
+            <ul class="flex flex-wrap font-montserrat font-semibold text-button">
+                <li class="p-4 border-2 rounded-t-lg bg-white flex-1 md:flex-none md:justify-center {% if request.path == '/profile/' %}-mb-4  {% else %}mt-3 -mb-4{% endif %}">
+                    <a href="{% url 'profile' %}" class="underline-hover">Profile</a>
+                </li>
+                <li class="p-4 border-2 rounded-t-lg bg-white flex-1 md:flex-none justify-center {% if request.path == '/profile/shipping/' %}-mb-4{% else %}mt-3 -mb-4{% endif %}">
+                    <a href="{% url 'shipping_address_view' %}" class="underline-hover">Shipping</a>
+                </li>
+                <li class="p-4  border-2 rounded-t-lg bg-white flex-1 md:flex-none justify-center {% if request.path == '/profile/orders/' %}-mb-4{% else %}mt-3 -mb-4{% endif %}">
+                    <a href="{% url 'profile_orders' %}" class="underline-hover">orders</a>
+                </li>
+                <li class="p-4 border-2 rounded-t-lg bg-white flex-1 md:flex-none justify-center {% if request.path == '/profile/favourites/' %}-mb-2{% else %}mt-3 -mb-2{% endif %}">
+                    <a href="{% url 'favourites' %}" class="underline-hover">Favourites</a>
+                </li>
+                <li class="p-4 border-2 rounded-t-lg bg-white flex-1 md:flex-none justify-center {% if request.path == '/profile/tickets/' %}-mb-2{% else %}mt-3 -mb-2{% endif %}">
+                    <a href="{% url 'profile_tickets' %}" class="underline-hover">Tickets</a>
+                </li>
+            </ul>
+        </div>
+        <div class="relative z-20 p-4 border-2 rounded-lg bg-gray-50 dark:bg-gray-800">
+            {% block profile %}
+            {% endblock %}
         </div>
     </div>
 {% endblock %}
 
 {% block extra_postloadjs %}
-    <script>
-        {% if 'open_ticket' in request.path %}
-            $(document).ready(function() {
-                $('.ticket-btn').click();
-            });
-        {% endif %}
-    </script>
+<script src="{% static 'products/js/fav_btn.js' %}"></script>
 {% endblock %}

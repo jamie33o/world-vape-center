@@ -37,10 +37,8 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css"
 			integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc="
 			crossorigin="anonymous" />
-		{% comment %}
 		<link rel="stylesheet" href="{% static 'css/base.css' %}" />
-		<link rel="stylesheet" href="{% static 'products/css/product-list.css' %}" />
-		{% endcomment %}
+		
 		<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
 
 		{% comment %}
@@ -71,14 +69,13 @@
 
 		<title>World Vape Center {% block extra_title %}{% endblock %}</title>
 	</head>
-	<body>
+	<body class="bg-primaryBackground">
 		<header
 			class="py-2 fixed top-0 left-0 right-0 z-50 bg-header shadow-lg border-0 rounded-t-none">
 			{% block header %}
 			<div class="flex items-center justify-between px-4">
 				<div class="flex">
-					<a
-						href="{% url 'home' %}"
+					<a href="{% url 'home' %}"
 						class="flex items-center gap-x-2 bg-white rounded-full"
 						aria-label="Homepage">
 						<img
@@ -115,7 +112,6 @@
 			<div class="mobile-search-form max-h-0 opacity-0 flex lg:hidden transition-all duration-500 ease-in-out">
 				{% include 'includes/search-form.html' %}
 			</div>
-
 			{% endblock %} 
 		</header>
 

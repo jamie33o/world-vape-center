@@ -18,7 +18,8 @@
         </div>
         <div class="w-full flex items-center space-x-2 px-2 h-12">
           <h4 class="text-2xl font-semibold font-linksFont text-buttonHover">
-            €{% if not product.discounted_price %}
+            {{ currency_symbol|default:'€' }} 
+            {% if not product.discounted_price %}
               {{ product.price }}
             {% else %}
               {{ product.discounted_price }}
@@ -26,7 +27,7 @@
           </h4>
           {% if product.discounted_price %}
             <p class="text-red-500 font-bold">
-              <del>€ {{ product.price }}</del>
+              <del>{{ currency_symbol|default:'€' }} {{ product.price }}</del>
             </p>
           {% endif %}
           {% if product.free_shipping %}

@@ -6,7 +6,7 @@
 <div class="bg-white shadow-md rounded-lg p-6 mb-4">
     <div class="flex justify-between items-center border-b pb-2 mb-4">
         <h3 class="text-lg font-semibold">Tickets</h3>
-        <button type="button" class="bg-blue-500 hover:bg-blue-600 text-white text-sm px-4 py-2 rounded transition" onclick="openModal()">
+        <button type="button" class="bg-button hover:bg-buttonHover text-buttonText text-sm px-4 py-2 rounded transition" onclick="openModal()">
             Open Ticket
         </button>
     </div>
@@ -36,7 +36,7 @@
                         </span>
                     </td>
                     <td class="px-4 py-2">
-                        <button type="button" class="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded transition" onclick="toggleDetails('collapseticket{{ ticket.id }}')">
+                        <button type="button" class="bg-button hover:bg-buttonHover text-buttonText text-sm px-3 py-1 rounded transition" onclick="toggleDetails('collapseticket{{ ticket.id }}')">
                             View More
                         </button>
                     </td>
@@ -72,7 +72,7 @@
                                         {% csrf_token %}
                                         <input type="hidden" name="url" value="{% url 'profile_tickets' %}">
                                         {{ ticket_response_form | crispy }}
-                                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded transition mt-2">
+                                        <button type="submit" class="bg-button hover:bg-buttonHover text-buttonText text-sm px-3 py-1 rounded transition mt-2">
                                             Submit
                                         </button>
                                     </form>
@@ -91,7 +91,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="url" value="{% url 'profile_tickets' %}">
                 {{ ticket_form | crispy }}
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition mt-2">
+                <button type="submit" class="bg-button hover:bg-buttonHover text-buttonText text-white px-4 py-2 rounded transition mt-2">
                     Submit
                 </button>
             </form>
@@ -112,7 +112,7 @@
                 {% csrf_token %}
                 <input type="hidden" name="url" value="{% url 'profile_tickets' %}">
                 {{ ticket_form | crispy }}
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition w-full">
+                <button type="submit" class="bg-button hover:bg-buttonHover text-buttonText px-4 py-2 rounded transition w-full">
                     Submit
                 </button>
             </form>

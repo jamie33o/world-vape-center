@@ -11,7 +11,7 @@
 {% block extra_title %}- Product Details{% endblock %}
 
 {% block content %}
-    <div class="bg-gray-100 border border-gray-200 shadow-[0_0_8px_rgba(0,0,0,0.3)]">
+<div class="bg-gray-100 border border-gray-200 shadow-[0_0_8px_rgba(0,0,0,0.3)]">
     <div class="container mx-auto px-4 py-8">
         <div class="flex flex-wrap -mx-4">
             <!-- Product Images -->
@@ -128,16 +128,15 @@
 
     <div class="p-5 mx-auto px-4 py-8 w-full">
         {% include 'includes/carousel.html' with products=category_products heading='Best Selling Products' %}
-    
-      </div>
+    </div>
 
 
-    <div class="w-full pt-3 px-2 sm:px-3 lg:px-5">
+    <div class="w-full pt-3">
         <hr class="border-gray-300">
         
-        <div class="mt-10 flex flex-col md:flex-row">
+        <div class="mt-10 flex flex-col md:flex-row gap-4">
             <!-- Review Button Section -->
-            <div class="md:w-1/2 p-1">
+            <div class="md:w-1/2">
                 <div class="bg-white p-4 rounded-lg shadow-md border">
                     <div class="text-right bg-gray-100 border rounded-md p-3">
                         {% if request.user.is_authenticated %}
@@ -156,42 +155,39 @@
 
                     <!-- Hidden Review Box -->
                     <div class="hidden p-1" id="post-review-box">
-                        <div class="w-full">
-                            <form class="review-form" data-url="{% url 'post_review' product.id %}">
-                                {% csrf_token %}
-                                <input id="ratings-hidden" name="rating" type="hidden">
-                                
-                                <textarea class="w-full p-3 border rounded-md focus:ring focus:ring-blue-200"
-                                        id="new-review"
-                                        name="comment"
-                                        placeholder="Enter your review here..."
-                                        required
-                                        rows="5"></textarea>
+                        <form class="review-form" data-url="{% url 'post_review' product.id %}">
+                            {% csrf_token %}
+                            <input id="ratings-hidden" name="rating" type="hidden">
+                            
+                            <textarea class="w-full p-3 border rounded-md focus:ring focus:ring-blue-200"
+                                    id="new-review"
+                                    name="comment"
+                                    placeholder="Enter your review here..."
+                                    required
+                                    rows="5"></textarea>
 
-                                <div class="flex justify-end mt-3 space-x-3">
-                                    <div class="stars starrr" data-rating="0"></div>
+                            <div class="flex justify-end mt-3 space-x-3">
+                                <div class="stars starrr" data-rating="0"></div>
 
-                                    <a class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition hidden"
-                                    href="#"
-                                    id="close-review-box">
-                                        <i class="fa-solid fa-xmark text-white"></i> Cancel
-                                    </a>
-                                    <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md transition" type="submit">
-                                        Save
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
+                                <a class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md transition hidden"
+                                href="#"
+                                id="close-review-box">
+                                    <i class="fa-solid fa-xmark text-white"></i> Cancel
+                                </a>
+                                <button class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md transition" type="submit">
+                                    Save
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
+
+            <div class="reviews-list md:w-1/2 p-1 bg-white rounded-lg p-5 border border-gray-200 shadow-lg" id="reviews">
+                {% include 'includes/reviews.html' with reviews=reviews %}
+            </div> 
         </div>
     </div>
 
-        <div class="col-sm-6 reviews-list p-1" id="reviews">
-           {% include 'includes/reviews.html' with reviews=reviews %}
-        </div> 
-    </div>
-</div>
 {% endblock %}
 

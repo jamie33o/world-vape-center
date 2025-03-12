@@ -1,6 +1,7 @@
 from django import forms
 from .models import Review
-from .models import Brand
+from .models import Brand, ProductVariant
+from collections import defaultdict
 
 
 class ReviewForm(forms.ModelForm):
@@ -29,18 +30,11 @@ class ReviewForm(forms.ModelForm):
         'comment': forms.Textarea(attrs={'class': 'form-control'}),
     }
 
-
 class FiltersForm(forms.Form):
     """
     Form for applying filters to product listings.
-
-    Attributes:
-    - brands (ModelMultipleChoiceField):
-    Multiple choice field for brands.
-    - multi_options (ModelMultipleChoiceField):
-    Multiple choice field for multi-options.
-
     """
+
     brands = forms.ModelMultipleChoiceField(
         queryset=Brand.objects.all(),
         widget=forms.CheckboxSelectMultiple,
@@ -48,9 +42,20 @@ class FiltersForm(forms.Form):
         to_field_name='slug'
     )
 
-    # multi_options = forms.ModelMultipleChoiceField(
-    #     queryset=MultiOption.objects.all(),
-    #     widget=forms.CheckboxSelectMultiple,
-    #     required=False,
-    #     to_field_name='slug'
-    # )
+    variants = forms.ModelMultipleChoiceField(
+        queryset=ProductVariant.objects.all(),
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+        to_field_name='id'
+    )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        # Group variants by their type
+        grouped_variants = defaultdict(list)
+        for variant in ProductVariant.objects.all():
+            grouped_variants[variant.variant_type].append((variant.id, variant.name))
+
+        # Store grouped variants as choices in a dictionary
+        self.grouped_variants = dict(grouped_variants)

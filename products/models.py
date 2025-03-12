@@ -61,6 +61,12 @@ class Brand(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+    def product_count(self):
+        """
+        Returns the count of products associated with this brand.
+        """
+        return Product.objects.filter(brand=self).count()
+
     def __str__(self):
         """
         Returns a string representation of the brand.
@@ -149,6 +155,22 @@ class Product(models.Model):
         return round(average_rating) if average_rating is not None else 0
 
 
+    def get_variant_options(self):
+        """
+        Returns a dictionary where keys are variant types (e.g., color, size)
+        and values are lists of available options for each type.
+        """
+        variants = self.variants.all()  # Get all variants for this product
+        variant_dict = {}
+
+        for variant in variants:
+            if variant.variant_type not in variant_dict:
+                variant_dict[variant.variant_type] = []
+            if variant.name not in variant_dict[variant.variant_type]:
+                variant_dict[variant.variant_type].append(variant.name)
+
+        return variant_dict  # Example: {'color': ['Red', 'Blue'], 'size': ['Small', 'Large']}
+
 class ProductVariant(models.Model):
     """
     Model representing a variant of a product.
@@ -178,6 +200,12 @@ class ProductVariant(models.Model):
     sku = models.CharField(max_length=254, unique=True, null=True, blank=True)
     countInStock = models.IntegerField(null=True, blank=True, default=0)
     additional_info = models.TextField(null=True, blank=True)
+
+    def variant_count(self):
+        """
+        Returns the count of products having this variant.
+        """
+        return ProductVariant.objects.filter(variant_type=self.variant_type, name=self.name).count()
 
     def __str__(self):
         return f"{self.name} - {self.variant_type} - Stock: {self.countInStock}"

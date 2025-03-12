@@ -12,7 +12,7 @@
 {% block content %}
 <div class="mx-auto">
     <div class="w-full bg-tertiaryBackground h-32 flex rounded-lg my-10">
-        <h1 class="text-lg md:text-2xl font-semibold p-10 text-white font-montserrat">{%  if category  %}{{category.name|capfirst}} {% else %}  Search Results  {% endif %}</h1>
+        <h1 class="text-lg md:text-2xl font-semibold p-10 text-white font-montserrat">{% if category  %}{{category.name|capfirst}} {% else %}  Search Results  {% endif %}</h1>
     </div>
     {% if category.description %}
         <div class="flex flex-row justify-center mb-10">
@@ -27,16 +27,16 @@
             {% include 'includes/filters.html' with category=category %}
         </div>
         <div class="w-full lg:w-4/5">
-            <div class="bg-white p-0">
+            <div class="bg-white p-0 rounded-lg shadow-[0_0_8px_rgba(0,0,0,0.3)] border border-gray-300">
                 <div class="border-b py-2">
                     <div class="flex flex-wrap">
                         <div class="flex items-center">
                             <button class="filter-btn block lg:hidden"><i class="fa-solid fa-filter"></i> Filter</button>
                         </div>
                        
-                        <div class="flex items-center justify-end ml-auto">
+                        <div class="flex items-center justify-end ml-auto mr-5">
                             <form method="get" action="{% url 'products_list_by_category' category %}">
-                                <label for="items_per_page" class="font-medium">Items per page:</label>
+                                <label for="items_per_page" class="font-semibold text-button">Items per page:</label>
                                 <select name="items_per_page" id="items_per_page" class="ml-2 text-black border w-24 cursor-pointer rounded" onchange="this.form.submit()">
                                     <option value="24" {% if items_per_page == 24 %}selected{% endif %}>24</option>
                                     <option value="36" {% if items_per_page == 36 %}selected{% endif %}>36</option>

@@ -5,7 +5,6 @@ from products.models import ProductVariant
 
 
 class Cart():
-
     """
     Shopping Cart class to manage user's shopping cart.
 

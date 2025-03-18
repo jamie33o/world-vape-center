@@ -1,6 +1,6 @@
 {% load custom_filters %}
 {% if user.is_authenticated %}
-    <form  class="fav-form relative inline-block group-hover/item:bg-red-500 transition duration-300 ease-in-out flex items-center" action="{% url 'add_to_favorites' product.id %}" method="POST">
+    <form  class="h-full rounded fav-form relative inline-block group-hover/item:bg-red-500 transition duration-300 ease-in-out flex items-center" action="{% url 'add_to_favorites' product.id %}" method="POST">
         {% csrf_token %}
         {% if product|is_favorited_by:request.user %}
             <button class="group-hover/item:text-white text-red-500 font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out flex items-center gap-2" 
@@ -12,14 +12,14 @@
                 Remove from Favourites!
             </span>
         {% else %}
-        <button class="group-hover/item:text-white text-red-500 font-semibold py-2 px-4 rounded-full transition duration-300 ease-in-out flex items-center gap-2" 
-            type="submit" aria-label="Favourite Button">
-            <span class="fa fa-heart"></span>
-        </button>
-        <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover/item:opacity-100 transition-opacity duration-300
-                    before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:top-full before:border-4 before:border-transparent before:border-t-gray-800">
-            Add to Favourites!
-        </span>
+            <button class="group-hover/item:text-white text-red-500 py-2 px-4 font-semibold rounded-full transition duration-300 ease-in-out flex items-center gap-2" 
+                type="submit" aria-label="Favourite Button">
+                <span class="fa fa-heart"></span>
+            </button>
+            <span class="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 px-2 py-1 text-xs text-white bg-gray-800 rounded opacity-0 group-hover/item:opacity-100 transition-opacity duration-300
+                        before:content-[''] before:absolute before:left-1/2 before:-translate-x-1/2 before:top-full before:border-4 before:border-transparent before:border-t-gray-800">
+                Add to Favourites!
+            </span>
         {% endif %}
        
     </form>

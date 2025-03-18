@@ -4,11 +4,11 @@
     {% endif %}
 
     <a href="{% url 'product_details' slug=product.slug %}" class="group w-full border-0 h-full">
-      <div class="w-full h-64 overflow-hidden">
-        {% if product.image %}
-          <img class="m-auto w-full h-auto object-contain" src="{{ product.image.url }}" alt="product image" />
+      <div class="mx-auto w-full bg-gray-200 flex items-center justify-center  h-64 overflow-hidden">
+        {% if product.variants.first.image %}
+          <img class="m-auto w-full h-auto object-contain" src="{{ product.variants.first.image.url }}" alt="product image" />
         {% else %}
-          <div class="mx-auto w-full h-full bg-gray-200 flex items-center justify-center text-gray-600 text-lg font-semibold">No Image</div>
+          <div class="text-gray-600 text-lg font-semibold">No Image</div>
         {% endif %}
       </div>
 

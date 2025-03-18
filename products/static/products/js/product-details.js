@@ -5,6 +5,18 @@ $(document).ready(function () {
 	var closeReviewBtn = $("#close-review-box");
 	var ratingsField = $("#ratings-hidden");
 
+	$('.sec-img').click(function (e) {
+		e.preventDefault();
+		let mainImage = $(".main-img");  // Select the main image
+		let mainSrc = mainImage.attr("src");  // Get current main image src
+		let clickedThumbnail = $(this);  // Get clicked thumbnail
+		let thumbnailSrc = clickedThumbnail.attr("src");  // Get clicked thumbnail src
+
+		// Swap src between main image and clicked thumbnail
+		mainImage.attr("src", thumbnailSrc);
+		clickedThumbnail.attr("src", mainSrc);
+	});
+
 	// Open Review Form
 	openReviewBtn.click(function (e) {
 		e.preventDefault();

@@ -215,7 +215,6 @@ vape_brands = [
     "pod-salt"
 ]
 
-
 def create_fixture(model_name, pk, fields):
     """
     Create a fixture dictionary for a Django model.
@@ -316,7 +315,7 @@ def add_extension_to_files_in_folder():
     for folder in os.listdir('media'):
         full_path = os.path.join('media', folder)
 
-        if folder != 'jumbotron_images' and os.path.isdir(full_path):
+        if folder != 'hero_section' and folder != 'profile_images' and os.path.isdir(full_path):
             category_name_n_slug = format_category_name(folder)
             category_fixture = create_fixture("category", category_id,
                                               {"name": category_name_n_slug[0],
@@ -358,11 +357,8 @@ def add_extension_to_files_in_folder():
                                        folder + '/' + filename,
                                        )
                     product_id += 1
-
                     brand_pk = None
-
             category_id += 1
-
 
 add_extension_to_files_in_folder()
 

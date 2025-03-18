@@ -16,14 +16,14 @@
     </div>
     {% if category.description %}
         <div class="flex flex-row justify-center mb-10">
-            <p class="text-md ">{{ category.description }}</p>
+            <p class="text-md text-textDark font-montserrat">{{ category.description }}</p>
         </div>
     {% endif %}
     
     <div class="flex flex-row justify-center mb-5">
         <div class="fixed top-0 w-full h-full bg-black opacity-50 filter-overlay hidden"></div>
             
-        <div class="z-10 z-0 absolute transform -translate-x-full lg:translate-x-0 transition-transform duration-300 left-0 w-2/3 lg:relative xl:flex lg:w-1/5 p-0 filter-mobile overflow-auto h-full">
+        <div class="z-10 z-0 absolute transform -translate-x-full lg:translate-x-0 transition-transform duration-300 left-0 w-2/3 lg:relative xl:flex lg:w-1/5 p-0 filter-mobile overflow-auto lg:overflow-visible h-full">
             {% include 'includes/filters.html' with category=category %}
         </div>
         <div class="w-full lg:w-4/5">
@@ -60,11 +60,11 @@
                 <div class="p-3">
                     <div class="flex  justify-center divide-x-2 space-x-2 border-t-2">
                         {% if products.has_previous %}
-                        <a class="underline-hover text-button font-semibold py-2 px-4 rounded-lg flex items-center justify-center space-x-2" 
-                            href="?page={{ products.previous_page_number }}">
-                            <i class="fa fa-chevron-left"></i>
-                            <span>Previous</span>
-                        </a>
+                            <a class="underline-hover text-button font-semibold py-2 px-4 rounded-lg flex items-center justify-center space-x-2" 
+                                href="?page={{ products.previous_page_number }}">
+                                <i class="fa fa-chevron-left"></i>
+                                <span>Previous</span>
+                            </a>
                         {% endif %}
                         <span class="lg:hidden">Page {{ products.number }} of {{ products.paginator.num_pages }}.</span>
                         <div class="hidden lg:flex space-x-2 text-xl divide-x-2">
@@ -82,12 +82,11 @@
                             {% endfor %}
                         </div>
                         {% if products.has_next %}
-                        <a class="underline-hover text-button font-semibold py-2 px-4 flex items-center justify-center space-x-2" 
-                            href="?page={{ products.next_page_number }}">
-                            <span>Next</span> 
-                            <i class="fa fa-chevron-right"></i>
-                        </a>
-                     
+                            <a class="underline-hover text-button font-semibold py-2 px-4 flex items-center justify-center space-x-2" 
+                                href="?page={{ products.next_page_number }}">
+                                <span>Next</span> 
+                                <i class="fa fa-chevron-right"></i>
+                            </a>
                         {% endif %}
                     </div>                
                 </div>

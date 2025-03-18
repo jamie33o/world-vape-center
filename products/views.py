@@ -133,11 +133,7 @@ class ProductDetailView(View):
         try:
             reviews = Review.objects.filter(product=product)
             category_products = Product.objects.filter(category=product.category)
-            # form = AddToCartForm(
-            #         product_id=product.id,
-            #         product_options=product.options.all(),
-            #         product_option_name=product.options_name
-            #     )
+            form = AddToCartForm(product=product)
             sign_up_form = SignupForm(auto_id='signup_%s')
             sign_in_form = SigninForm(auto_id='signin_%s')
             url = reverse('products_list_by_category',
@@ -148,7 +144,7 @@ class ProductDetailView(View):
                 'product': product,
                 'reviews': reviews,
                 'category_products': category_products,
-                # 'form': form,
+                'form': form,
                 'url': url
             }
             if not request.user.is_authenticated:

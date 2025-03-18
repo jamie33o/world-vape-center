@@ -120,8 +120,13 @@ class Product(models.Model):
         max_digits=4, decimal_places=2, null=True, blank=True)
     discounted_price = models.DecimalField(
         max_digits=4, decimal_places=2, null=True, blank=True)
-    image = models.ImageField(upload_to='products', null=True, blank=True)
 
+    def has_variants(self):
+        """
+        Returns True if the product has variants.
+        """
+        return self.variants.exists()
+    
     def __str__(self):
         """
         Returns a string representation of the product.
@@ -140,8 +145,11 @@ class Product(models.Model):
         """
         if not self.slug and self.name:
             self.slug = slugify(self.name)
+        if not self.sku:
+            self.sku = f"{self.name}-{self.id}"  # Assigns SKU for the main product
         super().save(*args, **kwargs)
 
+   
     def average_rating(self):
         """
         Calculates the average rating of the product's reviews.
@@ -154,22 +162,30 @@ class Product(models.Model):
             .aggregate(Avg('rating'))['rating__avg']
         return round(average_rating) if average_rating is not None else 0
 
-
     def get_variant_options(self):
         """
-        Returns a dictionary where keys are variant types (e.g., color, size)
+        Returns a dictionary where keys are human-readable variant types (e.g., 'Color', 'Size')
         and values are lists of available options for each type.
         """
         variants = self.variants.all()  # Get all variants for this product
         variant_dict = {}
 
-        for variant in variants:
-            if variant.variant_type not in variant_dict:
-                variant_dict[variant.variant_type] = []
-            if variant.name not in variant_dict[variant.variant_type]:
-                variant_dict[variant.variant_type].append(variant.name)
+        # Convert VARIANT_CHOICES into a dictionary for easy lookup
+        variant_type_dict = dict(ProductVariant.VARIANT_CHOICES)  # {'color': 'Color', 'size': 'Size'}
 
-        return variant_dict  # Example: {'color': ['Red', 'Blue'], 'size': ['Small', 'Large']}
+        for variant in variants:
+            # Get human-readable name for the variant type
+            variant_label = variant_type_dict.get(variant.variant_type, variant.variant_type)  # Default to key if not found
+
+            if variant_label not in variant_dict:
+                variant_dict[variant_label] = []
+
+            if variant.name not in variant_dict[variant_label]:
+                variant_dict[variant_label].append(variant.name)
+
+        return variant_dict  # Example: {'Color': ['Red', 'Blue'], 'Size': ['Small', 'Large']}
+
+
 
 class ProductVariant(models.Model):
     """
@@ -187,7 +203,7 @@ class ProductVariant(models.Model):
     Methods:
     - __str__(): Returns a string representation of the product variant.
     """
-    OPTION_CHOICES = [
+    VARIANT_CHOICES = [
         ('flavor', 'Flavor'),
         ('nicotine', 'Nicotine Strength'),
         ('size', 'Size'),
@@ -195,7 +211,7 @@ class ProductVariant(models.Model):
     ]
     product = models.ForeignKey(Product, related_name='variants', on_delete=models.CASCADE)
     image = models.ImageField(null=True, blank=True)
-    variant_type = models.CharField(max_length=50, choices=OPTION_CHOICES, null=True, blank=True)
+    variant_type = models.CharField(max_length=50, choices=VARIANT_CHOICES, null=True, blank=True)
     name = models.CharField(max_length=254, null=True, blank=True)
     sku = models.CharField(max_length=254, unique=True, null=True, blank=True)
     countInStock = models.IntegerField(null=True, blank=True, default=0)
@@ -207,8 +223,16 @@ class ProductVariant(models.Model):
         """
         return ProductVariant.objects.filter(variant_type=self.variant_type, name=self.name).count()
 
+    def save(self, *args, **kwargs):
+        """
+        Automatically generate SKU if not provided.
+        """
+        if not self.sku:
+            self.sku = f"{self.product.slug}-{self.variant_type}-{self.name}".replace(" ", "-").upper()
+        super().save(*args, **kwargs)
+
     def __str__(self):
-        return f"{self.name} - {self.variant_type} - Stock: {self.countInStock}"
+        return f"{self.product.name} - {self.variant_type}: {self.name}"
 
 
 class Review(models.Model):

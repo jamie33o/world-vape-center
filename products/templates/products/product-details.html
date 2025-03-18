@@ -16,20 +16,24 @@
         <div class="flex flex-wrap -mx-4">
             <!-- Product Images -->
             <div class="w-full md:w-1/2 px-4 mb-8">
-                {% if product.image %}
-                    <img class="m-auto w-full h-auto object-contain" src="{{ product.image.url }}" alt="product image" />
+                {% if product.variants.all %}
+                <div class="flex justify-center items-center bg-gray-200 w-full h-96 p-5 rounded-md overflow-hidden">
+                    <img class="main-img m-auto w-full h-96 object-contain" src="{{ product.variants.first.image.url }}" alt="product image" />
+                </div>
                 {% else %}
-                    <div class="mx-auto w-full h-full bg-gray-200 flex items-center justify-center text-gray-600 text-lg font-semibold">No Image</div>
+                    <div class="main-img mx-auto w-full h-full bg-gray-200 flex items-center justify-center text-gray-600 text-lg font-semibold">No Image</div>
                 {% endif %}
 
                 <div class="flex gap-4 py-4 justify-center overflow-x-auto">
                     {% for variant in product.variants.all %}
-                        {% if variant.image %}
-                            <img src="{{variant.image.url}}" alt="Thumbnail"
-                                class="size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
-                                onclick="changeImage(this.src)">
-                        {% else %}
-                            <div class="size-16 sm:size-20 bg-gray-200 flex items-center justify-center text-gray-600 text-lg font-semibold">No Image</div>
+                        {% if not forloop.first %}
+                            {% if variant.image %}
+                                <img src="{{variant.image.url}}" alt="Thumbnail" data-variant-name="{{variant.name}}"
+                                    class="sec-img size-16 sm:size-20 object-cover rounded-md cursor-pointer opacity-60 hover:opacity-100 transition duration-300"
+                                    >
+                            {% else %}
+                                <div class="size-16 sm:size-20 bg-gray-200 flex items-center justify-center text-gray-600 text-lg font-semibold">No Image</div>
+                            {% endif %}
                         {% endif %}
                     {% endfor %}
                 </div>
@@ -41,15 +45,15 @@
                 {% comment %} <p class="text-gray-600 mb-4">SKU: {{ product.sku }}</p> {% endcomment %}
                 <div class="mb-4">
                     {% if product.discounted_price %}
-                        <span class="text-2xl font-bold mr-2 font-roboto">{{ product.discounted_price }}</span>
-                        <span class="text-gray-500 line-through font-roboto">{{ product.price }}</span>
+                        <span class="text-2xl font-bold mr-2 font-roboto">{{ currency|default:'€' }} {{ product.discounted_price }}</span>
+                        <span class="text-gray-500 line-through font-roboto">{{ currency|default:'€' }} {{ product.price }}</span>
                     {% else %}
-                    <span class="text-2xl font-bold mr-2 font-roboto">€ {{ product.price }}</span>
+                    <span class="text-2xl font-bold mr-2 font-roboto">{{ currency|default:'€' }} {{ product.price }}</span>
                     {% endif %}
                 </div>
                 <div class="flex items-center mb-4">
                     <div class="d-flex justify-content-between">
-                        <h5 class="font-weight-bold text-info">{{ product.brand.name }}</h5>
+                        <h5 class="font-weight-bold text-info text-textDark">{{ product.brand.name|capfirst }}</h5>
                         <div class="flex">
                             {% include 'includes/ratings.html' with product=product %}
                             <a href="#reviews" class="ml-2 text-gray-600">{{ product.num_reviews }} reviews</a>
@@ -57,41 +61,29 @@
                     </div>
                 </div>
                 <p class="text-gray-700 mb-6">{{ product.description }}.</p>
-        
-                <div class="mb-6">
-                    {% for variant_type, options in product.get_variant_options.items %}
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-semibold mb-2">
-                                {{ variant_type|title }}:
-                            </label>
-                            <select name="{{ variant_type }}" class="w-full p-2 border rounded-md focus:ring focus:ring-blue-200">
-                                <option value="" disabled selected>Select {{ variant_type|title }}</option>
-                                {% for option in options %}
-                                    <option value="{{ option }}">{{ option }}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                    {% endfor %}
-                </div>
+                
+                <form method="post" action="{% url 'cart-add' product.id %}">
+                    {% csrf_token %}
+                    <div class="mb-6">
+                        {% for field in form %}
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-semibold mb-2">
+                                    {{ field.label }}
+                                </label>
+                                {{ field }} 
+                            </div>
+                        {% endfor %}
+                    </div>
     
-                <div class="mb-6">
-                    <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Quantity:</label>
-                    <input type="number" id="quantity" name="quantity" min="1" value="1"
-                                class="w-12 text-center rounded-md border-gray-300  shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                </div>
-        
-                <div class="flex space-x-4 mb-6">
-                        <form method="post" action="{% url 'cart-add' %}" >
-                            {% csrf_token %}
-                            {% comment %} {{ form | crispy }} {% endcomment %}
-                            <input type="hidden" name="redirect_url" value="{% url 'product_details' product.slug %}">
-
-                            <button type="submit" class="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                                Add To Cart
-                            </button>                   
-                        </form>
-                        {% include 'includes/favourite-btn.html' %}
-                </div>
+                    <div class="flex space-x-4 mb-6">
+                        <button type="submit" class="bg-indigo-600 flex gap-2 items-center text-white px-6 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            Add To Cart
+                        </button>                   
+                        <div class="flex group/item relative items-center border rounded-md bg-gray-200">
+                            {% include 'includes/favourite-btn.html' %}
+                        </div>
+                    </div>
+                </form>
                 <div class="flex flex-col md:flex-row gap-4 mb-6">
                     <!-- Continue Shopping Button -->
                     <div class="w-4/5 sm:w-2/5 md:w-full lg:w-2/5">
@@ -191,3 +183,8 @@
 
 {% endblock %}
 
+{% block extra_postloadjs %}  
+
+<script src="{% static 'products/js/fav_btn.js' %}"></script>
+
+{% endblock %}  

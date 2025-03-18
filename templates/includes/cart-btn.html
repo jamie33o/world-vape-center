@@ -9,7 +9,7 @@
 		class="ml-auto fa-solid fa-cart-shopping text-2xl text-buttonText"></i>
 	<span
 		class="text-sm text-buttonText  font-semibold"
-		>{{ currency_symbol|default:'€' }}{{ total|floatformat:2|default:0 }}</span
+		>{{ currency_symbol|default:'€' }}{{ cart.get_total_before_shipping|floatformat:2|default:0 }}</span
 	>
 </a>
 </div>

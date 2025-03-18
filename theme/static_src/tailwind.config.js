@@ -48,18 +48,18 @@ module.exports = {
                 linksHover: " #F9FAFB", // Custom blue
                 mainBackground: " #F9FAFB", // Custom gray
                 footer: " #1A202C", // Custom gray
-
-                buttonHover: " #5584b0 ", 
+                button: " #5584b0", // Custom blue
+                buttonHover: " #254e7a", 
                 buttonText: " #f7f3ea", // Custom white
                 buttonTextHover: "rgb(4, 24, 91)", // Custom white
-
+                primaryBackground: " #f7f3ea", // Custom white
+                textDark: "rgb(66, 67, 68)", // Custom gray
+                textLight: " #F9FAFB", // Custom white
               },
               backgroundImage: {
-                'button1': "radial-gradient(circle, #f7f3ea, #5584b0 )",
-                'header': "linear-gradient(180deg, #2c3e50, #254e7a)",
+                'header': "linear-gradient(180deg, #5584b0  20%, #254e7a 50%, #1A202C 80%)",
                 'secondaryBackground': "radial-gradient(circle, #f7f3ea, #5584b0 )",
-                'button': "linear-gradient(0deg, #254e7a, #82c2e6,  #254e7a)",
-                'buttonHover': "radial-gradient(circle, #5584b0,  #2c3e50, #254e7a)",
+                'tertiaryBackground': "linear-gradient(90deg, #254e7a 50%, #82c2e6 90%)"
               },
               fontFamily: {
                 poppins: ["Poppins", "sans-serif"],
@@ -88,7 +88,8 @@ module.exports = {
         "bg-secondaryBackground",
         "bg-footer",
         "max-h-[500px]", 
-        "opacity-100"
+        "opacity-100",
+        "rotate-180",
     ],
     plugins: [
         /**

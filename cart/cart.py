@@ -1,7 +1,7 @@
 import uuid
 from decimal import Decimal
 from django.shortcuts import get_object_or_404
-from products.models import Product
+from products.models import ProductVariant
 
 
 class Cart():
@@ -42,7 +42,7 @@ class Cart():
         self.cart_updated = cart_updated
 
 
-    def add(self, product, product_qty, product_choice):
+    def add(self, product_qty, product_variant):
         """
         Add a product to the shopping cart.
 
@@ -60,34 +60,30 @@ class Cart():
             The session will be marked as modified to save the changes.
         """
         self.cart_updated['cart_bool'] = True
-        product_key = product.id
-
-        if product_choice:
-            product_key = f"{product.id}-{product_choice}"
+        product_key = product_variant.sku
 
         if product_key in self.cart:
             self.cart[product_key]['qty'] = product_qty if \
                 product_qty > 1 else self.cart[product_key].get('qty') + 1
         else:
-            self.cart[product_key] = {'price': str(product.price),
+            self.cart[product_key] = {'price': str(product_variant.product.price),
                                       'qty': product_qty}
 
-            if product.discounted_price:
+            if product_variant.product.discounted_price:
                 self.cart[product_key]['discounted_price'] = \
-                    str(product.discounted_price)
+                    str(product_variant.product.discounted_price)
 
-        if product_choice:
-            self.cart[product_key]['product_choice'] = product_choice
+        
 
         self.session.modified = True
 
 
-    def delete(self, product, product_choice):
+    def delete(self, sku):
         """
         Delete a product from the shopping cart.
 
         Args:
-            product (str or Product): The product or product ID to be deleted.
+            product (str or Product): The product or product sku to be deleted.
 
         Returns:
             None
@@ -99,17 +95,12 @@ class Cart():
         """
         self.cart_updated['cart_bool'] = True
 
-        product_id = str(product)
-        product_key = product_id
-        if product_choice:
-            product_key = f"{product_id}-{product_choice}"
-
-        if product_key in self.cart:
-            del self.cart[product_key]
+        if sku in self.cart:
+            del self.cart[sku]
 
         self.session.modified = True
 
-    def update(self, product, qty, product_choice):
+    def update(self, sku, qty):
         """
         Update the quantity of a product in the shopping cart.
 
@@ -127,15 +118,10 @@ class Cart():
         """
         self.cart_updated['cart_bool'] = True
 
-        product_id = str(product)
-        product_key = product_id
-        if product_choice:
-            product_key = f"{product_id}-{product_choice}"
-
         product_quantity = qty
 
-        if product_key in self.cart:
-            self.cart[product_key]['qty'] = product_quantity
+        if sku in self.cart:
+            self.cart[sku]['qty'] = product_quantity
 
         self.session.modified = True
 
@@ -171,23 +157,28 @@ class Cart():
 
 
         cart = self.cart.copy()
+        print('cart', cart.items())
 
         for product_key, item in cart.items():
-            if '-' in product_key:
-                product_key, product_choice = product_key.split('-') 
-            product = get_object_or_404(Product, id=product_key) 
+        
+            product_variant = get_object_or_404(ProductVariant, sku=product_key) 
+
+            variant_type_dict = dict(ProductVariant.VARIANT_CHOICES)  # Convert to dictionary
+            choice = variant_type_dict.get(product_variant.variant_type, product_variant.variant_type)  # Default to original if not found
+
 
             item['product'] = {
-                'name': product.name,
-                'price': str(product.price),
-                'discounted_price': str(product.discounted_price) \
-                    if product.discounted_price else None,
-                'slug': product.slug,
-                'category': {'slug': product.category.slug,
-                             'name': product.category.name},
-                'id': product.id,
-                'image': {'url': product.image.url},
-                'options_name': product.options_name
+                'name': product_variant.product.name,
+                'price': str(product_variant.product.price),
+                'discounted_price': str(product_variant.product.discounted_price) \
+                    if product_variant.product.discounted_price else None,
+                'slug': product_variant.product.slug,
+                'category': {'slug': product_variant.product.category.slug,
+                             'name': product_variant.product.category.name},
+                'sku': product_variant.sku,
+                'image': {'url': product_variant.image.url},
+                'variant_name': product_variant.name,
+                'variant_type': choice
             }
 
             item['total'] = Decimal(item['discounted_price'])\
@@ -318,6 +309,20 @@ class Cart():
                                                        False)
         )
         return total_discount if total_discount else 0
+
+
+    def get_total_before_shipping(self):
+        """
+        Get the total amount before adding shipping but after applying discounts.
+        
+        Returns:
+            Decimal: The total amount after applying discounts but before shipping.
+        """
+        subtotal = self.get_subtotal()  # Get subtotal before discounts
+        discount = self.get_discounted_total()  # Get total discount applied
+        
+        return subtotal - discount if discount else subtotal
+    
 
     def clear_cart(self):
         """

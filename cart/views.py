@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 from django.contrib import messages
-from products.models import Product
+from products.models import Product, ProductVariant
 from cart.forms import AddToCartForm
 from .cart import Cart
 
@@ -29,7 +29,8 @@ def cart_summary(request):
             'cart': cart,
             'discounted_products': discounted_products,
         })
-    except Exception:
+    except Exception as e:
+        print(e)
         messages.error(request,
                        'Error trying to retrieve cart \
                        summary!!! Please contact us!!!')
@@ -37,7 +38,7 @@ def cart_summary(request):
 
 
 @require_POST
-def cart_add(request):
+def cart_add(request, product_id):
     """
     Add a product to the shopping cart.
 
@@ -50,33 +51,40 @@ def cart_add(request):
     """
     try:
         cart = Cart(request)
-        form = AddToCartForm(request.POST)
+        product = get_object_or_404(Product, id=product_id)
+        form = AddToCartForm(request.POST, product=product)
 
         if form.is_valid():
-            redirect_url = request.POST.get('redirect_url')
-            product_quantity = form.cleaned_data['product_quantity']
-            product_choice = request.POST.get('options')
-            product_id = form.cleaned_data['product_id']
-
-            product = get_object_or_404(Product, id=product_id)
-
-            cart.add(product=product,
-                     product_qty=int(product_quantity),
-                     product_choice=product_choice)
+            selected_variants = {
+                variant_type: form.cleaned_data[variant_type]
+                for variant_type in product.get_variant_options().keys()
+            }
+            
+            quantity = form.cleaned_data["quantity"]
+            
+            # Find the matching variant
+            variant = ProductVariant.objects.filter(
+                product=product,
+                name__in=selected_variants.values()
+            ).first()
+            
+            cart.add(product_qty=int(quantity),
+                     product_variant=variant)
             messages.success(request,
                             'Product added to cart')
-            return redirect(redirect_url)
+            return redirect(request.META.get('HTTP_REFERER', '/'))
 
         messages.error(request,
                        f'Could not add product to cart: {form.errors}')
-        return redirect('cart-summary')
-    except Exception:
+        return redirect(request.META.get('HTTP_REFERER', '/'))
+    except Exception as e:
+        print(e)
         messages.error(request, 'Could not add product to cart')
-        return redirect('cart-summary')
+        return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 @require_POST
-def cart_delete(request):
+def cart_delete(request, sku):
     """
     Delete a product from the shopping cart.
 
@@ -90,10 +98,7 @@ def cart_delete(request):
     try:
         cart = Cart(request)
 
-        product_id = int(request.POST.get('product_id'))
-        product_choice = request.POST.get('product_choice')
-        cart.delete(product=product_id,
-                    product_choice=product_choice)
+        cart.delete(sku=sku)
         messages.success(request, 'Product removed!!!')
         return redirect('cart-summary')
     except Exception:
@@ -102,7 +107,7 @@ def cart_delete(request):
 
 
 @require_POST
-def cart_update(request):
+def cart_update(request, sku):
     """
     Update the quantity of a product in the shopping cart.
 
@@ -116,12 +121,9 @@ def cart_update(request):
     try:
         cart = Cart(request)
 
-        product_id = int(request.POST.get('product_id'))
         product_quantity = int(request.POST.get('product_quantity'))
-        product_choice = request.POST.get('product_choice')
 
-        cart.update(product=product_id, qty=product_quantity,
-                    product_choice=product_choice)
+        cart.update(sku=sku, qty=product_quantity)
 
         messages.success(request, 'Quantity updated!!!')
         return redirect('cart-summary')

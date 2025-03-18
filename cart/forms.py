@@ -1,55 +1,35 @@
 from django import forms
 
-
 class AddToCartForm(forms.Form):
-    """
-    Form for adding a product to the shopping cart.
+    quantity = forms.IntegerField(
+        min_value=1,
+        initial=1,
+        widget=forms.NumberInput(attrs={
+            "class": "w-16 text-center rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+        })
+    )
 
-    Attributes:
-        options (forms.ChoiceField): A radio select field for product options.
-        product_quantity (forms.ChoiceField): A select field for
-        choosing the quantity.
-        product_id (forms.IntegerField): A hidden input field for
-        storing the product ID.
-    """
+    def __init__(self, *args, product=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.product = product
 
-    def __init__(self, *args, **kwargs):
-        """
-        Initialize the form with the specified product details.
+        if product and product.has_variants():
+            for variant_type, options in product.get_variant_options().items():
+                choices = []
+                for option in options:
+                    # Get stock count for this variant
+                    variant = product.variants.filter(variant_type=variant_type, name=option).first()
+                    stock_count = variant.countInStock if variant else 0
 
-        Args:
-            *args: Variable length argument list.
-            **kwargs: Arbitrary keyword arguments.
+                    # Format the option with stock count
+                    formatted_option = f"{option} ({stock_count} in stock)"
+                    choices.append((option, formatted_option))
 
-        Keyword Args:
-            product_id (int): The ID of the product.
-            product_option_name (str): The name of the product option.
-            product_options (list): List of product options.
-
-        """
-        product_id = kwargs.pop('product_id', None)
-        product_option_name = kwargs.pop('product_option_name', None)
-        product_options = kwargs.pop('product_options', [])
-        super(AddToCartForm, self).__init__(*args, **kwargs)
-
-        if product_options:
-            self.fields['options'] = forms.ChoiceField(
-                label=product_option_name,
-                widget=forms.RadioSelect,
-                choices=[(option.name, option.name)
-                         for option in product_options],
-                required=False,
-                initial=product_options[0].name if product_options else None,
-            )
-
-        self.fields['product_quantity'] = forms.ChoiceField(
-            choices=[(str(i), str(i)) for i in range(1, 9)],
-            widget=forms.Select(attrs={'class':
-                                'form-select form-select-sm form-qty'}),
-            initial='1',
-        )
-
-        self.fields['product_id'] = forms.IntegerField(
-            widget=forms.HiddenInput(),
-            initial=product_id,
-        )
+                self.fields[variant_type] = forms.ChoiceField(
+                    choices=choices,
+                    required=True,
+                    widget=forms.Select(attrs={
+                        "class": "w-full p-2 border rounded-md focus:ring focus:ring-blue-200"
+                    })
+                )
+            

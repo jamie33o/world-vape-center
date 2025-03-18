@@ -4,13 +4,16 @@
 
 @layer components {
     .underline-hover {
-        @apply relative before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-0 
-               before:h-[2px] before:bg-linksHover before:transition-all before:duration-300 
-               hover:before:w-full;
+        @apply relative inline z-0 bg-gradient-to-r from-current to-current bg-no-repeat 
+               bg-left-bottom bg-[length:0%_1px] hover:bg-[length:100%_1px] group-hover:bg-[length:100%_1px] 
+               transition-all duration-300 decoration-[1px] decoration-current decoration-clone;
+        -webkit-box-decoration-break: clone;
+        box-decoration-break: clone;
     }
-
-
 }
+
+
+
 @layer utilities {
     .clip-path-custom {
       clip-path: polygon(0 0, 100% 0, calc(100% - 20px) 100%, 0% 100%);

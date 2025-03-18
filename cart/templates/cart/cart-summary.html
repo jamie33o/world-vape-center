@@ -1,240 +1,152 @@
-{% extends "base.html" %} 
-{% load static %} 
-
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'cart/css/cart-summary.css' %}">
-{% endblock %} 
+{% extends "base.html" %}
+{% load static %}
 
 {% block extra_meta %}
-<meta name="description" content="Review and manage your vape product selections at the World Vape Center shopping cart. Explore a variety of e-cigarettes, e-liquids, and accessories in your cart. Securely proceed to checkout and enjoy a fast order confirmation process.">
+<meta name="description" content="Review and manage your vape product selections at the World Vape Center shopping cart. Securely proceed to checkout.">
 <meta name="keywords" content="shopping cart, vape products, e-cigarettes, e-liquids, cart review, secure checkout">
 {% endblock %}
 
 {% block extra_title %}- Shopping Cart{% endblock %}
 
-
 {% block breadcrumb %}
-<div class="container">
-    <nav aria-label="breadcrumb" class="d-none bc-con w-100">
-        <ol class="bg-none mt-3 list-unstyled d-flex">
-            <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'cart-summary' %}">Cart</a></li>
-            <li class="breadcrumb-item"><a href="{% url 'checkout' %}">Checkout</a></li>
-            <li class="breadcrumb-item">Order Success</li> 
+<div class="container mx-auto p-4">
+    <nav class="text-sm text-gray-500">
+        <ol class="flex space-x-2">
+            <li><a href="{% url 'cart-summary' %}" class="text-gray-700 hover:underline">Cart</a></li>
+            <li>/</li>
+            <li><a href="{% url 'checkout' %}" class="text-gray-700 hover:underline">Checkout</a></li>
+            <li>/</li>
+            <li class="text-gray-400">Order Success</li>
         </ol>
     </nav>
 </div>
 {% endblock %}
 
 {% block content %}
+<div class="container mx-auto p-4">
+    <h1 class="text-xl font-semibold mb-4">Shopping Cart</h1>
+    <hr class="border-gray-300 mb-6">
 
-<div class="container">
-    <h1 class="h5">Shopping cart</h1>
-    <hr>
-    <div class="row mb-5">
-        <div class="col-12 col-lg-8">
-            {% for item in cart %} 
+    <div class="grid md:grid-cols-2 gap-6">
+        <!-- Cart Items -->
+        <div>
+            {% for item in cart %}
             {% with product=item.product %}
-            <div class="card border shadow-none">
-                <div class="card-body">
-                    <div class="d-flex align-items-start border-bottom pb-3">
-                        <div class="me-4">
-                            <img
-                                class="img-fluid mx-auto d-block"
-                                width="100px"
-                                alt="Responsive image"
-                                src="{{ product.image.url }}">
-                            <!-- Product image -->
-                        </div>
-                        <div class="flex-grow-1 align-self-center overflow-hidden">
-                            <div>
-                                <a
-                                    href="{% url 'product_details' product.category.slug product.slug %}"
-                                    class="text-info text-decoration-none">
-                                    <!-- Product get absolute url -->
-                                    <h5 class="h5 pt-2">{{product.name}}<!-- Product title --></h5>
-                                </a>
-                                {% include 'components/ratings.html' with product=product %}
-                                {% if item.product_choice %}
-                                    <p class="mb-0 mt-1">{{ product.options_name }}: <span class="fw-medium">{{ item.product_choice }}</span></p>
-                                {% endif %}
-                            </div>
-                        </div>
-                        {% if request.user.is_authenticated %}
-                        <form class="like-form d-inline mr-2 ml-4" action="{% url 'add_to_favorites' product.id %}" method="POST">
+            <div class="bg-white shadow rounded-lg p-4 mb-4 border">
+                <div class="flex items-start border-b pb-4">
+                    <img class="w-24 h-24 object-contain rounded-md" src="{{ product.image.url }}" alt="Product Image">
+                    
+                    <div class="ml-4 flex-grow">
+                        <a href="{% url 'product_details' product.slug %}" class="text-lg font-semibold text-indigo-600 hover:underline">
+                            {{ product.name }}
+                        </a>
+                        {% include 'components/ratings.html' with product=product %}
+                        {% if product.variant_name %}
+                        <p class="text-gray-600 text-sm mt-1">{{ product.variant_type }}: <span class="font-medium">{{ product.variant_name }}</span></p>
+                        {% endif %}
+                    </div>
+
+                    <form method="post" action="{% url 'cart-delete' product.sku %}">
+                        {% csrf_token %}
+                        <button class="text-red-600 hover:text-red-800" type="submit">✖</button>
+                    </form>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 mt-3">
+                    <!-- Price -->
+                    <div>
+                        <p class="text-gray-500 text-sm">Price</p>
+                        {% if product.discounted_price %}
+                        <p class="text-lg font-semibold">€{{ product.discounted_price }}</p>
+                        <p class="text-sm text-gray-500 line-through">€{{ product.price }}</p>
+                        {% else %}
+                        <p class="text-lg font-semibold">€{{ product.price }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Quantity -->
+                    <div>
+                        <p class="text-gray-500 text-sm">Quantity</p>
+                        <form method="post" class="flex-col md:flex-row flex gap-2" action="{% url 'cart-update' product.sku %}">
                             {% csrf_token %}
-                            <button class="like btn btn-warning text-white" type="submit" aria-label="add to favourites">
-                                <span class="fa fa-heart"></span>
+                            <select name="product_quantity" class="border w-16 rounded p-2">
+                                <option selected>{{ item.qty }}</option>
+                                {% for i in "12345678"|make_list %}
+                                <option value="{{ i }}">{{ i }}</option>
+                                {% endfor %}
+                            </select>
+                            <button class=" bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700" type="submit">
+                                Update
                             </button>
                         </form>
-                        {% endif %}
-                        <form method="post" action="{% url 'cart-delete' %}" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            {% if item.product_choice %}
-                                <input type="hidden" name="product_choice" value="{{ item.product_choice }}">
-                            {% endif %}
-                            <input type="hidden" name="product_id" value="{{ product.id }}">
-                            <button class="btn btn-danger" type="submit">X</button>
-                        </form>
                     </div>
 
+                    <!-- Total -->
                     <div>
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <div class="mt-3">
-                                    <p class="text-muted mb-2">Price</p>
-                                    {% if product.discounted_price %}
-                                        <h5 class="mb-0 mt-2">€ {{ product.discounted_price }} - <span class="text-muted me-2"><del class="font-size-16 fw-normal">€ {{product.price }}</del></span></h5>
-                                    {% else %}
-                                        <h4 class="price text-muted"><span class="price-amount">€ {{ product.price }} </span></h4>
-                                    {% endif %}
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div class="mt-3">
-                                    <form method="post" action="{% url 'cart-update' %}" enctype="multipart/form-data">
-                                        {% csrf_token %}
-                                        <label for="select{{product.id}}" class="text-muted mb-2">Quantity</p>
-                                        <div class="d-inline-flex">
-                                            <select
-                                                id="select{{product.id}}" name="product_quantity"
-                                                class="form-select form-select-sm w-xl" >
-                                                <option selected>
-                                                    {{item.qty}}
-                                                </option>
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                                <option value="5">5</option>
-                                                <option value="6">6</option>
-                                                <option value="7">7</option>
-                                                <option value="8">8</option>
-                                            </select>
-                                        </div>
-                                        {% if item.product_choice %}
-                                            <input type="hidden" name="product_choice" value="{{ item.product_choice }}">
-                                        {% endif %}
-                                        <input type="hidden" name="product_id" value="{{ product.id }}">
-                                        <button class="btn btn-success" type="submit">Update</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="mt-3">
-                                    <p class="text-muted mb-2">Total</p>
-                                    <h5>
-                                        € {{ item.total }} 
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="text-gray-500 text-sm">Total</p>
+                        <p class="text-lg font-semibold">€{{ item.total }}</p>
                     </div>
                 </div>
             </div>
-
-            {% endwith %} 
+            {% endwith %}
             {% endfor %}
-
         </div>
 
-        <!-- end row-->
+        <!-- Order Summary -->
+        <div class="bg-white shadow rounded-lg p-6 border">
+            <h2 class="text-lg font-semibold mb-4">Order Summary</h2>
+            <hr class="border-gray-300 mb-4">
 
-        <div class="col-12 col-lg-4">
-            <div class="mt-5 mt-sm-0">
-                <div class="card border shadow-none">
-                    <div class="card-header bg-transparent border-bottom py-3 px-4">
-                        <h5 class="font-size-16 mb-0">
-                            Order Summary <span class="float-end">(#{{ cart.get_order_num }})</span>
-                        </h5>
-                    </div>
-                    <div class="card-body p-4 pt-2">
-                        <div class="table-responsive">
-                            <table class="table mb-0">
-                                <tbody> 
-                                    <tr>
-                                        <td>Sub Total:</td>
-                                        <td class="text-end">€{{ cart.get_subtotal }}</td>
-                                    </tr>
-                                    {% if cart.get_discounted_total %}
-                                        <tr>
-                                            <td>Discount :</td>
-                                            <td class="text-end">€{{ cart.get_discounted_total }}</td>
-                                        </tr>
-                                    {% endif %}
-                                   
-                                    <tr>
-                                        <td>Shipping Charge :</td>
-                                        <td class="text-end">{% if cart.get_delivery_cost %}€ {{ cart.get_delivery_cost }}{% else %}<span class="h6 text-success">Free Delivery</span>{% endif %}</td>
-                                    </tr>
-                                    <tr class="bg-light">
-                                        <th>Total :</th>
-                                        <td class="text-end">
-                                            <span class="fw-bold">€{{ cart.get_grand_total }} </span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- end table-responsive -->
-                    </div>
+            <div class="space-y-2">
+                <div class="flex justify-between">
+                    <p class="text-gray-500">Sub Total:</p>
+                    <p class="text-lg font-semibold">€{{ cart.get_subtotal }}</p>
                 </div>
-            </div>        
-            <div class="d-flex flex-column flex-xl-row justify-content-between">
-                <a href="{% url 'categories' %}" class="btn btn-info text-white continue-shopping  m-1 mt-xl-0">
-                    <i class="mdi mdi-arrow-left"></i> Continue Shopping
+                {% if cart.get_discounted_total %}
+                <div class="flex justify-between">
+                    <p class="text-gray-500">Discount:</p>
+                    <p class="text-lg font-semibold text-red-500">-€{{ cart.get_discounted_total }}</p>
+                </div>
+                {% endif %}
+                <div class="flex justify-between">
+                    <p class="text-gray-500">Shipping:</p>
+                    <p class="text-lg font-semibold">
+                        {% if cart.get_delivery_cost %}
+                        €{{ cart.get_delivery_cost }}
+                        {% else %}
+                        <span class="text-green-600">Free Delivery</span>
+                        {% endif %}
+                    </p>
+                </div>
+                <hr class="border-gray-300">
+                <div class="flex justify-between text-lg font-semibold">
+                    <p>Total:</p>
+                    <p>€{{ cart.get_grand_total }}</p>
+                </div>
+            </div>
+
+            <div class="mt-6 flex flex-col md:flex-row gap-3">
+                <a href="{% url 'products_list' %}" class="flex-1 text-center bg-gray-500 text-white py-2 rounded hover:bg-gray-600">
+                    Continue Shopping
                 </a>
-            
-                <a href="{% url 'checkout' %}" class="btn btn-success m-1 mt-xl-0">
-                    <i class="fas fa-lock me-1"></i> </i> Checkout
-                    <i class="mdi mdi-arrow-right"></i>
+                <a href="{% url 'checkout' %}" class="flex-1 text-center bg-green-600 text-white py-2 rounded hover:bg-green-700">
+                    Proceed to Checkout
                 </a>
             </div>
-                <!-- end col -->
         </div>
     </div>
-    <!-- end row -->
 </div>
+
 {% if discounted_products %}
-    <div class="bbb_viewed container-fluid bg-transparent p-0">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col p-0">
-                <div class="bbb_main_container">
-                    <div class="bbb_viewed_title_container">
-                        <h3 class="bbb_viewed_title">Discounted products</h3>
-                        <div class="bbb_viewed_nav_container">
-                            <div class="bbb_viewed_nav bbb_viewed_prev"><i class="fas fa-chevron-left"></i></div>
-                            <div class="bbb_viewed_nav bbb_viewed_next"><i class="fas fa-chevron-right"></i></div>
-                        </div>
-                    </div>
-                    <div class="bbb_viewed_slider_container">
-                        <div class="owl-carousel owl-theme bbb_viewed_slider">
-                            {% for product in discounted_products %}
-                                <div class="owl-item">
-                                    <a href="{% url 'product_details' product.category.slug product.slug %}" class="btn text-hover">
-                                    <div class="bbb_viewed_item discount d-flex flex-column align-items-center justify-content-center text-center">
-                                        <div class="bbb_viewed_image"><img src="{{ product.image.url }}" alt="product image"></div>
-                                        <div class="bbb_viewed_content text-center">
-                                            {% if product.discounted_price %}
-                                            <div class="bbb_viewed_price">Price: € {{ product.discounted_price }} <span>{{ product.price }} </span></div>
-                                            {% else %}
-                                            <div class="bbb_viewed_price">Price: € {{ product.price }} </div>
-                                            {% endif %}
-                                            <div class="bbb_viewed_name">{{ product.name }}</div>
-                                        </div>
-                                        {% if product.discount_percentage %}
-                                        <span class="percentage text-danger text-bold font-weight-bold">{{ product.discount_percentage }}</span>
-                                        {% endif %}
-                                    </div>
-                                </a>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div> 
-                </div>
-            </div>
-        </div>
-    </div>
+<div class="p-5 mx-auto px-4 py-8 w-full">
+    {% include 'includes/carousel.html' with products=discounted_products heading='Best Selling Products' %}
+</div>
 {% endif %}
 {% endblock %}
+
+{% block extra_postloadjs %}  
+
+<script src="{% static 'products/js/fav_btn.js' %}"></script>
+<script src="{% static 'js/carousel.js' %}"></script>
+
+{% endblock %}  

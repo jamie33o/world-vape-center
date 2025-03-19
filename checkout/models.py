@@ -37,7 +37,7 @@ class Order(models.Model):
                                   null=False, blank=False, default='')
     user = models.ForeignKey(get_user_model(),
                              on_delete=models.CASCADE,
-                             null=True, related_name='user_orders')
+                             null=True, blank=True, related_name='user_orders')
 
 
 class OrderLineItem(models.Model):

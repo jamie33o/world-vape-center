@@ -45,6 +45,7 @@ class TicketMessages(models.Model):
     sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     message = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)  # New field to track unread messages
 
     def __str__(self):
         """
